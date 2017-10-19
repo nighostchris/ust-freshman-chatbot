@@ -268,10 +268,7 @@ public class KitchenSinkController {
             		reply = text;
             	}
                 log.info("Returns echo message {}: {}", replyToken, reply);
-                this.replyText(
-                    replyToken,
-                    itscLOGIN + " says " + reply
-                );
+                this.replyText(replyToken, "chatbot says " + reply);
                 break;
         }
     }
@@ -316,13 +313,10 @@ public class KitchenSinkController {
 	
 
 	public KitchenSinkController() {
-		// database = new DatabaseEngine();
         database = new SQLDatabaseEngine();  // polymorphism
-		itscLOGIN = System.getenv("ITSC_LOGIN");
 	}
 
 	private DatabaseEngine database;
-	private String itscLOGIN;
 	
 
 	//The annontation @Value is from the package lombok.Value
