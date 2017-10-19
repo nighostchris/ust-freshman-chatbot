@@ -3,13 +3,14 @@ target/
 build/
 
 # gradle
-.gradle/
+/.gradle/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
 # Package Files #
 *.jar
+!gradle/wrapper/gradle-wrapper.jar
 *.war
 *.ear
 
