@@ -11,24 +11,16 @@ import java.net.URI;
 public class SQLDatabaseEngine extends DatabaseEngine {  // load database deployed from Heroku
 	@Override
 	String search(String text) throws Exception {  // handle Exceptions in caller method
-        Connection SQLDatabase = null;  // may be moved to constructor?
+        Connection SQLDatabase = null;
         PreparedStatement SQLQuery = null;  // precompiled SQL statement
         ResultSet rs = null;  // query result from SQL database
         String result = null;  // prepare to store the result
         try {
             SQLDatabase = this.getConnection();  // get connection from online database
-            // String SQLTable = "Response";  // table name cannot be replaced by ? *****
-            // NOTE that SQL is case-insensitive, therefore need to use double quotes to enclose
-            //                                    if want to be case-sensitive
-            // get the entire table
-            SQLQuery = SQLDatabase.prepareStatement("SELECT * FROM \"Response\"");
-            // SQLQuery.setString(1, SQLTable);  *****
+            SQLQuery = SQLDatabase.prepareStatement("SELECT * FROM response");
 
             rs = SQLQuery.executeQuery();
 
-            //        Response
-            //  keyword  |  response
-            // read the entire table, always return the first match (can be modified)
             while (result == null && rs.next()){
                 // System.err.println(rs.getString(1));
                 if (text.toLowerCase().equals(rs.getString(1).toLowerCase()))  // exact match

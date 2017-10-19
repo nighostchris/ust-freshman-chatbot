@@ -47,8 +47,8 @@ import com.cse3111project.bot.spring.SQLDatabaseEngine;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = { KitchenSinkTester.class, DatabaseEngine.class })
-// @SpringBootTest(classes = { KitchenSinkTester.class, SQLDatabaseEngine.class })  // test SQL Database
+// @SpringBootTest(classes = { KitchenSinkTester.class, DatabaseEngine.class })
+@SpringBootTest(classes = { KitchenSinkTester.class, SQLDatabaseEngine.class })  // test SQL Database
 public class KitchenSinkTester {
 	@Autowired  // autowired to DatabaseEngine / SDLDatabaseEngine
 	private DatabaseEngine databaseEngine;
