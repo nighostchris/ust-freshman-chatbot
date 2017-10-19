@@ -6,6 +6,15 @@ Everyone should fork this repository before attempting to make changes (by Sung 
 
 Click + from the left sidebar and choose "Fork this repository".
 
+---
+
+## IMPORTANT
+
+Everyone please scan the following QR code and add our team chatbot as friend
+![QR code](https://qr-official.line.me/M/xMDv53tZAe.png)
+
+---
+
 ### Oct 12 - Milestone 1
 - Proposal Features (Functional Specification) of the chatbot
 - Interview/Focus Group meeting record
