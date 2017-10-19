@@ -313,7 +313,7 @@ public class KitchenSinkController {
 	
 
 	public KitchenSinkController() {
-        database = new SQLDatabaseEngine();  // polymorphism
+        database = new DatabaseEngine();  // polymorphism
 	}
 
 	private DatabaseEngine database;
