@@ -1,76 +1,77 @@
 package com.cse3111project.bot.spring;
 
-import lombok.extern.slf4j.Slf4j;
-import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
-import java.sql.*;
-import java.net.URISyntaxException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import java.net.URI;
+import java.net.URISyntaxException;
 
+import lombok.extern.slf4j.Slf4j;  // logging
+
+// this class wraps the SQL connection for better encapsulation
 @Slf4j
-public class SQLDatabaseEngine extends DatabaseEngine {  // load database deployed from Heroku
-	@Override
-	String search(String text) throws Exception {  // handle Exceptions in caller method
-        Connection SQLDatabase = null;
-        PreparedStatement SQLQuery = null;  // precompiled SQL statement
-        ResultSet rs = null;  // query result from SQL database
-        String result = null;  // prepare to store the result
-        try {
-            SQLDatabase = this.getConnection();  // get connection from online database
-            SQLQuery = SQLDatabase.prepareStatement("SELECT * FROM response");
+public class SQLDatabaseEngine {
+    private Connection SQLConnection = null;
 
-            rs = SQLQuery.executeQuery();
+    // only SearchEngine can use
+    SQLDatabaseEngine() throws URISyntaxException, SQLException {
+        SQLConnection = this.getConnection();
+        // SQLConnection = this.getLocalConnection();
+    }
 
-            while (result == null && rs.next()){
-                // System.err.println(rs.getString(1));
-                if (text.toLowerCase().equals(rs.getString(1).toLowerCase()))  // exact match
-                    result = rs.getString(2);
-                if (text.toLowerCase().contains(rs.getString(1).toLowerCase()))  // partial match
-                    result = rs.getString(2);  // only get the first result (can be modified)
-            }
-        }
-        catch (URISyntaxException e){
-            log.info("Wrong URI: {}", e.toString());
-        }
-        catch (SQLTimeoutException e){
-            log.info("Timeout: SQL statement expired, abort execution:: {}", e.toString());
-        }
-        catch (SQLException e){
-            log.info("Unable to connect database: {}", e.toString());
-        }
-        finally {  // safe close
-            try {
-                if (rs != null)
-                    rs.close();
-                if (SQLQuery != null)
-                    SQLQuery.close();
-                if (SQLDatabase != null)
-                    SQLDatabase.close();
-            }
-            catch (SQLException e){
-                log.info("Unable to close database: {}", e.toString());
-            }
-        }
-
-        if (result != null) return result;
-        throw new Exception("NOT FOUND");
-	}
-	
+    // establish connection with SQL database using JDBC
+    // may be moved to Utilities class
 	private Connection getConnection() throws URISyntaxException, SQLException {
-		Connection connection;
-        // get database URL from environment variable, needs to be set in build.gradle
-		URI dbUri = new URI(System.getenv("DATABASE_URL"));
+		Connection connection = null;
+        // get database URL from environment variable, need to be set in build.gradle
+        // using URI constructor to check if the DATABASE_URL has valid URI syntax
+		URI databaseURI = new URI(System.getenv("DATABASE_URL"));
 
-		String username = dbUri.getUserInfo().split(":")[0];
-		String password = dbUri.getUserInfo().split(":")[1];
-		String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath() 
-                            + "?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory";
+		String username = databaseURI.getUserInfo().split(":")[0];
+		String password = databaseURI.getUserInfo().split(":")[1];
+		String databaseURL = "jdbc:postgresql://" + 
+                             databaseURI.getHost() + ':' + databaseURI.getPort() + databaseURI.getPath() +
+                             "?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory";
 
 		log.info("Username: {} Password: {}", username, password);
-		log.info("dbUrl: {}", dbUrl);
+		log.info("databaseURL: {}", databaseURL);
 		
-		connection = DriverManager.getConnection(dbUrl, username, password);
+		connection = DriverManager.getConnection(databaseURL, username, password);
 
 		return connection;
 	}
+
+    // local connection for testing
+    // see the DATABASE_URL example in ust-freshmen-chatbot/build.gradle 
+    private Connection getLocalConnection() throws URISyntaxException, SQLException {
+        Connection connection = null;
+
+        URI databaseURI = new URI(System.getenv("DATABASE_URL"));
+
+        String username = "cnleungaa";  // modify your own username
+        String password = "12345";      // modify your own password
+        String databaseURL = "jdbc:" + databaseURI.toString();
+
+		log.info("Username: {} Password: {}", username, password);
+		log.info("databaseURL: {}", databaseURL);
+
+		connection = DriverManager.getConnection(databaseURL, username, password);
+        
+        return connection;
+    }
+
+    // wraps the Connection.prepareStatement() method
+    public PreparedStatement prepare(String SQLStatement) throws SQLException {
+        return SQLConnection.prepareStatement(SQLStatement);
+    }
+
+    // safely .close() connection to SQL
+    public void closeConnection() throws SQLException {
+        if (SQLConnection != null){
+            SQLConnection.close();
+            SQLConnection = null;  // avoid dangling reference
+        }
+    }
 }

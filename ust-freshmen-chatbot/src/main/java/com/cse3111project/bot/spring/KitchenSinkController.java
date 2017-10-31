@@ -210,19 +210,20 @@ public class KitchenSinkController {
 	private void handleTextContent(String replyToken, Event event, 
                                    TextMessageContent content) throws Exception {
         String text = content.getText();
-
         log.info("Got text message from {}: {}", replyToken, text);
+
         String reply = null;
-        try {
-            reply = database.search(text);
-        } 
-        catch (Exception e) {
-            reply = "I don\'t know what you are talking about. Could you be more clearer?";
-        }
+
+        reply = searchEngine.search(text);  // search from SQL database
+
+        if (reply == null)
+            reply = "I don\'t understand what you are saying. Could you be more clearer?";
+
         log.info("Returns echo message {}: {}", replyToken, reply);
         this.replyText(replyToken, reply);
     }
 
+    // create URI for static resources
 	static String createUri(String path) {
 		return ServletUriComponentsBuilder.fromCurrentContextPath().path(path).build().toUriString();
 	}
@@ -263,10 +264,10 @@ public class KitchenSinkController {
 	
 
 	public KitchenSinkController() {
-        database = new SQLDatabaseEngine();  // polymorphism
+        searchEngine = new SearchEngine();
 	}
 
-	private DatabaseEngine database;
+	private SearchEngine searchEngine;
 	
 
 	//The annontation @Value is from the package lombok.Value
