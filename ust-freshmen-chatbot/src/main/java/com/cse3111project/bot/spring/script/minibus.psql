@@ -1,0 +1,27 @@
+CREATE TABLE minibus11record (  -- record of minibus route 11 from Choi Hung Station <-> HKUST
+                                -- recorded by LCN
+    travelDate       date,     -- self-explanatory
+    isRushHour       boolean,  -- if need to wait at least 1 bus to get aboard => true
+    ChoiHung2UST     boolean,  -- Choi Hung -> UST ==> True; UST -> Choi Hung ==> False
+    minWaitingTime   int,      -- approximate minimum time for waiting PER bus (in minutes)
+    maxWaitingTime   int,      -- approximate maximum time for waiting PER bus (in minutes)
+    aboardTime       time,     -- time to take aboard
+    arrivalTime      time      -- time taken for travelling from Choi Hung <-> UST
+                               -- (MM:SS:pppppp is not supported -> may define a timer type)
+);
+
+-- Choi Hung Station -> UST
+INSERT INTO minibus11record VALUES ('2017-10-16', true,  true, 2, 3, '18:24', '00:12:38.15');
+INSERT INTO minibus11record VALUES ('2017-10-17', true,  true, 1, 2, '17:57', '00:13:18.43');
+INSERT INTO minibus11record VALUES ('2017-10-23', true,  true, 4, 6, '08:35', '00:11:06.48');
+INSERT INTO minibus11record VALUES ('2017-10-24', false, true, 2, 3, '11:11', '00:10:40.77');
+INSERT INTO minibus11record VALUES ('2017-10-25', true,  true, 2, 4, '08:14', '00:12:52.98');
+INSERT INTO minibus11record VALUES ('2017-10-26', true,  true, 3, 6, '10:08', '00:10:33.15');
+
+-- UST -> Choi Hung Station
+INSERT INTO minibus11record VALUES ('2017-10-17', false, false, 3, 4, '21:03', '00:13:15.79');
+INSERT INTO minibus11record VALUES ('2017-10-19', false, false, 1, 3, '13:28', '00:15:56.71');
+INSERT INTO minibus11record VALUES ('2017-10-23', false, false, 3, 5, '12:34', '00:13:46.84');
+INSERT INTO minibus11record VALUES ('2017-10-24', true,  false, 3, 5, '16:56', '00:11:20.80');
+INSERT INTO minibus11record VALUES ('2017-10-25', false, false, 2, 3, '11:07', '00:14:54.74');
+INSERT INTO minibus11record VALUES ('2017-10-26', false, false, 1, 2, '13:31', '00:11:47.75');
