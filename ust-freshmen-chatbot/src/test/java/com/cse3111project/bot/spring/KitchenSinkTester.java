@@ -40,107 +40,91 @@ import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.spring.boot.annotation.LineBotMessages;
 
 import lombok.NonNull;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.Slf4j;  // logging
 
-import com.cse3111project.bot.spring.DatabaseEngine;
-import com.cse3111project.bot.spring.SQLDatabaseEngine;
+import com.cse3111project.bot.spring.SearchEngine;
 
+import com.cse3111project.bot.spring.category.transport.*;
 
+@Slf4j
 @RunWith(SpringRunner.class)
-// @SpringBootTest(classes = { KitchenSinkTester.class, DatabaseEngine.class })
-@SpringBootTest(classes = { KitchenSinkTester.class, SQLDatabaseEngine.class })  // test SQL Database
+@SpringBootTest(classes = { KitchenSinkTester.class, SearchEngine.class })  // test SQL Database
 public class KitchenSinkTester {
-	@Autowired  // autowired to DatabaseEngine / SDLDatabaseEngine
-	private DatabaseEngine databaseEngine;
+	@Autowired  // autowired to DatabaseEngine / SQLDatabaseEngine
+	private SearchEngine searchEngine;
 	
     // test if key is not found in database
+    // local SQL database     -- pass
+    // heroku SQL database    -- pass
+    // local static database  -- pass
 	@Test
 	public void testNotFound() throws Exception {
-		boolean thrown = false;
-		try {
-			this.databaseEngine.search("no");  // not found
-		} 
-        catch (Exception e) {
-			thrown = true;
-		}
-		assertThat(thrown).isEqualTo(true);  // indeed thrown=true -> true assertion
+        String answer = this.searchEngine.search("How are you?");  // if not found, return null
+
+		assertThat(answer).isNull();
 	}
 	
-    // test if key is found in database (by exact match)
-	@Test
-	public void testFound() throws Exception {
-		boolean thrown = false;
-		String result = null;
-		try {
-			result = this.databaseEngine.search("abc");
-		} 
-        catch (Exception e) {
-			thrown = true;
-		}
-		assertThat(!thrown).isEqualTo(true);
-		assertThat(result.equals("def")).isEqualTo(true);
-	}
-
-    // partial match case 1: at the front
+    // partial match minibus keyword case 1: at the near end + merge with other character '?'
+    // local SQL database     -- pass
+    // heroku SQL database    -- pass
+    // local static database  -- pass
     @Test
-    public void partialMatch1() throws Exception {
-        boolean thrown = false;
-        String answer = null;
-        try {
-            answer = this.databaseEngine.search("Hi, I am Sam");
+    public void partialMatchMinibus1() throws Exception {
+        for (String minibusKeyword : Minibus.QUERY_KEYWORD){
+            StringBuilder questionBuilder = new StringBuilder("What is the arrival time of ")
+                                                .append(minibusKeyword).append('?');
+            String answer = this.searchEngine.search(questionBuilder.toString());
+
+            assertThat(answer).isNotNull();
+            log.info("reply: {}", answer);
+            assertThat(answer.contains("Estimated Arrival Time")).isEqualTo(true);
         }
-        catch (Exception e){
-            thrown = true;
-        }
-        assertThat(!thrown).isEqualTo(true);
-        assertThat(answer.equals("Hey, how things going?")).isEqualTo(true);
     }
 
-    // partial match case 2: at the end + different case
+    // partial match minibus keyword case 2: different case + middle
+    // local SQL database     -- pass
+    // heroku SQL database    -- pass
+    // local static database  -- pass
     @Test
-    public void partialMatch2() throws Exception {
-        boolean thrown = false;
+    public void partialMatchMinibus2() throws Exception {
         String answer = null;
-        try {
-            answer = this.databaseEngine.search("I wonder who is Prof Kim");
-        }
-        catch (Exception e){
-            thrown = true;
-        }
-        assertThat(!thrown).isEqualTo(true);
-        assertThat(answer.equals("Well, this is your instructor.")).isEqualTo(true);
+
+        answer = this.searchEngine.search("Get Minibus arrival time");
+
+        assertThat(answer).isNotNull();
+        log.info("reply: {}", answer);
+        assertThat(answer.contains("Estimated Arrival Time")).isEqualTo(true);
     }
 
-    // partial match case 3: at the middle + different case + merged with other char ','
+    // partial match minibus keyword case 3: at the front + different case
+    // local SQL database     -- pass
+    // heroku SQL database    -- pass
+    // local static database  -- pass
     @Test
-    public void partialMatch3() throws Exception {
-        boolean thrown = false;
+    public void partialMatchMinibus3() throws Exception {
         String answer = null;
-        try {
-            answer = this.databaseEngine.search("My name is aBc, how are you?");
-        }
-        catch (Exception e){
-            thrown = true;
-        }
 
-        assertThat(!thrown).isEqualTo(true);
-        assertThat(answer.equals("def")).isEqualTo(true);
+        answer = this.searchEngine.search("11 Minibus arrival time please?");
+
+        assertThat(answer).isNotNull();
+        log.info("reply: {}", answer);
+        assertThat(answer.contains("Estimated Arrival Time")).isEqualTo(true);
     }
 
     // partial match case 4: multiple matches
     //                       ==> return first matched result found in database (can be amended)
-    @Test
-    public void partialMatch4() throws Exception {
-        boolean thrown = false;
-        String answer = null;
-        try {
-            answer = this.databaseEngine.search("Hi guys, how are you? I am fine");
-        }
-        catch (Exception e){
-            thrown = true;
-        }
+    // @Test
+    // public void partialMatch4() throws Exception {
+    //     boolean thrown = false;
+    //     String answer = null;
+    //     try {
+    //         answer = this.searchEngine.search("Hi guys, how are you? I am fine");
+    //     }
+    //     catch (Exception e){
+    //         thrown = true;
+    //     }
 
-        assertThat(!thrown).isEqualTo(true);
-        assertThat(answer.equals("Hey, how things going?")).isEqualTo(true);  // matched with 'Hi' key
-    }
+    //     assertThat(!thrown).isEqualTo(true);
+    //     assertThat(answer.equals("Hey, how things going?")).isEqualTo(true);  // matched with 'Hi' key
+    // }
 }
