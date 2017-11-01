@@ -9,23 +9,55 @@ public class Date
 	private int noOfActivity = 0;
 	private ArrayList<Activity> activity;
 	
-	public Date(int month, int day, Activity activity)
+	public Date(int month, int day)
 	{
 		this.month = month;
 		this.day = day;
 		this.activity = new ArrayList<Activity>();
-		this.activity.add(activity);
-		noOfActivity++;
 	}
 	
-	public addActivity(Activity activity)
+	public boolean addActivity(Activity activity)
 	{
-		
+		boolean canAdd = true;
+		for (Activity check : activity)
+		{
+			if (check.getTimeslot().hasConflict(activity.getTimeslot()))
+				canAdd = false;
+		}
+		if (canAdd)
+		{
+			this.activity.add(activity);
+			noOfActivity++;
+			return canAdd;
+		}
+		return canAdd;
 	}
+	
+	public boolean removeActivity(Activity activity)
+	{
+		for (Activity check : activity)
+		{
+			if (check.getName().equals(activity.getName()))
+			{
+				this.activity.remove(check);
+				noOfActivity--;
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public int getMonth() { return month; }
+	
+	public int getDay() { return day; }
+	
+	public int getNoOfActivity() { return noOfActivity; }
+	
+	public ArrayList<Activity> getActivity() { return activity; }
 	
 	@Override
 	public String toString()
 	{
-		return timeslot.toString() + " " + name;
+		
 	}
 }
