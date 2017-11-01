@@ -3,6 +3,8 @@ package com.cse3111project.bot.spring.utility;
 import java.io.PrintStream;
 import java.io.ByteArrayOutputStream;
 
+import java.util.ArrayList;
+
 import lombok.extern.slf4j.Slf4j;  // logging
 
 // offer general utilities for classes
@@ -12,17 +14,21 @@ public final class Utilities {
     private Utilities() { }
 
     // concatenate two arrays, might be expanded as
-    // - variadic arguments
+    // - variadic arguments  -- done
     // - generics
-    // Time Complexity: O(arr1.length + arr2.length)
-    public static String[] concatArrays(String arr1[], String arr2[]){
-        String newArr[] = new String[arr1.length + arr2.length];
+    // if needed
+    // Time Complexity: O(sum of arrays length)
+    public static String[] concatArrays(String[]... arrays){
+        int newArrSize = 0;
+        for (int i = 0; i < arrays.length; i++)
+            newArrSize += arrays[i].length;
 
-        int i = 0;
-        for (; i < arr1.length; i++)
-            newArr[i] = arr1[i];
-        for (; i < arr1.length + arr2.length; i++)
-            newArr[i] = arr2[i - arr1.length];
+        String newArr[] = new String[newArrSize];
+
+        int k = 0;
+        for (int i = 0; i < arrays.length; i++)
+            for (int j = 0; j < arrays[i].length; j++, k++)
+                newArr[k] = arrays[i][j];
 
         return newArr;
     }
@@ -42,5 +48,18 @@ public final class Utilities {
         System.setErr(stderr);  // reset as stderr
 
         // os.close();  // unnecessary by javadoc
+    }
+
+    // log all elements
+    public static void arrayLog(String msg, ArrayList<String> items){
+        StringBuilder logBuilder = new StringBuilder();
+
+        for (int i = 0; i < items.size(); i++){
+            logBuilder.append(items.get(i));
+            if (i != items.size() - 1)
+                logBuilder.append(", ");
+        }
+
+        log.info("{}: {}", msg, logBuilder.toString());
     }
 }
