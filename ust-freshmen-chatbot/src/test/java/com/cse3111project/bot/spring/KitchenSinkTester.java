@@ -50,7 +50,7 @@ import com.cse3111project.bot.spring.category.transport.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { KitchenSinkTester.class, SearchEngine.class })  // test SQL Database
 public class KitchenSinkTester {
-	@Autowired  // autowired to DatabaseEngine / SQLDatabaseEngine
+	@Autowired  // autowired to SearchEngine
 	private SearchEngine searchEngine;
 	
     // test if key is not found in database
@@ -70,6 +70,7 @@ public class KitchenSinkTester {
     // local static database  -- pass
     @Test
     public void partialMatchMinibus1() throws Exception {
+        // { "minibus", "minibus 11", "11 minibus" }
         for (String minibusKeyword : Minibus.QUERY_KEYWORD){
             StringBuilder questionBuilder = new StringBuilder("What is the arrival time of ")
                                                 .append(minibusKeyword).append('?');
@@ -111,20 +112,35 @@ public class KitchenSinkTester {
         assertThat(answer.contains("Estimated Arrival Time")).isEqualTo(true);
     }
 
-    // partial match case 4: multiple matches
-    //                       ==> return first matched result found in database (can be amended)
-    // @Test
-    // public void partialMatch4() throws Exception {
-    //     boolean thrown = false;
-    //     String answer = null;
-    //     try {
-    //         answer = this.searchEngine.search("Hi guys, how are you? I am fine");
-    //     }
-    //     catch (Exception e){
-    //         thrown = true;
-    //     }
+    // partial match staff keyword case 1: at the middle + exact staff name
+    // local SQL database     -- untested
+    // heroku SQL database    -- pass
+    // local static database  -- pass
+    @Test
+    public void partialMatchStaff1() throws Exception {
+        String answer = null;
 
-    //     assertThat(!thrown).isEqualTo(true);
-    //     assertThat(answer.equals("Hey, how things going?")).isEqualTo(true);  // matched with 'Hi' key
-    // }
+        answer = this.searchEngine.search("Could you tell where the office of Prof. Li Bo is?");
+
+        assertThat(answer).isNotNull();
+        log.info("reply: {}", answer);
+        assertThat(answer.contains("Results:") && answer.contains("Li Bo") && 
+                   !answer.contains("Li Xin")).isEqualTo(true);
+    }
+
+    // partial match staff keyword case 2: multiple matches + staff last name
+    // local SQL database     -- untested
+    // heroku SQL database    -- pass
+    // local static database  -- pass
+    @Test
+    public void partialMatchStaff2() throws Exception {
+        String answer = null;
+
+        answer = this.searchEngine.search("Where is the office of Professor Li?");
+
+        assertThat(answer).isNotNull();
+        log.info("reply: {}", answer);
+        assertThat(answer.contains("Results:") && answer.contains("Li Bo") && 
+                   answer.contains("Li Xin")).isEqualTo(true);
+    }
 }
