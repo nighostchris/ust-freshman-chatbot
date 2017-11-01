@@ -15,8 +15,8 @@ import lombok.extern.slf4j.Slf4j;  // logging
 public class SQLDatabaseEngine {
     private Connection SQLConnection = null;
 
-    // only SearchEngine can use
-    SQLDatabaseEngine() throws URISyntaxException, SQLException {
+    // only SearchEngine can use  -- no longer true
+    public SQLDatabaseEngine() throws URISyntaxException, SQLException {
         SQLConnection = this.getConnection();
         // SQLConnection = this.getLocalConnection();
     }
