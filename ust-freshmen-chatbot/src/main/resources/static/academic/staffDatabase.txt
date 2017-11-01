@@ -1,0 +1,55 @@
+# department,staffName,position,officeLocation,email
+
+COMP,Yang Qiang,Chair Professor,Room 3531,qyang@cse.ust.hk
+COMP,Chung Chi Shing Albert,Professor,Room 2531,achung@cse.ust.hk
+COMP,Chan Tony F.,Chair Professor,Room 6349,tfchan@cse.ust.hk
+COMP,Cheng Kwang Ting Tim,Chair Professor,Room 6548,timcheng@ust.hk
+COMP,Li Bo,Chair Professor,Room 2535,bli@cse.ust.hk
+COMP,Chan Shueng Han Gary,Professor,Room 2539,gchan@cse.ust.hk
+COMP,Chan Lei,Professor,Room 3561,leichen@cse.ust.hk
+COMP,Cheng Siu Wing,Professor,Room 3551,scheng@cse.ust.hk
+COMP,Cheung Shing Chi,Professor,Room 2534,scc@cse.ust.hk
+COMP,Ding Cun Sheng,Professor,Room 2533,cding@cse.ust.hk
+COMP,Golin Mordecai J.,Professor,Room 3559,golin@cse.ust.hk
+COMP,Horner Andrew B.,Professor,Room 3549,horner@cse.ust.hk
+COMP,Kwok Tin Yau James,Professor,Room 3545,jamesk@cse.ust.hk
+COMP,Lee Dik Lun,Professor,Room 3534,dlee@cse.ust.hk
+COMP,Lin Fang Zhen,Professor,Room 3557,flin@cse.ust.hk
+COMP,Papadias Dimitris,Professor,Room 3555,dimitris@cse.ust.hk
+COMP,Pong Ting Chuen,Professor,Room 3544,tcpong@cse.ust.hk
+COMP,Qu Hua Min,Professor,Room 2529,huamin@cse.ust.hk
+COMP,Quan Long,Professor,Room 3506,quan@cse.ust.hk
+COMP,Tai Chiew Lan,Professor,Room 3515,taicl@cse.ust.hk
+COMP,Tang Chi Keung,Professor,Room 3538,cktang@cse.ust.hk
+COMP,Wu De Kai,Professor,Room 3556,dekai@cse.ust.hk
+COMP,Yeung Dit Yan,Professor,Room 3542,dyyeung@cse.ust.hk
+COMP,Zhang Lian Wen Nevin,Professor,Room 2541,lzhang@cse.ust.hk
+COMP,Arya Sunil,Associate Professor,Room 3514,arya@cse.ust.hk
+COMP,Bensaou Brahim,Associate Professor,Room 3537,csbb@cse.ust.hk
+COMP,Chen Kai,Associate Professor,Room 3509,kaichen@cse.ust.hk
+COMP,Kim Sung Hun,Associate Professor,Room 2527,hunkim@cse.ust.hk
+COMP,Luo Qiong,Associate Professor,Room 3511,luo@cse.ust.hk
+COMP,Mak Kan Wing Brian,Associate Professor,Room 3513,mak@cse.ust.hk
+COMP,Muppala Jogesh K.,Associate Professor,Room 3510,muppala@cse.ust.hk
+COMP,Ng Siu Hung Wilfred,Associate Professor,Room 3503,wilfred@cse.ust.hk
+COMP,Sander Pedro,Associate Professor,Room 3504,psander@cse.ust.hk
+COMP,Wong Chi Wing Raymond,Associate Professor,Room 3541,raywong@cse.ust.hk
+COMP,Yi Ke,Associate Professor,Room 3547,yike@cse.ust.hk
+COMP,Zhang Charles,Associate Professor,Room 3516,charlesz@cse.ust.hk
+COMP,Hui Pan,Assistant Professor,Room 3519,panhui@cse.ust.hk
+COMP,Liu Ming,Assistant Professor,CYT-2011,eelium@ust.hk
+COMP,Ma Xiao Juan,Assistant Professor,Room 3507,mxj@cse.ust.hk
+COMP,Papadopoulos Dimitris,Assistant Professor,Room 2537,dipapado@cse.ust.hk
+COMP,Song Yang Qiu,Assistant Professor,Room 3518,yqsong@cse.ust.hk
+COMP,Wang Tao,Assistant Professor,Room 3517,taow@cse.ust.hk
+COMP,Wang Wei,Assistant Professor,Room 3524,weiwa@cse.ust.hk
+COMP,Hang Kai Yu,Research Assistant Professor,IAS-1023,kaiyuh@ust.hk
+COMP,Zhang Yu,Research Assistant Professor,CYT-3007,yuzhangcse@cse.ust.hk
+COMP,Ieong Ricci,Adjunct Assistant Professor,"",ricci@cse.ust.hk
+COMP,Rossiter David Paul,Associate Professor,Room 3554,rossiter@cse.ust.hk
+COMP,Li Xin,Senior Lecturer,Room 3525,lixin@cse.ust.hk
+COMP,Chan Ki Cecia,Lecturer,Room 3525,kccecia@cse.ust.hk
+COMP,Gibson Lam,Lecturer,Room 3553,gibson@cse.ust.hk
+COMP,Lam Ngok,Lecturer,Room 3548,lamngok@cse.ust.hk
+COMP,Leung Wai Ting,Lecturer,Room 3548,kwtleung@cse.ust.hk
+COMP,Desmond Tsoi Yau Chat,Lecturer,Room 3553,desmond@cse.ust.hk
