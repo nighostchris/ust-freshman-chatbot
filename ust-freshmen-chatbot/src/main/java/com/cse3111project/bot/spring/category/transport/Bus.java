@@ -2,6 +2,8 @@ package com.cse3111project.bot.spring.category.transport;
 
 import java.sql.SQLException;
 
+import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
+
 // need web grabber to grab (best) estimated arrival time from KMB official website
 public class Bus extends Transport {
     public static final String QUERY_KEYWORD[] = { "bus", "kmb", "91", "route 91", "91M", "route 91M",
@@ -15,7 +17,7 @@ public class Bus extends Transport {
     }
 
     @Override
-    public String getArrivalTimeFromStatic(){
+    public String getArrivalTimeFromStatic() throws StaticDatabaseFileNotFoundException {
         return "*** not implemented yet ***";
     }
 }
