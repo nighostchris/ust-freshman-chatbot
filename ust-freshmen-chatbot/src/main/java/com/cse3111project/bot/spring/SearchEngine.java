@@ -2,7 +2,8 @@ package com.cse3111project.bot.spring;
 
 import com.cse3111project.bot.spring.category.Category;
 import com.cse3111project.bot.spring.category.transport.*;
-import com.cse3111project.bot.spring.SQLDatabaseEngine;
+import com.cse3111project.bot.spring.category.academic.*;
+// import com.cse3111project.bot.spring.SQLDatabaseEngine;
 
 // import javax.annotation.PostConstruct;
 import java.sql.Connection;
@@ -11,41 +12,46 @@ import java.sql.DriverManager;
 import java.sql.SQLTimeoutException;
 import java.sql.SQLException;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.util.ArrayList;
 import com.cse3111project.bot.spring.utility.Utilities;
 
-import lombok.extern.slf4j.Slf4j;  // logging
+import com.cse3111project.bot.spring.exception.StaffNotFoundException;
+import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
+import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
 
-@Slf4j
 public class SearchEngine {
     // conducting search based on userQuery
     // if matched certain QUERY_KEYWORD, reply accordingly using SQLDatabase first
     // if SQLDatabase is failed to load => use the backup static database
-	// @Override
 	String search(String userQuery){
         String reply = null;  // chatbot reply according to userQuery
 
         Category categoryResult = null;  // storing search result of user query
         boolean SQLErrorThrown = false;  // flag if exception is thrown while connecting to SQL database
 
-        ArrayList<String> matchedResults = new ArrayList<>();
-        // may add Wagner Fischer's algorithm (handle user's typos) in the future
-        for (String keyword : Category.QUERY_KEYWORD)
-            if (userQuery.toLowerCase().contains(keyword.toLowerCase()))  // partial match
-                matchedResults.add(keyword);
+        // parse and manipulate the query
+        ArrayList<String> matchedResults = this.parse(userQuery);
+
+        Utilities.arrayLog("matchedResults", matchedResults);
 
         if (matchedResults.isEmpty())  // if doesn't match any result from the QUERY_KEYWORD list
             return null;  // reply unable to understand what user is asking for
 
         // if found matched results, find out what category the user is asking for
-        categoryResult = Category.analyze(matchedResults);
+        try {
+            categoryResult = Category.analyze(matchedResults);
+        }
+        // if results are found, but specified staff is not found on database or 
+        // the entire query is ambiguous => reply corresponding message
+        catch (StaffNotFoundException | AmbiguousQueryException e) {
+            return e.getMessage();
+        }
 
         try {
             // establish connection to SQL database
-            categoryResult.setConnection(new SQLDatabaseEngine());
+            Category.getDatabaseConnection();
 
             // throw new SQLException("*** throwing error to test static database ***");
 
@@ -54,6 +60,10 @@ public class SearchEngine {
                     reply = ((Minibus) categoryResult).getArrivalTimeFromSQL();
                 else if (categoryResult instanceof Bus)
                     reply = ((Bus) categoryResult).getArrivalTimeFromSQL();
+            }
+            else if (categoryResult instanceof Academic){
+                if (categoryResult instanceof Staff)
+                    reply = ((Staff) categoryResult).getContactInfoFromSQL();
             }
         }
         // when one of exceptions occurs => load static database
@@ -71,7 +81,7 @@ public class SearchEngine {
         }
         finally {
             try {
-                categoryResult.closeDatabaseConnection();
+                Category.closeDatabaseConnection();
             }
             catch (SQLException e) {
                 Utilities.errorLog("Unable to close database", e);
@@ -81,15 +91,60 @@ public class SearchEngine {
             }
         }
 
-        if (SQLErrorThrown){
-            if (categoryResult instanceof Transport){
-                if (categoryResult instanceof Minibus)
-                    reply = ((Minibus) categoryResult).getArrivalTimeFromStatic();
-                if (categoryResult instanceof Bus)
-                    reply = ((Bus) categoryResult).getArrivalTimeFromStatic();
+        try {
+            if (SQLErrorThrown){
+                if (categoryResult instanceof Transport){
+                    if (categoryResult instanceof Minibus)
+                        reply = ((Minibus) categoryResult).getArrivalTimeFromStatic();
+                    if (categoryResult instanceof Bus)
+                        reply = ((Bus) categoryResult).getArrivalTimeFromStatic();
+                }
+                else if (categoryResult instanceof Academic){
+                    if (categoryResult instanceof Staff)
+                        reply = ((Staff) categoryResult).getContactInfoFromStatic();
+                }
             }
+        }
+        // if failed on LAST RESORT ....
+        catch (StaticDatabaseFileNotFoundException e) {
+            Utilities.errorLog("Static database file not found", e);
+            return "***\n1001010100\nOh It seEms I aM bRokEn\n0101010001\n***";
         }
 
         return reply;
 	}
+
+    // symbols needed to be omitted in user query
+    // may add Unicode / emojis later **
+    public static final String OMITTED_SYMBOLS = "!@#$%^&*()-_=+[]{}\\|:;\'\",<>/?";
+
+    private ArrayList<String> parse(String userQuery){
+        StringBuilder queryBuilder = new StringBuilder(userQuery);
+
+        // remove all unneccessary symbols
+        for (int symbol = 0; symbol < OMITTED_SYMBOLS.length(); symbol++){
+            while (true) {
+                int i = queryBuilder.indexOf(new Character(OMITTED_SYMBOLS.charAt(symbol)).toString());
+                if (i == -1)  // if symbol not found / all removed
+                    break;
+                queryBuilder.deleteCharAt(i);
+            }
+        }
+
+        // assign to the transformed user query text + lower casing
+        userQuery = queryBuilder.toString().toLowerCase();
+
+        ArrayList<String> matchedResults = new ArrayList<>();
+
+        // may use Wagner Fischer's algorithm (handle user's typos) in the future
+        // => more accurate
+        for (String keyword : Category.QUERY_KEYWORD)
+            if (userQuery.contains(keyword.toLowerCase()))  // partial match
+                matchedResults.add(keyword);
+
+        // detect last name (full name) after STAFF_POSITION_KEYWORD, e.g. Lecturer, Professor, Prof., ...
+        Staff.containsLastName(userQuery, matchedResults);
+
+        return matchedResults;
+    }
 }
