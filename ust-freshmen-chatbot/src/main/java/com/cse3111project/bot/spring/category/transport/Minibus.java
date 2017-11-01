@@ -5,22 +5,27 @@ import java.sql.ResultSet;
 import java.sql.Time;
 import java.sql.SQLException;
 
+import java.io.InputStream;
+
 import java.util.Calendar;
 import java.util.Scanner;
 import java.util.ArrayList;
 import com.cse3111project.bot.spring.utility.Utilities;
 
+import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
+
 import lombok.extern.slf4j.Slf4j;  // logging
 
 @Slf4j
 public class Minibus extends Transport {
-    private final String SQL_TABLE = "minibus11record";
+    private static final String SQL_TABLE = "minibus11record";
     // use only when the SQL database is failed to load in order not to break the program
-    private final String STATIC_DATABASE = "/static/transport/minibusDatabase.txt";
+    private static final String STATIC_DATABASE = "/static/transport/minibusDatabase.txt";
 
     public static final String QUERY_KEYWORD[] = { "minibus", "minibus 11", "11 minibus" };
 
     // attempt to estimate the arrival time of minibus based on self-collected data from SQL database
+    // ** might be too slow **
     @Override
     public String getArrivalTimeFromSQL() throws SQLException {
         currentTime = Calendar.getInstance();  // get current time
@@ -45,27 +50,36 @@ public class Minibus extends Transport {
             ResultSet rs = null;
             try {
                 // prepare a SQL query
-                // String SQLStatement = new StringBuilder("SELECT * FROM ").append(SQL_TABLE)
-                //                           .append(" WHERE aboardTime ")
-                //                           .append("BETWEEN \'").append(lastHrString).append(":00\' ")
-                //                           .append("AND \'").append(nextHrString).append(":00\'")
-                //                           .toString();
+                // String SQLStatement = "SELECT minWaitingTime, maxWaitingTime FROM " + SQL_TABLE +
+                //                       " WHERE aboardTime BETWEEN ? AND ?"; 
 
+                // use StringBuilder rather than operator+() (string concatenation operator)
+                // in for loop for PERFORMANCE
                 String SQLStatement = new StringBuilder("SELECT minWaitingTime, maxWaitingTime ")
                                           .append("FROM ").append(SQL_TABLE)
-                                          .append(" WHERE aboardTime ").append("BETWEEN ? AND ?")
-                                          .toString();
+                                          .append(" WHERE aboardTime ")
+                                          .append("BETWEEN ? AND ?").toString();
 
                 SQLQuery = SQLDatabase.prepare(SQLStatement);
 
                 // public static Time java.sql.Time.valueOf(String timeFormat);
                 // where timeFormat: hh:mm:ss
+                // log.info("pastHrString: {}", pastHrString);
+                // log.info("nextHrString: {}", nextHrString);
+
                 Time pastHrTimeFormat = Time.valueOf(pastHrString + ":00:00");
-                Time nextHrTimeFormat = Time.valueOf(nextHrString + ":00:00");
+                Time nextHrTimeFormat = null;
+                // *** NOTE that if nextHr == 24 => JDBC would convert time format as 00:00:00
+                // since it uses  % 24  to try to fix programmers' time REGARDLESS OF invalid
+                if (nextHrString.equals("24"))
+                    nextHrTimeFormat = Time.valueOf("23:59:59");
+                else
+                    nextHrTimeFormat = Time.valueOf(nextHrString + ":00:00");
 
                 log.info("pastHrTimeFormat: {}", pastHrTimeFormat);
                 log.info("nextHrTimeFormat: {}", nextHrTimeFormat);
 
+                // convert to SQL TIME format
                 SQLQuery.setTime(1, pastHrTimeFormat);
                 SQLQuery.setTime(2, nextHrTimeFormat);
 
@@ -96,15 +110,13 @@ public class Minibus extends Transport {
         int avgMinWaitingTime = new Long(Math.round((double) totalMinWaitingTime / numOfData)).intValue();
         int avgMaxWaitingTime = new Long(Math.round((double) totalMaxWaitingTime / numOfData)).intValue();
 
-        return new StringBuilder("Estimated Arrival Time: ")
-                   .append(avgMinWaitingTime).append('-').append(avgMaxWaitingTime).append(" min")
-                   .toString();
+        return "Estimated Arrival Time: " + avgMinWaitingTime + '-' + avgMaxWaitingTime + " min";
     }
 
     // if unfortunately fail to connect SQL database, load the static file to estimate arrival time
     // *** LAST RESORT ***
     @Override
-    public String getArrivalTimeFromStatic(){
+    public String getArrivalTimeFromStatic() throws StaticDatabaseFileNotFoundException {
         currentTime = Calendar.getInstance();  // get current time
         int currentHr = currentTime.get(Calendar.HOUR_OF_DAY);  // get current hr in 24-hr format
 
@@ -117,8 +129,11 @@ public class Minibus extends Transport {
         // read static database
         Scanner staticDatabaseReader = null;
         try {
+            InputStream is = this.getClass().getResourceAsStream(STATIC_DATABASE);
+            if (is == null)  // static database file not found
+                throw new StaticDatabaseFileNotFoundException(STATIC_DATABASE + " file not found");
             // load static database file
-            staticDatabaseReader = new Scanner(this.getClass().getResourceAsStream(STATIC_DATABASE));
+            staticDatabaseReader = new Scanner(is);
 
             // column format:
             // travelDate isRushHour ChoiHung2UST minWaitingTime maxWaitingTime aboardTime arrivalTime
@@ -159,9 +174,7 @@ public class Minibus extends Transport {
         int avgMinWaitingTime = new Long(Math.round((double) totalMinWaitingTime / numOfData)).intValue();
         int avgMaxWaitingTime = new Long(Math.round((double) totalMaxWaitingTime / numOfData)).intValue();
 
-        return new StringBuilder("Estimated Arrival Time: ")
-                   .append(avgMinWaitingTime).append('-').append(avgMaxWaitingTime).append(" min")
-                   .toString();
+        return "Estimated Arrival Time: " + avgMinWaitingTime + '-' + avgMaxWaitingTime + " min";
     }
 
     class ArrivalTime {
