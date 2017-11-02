@@ -59,9 +59,12 @@ public class KitchenSinkTester {
     // local static database  -- pass
 	@Test
 	public void testNotFound() throws Exception {
+        log.info("--- testNotFound() ---");
         String answer = this.searchEngine.search("How are you?");  // if not found, return null
 
 		assertThat(answer).isNull();
+
+        log.info("--- End of testNotFound() ---");
 	}
 	
     // partial match minibus keyword case 1: at the near end + merge with other character '?'
@@ -70,6 +73,8 @@ public class KitchenSinkTester {
     // local static database  -- pass
     @Test
     public void partialMatchMinibus1() throws Exception {
+        log.info("--- partialMatchMinibus1() ---");
+
         // { "minibus", "minibus 11", "11 minibus" }
         for (String minibusKeyword : Minibus.QUERY_KEYWORD){
             StringBuilder questionBuilder = new StringBuilder("What is the arrival time of ")
@@ -80,6 +85,8 @@ public class KitchenSinkTester {
             log.info("reply: {}", answer);
             assertThat(answer.contains("Estimated Arrival Time")).isEqualTo(true);
         }
+
+        log.info("--- End of partialMatchMinibus1() ---");
     }
 
     // partial match minibus keyword case 2: different case + middle
@@ -88,6 +95,8 @@ public class KitchenSinkTester {
     // local static database  -- pass
     @Test
     public void partialMatchMinibus2() throws Exception {
+        log.info("--- partialMatchMinibus2() ---");
+
         String answer = null;
 
         answer = this.searchEngine.search("Get Minibus arrival time");
@@ -95,6 +104,8 @@ public class KitchenSinkTester {
         assertThat(answer).isNotNull();
         log.info("reply: {}", answer);
         assertThat(answer.contains("Estimated Arrival Time")).isEqualTo(true);
+
+        log.info("--- End of partialMatchMinibus2() ---");
     }
 
     // partial match minibus keyword case 3: at the front + different case
@@ -103,6 +114,8 @@ public class KitchenSinkTester {
     // local static database  -- pass
     @Test
     public void partialMatchMinibus3() throws Exception {
+        log.info("--- partialMatchMinibus3() ---");
+
         String answer = null;
 
         answer = this.searchEngine.search("11 Minibus arrival time please?");
@@ -110,6 +123,8 @@ public class KitchenSinkTester {
         assertThat(answer).isNotNull();
         log.info("reply: {}", answer);
         assertThat(answer.contains("Estimated Arrival Time")).isEqualTo(true);
+
+        log.info("--- End of partialMatchMinibus3() ---");
     }
 
     // partial match staff keyword case 1: at the middle + exact staff name
@@ -118,6 +133,8 @@ public class KitchenSinkTester {
     // local static database  -- pass
     @Test
     public void partialMatchStaff1() throws Exception {
+        log.info("--- partialMatchStaff1() ---");
+
         String answer = null;
 
         answer = this.searchEngine.search("Could you tell where the office of Prof. Li Bo is?");
@@ -126,6 +143,8 @@ public class KitchenSinkTester {
         log.info("reply: {}", answer);
         assertThat(answer.contains("Results:") && answer.contains("Li Bo") && 
                    !answer.contains("Li Xin")).isEqualTo(true);
+
+        log.info("--- End of partialMatchStaff1() ---");
     }
 
     // partial match staff keyword case 2: multiple matches + staff last name
@@ -134,6 +153,8 @@ public class KitchenSinkTester {
     // local static database  -- pass
     @Test
     public void partialMatchStaff2() throws Exception {
+        log.info("--- partialMatchStaff2() ---");
+
         String answer = null;
 
         answer = this.searchEngine.search("Where is the office of Professor Li?");
@@ -142,5 +163,41 @@ public class KitchenSinkTester {
         log.info("reply: {}", answer);
         assertThat(answer.contains("Results:") && answer.contains("Li Bo") && 
                    answer.contains("Li Xin")).isEqualTo(true);
+
+        log.info("--- End of partialMatchStaff2() ---");
+    }
+
+    // partial match bus keyword case 1: middle + 2 matches (route + location) + different case
+    // KMB database           -- pass
+    @Test
+    public void partialMatchBus1() throws Exception {
+        log.info("--- partialMatchBus1() ---");
+
+        String answer = null;
+
+        answer = this.searchEngine.search("Arrival time of 91M please. I am currently at UST North gate.");
+
+        assertThat(answer).isNotNull();
+        log.info("reply: {}", answer);
+        assertThat(answer.contains("91M") && answer.contains("arrival time")).isEqualTo(true);
+
+        log.info("--- End of partialMatchBus1() ---");
+    }
+
+    // partial match bus keyword case 2: end + merged with other char + no location provided
+    // KMB database           -- pass
+    @Test
+    public void partialMatchBus2() throws Exception {
+        log.info("--- partialMatchBus2() ---");
+
+        String answer = null;
+
+        answer = this.searchEngine.search("What is the arrival time of 91?");
+
+        assertThat(answer).isNotNull();
+        log.info("reply: {}", answer);
+        assertThat(answer.contains("Sorry") && answer.contains("query again")).isEqualTo(true);
+
+        log.info("--- End of partialMatchBus2() ---");
     }
 }
