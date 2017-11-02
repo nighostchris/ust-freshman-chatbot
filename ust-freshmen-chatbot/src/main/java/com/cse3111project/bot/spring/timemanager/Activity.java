@@ -1,6 +1,6 @@
 package com.cse3111project.bot.spring.timemanager;
 
-public class Activity 
+public class Activity implements Comparable<Activity>
 {
 	private String name;
 	private Timeslot timeslot;
@@ -14,6 +14,18 @@ public class Activity
 	public String getName() { return name; }
 	
 	public Timeslot getTimeslot() { return timeslot; }
+	
+	@Override
+	public int compareTo(Activity a)
+	{
+		Timeslot another = a.getTimeslot();
+		if (timeslot.getStart() >= another.getEnd())
+			return 1;
+		else if (timeslot.getEnd() <= another.getStart())
+			return -1;
+		else
+			return 0;
+	}
 	
 	@Override
 	public String toString()

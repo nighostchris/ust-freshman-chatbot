@@ -11,11 +11,11 @@ public class Timeslot
 		this.end = end;
 	}
 	
-	boolean hasConflict(Timeslot timeslot)
+	public boolean hasConflict(Timeslot timeslot)
 	{
-		if (this.start > timeslot.start && this.start < timeslot.end)
+		if (this.start >= timeslot.start && this.start < timeslot.end)
 			return true;
-		else if (timeslot.start > this.start && timeslot.start < this.start)
+		else if (timeslot.start >= this.start && timeslot.start < this.end)
 			return true;
 		else
 			return false;
