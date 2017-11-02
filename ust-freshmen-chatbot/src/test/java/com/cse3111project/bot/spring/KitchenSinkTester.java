@@ -128,7 +128,6 @@ public class KitchenSinkTester {
     }
 
     // partial match staff keyword case 1: at the middle + exact staff name
-    // local SQL database     -- untested
     // heroku SQL database    -- pass
     // local static database  -- pass
     @Test
@@ -148,7 +147,6 @@ public class KitchenSinkTester {
     }
 
     // partial match staff keyword case 2: multiple matches + staff last name
-    // local SQL database     -- untested
     // heroku SQL database    -- pass
     // local static database  -- pass
     @Test
@@ -199,5 +197,61 @@ public class KitchenSinkTester {
         assertThat(answer.contains("Sorry") && answer.contains("query again")).isEqualTo(true);
 
         log.info("--- End of partialMatchBus2() ---");
+    }
+
+    // partial match societies keyword case 1: end + merged with other char + different case
+    // heroku SQL database    -- pass
+    // local static database  -- pass
+    @Test
+    public void partialMatchSocieties1() throws Exception {
+        log.info("--- partialMatchSocieties1() ---");
+
+        String answer = null;
+
+        answer = this.searchEngine.search("Where is the webpage of film society?");
+
+        assertThat(answer).isNotNull();
+        log.info("reply: {}", answer);
+        assertThat(answer.contains("Results:")).isEqualTo(true);
+
+        log.info("--- End of partialMatchSocieties1() ---");
+    }
+
+    // partial match societies keyword case 2: front + merged with other char + multiple matches
+    // heroku SQL database    -- pass
+    // local static database  -- pass
+    @Test
+    public void partialMatchSocieties2() throws Exception {
+        log.info("--- partialMatchSocieties2() ---");
+
+        String answer = null;
+
+        answer = this.searchEngine.search("Nature Club, Cricket Club where could I get info on them?");
+
+        assertThat(answer).isNotNull();
+        log.info("reply: {}", answer);
+        assertThat(answer.contains("Results:") && answer.contains("Nature Club") && 
+                   answer.contains("Cricket Club")).isEqualTo(true);
+
+        log.info("--- End of partialMatchSocieties2() ---");
+    }
+
+    // partial match societies keyword case 3: end + merged with other char + different case +
+    //                                         no Societies.SOCIETIES_KEYWORD
+    // heroku SQL database    -- pass
+    // local static database  -- pass
+    @Test
+    public void partialMatchSocieties3() throws Exception {
+        log.info("--- partialMatchSocieties3() ---");
+
+        String answer = null;
+
+        answer = this.searchEngine.search("Where could I get info on UST Soc?");
+
+        assertThat(answer).isNotNull();
+        log.info("reply: {}", answer);
+        assertThat(answer.contains("There are a variety of UST societies")).isEqualTo(true);
+
+        log.info("--- End of partialMatchSocieties3() ---");
     }
 }
