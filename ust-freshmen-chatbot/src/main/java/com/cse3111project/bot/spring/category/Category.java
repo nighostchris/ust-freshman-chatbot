@@ -2,8 +2,8 @@ package com.cse3111project.bot.spring.category;
 
 import com.cse3111project.bot.spring.category.transport.Transport;
 import com.cse3111project.bot.spring.category.academic.Academic;
+import com.cse3111project.bot.spring.category.social.Social;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import java.net.URISyntaxException;
@@ -24,7 +24,8 @@ public abstract class Category {
     // going to use Utilities.concatArrays() to concatenate all QUERY_KEYWORDs in each catagory
     // as more Categories are defined
     public static final String QUERY_KEYWORD[] = Utilities.concatArrays(Academic.QUERY_KEYWORD, 
-                                                                        Transport.QUERY_KEYWORD);
+                                                                        Transport.QUERY_KEYWORD,
+                                                                        Social.QUERY_KEYWORD);
 
     // there is only one SQLDatabase deployed => declare static
     protected static SQLDatabaseEngine SQLDatabase = null;
@@ -34,6 +35,7 @@ public abstract class Category {
             throws AmbiguousQueryException, StaffNotFoundException {
         ArrayList<String> transportResults = new ArrayList<>();
         ArrayList<String> academicResults = new ArrayList<>();
+        ArrayList<String> socialResults = new ArrayList<>();
 
         for (String result : matchedResults){
             // Transport.QUERY_KEYWORD = Minibus.QUERY_KEYWORD U Bus.QUERY_KEYWORD
@@ -46,17 +48,23 @@ public abstract class Category {
             for (String academicKeyword : Academic.QUERY_KEYWORD)
                 if (result.equals(academicKeyword))
                     academicResults.add(academicKeyword);
-        }
-        // TODO in future:
-        // find max of occurrences between categories
-        // create a new ArrayList to extract keywords from category having the largest match
-        // and pass it to .query()
-        // if multiple occurrences are max => ask further
 
-        if (transportResults.size() > academicResults.size())
+            // Social.QUERY_KEYWORD = Social.
+            for (String socialKeyword : Social.QUERY_KEYWORD)
+                if (result.equals(socialKeyword))
+                    socialResults.add(socialKeyword);
+        }
+
+        // each of categories should be UNIQUE, NO query keyword between categories is overlapping
+        if (transportResults.size() > academicResults.size() && 
+            transportResults.size() > socialResults.size())
             return Transport.query(transportResults);
-        else if (academicResults.size() > transportResults.size())
+        else if (academicResults.size() > transportResults.size() && 
+                 academicResults.size() > socialResults.size())
             return Academic.query(academicResults);
+        else if (socialResults.size() > transportResults.size() && 
+                 socialResults.size() > academicResults.size())
+            return Social.query(socialResults);
         else  // query should not have overlap in a single sentence (untested) ***
             throw new AmbiguousQueryException("I am not quite sure what you are talking about, " +
                                               "could you be more clearer?");

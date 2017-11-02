@@ -3,6 +3,7 @@ package com.cse3111project.bot.spring;
 import com.cse3111project.bot.spring.category.Category;
 import com.cse3111project.bot.spring.category.transport.*;
 import com.cse3111project.bot.spring.category.academic.*;
+import com.cse3111project.bot.spring.category.social.*;
 // import com.cse3111project.bot.spring.SQLDatabaseEngine;
 
 // import javax.annotation.PostConstruct;
@@ -74,6 +75,10 @@ public class SearchEngine {
                 if (categoryResult instanceof Staff)
                     reply = ((Staff) categoryResult).getContactInfoFromSQL();
             }
+            else if (categoryResult instanceof Social){
+                if (categoryResult instanceof Societies)
+                    reply = ((Societies) categoryResult).getSocietyWebsiteFromSQL();
+            }
         }
         // when one of exceptions occurs => load static database
         catch (URISyntaxException e) {  // mostly not happen in practical
@@ -112,6 +117,10 @@ public class SearchEngine {
                 else if (categoryResult instanceof Academic){
                     if (categoryResult instanceof Staff)
                         reply = ((Staff) categoryResult).getContactInfoFromStatic();
+                }
+                else if (categoryResult instanceof Social){
+                    if (categoryResult instanceof Societies)
+                        reply = ((Societies) categoryResult).getSocietyWebsiteFromStatic();
                 }
             }
         }
