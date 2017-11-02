@@ -18,11 +18,11 @@ import lombok.extern.slf4j.Slf4j;  // logging
 
 @Slf4j
 public class Minibus extends Transport {
+    public static final String QUERY_KEYWORD[] = { "minibus", "minibus 11", "11 minibus" };
+
     private static final String SQL_TABLE = "minibus11record";
     // use only when the SQL database is failed to load in order not to break the program
     private static final String STATIC_DATABASE = "/static/transport/minibusDatabase.txt";
-
-    public static final String QUERY_KEYWORD[] = { "minibus", "minibus 11", "11 minibus" };
 
     // attempt to estimate the arrival time of minibus based on self-collected data from SQL database
     // ** might be too slow **

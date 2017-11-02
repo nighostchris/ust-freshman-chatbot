@@ -7,6 +7,8 @@ import com.cse3111project.bot.spring.utility.Utilities;
 
 import com.cse3111project.bot.spring.exception.StaffNotFoundException;
 
+// Academic
+//          -> Staff
 public abstract class Academic extends Category {
     public static final String QUERY_KEYWORD[] = Utilities.concatArrays(Staff.STAFF_NAME_KEYWORD,
                                                                         Staff.STAFF_POSITION_KEYWORD);

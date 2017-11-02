@@ -12,6 +12,9 @@ import com.cse3111project.bot.spring.utility.Utilities;
 // import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
 import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
 
+// Transport
+//           -> Minibus
+//           -> Bus
 public abstract class Transport extends Category {
     // compute ESTIMATED arrival time according to currentTime
     protected Calendar currentTime = null;
