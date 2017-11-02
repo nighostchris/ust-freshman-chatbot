@@ -1,0 +1,115 @@
+# id,name,website_link
+
+3,Chinese Folk Art Society,http://ihome.ust.hk/~su_cfas
+4,Chinese Orchestra,http://ihome.ust.hk/~su_corch
+5,Comics and Animation Society,http://ihome.ust.hk/~su_comic
+6,Culinary Art and Culture Society,http://ihome.ust.hk/~su_cacs
+7,Drama Society,http://ihome.ust.hk/~su_drama
+8,Film Society,http://ihome.ust.hk/~su_film
+9,International Cuisine Society,http://ihome.ust.hk/~su_ics
+10,Korean Students’ Association,http://ihome.ust.hk/~su_ksa
+11,Magic Club,http://ihome.ust.hk/~su_magic
+12,South Asian Students’ Society,http://ihome.ust.hk/~su_sass
+13,Southeast Asian Students’ Society,http://ihome.ust.hk/~su_seasa
+14,Taiwanese Students’Association,http://ihome.ust.hk/~su_tsa
+15,The Band Society,http://ihome.ust.hk/~su_band
+16,The Photographic Society,http://ihome.ust.hk/~su_photo
+17,The University Choir,http://ihome.ust.hk/~su_choir
+18,University Philharmonic Orchestra,http://ihome.ust.hk/~su_upo
+19,Independent Clubs Association,http://ihome.ust.hk/~su_ica
+20,AIESEC-LC-HKUST,http://ihome.ust.hk/~su_acust
+21,Campus Crusade for Christ,http://ihome.ust.hk/~su_ccc
+22,China Entrepreneur Network,http://ihome.ust.hk/~su_cen
+23,China Study Society,http://ihome.ust.hk/~su_cstus
+24,Chinese Culture Society,http://ihome.ust.hk/~su_cculs
+25,Christian Choir,http://ihome.ust.hk/~su_cchoir
+26,Christian Fellowship,http://ihome.ust.hk/~su_cf
+27,Contract Bridge Club,http://ihome.ust.hk/~su_bridg
+29,Debating Society,http://ihome.ust.hk/~su_debat
+30,Games Society,http://ihome.ust.hk/~su_games
+31,Golden Z Club,http://ihome.ust.hk/~su_goldz
+32,Greater China Vision,http://ihome.ust.hk/~su_gcv
+33,Hong Kong Career Match Association,http://ihome.ust.hk/~su_hkcma
+34,Model United Nations Club,http://ihome.ust.hk/~su_munc
+35,Nature Club,http://ihome.ust.hk/~su_natur
+36,People’s Campus Radio,http://ihome.ust.hk/~su_radio
+37,Progressust,http://ihome.ust.hk/~su_prgssust
+38,Rotaract Club of HKUST,http://ihome.ust.hk/~su_roust
+39,Student Air Cadet Society,http://ihome.ust.hk/~su_aircadet
+40,Student Astronomy Club,http://ihome.ust.hk/~su_astro
+41,Student Social Service Society,http://ihome.ust.hk/~su_ssss
+42,The Catholic Society,http://ihome.ust.hk/~su_catho
+43,The Hong Kong Award for Young People User Unit,http://ihome.ust.hk/~su_ayp
+44,The Linguistics Society,http://ihome.ust.hk/~su_lings
+45,University YMCA – HKUST,http://ihome.ust.hk/~su_uniy
+46,Yo-hoo Club,http://ihome.ust.hk/~su_yohoo
+47,Sports Association,http://ihome.ust.hk/~su_sport
+48,Archery Club,http://ihome.ust.hk/~su_archy
+49,Cricket Club,http://ihome.ust.hk/~su_cricket
+50,Dance Society,http://ihome.ust.hk/~su_dance
+51,Distance Runner’s Club,http://ihome.ust.hk/~su_run
+52,Dodgeball Club,http://ihome.ust.hk/~su_dball
+53,Dragon Boat Club,http://ihome.ust.hk/~su_dboat
+54,Fencing Club,http://ihome.ust.hk/~su_fence
+56,Handball Club,http://ihome.ust.hk/~su_hbc
+57,Hockey Club,http://ihome.ust.hk/~su_hocke
+58,Judo Club,http://ihome.ust.hk/~su_judo
+59,Kendo Club,http://ihome.ust.hk/~su_kendo
+60,Korfball Club,http://ihome.ust.hk/~su_korf
+61,Rope Skipping Club,http://ihome.ust.hk/~su_rope
+62,Rowing Club,http://ihome.ust.hk/~su_row
+63,Rugby Club,http://ihome.ust.hk/~su_rugby
+64,Shaolin Martial Arts Society,http://ihome.ust.hk/~su_shao
+65,Social Dance Society,http://ihome.ust.hk/~su_sds
+66,Softball Club,http://ihome.ust.hk/~su_soft
+67,Sport Climbing Students’ Society,http://ihome.ust.hk/~su_climb
+68,Squash Club,http://ihome.ust.hk/~su_squas
+69,Student Basketball Club,http://ihome.ust.hk/~su_bball
+70,Students’ Badminton Club,http://ihome.ust.hk/~su_bad
+71,Students’ Football Club,http://ihome.ust.hk/~su_fball
+72,Students’ Karate Club,http://ihome.ust.hk/~su_karat
+73,Students’ Swimming Club,http://ihome.ust.hk/~su_swim
+74,Table Tennis Club,http://ihome.ust.hk/~su_table
+75,Tae Kwon Do Club,http://ihome.ust.hk/~su_tkd
+76,Tai Chi Society,http://ihome.ust.hk/~su_taiji
+77,Tchoukball Club,http://ihome.ust.hk/~su_tball
+78,The Netball Club,http://ihome.ust.hk/~su_net
+80,Track and Field Club,http://ihome.ust.hk/~su_track
+81,Volleyball Club,http://ihome.ust.hk/~su_volly
+82,Wing Chun Martial Arts Society,http://ihome.ust.hk/~su_wcsoc
+83,The Undergraduate House One Students’ Association,http://ihome.ust.hk/~su_ugh1
+84,"VERTEX, House II Students’ Association",http://ihome.ust.hk/~su_ugh2
+85,"Glacier, HOUSE III Students’ Association",http://ihome.ust.hk/~su_ugh3
+86,"Vista, House IV Students’ Association",http://ihome.ust.hk/~su_ugh4
+87,"Endeavour, House V Students’ Association",http://ihome.ust.hk/~su_ugh5
+88,The Business Students’ Union,http://ihome.ust.hk/~su_bsu
+89,The Engineering Students’ Union,http://ihome.ust.hk/~su_esu
+90,The Humanities and Social Science Students’ Union,http://ihome.ust.hk/~su_hssu
+91,Science Students’ Union,http://ihome.ust.hk/~su_ssu
+1,Art Club,http://ihome.ust.hk/~su_art
+107,Chemistry Students’ Society,http://ihome.ust.hk/~su_chem
+108,Mathematics Students’ Society,http://ihome.ust.hk/~su_maths
+109,International Research Enrichment Students’ Society,http://ihome.ust.hk/~su_iress
+110,The Biology Students’ Society,http://ihome.ust.hk/~su_bio
+111,The Physics Students’ Society,http://ihome.ust.hk/~su_phy
+112,Environment Students’ Society,http://ihome.ust.hk/~su_evss
+113,Risk Management and Business Intelligence Students’ Association,http://ihome.ust.hk/~su_rmbisa
+2,Artiste and Show Production Association,http://ihome.ust.hk/~su_aspa
+28,Current Affairs Research Enlightenment,http://ihome.ust.hk/~su_care
+55,Gym and Fitness Society,http://ihome.ust.hk/~su_gymfit
+79,The Student Tennis Club,http://ihome.ust.hk/~su_tenni
+92,"Interdisciplinary Programs Students’ Union,HKUSTSU",http://ihome.ust.hk/~su_ipsu
+93,Accounting Students’ Society,http://ihome.ust.hk/~su_acct
+94,"Information Systems, Business Statistics and Operations Management Students’ Society",http://ihome.ust.hk/~su_isomss
+95,Management Students’ Association,http://ihome.ust.hk/~su_msa
+96,The Economics Students’ Society,http://ihome.ust.hk/~su_econ
+97,The Finance Students’ Society,http://ihome.ust.hk/~su_fina
+98,The Marketing Students’ Society,http://ihome.ust.hk/~su_mkss
+99,Computer Engineering Students’ Society,http://ihome.ust.hk/~su_cpueg
+100,Industrial Engineering and Logistics Management Students’ Society,http://ihome.ust.hk/~su_iess
+101,Mechanical Engineering Students’ Association,http://ihome.ust.hk/~su_mesa
+102,The Chemical and Biomolecular Engineering Students’ Society,http://ihome.ust.hk/~su_cbme
+103,The Civil and Environmental Engineering Students’ Society,http://ihome.ust.hk/~su_civil
+104,The Computer Science and Engineering Students’ Society,http://ihome.ust.hk/~su_csess
+105,The Electronic and Computer Engineering Students’ Society,http://ihome.ust.hk/~su_ece
+106,Biochemistry Students’ Society,http://ihome.ust.hk/~su_bcss
