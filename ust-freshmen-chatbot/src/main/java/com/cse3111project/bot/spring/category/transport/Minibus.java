@@ -26,7 +26,7 @@ public class Minibus extends Transport {
 
     // attempt to estimate the arrival time of minibus based on self-collected data from SQL database
     // ** might be too slow **
-    @Override
+    // @Override
     public String getArrivalTimeFromSQL() throws SQLException {
         currentTime = Calendar.getInstance();  // get current time
         // not enough data => use currentHr to approximate first
@@ -115,7 +115,7 @@ public class Minibus extends Transport {
 
     // if unfortunately fail to connect SQL database, load the static file to estimate arrival time
     // *** LAST RESORT ***
-    @Override
+    // @Override
     public String getArrivalTimeFromStatic() throws StaticDatabaseFileNotFoundException {
         currentTime = Calendar.getInstance();  // get current time
         int currentHr = currentTime.get(Calendar.HOUR_OF_DAY);  // get current hr in 24-hr format

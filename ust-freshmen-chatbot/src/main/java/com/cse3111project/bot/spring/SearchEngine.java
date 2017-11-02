@@ -50,6 +50,16 @@ public class SearchEngine {
         }
 
         try {
+            if (categoryResult instanceof Transport)
+                if (categoryResult instanceof Bus)
+                    reply = ((Bus) categoryResult).getArrivalTimeFromKMB();
+        }
+        catch (Exception e) {
+            Utilities.errorLog("unexpected error occurred while reading from KMB database", e);
+            return "Unexpected error occurred while reading from KMB database. Sorry";
+        }
+
+        try {
             // establish connection to SQL database
             Category.getDatabaseConnection();
 
@@ -58,8 +68,7 @@ public class SearchEngine {
             if (categoryResult instanceof Transport){
                 if (categoryResult instanceof Minibus)
                     reply = ((Minibus) categoryResult).getArrivalTimeFromSQL();
-                else if (categoryResult instanceof Bus)
-                    reply = ((Bus) categoryResult).getArrivalTimeFromSQL();
+                // ** may add SQL database for Bus **
             }
             else if (categoryResult instanceof Academic){
                 if (categoryResult instanceof Staff)
@@ -96,8 +105,9 @@ public class SearchEngine {
                 if (categoryResult instanceof Transport){
                     if (categoryResult instanceof Minibus)
                         reply = ((Minibus) categoryResult).getArrivalTimeFromStatic();
-                    if (categoryResult instanceof Bus)
-                        reply = ((Bus) categoryResult).getArrivalTimeFromStatic();
+                    // ** may add static database for Bus **
+                    // if (categoryResult instanceof Bus)
+                    //     reply = ((Bus) categoryResult).getArrivalTimeFromStatic();
                 }
                 else if (categoryResult instanceof Academic){
                     if (categoryResult instanceof Staff)
