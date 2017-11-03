@@ -254,4 +254,44 @@ public class KitchenSinkTester {
 
         log.info("--- End of partialMatchSocieties3() ---");
     }
+
+    // partial match recreation keyword case 1: middle + different case
+    // heroku SQL database    -- pass
+    // local static database  -- pass
+    @Test
+    public void partialMatchRecreation1() throws Exception {
+        log.info("--- partialMatchRecreation1() ---");
+
+        String answer = null;
+
+        answer = this.searchEngine.search("Where could I book music room in UST?");
+
+        assertThat(answer).isNotNull();
+        log.info("reply: {}", answer);
+        assertThat(answer.contains("Results:") && answer.contains("Music Room")).isEqualTo(true);
+
+        log.info("--- End of partialMatchRecreation1() ---");
+    }
+
+    // partial match recreation keyword case 2: multiple matches + different case + merged with other char
+    //                                          + keyword transformation
+    // heroku SQL database    -- pass
+    // local static database  -- pass
+    @Test
+    public void partialMatchRecreation2() throws Exception {
+        log.info("--- partialMatchRecreation2() ---");
+
+        String answer = null;
+
+        // Lecture Room doesn't exist in SQL / static database
+        // but it would be transformed to the keyword that they appear: Classroom
+        answer = this.searchEngine.search("Where to book Lecture Room, and also study room?");
+
+        assertThat(answer).isNotNull();
+        log.info("reply: {}", answer);
+        assertThat(answer.contains("Results:") && answer.contains("Classroom") && 
+                   answer.contains("Study Room")).isEqualTo(true);
+
+        log.info("--- End of partialMatchRecreation2() ---");
+    }
 }
