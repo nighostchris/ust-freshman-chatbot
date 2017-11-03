@@ -71,7 +71,7 @@ public class Recreation extends Social {
     // solely contains the UST amenities info
     // since there is only one link to book library study room => not intended to insert
     private static final String SQL_TABLE = "amenities";
-    private static final String STATIC_DATABASE = "/social/recreationDatabase.txt";
+    private static final String STATIC_DATABASE = "/static/social/amenitiesDatabase.txt";
 
     // user may have searched multiple recreations
     private ArrayList<String> userQuery;
@@ -131,7 +131,7 @@ public class Recreation extends Social {
             String recreationInfoBuilder = "for " + name + ",\n";
             if (application_link != null && instruction_link != null)
                 recreationInfoBuilder += "You could find application form at " + application_link + " while " +
-                                         " its booking instruction could be found at " + instruction_link + '\n';
+                                         "its booking instruction could be found at " + instruction_link + '\n';
             else if (application_link == null && instruction_link != null)
                 recreationInfoBuilder += "There is no application form but " +
                                          "its booking instruction could be found at " + instruction_link + '\n';
@@ -208,14 +208,16 @@ public class Recreation extends Social {
                 // name application_link instruction_link
                 String recreationInfo[] = line.split(",", 3);  // split at most 2 commas (3 parts)
                                                                // and insert empty string if encountered
-                if (!transformedUserQuery.contains(recreationInfo[0]))  // if not querying this amenity
-                    continue;
+                for (String query : transformedUserQuery){
+                    if (recreationInfo[0].toLowerCase().contains(query.toLowerCase())){
+                        for (int i = 0; i < recreationInfo.length; i++)
+                            if (recreationInfo[i].length() == 0)
+                                recreationInfo[i] = null;  // reassign to null for empty string
+                            
+                            results.add(new RecreationInfo(recreationInfo[0], recreationInfo[1], recreationInfo[2]));
+                    }
+                }
 
-                for (int i = 0; i < recreationInfo.length; i++)
-                    if (recreationInfo[i].length() == 0)
-                        recreationInfo[i] = null;  // reassign to null for empty string
-                
-                results.add(new RecreationInfo(recreationInfo[0], recreationInfo[1], recreationInfo[2]));
             }
 
             return this.replyResults(results);

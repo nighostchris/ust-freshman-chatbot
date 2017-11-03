@@ -140,8 +140,8 @@ public class KitchenSinkTester {
 
         assertThat(answer).isNotNull();
         log.info("reply: {}", answer);
-        assertThat(answer.contains("Results:") && answer.contains("Li Bo") && 
-                   !answer.contains("Li Xin")).isEqualTo(true);
+        assertThat(answer.contains("Results:") && answer.contains("LI Bo") && 
+                   !answer.contains("LI Xin")).isEqualTo(true);
 
         log.info("--- End of partialMatchStaff1() ---");
     }
@@ -159,8 +159,8 @@ public class KitchenSinkTester {
 
         assertThat(answer).isNotNull();
         log.info("reply: {}", answer);
-        assertThat(answer.contains("Results:") && answer.contains("Li Bo") && 
-                   answer.contains("Li Xin")).isEqualTo(true);
+        assertThat(answer.contains("Results:") && answer.contains("LI Bo") && 
+                   answer.contains("LI Xin")).isEqualTo(true);
 
         log.info("--- End of partialMatchStaff2() ---");
     }

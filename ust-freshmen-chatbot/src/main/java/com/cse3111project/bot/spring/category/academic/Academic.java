@@ -29,7 +29,7 @@ public abstract class Academic extends Category {
                     queryStaffPositionKeywords.add(staffPositionKeyword);
 
             for (String staffNameKeyword : Staff.STAFF_NAME_KEYWORD)
-                if (result.equals(staffNameKeyword))
+                if (result.equals(staffNameKeyword) && !queryStaffNameKeywords.contains(result))
                     queryStaffNameKeywords.add(staffNameKeyword);
 
             // for (String courseKeyword : Course.QUERY_KEYWORD)

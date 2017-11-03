@@ -64,7 +64,7 @@ public class SearchEngine {
             // establish connection to SQL database
             Category.getDatabaseConnection();
 
-            // throw new SQLException("*** throwing error to test static database ***");
+            throw new SQLException("*** throwing error to test static database ***");
 
             if (categoryResult instanceof Transport){
                 if (categoryResult instanceof Minibus)
@@ -164,6 +164,8 @@ public class SearchEngine {
         for (String keyword : Category.QUERY_KEYWORD)
             if (userQuery.contains(keyword.toLowerCase()))  // partial match
                 matchedResults.add(keyword);
+
+        Utilities.arrayLog("before .containsLastName(): {}", matchedResults);
 
         // detect last name (full name) after STAFF_POSITION_KEYWORD, e.g. Lecturer, Professor, Prof., ...
         Staff.containsLastName(userQuery, matchedResults);
