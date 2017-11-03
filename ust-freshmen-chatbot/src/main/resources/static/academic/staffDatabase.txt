@@ -1,55 +1,1961 @@
-# department,staffName,position,officeLocation,email
+# id,department,name,position,officelocation,email
 
-COMP,Yang Qiang,Chair Professor,Room 3531,qyang@cse.ust.hk
-COMP,Chung Chi Shing Albert,Professor,Room 2531,achung@cse.ust.hk
-COMP,Chan Tony F.,Chair Professor,Room 6349,tfchan@cse.ust.hk
-COMP,Cheng Kwang Ting Tim,Chair Professor,Room 6548,timcheng@ust.hk
-COMP,Li Bo,Chair Professor,Room 2535,bli@cse.ust.hk
-COMP,Chan Shueng Han Gary,Professor,Room 2539,gchan@cse.ust.hk
-COMP,Chan Lei,Professor,Room 3561,leichen@cse.ust.hk
-COMP,Cheng Siu Wing,Professor,Room 3551,scheng@cse.ust.hk
-COMP,Cheung Shing Chi,Professor,Room 2534,scc@cse.ust.hk
-COMP,Ding Cun Sheng,Professor,Room 2533,cding@cse.ust.hk
-COMP,Golin Mordecai J.,Professor,Room 3559,golin@cse.ust.hk
-COMP,Horner Andrew B.,Professor,Room 3549,horner@cse.ust.hk
-COMP,Kwok Tin Yau James,Professor,Room 3545,jamesk@cse.ust.hk
-COMP,Lee Dik Lun,Professor,Room 3534,dlee@cse.ust.hk
-COMP,Lin Fang Zhen,Professor,Room 3557,flin@cse.ust.hk
-COMP,Papadias Dimitris,Professor,Room 3555,dimitris@cse.ust.hk
-COMP,Pong Ting Chuen,Professor,Room 3544,tcpong@cse.ust.hk
-COMP,Qu Hua Min,Professor,Room 2529,huamin@cse.ust.hk
-COMP,Quan Long,Professor,Room 3506,quan@cse.ust.hk
-COMP,Tai Chiew Lan,Professor,Room 3515,taicl@cse.ust.hk
-COMP,Tang Chi Keung,Professor,Room 3538,cktang@cse.ust.hk
-COMP,Wu De Kai,Professor,Room 3556,dekai@cse.ust.hk
-COMP,Yeung Dit Yan,Professor,Room 3542,dyyeung@cse.ust.hk
-COMP,Zhang Lian Wen Nevin,Professor,Room 2541,lzhang@cse.ust.hk
-COMP,Arya Sunil,Associate Professor,Room 3514,arya@cse.ust.hk
-COMP,Bensaou Brahim,Associate Professor,Room 3537,csbb@cse.ust.hk
-COMP,Chen Kai,Associate Professor,Room 3509,kaichen@cse.ust.hk
-COMP,Kim Sung Hun,Associate Professor,Room 2527,hunkim@cse.ust.hk
-COMP,Luo Qiong,Associate Professor,Room 3511,luo@cse.ust.hk
-COMP,Mak Kan Wing Brian,Associate Professor,Room 3513,mak@cse.ust.hk
-COMP,Muppala Jogesh K.,Associate Professor,Room 3510,muppala@cse.ust.hk
-COMP,Ng Siu Hung Wilfred,Associate Professor,Room 3503,wilfred@cse.ust.hk
-COMP,Sander Pedro,Associate Professor,Room 3504,psander@cse.ust.hk
-COMP,Wong Chi Wing Raymond,Associate Professor,Room 3541,raywong@cse.ust.hk
-COMP,Yi Ke,Associate Professor,Room 3547,yike@cse.ust.hk
-COMP,Zhang Charles,Associate Professor,Room 3516,charlesz@cse.ust.hk
-COMP,Hui Pan,Assistant Professor,Room 3519,panhui@cse.ust.hk
-COMP,Liu Ming,Assistant Professor,CYT-2011,eelium@ust.hk
-COMP,Ma Xiao Juan,Assistant Professor,Room 3507,mxj@cse.ust.hk
-COMP,Papadopoulos Dimitris,Assistant Professor,Room 2537,dipapado@cse.ust.hk
-COMP,Song Yang Qiu,Assistant Professor,Room 3518,yqsong@cse.ust.hk
-COMP,Wang Tao,Assistant Professor,Room 3517,taow@cse.ust.hk
-COMP,Wang Wei,Assistant Professor,Room 3524,weiwa@cse.ust.hk
-COMP,Hang Kai Yu,Research Assistant Professor,IAS-1023,kaiyuh@ust.hk
-COMP,Zhang Yu,Research Assistant Professor,CYT-3007,yuzhangcse@cse.ust.hk
-COMP,Ieong Ricci,Adjunct Assistant Professor,"",ricci@cse.ust.hk
-COMP,Rossiter David Paul,Associate Professor,Room 3554,rossiter@cse.ust.hk
-COMP,Li Xin,Senior Lecturer,Room 3525,lixin@cse.ust.hk
-COMP,Chan Ki Cecia,Lecturer,Room 3525,kccecia@cse.ust.hk
-COMP,Gibson Lam,Lecturer,Room 3553,gibson@cse.ust.hk
-COMP,Lam Ngok,Lecturer,Room 3548,lamngok@cse.ust.hk
-COMP,Leung Wai Ting,Lecturer,Room 3548,kwtleung@cse.ust.hk
-COMP,Desmond Tsoi Yau Chat,Lecturer,Room 3553,desmond@cse.ust.hk
+1,ACCT,Kevin C W CHEN,Head/Chair Professor,LSK6024,acchen@ust.hk
+2,ACCT,Mingyi HUNG,Fung Term Professor of Accounting,LSK6023,acmy@ust.hk
+3,ACCT,Tai-Yuan CHEN,Professor,LSK6014,acty@ust.hk
+4,ACCT,Charles HSU,Professor,LSK6022,achsu@ust.hk
+5,ACCT,Peter F CHEN,Associate Professor,LSK6011,acpchen@ust.hk
+6,ACCT,Zhihong CHEN,Associate Professor,LSK6012,aczh@ust.hk
+7,ACCT,Allen HUANG,Associate Professor,LSK6027,acahuang@ust.hk
+8,ACCT,Shiheng WANG,Associate Professor,LSK6020,acwang@ust.hk
+9,ACCT,Haifeng YOU,Associate Professor,LSK6010,achy@ust.hk
+10,ACCT,Amy ZANG,Associate Professor,LSK6002,aczang@ust.hk
+11,ACCT,Thomas BOURVEAU,Assistant Professor,LSK6013,actb@ust.hk
+12,ACCT,Szu-Fan CHEN,Assistant Professor,LSK6026,acsfc@ust.hk
+13,ACCT,Xinlei LI,Assistant Professor,LSK6049,acxinlei@ust.hk
+14,ACCT,Derrald STICE,Assistant Professor,LSK6051,acstice@ust.hk
+15,ACCT,Yue ZHENG,Assistant Professor,LSK6050,aczheng@ust.hk
+16,ACCT,Dennis CHAN,Associate Professor of Business Education,LSK6043,acdennis@ust.hk
+17,ACCT,Tony H SHIEH,Associate Professor of Business Education,LSK6003,actony@ust.hk
+18,ACCT,Charles K N LAM,Senior Lecturer,LSK6004,aclam@ust.hk
+19,ACCT,Kelvin P L MAK,Senior Lecturer,LSK6055,acmak@ust.hk
+20,ACCT,David LAI,Lecturer,LSK6005,acdavid@ust.hk
+21,ACCT,Laurence C FRANKLIN,Adjunct Professor,LSK5003,lcfran@ust.hk
+22,ACCT,Earl Kay STICE,Adjunct Professor,LSK6018,acharry@ust.hk
+23,ACCT,Ping Sheng KOH,Adjunct Associate Professor,LSK6018,ackoh@ust.hk
+24,ACCT,Sabrina Y S KWAN,Adjunct Associate Professor,LSK6016,acskwan@ust.hk
+25,ACCT,Gerry LI,Adjunct Associate Professor,LSK6048,acgerry@ust.hk
+26,ACCT,Swallow S Y WEI,Executive Officer,LSK6018,acsywei@ust.hk
+27,ACCT,Anita M Y WONG,Departmental Secretary,LSK6018,acanita@ust.hk
+28,ACCT,Carolyn K L LAM,Clerk,LSK6018,accaroly@ust.hk
+29,ACCT,Juno S P TUNG,Clerk,LSK6018,acjuno@ust.hk
+30,ACCT,Leean C W YIU,Clerk,LSK6018,acyiu@ust.hk
+31,ACCT,Shirley X WU,Assistant Manager,LSK2042,shirleywu@ust.hk
+32,ACCT,Jessica LEE,Teaching Associate,LSK6016,jessicalee@ust.hk
+33,ACCT,Ann Y W CHAN,Teaching Associate,LSK6066,acann@ust.hk
+34,ACCT,Carrie K L LEUNG,Teaching Associate,LSK6066,accarrie@ust.hk
+35,ACCT,Sandy W TAI,Teaching Associate,LSK6066,acsandy@ust.hk
+36,ACCT,Tracy WONG,Teaching Associate,LSK6016,actracy@ust.hk
+37,ACCT,K K LEE,Instructional Assistant,LSK6066,ackk@ust.hk
+38,CBE,I Ming HSING,Head/Professor,4571,kehsing@ust.hk
+39,CBE,Rebecca K Y YIP,Departmental Secretary,4570,kerebecca@ust.hk
+40,CBE,Henry H N LAM,Associate Head/Associate Professor,4561,kehlam@ust.hk
+41,CBE,Furong GAO,Chair Professor,4558,kefgao@ust.hk
+42,CBE,Ka Ming NG,Chair Professor,4572A,kekmng@ust.hk
+43,CBE,Ping GAO,Professor,4560,kepgao@ust.hk
+44,CBE,Xijun HU,Professor,4559,kexhu@ust.hk
+45,CBE,David C W HUI,Professor,4556,kehui@ust.hk
+46,CBE,Yongli MI,Professor,4574,keymix@ust.hk
+47,CBE,King Lun YEUNG,Professor,4550,kekyeung@ust.hk
+48,CBE,Andrew MAK,Professor of Engineering Practice,4566,keamak@ust.hk
+49,CBE,Terrence F YEE,Professor of Engineering Practice,4358,ketfyee@ust.hk
+50,CBE,Khalil AMINE,Adjunct Professor,4555,amine@ust.hk
+51,CBE,Chak Keung CHAN,Adjunct Professor,4566,keckchan@ust.hk
+52,CBE,Guohua CHEN,Adjunct Professor,5585,kechengh@ust.hk
+53,CBE,John C K KWOK,Adjunct Professor,"",jckkwok@ust.hk
+54,CBE,Christopher K S LEUNG,Adjunct Professor,"",leungcks@ust.hk
+55,CBE,Chwee Teck LIM,Adjunct Professor,"",ctlim@ust.hk
+56,CBE,Jean-Marie TARASCON,Adjunct Professor,4566,jmt@ust.hk
+57,CBE,Lutao WENG,Adjunct Professor,2575C,mcltweng@ust.hk
+58,CBE,Chi Ming CHAN,Professor Emeritus,4359,kecmchan@ust.hk
+59,CBE,Gordon MCKAY,Professor Emeritus,4566,kemckayg@ust.hk
+60,CBE,Po Lock YUE,Professor Emeritus,4553,keplyue@ust.hk
+61,CBE,Ying CHAU,Associate Professor,4555,keychau@ust.hk
+62,CBE,Francesco CIUCCI,Associate Professor,2577A,mefrank@ust.hk
+63,CBE,Minhua SHAO,Associate Professor,CYT2005,kemshao@ust.hk
+64,CBE,Henry TONG,Adjunct Associate Professor,4566,kehenry@ust.hk
+65,CBE,Richard LAKERVELD,Assistant Professor,CYT2003,kelakerveld@ust.hk
+66,CBE,Tom Z T LUO,Assistant Professor,4557,keztluo@ust.hk
+67,CBE,Julia SEMMELHACK,Assistant Professor,5462,jsemmelhack@ust.hk
+68,CBE,Fei SUN,Assistant Professor,CYT2004,kefsun@ust.hk
+69,CBE,Jiguang WANG,Assistant Professor,4352,jgwang@ust.hk
+70,CBE,Yiwen WANG,Assistant Professor,2437,eewangyw@ust.hk
+71,CBE,Angela R H WU,Assistant Professor,5512,angelawu@ust.hk
+72,CBE,Marshal YS LIU,Assistant Professor of Engineering Education,4551,keysliu@ust.hk
+73,CBE,Vincent CK CHEUNG,Adjunct Assistant Professor,"",vckc@ust.hk
+74,CBE,Frank L Y LAM,Adjunct Assistant Professor,5579,kefrank@ust.hk
+75,CBE,Yu ZHANG,Adjunct Assistant Professor,"",dyzhang@ust.hk
+76,CBE,Peter CHEUNG,Research Assistant Professor,4363,ppcheung@ust.hk
+77,CBE,Rong NI,Research Assistant Professor,4363,kenirong@ust.hk
+78,CBE,Ben Zhong TANG,Stephen Kam Chuen Cheong Professor of Science,CYT6002,tangbenz@ust.hk
+79,CBE,King Lau CHOW,Professor,5442,bokchow@ust.hk
+80,CBE,Albert C S CHUNG,Professor,2531,achung@ust.hk
+81,CBE,Richard H Y SO,Professor,5541,rhyso@ust.hk
+82,CBE,Jun XIA,Professor,5447,jxia@ust.hk
+83,CBE,Shengwang DU,Professor,4477,dusw@ust.hk
+84,CBE,Hongkai WU,Professor,4517,chhkwu@ust.hk
+85,CBE,Pingbo HUANG,Associate Professor,5463,bohuangp@ust.hk
+86,CBE,Xuhui HUANG,Padma Harilela Associate Professor of Science,4540,xuhuihuang@ust.hk
+87,CBE,Yi-Kuen LEE,Associate Professor,2547,meyklee@ust.hk
+88,CBE,Matthew MCKAY,Hari Harilela Associate Professor of Electronic & Computer Engineering,2450,eemrmckay@ust.hk
+89,CBE,Shuhuai YAO,Associate Professor,2577F,meshyao@ust.hk
+90,CBE,Yuan YAO,Associate Professor,3430,yuany@ust.hk
+91,CBE,Levent YOBAS,Associate Professor,CYT3012,eelyobas@ust.hk
+92,CBE,Yin CHEN,Post-doctoral Fellow,4335,yinchen@ust.hk
+93,CBE,Qianqian DOU,Post-doctoral Fellow,5580,keqdou@ust.hk
+94,CBE,Songzi KOU,Post-doctoral Fellow,7108,kesongzi@ust.hk
+95,CBE,Fei LI,Post-doctoral Fellow,CYT2002,kefeili@ust.hk
+96,CBE,Runlai LI,Post-doctoral Fellow,4562,keroland@ust.hk
+97,CBE,Ying LI,Post-doctoral Fellow,4335,liyingwcy@ust.hk
+98,CBE,Jingjing LIU,Post-doctoral Fellow,7110,jennyliu@ust.hk
+99,CBE,Xuewu OU,Post-doctoral Fellow,5577,kexou@ust.hk
+100,CBE,Xiujuan SHI,Post-doctoral Fellow,4335,xiujuanshi@ust.hk
+101,CBE,Sze Kee TAM,Post-doctoral Fellow,4564,cbmekee@ust.hk
+102,CBE,Haiyan WANG,Post-doctoral Fellow,CYT2002,kehywang@ust.hk
+103,CBE,Yu YU,Post-doctoral Fellow,4562,bmeyuyu@ust.hk
+104,CBE,Qicheng ZHANG,Post-doctoral Fellow,4562,keqzhang@ust.hk
+105,CBE,Wei ZHANG,Post-doctoral Fellow,5578,kezhwei@ust.hk
+106,CBE,Dewei LI,Visiting Scholar,5580,lidewei@ust.hk
+107,CBE,Yan LIU,Visiting Scholar,4562,liuyan@ust.hk
+108,CBE,Jinlin ZHU,Visiting Scholar,5580,kejinlin@ust.hk
+109,CBE,Qing CHANG,Research Associate,5577,keqchang@ust.hk
+110,CBE,Ka Yip FUNG,Research Associate,4564,kekelvin@ust.hk
+111,CBE,Zhimin LI,Research Associate,5577,kezmli@ust.hk
+112,CBE,Jianying MIAO,Research Associate,5578,kemiaojy@ust.hk
+113,CBE,Ce YAN,Research Associate,4564,keantonyyan@ust.hk
+114,CBE,Yong YU,Research Associate,4564,keyongyu@ust.hk
+115,CBE,Sara S C HO,Executive Officer,4566,kesaraho@ust.hk
+116,CBE,Pauline S T LEUNG,Senior Technical Officer,7101,kepleung@ust.hk
+117,CBE,Renu TYAGI,Senior Technical Officer,CYT2006,kertyagi@ust.hk
+118,CBE,Hoi Yau CHENG,Technical Officer,7101,kehoiyau@ust.hk
+119,CBE,Wing Li LEUNG,Technical Officer,7101,kelee@ust.hk
+120,CBE,Kam Tim TANG,Technical Officer,7101,ketim@ust.hk
+121,CBE,Kwok Fai CHAN,Technical Officer,CYT2006,kekfc@ust.hk
+122,CBE,Bruce K N CHAN,Technical Officer,CYT2006,kebruce@ust.hk
+123,CBE,Tony C P CHOI,Technical Officer,7101,kecpchoi@ust.hk
+124,CBE,Ricky Y L SZETO,Technical Officer,CYT2006,keszeto@ust.hk
+125,CBE,Fatemeh TOHIDI,Technical Officer,7101,kerosie@ust.hk
+126,CBE,Can T Y FUNG,Clerk,4566,kecanfung@ust.hk
+127,CBE,Eartha C S LEUNG,Clerk,4566,keeartha@ust.hk
+128,CBE,Cherry K C SIN,Clerk,4566,kecherry@ust.hk
+129,CBE,Floret Y C WONG,Clerk,4566,kefloret@ust.hk
+130,CBE,Woojin BACK,Research Assistant,6113,kewjback@ust.hk
+131,CBE,Felicia BUDIHARDJO,Research Assistant,7253,kefeli@ust.hk
+132,CBE,Gabriela Daisy HADIWINOTO,Research Assistant,CYT2007B,kegabriela@ust.hk
+133,CBE,Xin HU,Research Assistant,7250,kehuxin@ust.hk
+134,CBE,Sitong JIA,Research Assistant,7102,sjiabd@ust.hk
+135,CBE,Len Foong KOONG,Research Assistant,6114,kelen@ust.hk
+136,CBE,Jiadong LI,Research Assistant,7102,kejiadongli@ust.hk
+137,CBE,Qiu LI,Research Assistant,6115,keqiuli@ust.hk
+138,CBE,Ting LIN,Research Assistant,6116,ketlin@ust.hk
+139,CBE,Long Ting Billy LUK,Research Assistant,6115,kebillyluk@ust.hk
+140,CBE,Cheuk Hei Herry MAK,Research Assistant,7250,kechhmak@ust.hk
+141,CBE,Yik Wong NG,Research Assistant,7109,keywngac@ust.hk
+142,CBE,Mingxi WENG,Research Assistant,"",mxweng@ust.hk
+143,CBE,Jing XU,Research Assistant,6113,kejxu@ust.hk
+144,CBE,Lingda XU,Research Assistant,7253,lingdaxu@ust.hk
+145,CBE,Xiangyu ZHANG,Research Assistant,7250,kezxy@ust.hk
+146,CBE,Ridong ZHANG,Project Assistant,7120,kerzhang@ust.hk
+147,CBE,Kaori IKEGAYA,Communication Tutor,4554,kekaori@ust.hk
+148,CBE,Manis TSANG,Executive Officer,4340,manistsang@ust.hk
+149,CBE,Inez TSUI,Technical Officer,6104,bcinez@ust.hk
+150,CBE,Winnie LEUNG,Clerk,4340,kewinnie@ust.hk
+151,CHEM,Zhenyang LIN,Head/Professor,4511,chemhead@ust.hk
+152,CHEM,Agatha M F MAK,Departmental Officer,4510,chagatha@ust.hk
+153,CHEM,Guochen JIA,Chair Professor,CYT6009,chjiag@ust.hk
+154,CHEM,Xiao-Yuan LI,Chair Professor,4516,chxyli@ust.hk
+155,CHEM,Benzhong TANG,Stephen Kam Chuen Cheong Professor of Science,CYT6002,tangbenz@ust.hk
+156,CHEM,Ching W TANG,IAS Bank of East Asia Professor,IAS2010,chingtang@ust.hk
+157,CHEM,Wei Min DAI,Professor,CYT6012,chdai@ust.hk
+158,CHEM,Wa Hung LEUNG,Professor,4538,chleung@ust.hk
+159,CHEM,Zhenyang LIN,Professor,4533,chzlin@ust.hk
+160,CHEM,Ian D WILLIAMS,Professor,CYT6005,chwill@ust.hk
+161,CHEM,Hongkai WU,Professor,4517,chhkwu@ust.hk
+162,CHEM,Shihe YANG,Professor,4515,chsyang@ust.hk
+163,CHEM,Jianzhen YU,Professor,4532,chjianyu@ust.hk
+164,CHEM,Simon Wan CHAN,Associate Professor,4520,chanwan@ust.hk
+165,CHEM,Zhihong GUO,Associate Professor,4519,chguo@ust.hk
+166,CHEM,Xuhui HUANG,Padma Harilela Associate Professor of Science,4540,xuhuihuang@ust.hk
+167,CHEM,Jianwei SUN,Associate Professor,CYT6010,sunjw@ust.hk
+168,CHEM,Rongbiao TONG,Associate Professor,CYT6011,rtong@ust.hk
+169,CHEM,Henry He YAN,Associate Professor,CYT6003,hyan@ust.hk
+170,CHEM,Lam Lung YEUNG,Adjunct Associate Professor,2002,chyeungl@ust.hk
+171,CHEM,Qing CHEN,Assistant Professor,2544,chenqing@ust.hk
+172,CHEM,Jonathan HALPERT,Assistant Professor,4545,jhalpert@ust.hk
+173,CHEM,Jinqing HUANG,Assistant Professor,4544,jqhuang@ust.hk
+174,CHEM,Stefan NAGL,Assistant Professor,4546,chnagl@ust.hk
+175,CHEM,Ding PAN,Assistant Professor,4460,dingpan@ust.hk
+176,CHEM,Jason K K CHAN,Lecturer,4543,kkjchan@ust.hk
+177,CHEM,Emily M W TSANG,Lecturer,4536,chetsang@ust.hk
+178,CHEM,Dennis H W CHAN,Assistant Project Manager,4528,chanhw@ust.hk
+179,CHEM,Philip C Y CHOW,Research Assistant Professor,CYT6007,pcyc@ust.hk
+180,CHEM,Shoucheng DONG,Research Assistant Professor,CYT4011,scdong@ust.hk
+181,CHEM,Ryan T K KWOK,Research Assistant Professor,4095,chryan@ust.hk
+182,CHEM,Jacky W Y LAM,Research Assistant Professor,CYT6004,chjacky@ust.hk
+183,CHEM,Enrique KWAN,Laboratory Instructor,4535,chenrique@ust.hk
+184,CHEM,Joanne W T TUNG,Laboratory Instructor,4541,jwttung@ust.hk
+185,CHEM,Fion T Y YEONG,Laboratory Instructor,4542,fionyeong@ust.hk
+186,CHEM,Vivian T H CHEUNG,Instructional Assistant,4523,viviancheung@ust.hk
+187,CHEM,Queenie W S LAI,Instructional Assistant,4523,wslaibb@ust.hk
+188,CHEM,Sheila M S LEE,Instructional Assistant,4522,leesheila@ust.hk
+189,CHEM,Jackie T K LEE,Instructional Assistant,4524,tszkiulee@ust.hk
+190,CHEM,Joanne K M WONG,Instructional Assistant,4522,joannewong@ust.hk
+191,CHEM,Parvej ALAM,Post-doctoral Fellow,6143,parvej@ust.hk
+192,CHEM,Yang BAI,Post-doctoral Fellow,7132,yangbai@ust.hk
+193,CHEM,Ho Nam CHAN,Post-doctoral Fellow,7135,honamchan@ust.hk
+194,CHEM,Min CHEN,Post-doctoral Fellow,CYT6014,chenmin@ust.hk
+195,CHEM,Ming CHEN,Post-doctoral Fellow,6143,mingchen@ust.hk
+196,CHEM,Yuncong CHEN,Post-doctoral Fellow,6143,chenyc@ust.hk
+197,CHEM,Zuliang CHEN,Post-doctoral Fellow,CYT6014,zlchen@ust.hk
+198,CHEM,Haitao FENG,Post-doctoral Fellow,6143,haitaofeng@ust.hk
+199,CHEM,Longcheng GAO,Post-doctoral Fellow,6143,lcgao@ust.hk
+200,CHEM,Pengfei GAO,Post-doctoral Fellow,CYT6007,gpf@ust.hk
+201,CHEM,Benzhao HE,Post-doctoral Fellow,CYT6007,hebenzhao@ust.hk
+202,CHEM,Xianglong HU,Post-doctoral Fellow,CYT6007,xlhu@ust.hk
+203,CHEM,Meijuan JIANG,Post-doctoral Fellow,CYT6007,jiangmeijuan@ust.hk
+204,CHEM,Binyu KUANG,Post-doctoral Fellow,7130,kuangbinyu@ust.hk
+205,CHEM,Huilin LI,Post-doctoral Fellow,7145,lihuilin@ust.hk
+206,CHEM,Wei Wei LI,Post-doctoral Fellow,7137,liweiwei@ust.hk
+207,CHEM,Zhao LI,Post-doctoral Fellow,CYT6007,bilzhao@ust.hk
+208,CHEM,Shujuan LIN,Post-doctoral Fellow,4207,shujuanlin@ust.hk
+209,CHEM,Jingjing LIU,Post-doctoral Fellow,7137,jennyliu@ust.hk
+210,CHEM,Shunjie LIU,Post-doctoral Fellow,CYT6007,shunjieliu@ust.hk
+211,CHEM,Zhiyang LIU,Post-doctoral Fellow,CYT6007,liuzhiyang@ust.hk
+212,CHEM,Dengke MA,Post-doctoral Fellow,CYT6014,madk@ust.hk
+213,CHEM,Ming MA,Post-doctoral Fellow,7132,maming@ust.hk
+214,CHEM,Ju MEI,Post-doctoral Fellow,CYT6007,sunnymeiju@ust.hk
+215,CHEM,Huiqing PENG,Post-doctoral Fellow,CYT6007,phq@ust.hk
+216,CHEM,Ji QI,Post-doctoral Fellow,6143,qiji@ust.hk
+217,CHEM,Guogang SHAN,Post-doctoral Fellow,7167,ggshan@ust.hk
+218,CHEM,Fengyan SONG,Post-doctoral Fellow,CYT6007,fengyansong@ust.hk
+219,CHEM,Haigang SONG,Post-doctoral Fellow,7133,chsonghg@ust.hk
+220,CHEM,Lucia VIGIANTI,Post-doctoral Fellow,CYT6007,luciav@ust.hk
+221,CHEM,Dong WANG,Post-doctoral Fellow,CYT6007,wangdongchem@ust.hk
+222,CHEM,Jianguo WANG,Post-doctoral Fellow,6143,wangjianguo@ust.hk
+223,CHEM,Lin WANG,Post-doctoral Fellow,4207,wanglin@ust.hk
+224,CHEM,Peifa WEI,Post-doctoral Fellow,6143,peifawei@ust.hk
+225,CHEM,Shuang XIAO,Post-doctoral Fellow,7132,chsxiao@ust.hk
+226,CHEM,Linghong XIONG,Post-doctoral Fellow,CYT6007,lhxiong@ust.hk
+227,CHEM,Zejun XU,Post-doctoral Fellow,CYT6014,xuzejun@ust.hk
+228,CHEM,Mengchen YUE,Post-doctoral Fellow,CYT6007,mengchenyue@ust.hk
+229,CHEM,Guangye ZHANG,Post-doctoral Fellow,CYT6007,gyzhang@ust.hk
+230,CHEM,Hua ZHANG,Post-doctoral Fellow,7132,zhhua@ust.hk
+231,CHEM,Jing ZHANG,Post-doctoral Fellow,CYT6007,zhangjing@ust.hk
+232,CHEM,Teng ZHANG,Post-doctoral Fellow,7132,zhangan@ust.hk
+233,CHEM,Yanli ZHANG,Post-doctoral Fellow,7130,cezhangyl@ust.hk
+234,CHEM,Xuepeng ZHANG,Post-doctoral Fellow,CYT6007,zhangxp@ust.hk
+235,CHEM,Guodong ZHAO,Post-doctoral Fellow,CYT6014,zhaoguodonga@ust.hk
+236,CHEM,Weijun ZHAO,Post-doctoral Fellow,CYT6007,weijunzhao@ust.hk
+237,CHEM,Zheng ZHAO,Post-doctoral Fellow,7150,zhaozheng@ust.hk
+238,CHEM,Zheng ZHENG,Post-doctoral Fellow,CYT6007,zhengzheng@ust.hk
+239,CHEM,Chengcheng ZHOU,Post-doctoral Fellow,CYT6007,zccdxj@ust.hk
+240,CHEM,Shiqiang ZHOU,Post-doctoral Fellow,CYT6014,zhoushiqiang@ust.hk
+241,CHEM,Wei BAI,Research Associate,CYT6014,baiwei@ust.hk
+242,CHEM,Yuanjing CAI,Research Associate,CYT6007,gardencyj@ust.hk
+243,CHEM,Yaozong CHEN,Research Associate,7133,chenyaozong@ust.hk
+244,CHEM,Wai Man CHEUNG,Research Associate,7166,cheungwm@ust.hk
+245,CHEM,Xin DAI,Research Associate,7133,daixinchem@ust.hk
+246,CHEM,Yitao FENG,Research Associate,4207,chemfyt@ust.hk
+247,CHEM,Kai GAO,Research Associate,CYT6014,gaokai@ust.hk
+248,CHEM,Jie HU,Research Associate,7132,juehu@ust.hk
+249,CHEM,Jie LI,Research Associate,7142,chlijiejj@ust.hk
+250,CHEM,Yong LIU,Research Associate,6143,liuyonghd@ust.hk
+251,CHEM,Xia LONG,Research Associate,7132,xialongust@ust.hk
+252,CHEM,Wei QIN,Research Associate,CYT6007,qinweichem@ust.hk
+253,CHEM,Wenqing RUAN,Research Associate,CYT6014,ruanwq@ust.hk
+254,CHEM,Fu Kit SHEONG,Research Associate,4207,chemfksheong@ust.hk
+255,CHEM,Yexiang SU,Research Associate,CYT6014,chsyx@ust.hk
+256,CHEM,Lawrence W Y WONG,Research Associate,CYY6007,lawrwong@ust.hk
+257,CHEM,Liangxu XIE,Research Associate,4207,xielx@ust.hk
+258,CHEM,Ni XIE,Research Associate,7167,aiexn@ust.hk
+259,CHEM,Yutao XIE,Research Associate,7134,chytxie@ust.hk
+260,CHEM,Zhaoyuan YU,Research Associate,4207,yuzy@ust.hk
+261,CHEM,Xiaoyan ZHENG,Research Associate,4207,xiaoyanzheng@ust.hk
+262,CHEM,Siqin CAO,Visiting Scholar,4207,caosiqin@ust.hk
+263,CHEM,Jordy L H LAM,Visiting Scholar,4207,""
+264,CHEM,Jinping LEI,Visiting Scholar,4207,leijp@ust.hk
+265,CHEM,Song LIU,Visiting Scholar,4207,songliu@ust.hk
+266,CHEM,Tao LIU,Visiting Scholar,CYT6007,liutaozhx@ust.hk
+267,CHEM,Xiangyue MENG,Visiting Scholar,7132,mengxy@ust.hk
+268,CHEM,Xinlong NI,Visiting Scholar,CYT6007,niugl@ust.hk
+269,CHEM,Cong PAN,Visiting Scholar,4207,pancong@ust.hk
+270,CHEM,Junhui PENG,Visiting Scholar,4207,jhpeng@ust.hk
+271,CHEM,Qian PENG,Visiting Scholar,6143,qianpeng@ust.hk
+272,CHEM,Xin QIAO,Visiting Scholar,4207,qqiao@ust.hk
+273,CHEM,Ka Man TSE,Visiting Scholar,4207,kamantse@ust.hk
+274,CHEM,Olena VASHCHENKO,Visiting Scholar,CYT6007,chevv@ust.hk
+275,CHEM,Dongyu ZHAO,Visiting Scholar,CYT6007,zhaodongyu@ust.hk
+276,CHEM,Xiangze ZENG,Visiting Scholar,4207,zxz@ust.hk
+277,CHEM,Lizhe ZHU,Visiting Scholar,4207,chlizhezhu@ust.hk
+278,CHEM,Zonglong ZHU,Visiting Scholar,CYT6007,zlzhu@ust.hk
+279,CHEM,Laura Y CAO,Senior Technical Officer,7137,chyclora@ust.hk
+280,CHEM,Herman H Y SUNG,Senior Technical Officer,7162,hermans@ust.hk
+281,CHEM,Clement W W LEUNG,Glassblower,2123,chwing@ust.hk
+282,CHEM,Ki SEE-TO,Senior Technician,4531,chkseeto@ust.hk
+283,CHEM,Judy W Y TSE,Senior Technician,4525,chjudywy@ust.hk
+284,CHEM,Kam Kwong CHAN,Technician,4527,chankk@ust.hk
+285,CHEM,Kelvin K L CHAN,Technician,4524,chkelvin@ust.hk
+286,CHEM,Beryl W S CHOW,Technician,4537,chowws@ust.hk
+287,CHEM,Alan Y L FAN,Technician,4506,afan@ust.hk
+288,CHEM,Edmund M W FOK,Technician,4506,chfokmw@ust.hk
+289,CHEM,Carmen J W GUO,Technician,4542,chgjw@ust.hk
+290,CHEM,Chun Sing LAI,Technician,4535,chcslai@ust.hk
+291,CHEM,Disney C T LAU,Technician,4527,disney@ust.hk
+292,CHEM,Fox C K LEUNG,Technician,2123,chfox@ust.hk
+293,CHEM,Rowena S Y LEUNG,Technician,4541,chlsy@ust.hk
+294,CHEM,Man Lung TSE,Technician,4531,mltse@ust.hk
+295,CHEM,Veronica W P TSE,Technician,4537,chvaipui@ust.hk
+296,CHEM,Agatha M F MAK,Departmental Officer,4510,chagatha@ust.hk
+297,CHEM,Chun Ming CHOW,Clerk,4512,ccming@ust.hk
+298,CHEM,Amy T K HO,Clerk,4512,chamyho@ust.hk
+299,CHEM,Fion Y L LAU,Clerk,4512,chfionl@ust.hk
+300,CHEM,Vera S C TANG,Clerk,4512,chvera@ust.hk
+301,CHEM,Jenny M W WONG,Clerk,4512,chjenny@ust.hk
+302,CHEM,Hoi Yan YU,Clerk,4512,chyuhy@ust.hk
+303,CHEM,Pansy L M LUK,Office Assistant,4512,chpansy@ust.hk
+304,CHEM,Lily Y L TUNG,Laboratory Assistant,CYT1004,chtung@ust.hk
+305,CHEM,Jing Jing CHEN,Research Assistant,7166,jingjingch@ust.hk
+306,CHEM,Jiachen HUANG,Research Assistant,CYT6007,huangjc@ust.hk
+307,CHEM,Kui JIANG,Research Assistant,CYT6007,kuijiang@ust.hk
+308,CHEM,John P C KWONG,Research Assistant,CYT6007,johnwong@ust.hk
+309,CHEM,Zhengke LI,Research Assistant,CYT6007,lizhengke@ust.hk
+310,CHEM,Ao SHANG,Research Assistant,CYT6007,shangao@ust.hk
+311,CHEM,Bang WANG,Research Assistant,7167,wangbang@ust.hk
+312,CHEM,Bingnan WANG,Research Assistant,CYT6007,bingnanwang@ust.hk
+313,CHEM,Ling WANG,Research Assistant,7135,""
+314,CHEM,Yaobin WU,Research Assistant,7135,""
+315,CHEM,Huiqiong XIAO,Research Assistant,7166,ustxiao@ust.hk
+316,CHEM,Zelong XING,Research Assistant,CYT6007,xingzelong@ust.hk
+317,CHEM,Wenhan XU,Research Assistant,CYT6007,whxu@ust.hk
+318,CHEM,Siyuan ZHAI,Research Assistant,7137,mibezsy@ust.hk
+319,CHEM,Xueqian ZHAO,Research Assistant,CYT6007,zhaoxueqian@ust.hk
+320,CHEM,Hang ZOU,Research Assistant,CYT6007,zouhang@ust.hk
+321,CHEM,Xinhui ZOU,Research Assistant,CYT6007,lynnzou@ust.hk
+322,CHEM,Wa Hung LEUNG,Director,4538,chleung@ust.hk
+323,CHEM,Clement W W LEUNG,Glassblower,2123,chwing@ust.hk
+324,CHEM,Fox C K LEUNG,Technician,2123,chfox@ust.hk
+325,CHEM,Benzhong TANG,Director,CYT6002,tangbenz@ust.hk
+326,CHEM,Jacky W Y LAM,Research Assistant Professor,CYT6004,chjacky@ust.hk
+327,CHEM,Mengchen YUE,Post-doctoral Fellow,CYT6007,mengchenyue@ust.hk
+328,CHEM,Ian D WILLIAMS,Director of Master's Programs,CYT6005,chwill@ust.hk
+329,CHEM,Stephen GRIFFITH,Project Manager,CYT6004,stegriff@ust.hk
+330,CIVL,Hong Kam LO,Head/Chair Professor,3578,cehklo@ust.hk
+331,CIVL,Bingky W C LAM,Departmental Secretary,3578,bingky@ust.hk
+332,CIVL,Chun Man CHAN,Associate Head/Professor,4602,cecmchan@ust.hk
+333,CIVL,Chii SHANG,Associate Head/Professor,3596,cechii@ust.hk
+334,CIVL,Guanghao CHEN,Chair Professor,3577,ceghchen@ust.hk
+335,CIVL,Mohamed S B H GHIDAOUI,Chinese Estates Professor of Engineering,3569,ghidaoui@ust.hk
+336,CIVL,Joseph H W LEE,Elman Family Professor of Engineering & Public Policy,IAS3001,jhwlee@ust.hk
+337,CIVL,Irene M C LO,Chair Professor,3570,cemclo@ust.hk
+338,CIVL,Charles W W NG,CLP Holdings Professor of Sustainability,4607,cecwwng@ust.hk
+339,CIVL,Hai YANG,Chair Professor,3597,cehyang@ust.hk
+340,CIVL,Chih-Chen CHANG,Professor,4606,cechang@ust.hk
+341,CIVL,Lambros KATAFYGIOTIS,Professor,3567,lambros@ust.hk
+342,CIVL,Jun Shang KUANG,Professor,3571,cejkuang@ust.hk
+343,CIVL,Alexis K H LAU,Professor,4332,alau@ust.hk
+344,CIVL,Christopher K Y LEUNG,Professor,3566,ckleung@ust.hk
+345,CIVL,Yu-Hsing WANG,Professor,3572,ceyhwang@ust.hk
+346,CIVL,Limin ZHANG,Professor,4605,cezhangl@ust.hk
+347,CIVL,Xiangru ZHANG,Professor,4601,xiangru@ust.hk
+348,CIVL,Jack C P CHENG,Associate Professor,3586,cejcheng@ust.hk
+349,CIVL,Ilias DIMITRAKOPOULOS,Associate Professor,3587,ilias@ust.hk
+350,CIVL,Tim K T TSE,Associate Professor,4603,timkttse@ust.hk
+351,CIVL,Gang WANG,Associate Professor,3592,gwang@ust.hk
+352,CIVL,Xueqing ZHANG,Associate Professor,3593,zhangxq@ust.hk
+353,CIVL,Jidong ZHAO,Associate Professor,3590,jzhao@ust.hk
+354,CIVL,Eun Soon IM,Assistant Professor,3594,ceim@ust.hk
+355,CIVL,Mengqian LU,Assistant Professor,3589,cemlu@ust.hk
+356,CIVL,Tze Ling NG,Assistant Professor,3585,tzeling@ust.hk
+357,CIVL,Ben Y B CHAN,Assistant Professor of Engineering Education,6583,ybchan@ust.hk
+358,CIVL,Wei Chung HU,Assistant Professor of Engineering Education,3582,thomashu@ust.hk
+359,CIVL,Kit Ming LAM,Visiting Associate Professor,4604,kitminglam@ust.hk
+360,CIVL,Duncan MCINNIS,Visiting Assistant Professor,3588,dmcinnis@ust.hk
+361,CIVL,Honglei BAI,Research Assistant Professor,3565,hongleibai@ust.hk
+362,CIVL,Shu Ning Tree CHAN,Research Assistant Professor,IAS3002,treechansn@ust.hk
+363,CIVL,Wenwei CHE,Research Assistant Professor,4332,wenweiche@ust.hk
+364,CIVL,Clarence Edward CHOI,Research Assistant Professor,IAS1022,ceclarence@ust.hk
+365,CIVL,Jielong GAN,Research Assistant Professor,3565,vincentgan@ust.hk
+366,CIVL,Duruo HUANG,Research Assistant Professor,3565,huangdr@ust.hk
+367,CIVL,Bo SUN,Research Assistant Professor,IAS3011,cesunbo@ust.hk
+368,CIVL,Chao ZHOU,Research Assistant Professor,3565,cezhou@ust.hk
+369,CIVL,C C CHAN,Adjunct Professor,"",ceccchan@ust.hk
+370,CIVL,Andrew K C CHAN,Adjunct Professor,"",""
+371,CIVL,Martin H C KWONG,Adjunct Professor,"",cemartin@ust.hk
+372,CIVL,James C W LAU,Adjunct Professor,"",""
+373,CIVL,Raymond H M LEUNG,Adjunct Professor,"",""
+374,CIVL,Neil MICKLEBOROUGH,Adjunct Professor,2438,ceneilm@ust.hk
+375,CIVL,Paul T C PANG,Adjunct Professor,"",ceppang@ust.hk
+376,CIVL,Ming Hung WONG,Adjunct Professor,"",""
+377,CIVL,Ka Wai Barry LEE,Adjunct Associate Professor,"",bkwlee@ust.hk
+378,CIVL,Wen Wen ZHOU,Adjunct Assistant Professor,"",cewwzhou@ust.hk
+379,CIVL,Paul Tse-yung CHANG,Professor Emeritus,"",cepchang@ust.hk
+380,CIVL,Howard J C HUANG,Professor Emeritus,"",cehoward@ust.hk
+381,CIVL,Kenny C S KWOK,Professor Emeritus,"",kkwok@ust.hk
+382,CIVL,Xiang Song LI,Professor Emeritus,"",xsli@ust.hk
+383,CIVL,Zongjin LI,Professor Emeritus,"",zongjin@ust.hk
+384,CIVL,Yeou-Koung TUNG,Professor Emeritus,"",cetung@ust.hk
+385,CIVL,Mike POMFRET,Communication Tutor,3583,mpomfret@ust.hk
+386,CIVL,Gershom K S TSE,Teaching Associate,3583,cegtse@ust.hk
+387,CIVL,Anny Y S TSOI,Executive Officer (PG Program & Administration),3580,ceanny@ust.hk
+388,CIVL,Mandy M Y LAM,"Executive Officer (UG Program, Outreach & Development)",3580,cemandy@ust.hk
+389,CIVL,Kelly M Y KWONG,Project Officer,3575,cekelly@ust.hk
+390,CIVL,Ka Chi CHAN,Clerk,3575,egkachi@ust.hk
+391,CIVL,Josephine S F LEE,Clerk,3575,cejoelee@ust.hk
+392,CIVL,Cheryl L F TANG,Clerk,3575,cecheryl@ust.hk
+393,CIVL,Queenie C H TSO,Clerk,3575,cetso@ust.hk
+394,CIVL,Rebecca W Y YAU,Clerk,3575,cerebeca@ust.hk
+395,CIVL,Hing KO,Assistant Computer Officer,1204,cekko@ust.hk
+396,CIVL,Kam Shing IU,Chief Technical Officer,1203A,cejiks@ust.hk
+397,CIVL,Shing Tak LUI,Senior Technical Officer,3201A,cestlui@ust.hk
+398,CIVL,Kenny C K MA,Senior Technical Officer,1208,cekenny@ust.hk
+399,CIVL,Man Fai POON,Senior Technical Officer,1211,cepmf@ust.hk
+400,CIVL,Richard C CHAN,Technical Officer,2209D,richarcc@ust.hk
+401,CIVL,Ivan H M CHAN,Technical Officer,1206B,ceivan@ust.hk
+402,CIVL,Kwok Keung CHUNG,Technical Officer,1203B,cericky@ust.hk
+403,CIVL,Michael M H CHUNG,Technical Officer,1208,mhchung@ust.hk
+404,CIVL,Kam Wai KO,Technical Officer,1206A,kwko@ust.hk
+405,CIVL,Chun Hung LUK,Technical Officer,1206B,cechluk@ust.hk
+406,CIVL,Kin Pong TONG,Technical Officer,1206B,cetongkp@ust.hk
+407,CIVL,Ka Kit WONG,Technical Officer,1206B,cekkwong@ust.hk
+408,CIVL,Yiu Fai FONG,Junior Technician,1206B,yffong@ust.hk
+409,CIVL,Yiu Nam LO,Junior Technician,1204,cenam@ust.hk
+410,CIVL,Dicky P F NGAN,Junior Technician,1203C,cedicky@ust.hk
+411,CIVL,Johnson W L YAU,Junior Technician,3201A,ceyau@ust.hk
+412,CIVL,Wing Man CHAU,Senior Artisan,1203C,cechau@ust.hk
+413,CIVL,King Wah David CHOI,Research Associate,4600,dkwchoi@ust.hk
+414,CIVL,Moez LOUATI,Post-doctoral Fellow,2200A,mzlouati@ust.hk
+415,CIVL,Li WEI,Visiting Scholar,2200A,weilihkust@ust.hk
+416,CIVL,Asgar Ahadpour DORARAN,Research Assistant,1210,ahadpour@ust.hk
+417,CIVL,Andrey CHERNOUSOV,Research Assistant,2209D,chernous@ust.hk
+418,CIVL,Qingsong QIAO,Research Assistant,1210,qiaoqs@ust.hk
+419,CIVL,Eunice S S CHENG,Project Assistant,3588,ceeunice@ust.hk
+420,CIVL,Xiangru ZHANG,Program Director,4601,xiangru@ust.hk
+421,CIVL,Anny Y S TSOI,Executive Officer,3580,ceanny@ust.hk
+422,CIVL,Dave C M HO,Technical Officer,6102,kedave@ust.hk
+423,CIVL,Connie M F TSANG,Clerk,3575,cetsang@ust.hk
+424,CIVL,Guanghao CHEN,Director,3577,ceghchen@ust.hk
+425,CIVL,Chii SHANG,Associate Director,3596,cechii@ust.hk
+426,CIVL,Derek H W LEUNG,Research Associate,4585C,cederek@ust.hk
+427,CIVL,Ji DAI,Research Assistant Professor,2200A,cedj@ust.hk
+428,CIVL,Di WU,Research Assistant Professor,4585C,cewudi@ust.hk
+429,CIVL,Yiu Wing HA,Works Manager,4585C,ywha@ust.hk
+430,CIVL,Allan LEUNG,Engineer,4585C,suklun@ust.hk
+431,CIVL,Karen K Y LEUNG,Project Officer (Accounting),4585C,kityan@ust.hk
+432,CIVL,Victor P F TANG,Technician,4585C,pakfutang@ust.hk
+433,CIVL,Kit Yee LEUNG,Research Assistant,4585C,cekityee@ust.hk
+434,CIVL,Guanghao CHEN,Director,3577,ceghchen@ust.hk
+435,CIVL,Chii SHANG,Associate Director,3596,cechii@ust.hk
+436,CIVL,Derek H W LEUNG,Research Associate,4585C,cederek@ust.hk
+437,CIVL,Ji DAI,Research Assistant Professor,2200A,cedj@ust.hk
+438,CIVL,Di WU,Research Assistant Professor,4585C,cewudi@ust.hk
+439,CIVL,Yiu Wing HA,Works Manager,4585C,ywha@ust.hk
+440,CIVL,Allan LEUNG,Engineer,4585C,suklun@ust.hk
+441,CIVL,Karen K Y LEUNG,Project Officer (Accounting),4585C,kityan@ust.hk
+442,CIVL,Victor P F TANG,Technician,4585C,pakfutang@ust.hk
+443,CIVL,Kit Yee LEUNG,Research Assistant,4585C,cekityee@ust.hk
+444,CSE,Qiang YANG,New Bright Professor of Engineering,3531,cshead@ust.hk
+445,CSE,Betty S K LO,Departmental Secretary,3532,betty@ust.hk
+446,CSE,Albert C S CHUNG,Associate Head,2531,achung@ust.hk
+447,CSE,Tony F CHAN,Chair Professor,6349,tonyfchan@ust.hk
+448,CSE,Tim CHENG,Chair Professor,6548,timcheng@ust.hk
+449,CSE,Bo LI,Chair Professor,2535,bli@ust.hk
+450,CSE,Qiang YANG,New Bright Professor of Engineering,3563,qyang@ust.hk
+451,CSE,Qian ZHANG,Tencent Professor of Engineering,3533,qianzh@ust.hk
+452,CSE,Gary S H CHAN,Professor,2539,gchan@ust.hk
+453,CSE,Lei CHEN,Professor,3561,leichen@ust.hk
+454,CSE,Siu Wing CHENG,Professor,3551,scheng@ust.hk
+455,CSE,Shing Chi CHEUNG,Professor,2534,sccheung@ust.hk
+456,CSE,Albert C S CHUNG,Professor,2531,achung@ust.hk
+457,CSE,Cunsheng DING,Professor,2533,cding@ust.hk
+458,CSE,Pascale N FUNG,Professor,2454,pascale@ust.hk
+459,CSE,Mordecai J GOLIN,Professor,3559,golin@ust.hk
+460,CSE,Andrew B HORNER,Professor,3549,horner@ust.hk
+461,CSE,James T Y KWOK,Professor,3545,jamesk@ust.hk
+462,CSE,Dik Lun LEE,Professor,3534,dlee@ust.hk
+463,CSE,Fangzhen LIN,Professor,3557,flin@ust.hk
+464,CSE,Dimitrios PAPADIAS,Professor,3555,dimitris@ust.hk
+465,CSE,Ting Chuen PONG,Professor,3544,tcpong@ust.hk
+466,CSE,Huamin QU,Professor,2529,huamin@ust.hk
+467,CSE,Long QUAN,Professor,3506,quan@ust.hk
+468,CSE,Chiew Lan TAI,Professor,3515,taicl@ust.hk
+469,CSE,Chi Keung TANG,Professor,3538,cktang@ust.hk
+470,CSE,Dekai WU,Professor,3556,dekai@ust.hk
+471,CSE,Dit-Yan YEUNG,Professor,3542,dyyeung@ust.hk
+472,CSE,Nevin L ZHANG,Professor,2541,lzhang@ust.hk
+473,CSE,Mounir HAMDI,Professor Emeritus,"",hamdi@ust.hk
+474,CSE,Frederick H. LOCHOVSKY,Professor Emeritus,3558,fred@ust.hk
+475,CSE,Lionel M NI,Professor Emeritus,"",ni@ust.hk
+476,CSE,Vincent Y S SHEN,Professor Emeritus,"",shen@ust.hk
+477,CSE,Sunil ARYA,Associate Professor,3514,arya@ust.hk
+478,CSE,Brahim BENSAOU,Associate Professor,3537,csbb@ust.hk
+479,CSE,Kai CHEN,Associate Professor,3509,kaichen@ust.hk
+480,CSE,Sunghun KIM,Associate Professor,2527,hunkim@ust.hk
+481,CSE,Qiong LUO,Associate Professor,3511,luo@ust.hk
+482,CSE,Brian K W MAK,Associate Professor,3513,bmak@ust.hk
+483,CSE,K R Jogesh MUPPALA,Associate Professor,3510,muppala@ust.hk
+484,CSE,Wilfred S H NG,Associate Professor,3503,wng@ust.hk
+485,CSE,Pedro SANDER,Associate Professor,3504,psander@ust.hk
+486,CSE,Raymond C W WONG,Associate Professor,3541,raywong@ust.hk
+487,CSE,Ke YI,Associate Professor,3547,yike@ust.hk
+488,CSE,Charles C ZHANG,Associate Professor,3516,charlesz@ust.hk
+489,CSE,Yu Wing TAI,Adjunct Associate Professor,"",""
+490,CSE,Helen C M SHEN,Associate Professor Emeritus,"",helens@ust.hk
+491,CSE,Pan HUI,Assistant Professor,3519,panhui@ust.hk
+492,CSE,Ming LIU,Assistant Professor,CYT 2011,eelium@ust.hk
+493,CSE,Xiaojuan MA,Assistant Professor,3507,mxj@ust.hk
+494,CSE,Dimitris PAPADOPOULOS,Assistant Professor,2537,dipapado@ust.hk
+495,CSE,Yangqiu SONG,Assistant Professor,3518,yqsong@ust.hk
+496,CSE,Tao WANG,Assistant Professor,3517,taow@ust.hk
+497,CSE,Wei WANG,Assistant Professor,3524,weiwa@ust.hk
+498,CSE,Ricci IEONG,Adjunct Assistant Professor,"",""
+499,CSE,David P ROSSITER,Associate Professor of Engineering Education/Senior Lecturer,3554,rossiter@ust.hk
+500,CSE,Xin LI,Senior Lecturer,3525,lixin@ust.hk
+501,CSE,Cecia Ki CHAN,Lecturer,3525,kccecia@ust.hk
+502,CSE,Gibson LAM,Lecturer,3553,gibson@ust.hk
+503,CSE,Ngok LAM,Lecturer,3548,lamngok@ust.hk
+504,CSE,Kenneth W T LEUNG,Lecturer,3548,kwtleung@ust.hk
+505,CSE,Desmond Y C TSOI,Lecturer,3553,desmond@ust.hk
+506,CSE,Kaiyu HANG,Research Assistant Professor,IAS 1023,kaiyuh@ust.hk
+507,CSE,Yu ZHANG,Research Assistant Professor,CYT 3007,yuzhangcse@ust.hk
+508,CSE,Chuck Jee CHAU,Teaching Associate,4209,cscjchau@ust.hk
+509,CSE,Peter K L CHUNG,Teaching Associate,2532,cspeter@ust.hk
+510,CSE,Luke Ka Wing LO,Teaching Associate,4209,cslukelo@ust.hk
+511,CSE,Wallace W H MAK,Teaching Associate,2532,wallacem@ust.hk
+512,CSE,Kevin K H WANG,Teaching Associate,2532,kevinw@ust.hk
+513,CSE,Man Kit LAU,Instructional Assistant,2532,lmkia@ust.hk
+514,CSE,Ron K C MO,Instructional Assistant,4209,ronmo@ust.hk
+515,CSE,Nicko Y W SHEK,Instructional Assistant,2532,nickoshek@ust.hk
+516,CSE,Dominic C Y LAI,Computer Officer,4202,dominic@ust.hk
+517,CSE,Henry S H WONG,Computer Officer,4202,henry@ust.hk
+518,CSE,Kin Tak LAM,Assistant Computer Officer,4202,cstak@ust.hk
+519,CSE,Renfrew W W KWONG,Assistant Computer Officer,4202,wwkwong@ust.hk
+520,CSE,Winnie P M TSE,Assistant Computer Officer,4202,winnie@ust.hk
+521,CSE,Lam Yiu YAU,Assistant Computer Officer,4202,yiuly@ust.hk
+522,CSE,Vincent Y F CHOI,Technician,4202,vincentchoi@ust.hk
+523,CSE,Jacqueline C K CHAN,Executive Officer (Academic Programs & SSRI),3528,jacquelinec@ust.hk
+613,ECE,Chi Yuk CHIU,Research Assistant Professor,2413,eefrankie@ust.hk
+524,CSE,Sharon J CHIU,Executive Officer (Outreach & Development),3528,sharonchiu@ust.hk
+525,CSE,Angela P Y YU,Executive Officer (Administration),3528,angela@ust.hk
+526,CSE,Lily Y L CHAN,Clerk,3528,cslily@ust.hk
+527,CSE,Vanessa Y C KWOK,Clerk,3528,csyckwok@ust.hk
+528,CSE,Connie W C LAU,Clerk,3528,cswclau@ust.hk
+529,CSE,Isaac T H MA,Clerk,3528,csisaac@ust.hk
+530,CSE,Brenda Y L TAM,Clerk,3528,csbrenda@ust.hk
+531,CSE,Hilda CHAN,Program Assistant,3528,cshilda@ust.hk
+532,CSE,Shauna DALTON,Communication Tutor,3546,dalton@ust.hk
+533,CSE,Noorliza DAVEAU,Communication Tutor,3546,noor@ust.hk
+534,CSE,Theodore SPAETH,Communication Tutor,3546,spaeth@ust.hk
+535,CSE,Albert K S WONG,Director,2431,eealbert@ust.hk
+536,CSE,Wilfred S H NG,Associate Director,3505,wng@ust.hk
+537,CSE,Vicky Y H YUEN,Executive Officer,2414,eevicky@ust.hk
+538,CSE,Raymundo Saijong TANG TANG,Teaching Associate,3114,eeraytan@ust.hk
+539,CSE,Fox C H WU,Teaching Associate,3114,eefox@ust.hk
+540,CSE,Cupid CHOW,Instructional Assistant,3114,eecupid@ust.hk
+541,CSE,Iris Y F TING,Clerk,2414,eeiris@ust.hk
+542,CSE,Qiang YANG,Director,3563,qyang@ust.hk
+543,CSE,Lei CHEN,Associate Director,3509,leichen@ust.hk
+544,CSE,Yang WANG,Associate Director,6520,yangwang@ust.hk
+545,CSE,Irene O Y LAU,Manager,3552,irenelau@ust.hk
+546,CSE,Qian ZHANG,Director,3533,qianzh@ust.hk
+547,CSE,Qian ZHANG,Director,3533,qianzh@ust.hk
+548,CSE,Cheuk Wai LO,System Programmer,6560,albertlo@ust.hk
+549,CSE,Tony W K FUNG,Teaching Associate,6560,twkfung@ust.hk
+550,CSE,Ronald K C CHOW,Instructional Assistant,6560,ronaldchow@ust.hk
+551,CSE,Ben Y B CHAU,Computer Technician,6560,bencyu@ust.hk
+552,CSE,Huamin QU,Director,3503,huamin@ust.hk
+553,CSE,Jacqueline C K CHAN,Executive Officer (Academic Programs & SSRI),3528,jacquelinec@ust.hk
+554,CSE,Lei CHEN,Director of MoE/MSRA IT Key Lab,3509,leichen@ust.hk
+555,CSE,Gary S H CHAN,Associate Director,3507,gchan@ust.hk
+556,CSE,Leo Y H FOK,Technician,2607,eefok@ust.hk
+557,CSE,Lei CHEN,Program Director (MSc in Big Data Technology),3509,leichen@ust.hk
+558,CSE,Cunsheng DING,Program Director (MSc in Information Technology),3518,cding@ust.hk
+559,CSE,Daniel K L LAU,Technician,4202,daniellau@ust.hk
+560,CSE,Yin Tik QUE,Software Engineer,3528,csdee@ust.hk
+561,ECE,Bertram E SHI,Head/Professor,2457,eebert@ust.hk
+562,ECE,Avy W K MAN,Departmental Secretary,2457,eeavy@ust.hk
+563,ECE,Khaled BEN LETAIEF,Chair Professor,2439,eekhaled@ust.hk
+564,ECE,Tim CHENG,Chair Professor,6548,timcheng@ust.hk
+565,ECE,Hoi-Sing KWOK,Dr William M W Mong Professor of Nanotechnology,CYT4013,eekwok@ust.hk
+566,ECE,Kei May LAU,Fang Professor of Engineering,2452,eekmlau@ust.hk
+567,ECE,Vincent LAU,Chair Professor,2416,eeknlau@ust.hk
+568,ECE,Ross MURCH,Chair Professor,2417,eermurch@ust.hk
+569,ECE,Ching W TANG,IAS Bank of East Asia Professor,IAS2010,chingtang@ust.hk
+570,ECE,Amine BERMAK,Professor,2446,eebermak@ust.hk
+571,ECE,Man Sun CHAN,Professor,2519,mchan@ust.hk
+572,ECE,Kevin J CHEN,Professor,2421,eekjchen@ust.hk
+573,ECE,Roger S K CHENG,Professor,6338,eecheng@ust.hk
+574,ECE,Pascale N FUNG,Professor,2454,pascale@ust.hk
+575,ECE,Wing Hung KI,Professor,2520,eeki@ust.hk
+576,ECE,Chin-Tau LEA,Professor,2428,eelea@ust.hk
+577,ECE,Zexiang LI,Professor,CYT2009,eezxli@ust.hk
+578,ECE,Howard LUONG,Professor,2453,eeluong@ust.hk
+579,ECE,Philip K T MOK,Professor,2410,eemok@ust.hk
+580,ECE,Daniel PALOMAR,Professor,2398,palomar@ust.hk
+581,ECE,Andrew W O POON,Professor,2432,eeawpoon@ust.hk
+582,ECE,Li QIU,Professor,2440,eeqiu@ust.hk
+583,ECE,Jianan QU,Professor,2434,eequ@ust.hk
+584,ECE,Johnny K O SIN,Professor,2415,eesin@ust.hk
+585,ECE,Danny H K TSANG,Professor,2414,eetsang@ust.hk
+586,ECE,Chi Ying TSUI,Professor,6546,eetsui@ust.hk
+587,ECE,Michael WANG,Professor,CYT2010,mywang@ust.hk
+588,ECE,Man WONG,Professor,2521,eemwong@ust.hk
+589,ECE,Enboa WU,Professor of Engineering Practice,5613C,enboa@ust.hk
+590,ECE,Weichuan YU,Professor,2442,eeyu@ust.hk
+591,ECE,Patrick YUE,Professor,CYT3010,eepatrick@ust.hk
+592,ECE,Frank Chongwoo PARK,Adjunct Professor,CYT2011,eefcpark@ust.hk
+593,ECE,Xiren CAO,Professor Emeritus,"",eecao@ust.hk
+594,ECE,V G CHIGRINOV,Professor Emeritus,CYT4012,eechigr@ust.hk
+595,ECE,Zhiyong FAN,Associate Professor,2523,eezfan@ust.hk
+596,ECE,Erwin HUANG,Associate Professor of Engineering Practice,6597,erwinhuang@ust.hk
+597,ECE,Volkan KURSUN,Associate Professor,2426,eekursun@ust.hk
+598,ECE,Matthew MCKAY,Hari Harilela Associate Professor of Electronic & Computer Engineering,2450,m.mckay@ust.hk
+599,ECE,Wai Ho MOW,Associate Professor,2451,eewhmow@ust.hk
+600,ECE,Ling SHI,Associate Professor,CYT2013A,eesling@ust.hk
+601,ECE,Jiang XU,Associate Professor,2449,eexu@ust.hk
+602,ECE,Levent YOBAS,Associate Professor,CYT3012,eelyobas@ust.hk
+603,ECE,George Jie YUAN,Associate Professor,2522,eeyuan@ust.hk
+604,ECE,Wei ZHANG,Associate Professor,2444,eeweiz@ust.hk
+605,ECE,Ming LIU,Assistant Professor,CYT2011,eelium@ust.hk
+606,ECE,James SHE,Assistant Professor,2430,eejames@ust.hk
+607,ECE,Shaojie SHEN,Assistant Professor,CYT2012,eeshaojie@ust.hk
+608,ECE,Yiwen WANG,Assistant Professor,2437,eewangyw@ust.hk
+609,ECE,Albert K S WONG,Senior Lecturer,2424,eealbert@ust.hk
+610,ECE,Kam Tim WOO,Associate Professor of Engineering Education,2419,eetim@ust.hk
+611,ECE,Shenghui SONG,Assistant Professor of Engineering Education,2524,eeshsong@ust.hk
+612,ECE,Wei CHEN,Research Assistant Professor,2412,eeweichen@ust.hk
+614,ECE,David Morales JIMENEZ,Research Assistant Professor,2396,eedmorales@ust.hk
+615,ECE,Qiang LI,Research Assistant Professor,2412,eeqli@ust.hk
+616,ECE,An LIU,Research Assistant Professor,2413,eewendaol@ust.hk
+617,ECE,Raymond Hall Yip LOUIE,Research Assistant Professor,2411,eeraylouie@ust.hk
+618,ECE,Lei LU,Research Assistant Professor,CYT4010,eelulei@ust.hk
+619,ECE,Abhishek K SRIVASTAVA,Research Assistant Professor,CYT4011,eeabhishek@ust.hk
+620,ECE,Fu ZHANG,Research Assistant Professor,CYT2008,eefzhang@ust.hk
+621,ECE,Jun ZHANG,Research Assistant Professor,2411,eejzhang@ust.hk
+622,ECE,Lining ZHANG,Research Assistant Professor,2396,eelnzhang@ust.hk
+623,ECE,Tamie KONSTAS,Communication Tutor,2395,eetamie@ust.hk
+624,ECE,Tania Leigh WILMSHURST,Communication Tutor,2395,eetania@ust.hk
+625,ECE,Mang Yee CHANG,Teaching Associate,2395,eechang@ust.hk
+626,ECE,Ricky Y K CHOI,Teaching Associate,2395,eericky@ust.hk
+627,ECE,Raymundo Saijong TANG TANG,Teaching Associate,2395,eeraytan@ust.hk
+628,ECE,Fox C H WU,Teaching Associate,2395,eefox@ust.hk
+629,ECE,Cupid CHOW,Instructional Assistant,2395,eecupid@ust.hk
+630,ECE,Tsung Hsien Johnny LEUNG,Instructional Assistant,2395,eethleung@ust.hk
+631,ECE,Shuangyu LUO,Instructional Assistant,2395,eeallie@ust.hk
+632,ECE,Yimeng TANG,Instructional Assistant,2395,eetangy@ust.hk
+633,ECE,Xuning ZHANG,Instructional Assistant,2395,eexuning@ust.hk
+634,ECE,Chi Yuen Nelvin LAW,Computer Officer,2518,eevnl@ust.hk
+635,ECE,Lik Kin WONG,Computer Officer,3121A,eelkwong@ust.hk
+636,ECE,John C O LAW,Assistant Computer Officer,2518,eejohn@ust.hk
+637,ECE,Tsz Fai KWOK,Computer Engineer,CYT3011,eepaulux@ust.hk
+638,ECE,Tak Sang YIM,Computer Engineer,CYT3011,eedarwin@ust.hk
+639,ECE,King Yi CHAN,Executive Officer (Outreach & Development),2457,eebonniechan@ust.hk
+640,ECE,Julia LAI,Executive Officer (UG & PG Programs),2457,eejulialai@ust.hk
+641,ECE,Isa S Y LAU,Executive Officer (Administration),2457,eeisa@ust.hk
+642,ECE,Fion Sze Yan YEUNG,Executive Officer,CYT4009,eefion@ust.hk
+643,ECE,Vicky Y H YUEN,Executive Officer (CPEG Program),2457,eevicky@ust.hk
+644,ECE,Kin Ming FUNG,Chief Technician,3130,eekmfung@ust.hk
+645,ECE,Jacob Y L HO,Senior Technical Officer,3130,eejho@ust.hk
+646,ECE,Sam C W LAI,Senior Technical Officer,3130,eecwlai@ust.hk
+647,ECE,Bruce S L LEE,Senior Technical Officer,3130,eelee@ust.hk
+648,ECE,Siu Fai LUK,Senior Technical Officer,3112,eesfluk@ust.hk
+649,ECE,Yiu Kuen YIU,Senior Technical Officer,4226,eeyoyo@ust.hk
+650,ECE,Kwok Wai CHAN,Technician,3110,eekwchan@ust.hk
+651,ECE,Balwin M H CHAN,Technician,3654,eeball@ust.hk
+652,ECE,Joseph S C CHENG,Technician,3116,cscheng@ust.hk
+653,ECE,Wang Tung CHENG,Technician,CYT3014,eeraymond@ust.hk
+654,ECE,Leo Y H FOK,Technician,3130,eefok@ust.hk
+655,ECE,Frederick H P KWOK,Technician,CYT3014,eefred@ust.hk
+656,ECE,Nelson K C LI,Technician,3130,eenelson@ust.hk
+657,ECE,Peter K W NAM,Technician,3130,eekwnam@ust.hk
+658,ECE,Allen F L NG,Technician,3113B,eeallen@ust.hk
+659,ECE,Kenny K H PANG,Technician,2518,eekhpang@ust.hk
+660,ECE,Darwin T W WONG,Technician,3130,eetwwong@ust.hk
+661,ECE,Jacob K Y LAI,Computer Technician,2518,eejacob@ust.hk
+662,ECE,Hi Yin MAN,Senior Storekeeper,3127,eehym@ust.hk
+663,ECE,Wendy S K YUEN,Senior Clerk,2457,eewendy@ust.hk
+664,ECE,Foner S F CHAN,Clerk,2457,eefoner@ust.hk
+665,ECE,Joey M Y ON,Clerk,2457,eejoeyon@ust.hk
+666,ECE,Iris Y F TING,Clerk,2457,eeiris@ust.hk
+667,ECE,Alisa Y W WONG,Clerk,2457,eealisa@ust.hk
+668,ECE,Rita S F WONG,Clerk,2457,eerita@ust.hk
+669,ECE,Heather H Y TANG,Program Assistant,2457,eeheather@ust.hk
+670,ECE,Florence K Y FUNG,Project Assistant,3609,eeflorence@ust.hk
+671,ECE,Venus C Y PANG,Project Assistant,2457,eevenus@ust.hk
+672,ECE,Tsz Kin LAU,Office Assistant,2457,eekenlau@ust.hk
+673,ECE,Doris C Y LI,Part-time Project Assistant,CYT2013,eedoris@ust.hk
+674,ECE,Qilong BAO,Research Associate,3110,eeqlbao@ust.hk
+675,ECE,Hao FENG,Research Associate,3112,eehfeng@ust.hk
+676,ECE,Leilei GU,Research Associate,2427,eelguaa@ust.hk
+677,ECE,Wei JIANG,Research Associate,2431,eewjiang@ust.hk
+678,ECE,Ahmed Abdul QUADEER,Research Associate,2447,eeaaquadeer@ust.hk
+679,ECE,Bo WANG,Research Associate,CYT3013,eebo@ust.hk
+680,ECE,Shibo CHEN,Post-doctoral Fellow,2418,eeschen@ust.hk
+681,ECE,Mengyun HUA,Post-doctoral Fellow,2441,eemhua@ust.hk
+682,ECE,Yannick KERVRAN,Post-doctoral Fellow,2431,eekervran@ust.hk
+683,ECE,Zhao LI,Post-doctoral Fellow,2427,eelizhao@ust.hk
+684,ECE,KUMAR SANDEEP,Post-doctoral Fellow,2447,eesandeep@ust.hk
+685,ECE,Xiaoyan SHEN,Post-doctoral Fellow,3121A,eeshenxy@ust.hk
+686,ECE,Saber SOLTANI,Post-doctoral Fellow,3110,eessoltani@ust.hk
+687,ECE,Chong ZHANG,Post-doctoral Fellow,2441,eechongz@ust.hk
+688,ECE,Shaolin ZHOU,Post-doctoral Fellow,3113,eeslzhou@ust.hk
+689,ECE,Zubair AHMED,Visiting Scholar,3113,eezahmed@ust.hk
+690,ECE,Sang LAM,Visiting Scholar,2445,eeslamxl@ust.hk
+691,ECE,Xiaojian LI,Visiting Scholar,2445,eelixj@ust.hk
+692,ECE,Yanghui LIU,Visiting Scholar,3113,eeyhliu@ust.hk
+693,ECE,Salahuddin RAJU,Visiting Scholar,3113,eeraju@ust.hk
+694,ECE,Shairfe SALAHUDDIN,Visiting Scholar,3113,eesalahudd@ust.hk
+695,ECE,Longyan WANG,Visiting Scholar,3113,eelywang@ust.hk
+696,ECE,Xiang XIE,Visiting Scholar,2580,eexiexiang@ust.hk
+697,ECE,Changjian ZHOU,Visiting Scholar,2418,eezhoucj@ust.hk
+698,ECE,Jinghui GENG,Research Assistant,3116,eejgeng@ust.hk
+699,ECE,Huan JIN,Research Assistant,4226C,eejin@ust.hk
+700,ECE,Yuet Ha LAI,Research Assistant,CYT2014B,eejen@ust.hk
+701,ECE,Chi Keung LAM,Research Assistant,3118A,eekobe@ust.hk
+702,ECE,Kai Chi Alex LAM,Research Assistant,3114,eekclam@ust.hk
+703,ECE,Hongtao LIANG,Research Assistant,3114A,eeleon@ust.hk
+704,ECE,Yong PENG,Research Assistant,2602,eepengyong@ust.hk
+705,ECE,Aneesh SHIGWEKAR,Research Assistant,3121A,eeaneesh@ust.hk
+706,ECE,Kam Man WAN,Research Assistant,3116,eebrianwan@ust.hk
+707,ECE,Albert K S WONG,Director,2424,eealbert@ust.hk
+708,ECE,Wilfred S H NG,Associate Director,3503,wng@ust.hk
+709,ECE,Vicky Y H YUEN,Executive Officer,2457,eevicky@ust.hk
+710,ECE,Raymundo Saijong TANG TANG,Teaching Associate,2395,eeraytan@ust.hk
+711,ECE,Fox C H WU,Teaching Associate,2395,eefox@ust.hk
+712,ECE,Cupid CHOW,Instructional Assistant,2395,eecupid@ust.hk
+713,ECE,Iris Y F TING,Clerk,2457,eeiris@ust.hk
+714,ECE,Chi Yuen Nelvin LAW,Computer Officer,2518,eevnl@ust.hk
+715,ECE,John C O LAW,Assistant Computer Officer,2518,eejohn@ust.hk
+716,ECE,Kenny K H PANG,Technician,2518,eekhpang@ust.hk
+717,ECE,Jacob K Y LAI,Computer Technician,2518,eejacob@ust.hk
+718,ECE,Zexiang LI,Professor,CYT2009,eezxli@ust.hk
+719,ECE,Yiu Kuen YIU,Senior Technical Officer,4226,eeyoyo@ust.hk
+720,ECE,Khaled BEN LETAIEF,Director,2439,eekhaled@ust.hk
+721,ECE,Vincent LAU,Associate Director,2437,eeknlau@ust.hk
+722,ECE,Hoi-Sing KWOK,Director,CYT4013,eekwok@ust.hk
+723,ECE,Chung Yung LEE,Research Associate,CYT4008,eemichael@ust.hk
+724,ECE,Ming Wai TAM,Research Associate,3121A,eeamwtam@ust.hk
+725,ECE,Shu Tuen TANG,Research Associate,2435,eethomastang@ust.hk
+726,ECE,Venus C Y PANG,Project Assistant,2457,eevenus@ust.hk
+727,ECE,Gary S H CHAN,Associate Director,3507,gchan@ust.hk
+728,ECE,Leo Y H FOK,Technician,3130,eefok@ust.hk
+729,ECE,Kei May LAU,Chair Professor,2452,eekmlau@ust.hk
+730,ECE,Chak Wah TANG,Senior Technical Officer,1043,eewilson@ust.hk
+731,ECE,Siu Fai LUK,Senior Technical Officer,3112,eesfluk@ust.hk
+732,ECE,Johnny K O SIN,Professor,2428,eesin@ust.hk
+733,ECE,Chun Wah TSE,Project Assistant,2166,eecwtse@ust.hk
+734,ECE,Mag CHUNG,Clerk,2166,magchung@ust.hk
+735,ECE,Hoi-Sing KWOK,Director,CYT4013,eekwok@ust.hk
+736,ECE,Fion Sze Yan YEUNG,Manager,CYT4009,eefion@ust.hk
+737,ECE,Rongsheng CHEN,Research Associate,CYT4009,eerschen@ust.hk
+738,ECE,Guijun LI,Research Associate,2436,eeligj@ust.hk
+739,ECE,Pan SU,Research Associate,2522,eespan@ust.hk
+740,ECE,Man Chun TSENG,Research Associate,2435,eemcken@ust.hk
+741,ECE,Meng ZHANG,Research Associate,2436,eezhangmeng@ust.hk
+742,ECE,Yuk Lung CHEUNG,Research Assistant,CYT4008,eealexcheung@ust.hk
+743,ECE,Wai Keung CHO,Research Assistant,CYT4008,eeterencecho@ust.hk
+744,ECE,Fiona WONG,Project Assistant,CYT4009,eefionawong@ust.hk
+745,ECON,Siu Fai LEUNG,Head/Professor,LSK6029,sfleung@ust.hk
+746,ECON,Songnian CHEN,Chair Professor,LSK6007,snchen@ust.hk
+747,ECON,David E COOK,Professor,LSK6078,davcook@ust.hk
+748,ECON,Yuk Fai FONG,Professor/Director of Center for Experimental Business Research,LSK6069,yfong@ust.hk
+749,ECON,Edwin LAI,Professor/Director of Center for Economic Development,LSK6079,elai at ust.hk@ust.hk
+750,ECON,Albert PARK,Professor,IAS2018,albertpark@ust.hk
+751,ECON,Milind RAO,Professor of Business Practice,LSK6072,mrao@ust.hk
+752,ECON,Pengfei WANG,Professor,LSK6068,pfwang@ust.hk
+753,ECON,Susheng WANG,Professor,LSK6006,sswang@ust.hk
+754,ECON,Danyang XIE,Professor,LSK6009,dxie@ust.hk
+755,ECON,Xinyu HUA,Associate Professor,LSK6076,xyhua@ust.hk
+756,ECON,Wooyoung LIM,Associate Professor/Associate Director of Center for Experimental Business Research,LSK6080,wooyoung@ust.hk
+757,ECON,Xun LU,Associate Professor,LSK6077,xunlu@ust.hk
+758,ECON,Sujata VISARIA,Associate Professor,LSK6081,svisaria@ust.hk
+759,ECON,Peng WANG,Associate Professor,LSK6082,pwang@ust.hk
+760,ECON,Jenny J XU,Associate Professor,LSK6071,jennyxu@ust.hk
+761,ECON,Tao ZHU,Associate Professor,LSK6028,taozhu@ust.hk
+762,ECON,Guojun HE,Assistant Professor,2381,gjhe@ust.hk
+763,ECON,Yangguang Sunny HUANG,Assistant Professor,LSK6075,huangyg@ust.hk
+764,ECON,Kohei KAWAGUCHI,Assistant Professor,LSK6070,kkawaguchi@ust.hk
+765,ECON,Yao Amber LI,Assistant Professor,LSK6057,yaoli@ust.hk
+766,ECON,Yatang LIN,Assistant Professor,LSK6052,linyt@ust.hk
+767,ECON,Yang LU,Assistant Professor,LSK6059,yanglu@ust.hk
+768,ECON,Kam Wing SIU,Assistant Professor of Business Education,LSK6054,eckwsiu@ust.hk
+769,ECON,Xiaojian ZHAO,Assistant Professor,on leave,xjzhao@ust.hk
+770,ECON,Francis LUI,Professor Emeritus/Adjunct Professor,LSK6068,fnfntlui@ust.hk
+771,ECON,Soohong CHEW,Adjunct Professor,"",shchew@ust.hk
+772,ECON,Yiu Kwan FAN,Adjunct Professor,"",ykfan@ust.hk
+773,ECON,Alicia HERRERO,Adjunct Professor,"",alicia@ust.hk
+774,ECON,Han HONG,Adjunct Professor,"",""
+775,ECON,Cheng HSIAO,Adjunct Professor,"",""
+776,ECON,Lungfei LEE,Adjunct Professor,"",lflee@ust.hk
+777,ECON,Mico LORETAN,Adjunct Professor,"",mico@ust.hk
+778,ECON,Guoqiang TIAN,Adjunct Professor,"",""
+779,ECON,Changqi WU,Adjunct Professor,"",fnchqiwu@ust.hk
+780,ECON,Yan YU,Adjunct Associate Professor,"",yanyu@ust.hk
+781,ECON,Fei DING,Adjunct Assistant Professor,LSK6073,feiding@ust.hk
+782,ECON,Wenwen ZHANG,Adjunct Assistant Professor,LSK6042,wwzhang@ust.hk
+783,ECON,Lingzhi ZHOU,Visiting Scholar,LSK6056,lzzhou@ust.hk
+784,ECON,Leonna M F TONG,Executive Officer,LSK6067,leonna@ust.hk
+785,ECON,Kathy K Y WONG,Executive Officer,LSK6067,eckywong@ust.hk
+786,ECON,Juliana LM WONG,Departmental Secretary,LSK6067,fnjuwong@ust.hk
+787,ECON,Mandy S M CHAN,Program Assistant,LSK6067,ecmandy@ust.hk
+788,ECON,Hiram T H CHAU,Program Assistant,LSK6067,hiramc@ust.hk
+789,ECON,Cindy Y L SUN,Clerk,LSK6067,yinglan@ust.hk
+790,ECON,Thomas HT AUYEUNG,Instructional Assistant,LSK6066,ecthomas@ust.hk
+791,ECON,Astor P L FOK,Teaching Associate,LSK6066,ecastor@ust.hk
+792,ECON,Icy B GUO,Instructional Assistant,LSK6066,ecbguo@ust.hk
+793,ECON,Teresa T Y LAU,Teaching Associate,LSK6066,ectylau@ust.hk
+794,ECON,William J LI,Instructional Assistant,LSK6066,jxliecon@ust.hk
+795,ECON,Jeremy K K TO,Instructional Assistant,LSK6066,ecjeremy@ust.hk
+796,ECON,Peter K TSUI,Teaching Associate,LSK6066,ecpeter@ust.hk
+797,ENVR,Jimmy C H FUNG,Head,4412,majfung@ust.hk
+798,ENVR,Jianping GAN,Chair Professor,3482,magan@ust.hk
+799,ENVR,Alexis K H LAU,Professor,4332,alau@ust.hk
+800,ENVR,Xun WU,Professor,4616A,wuxun@ust.hk
+801,ENVR,King Lun YEUNG,Professor,4550,kekyeung@ust.hk
+802,ENVR,Jianzhen YU,Professor,4532,chjianyu@ust.hk
+803,ENVR,Erik BAARK,Professor Emeritus,4412,baark@ust.hk
+804,ENVR,Chi Ming CHAN,Professor Emeritus,4359,kecmchan@ust.hk
+805,ENVR,Simon W CHAN,Associate Professor,4520,chanwan@ust.hk
+806,ENVR,Stanley C K LAU,Associate Professor,CYT5003,scklau@ust.hk
+807,ENVR,Kira MATUS,Associate Professor,4616D,kmatus@ust.hk
+808,ENVR,Gerald R PATCHELL,Associate Professor,2354,sopatch@ust.hk
+809,ENVR,Guojun HE,Assistant Professor,2381,gjhe@ust.hk
+810,ENVR,Eun Soon IM,Assistant Professor,3594,ceim@ust.hk
+811,ENVR,Yatang LIN,Assistant Professor,LSK6052,linyt@ust.hk
+812,ENVR,Wei HAN,Research Assistant Professor,4360,keweihan@ust.hk
+813,ENVR,Zhongming LU,Research Assistant Professor,4360,luzm@ust.hk
+814,ENVR,Erik BAARK,Adjunct Professor,4412,sobaark@ust.hk
+815,ENVR,Chak Keung CHAN,Adjunct Professor,4412,keckchan@ust.hk
+816,ENVR,Christopher FREY,Adjunct Professor,4412,frey@ust.hk
+817,ENVR,Robert GIBSON,Adjunct Professor,4350,rgibson@ust.hk
+818,ENVR,Joseph K C KWAN,Adjunct Professor,2007B,joekwan@ust.hk
+819,ENVR,Christine LOH,Adjunct Professor,4412,cloh@ust.hk
+820,ENVR,David MOLE,Adjunct Professor,4365,mole@ust.hk
+821,ENVR,James K PONG,Adjunct Professor,4412,jameskpong@ust.hk
+822,ENVR,William F BARRON,Adjunct Associate Professor,4412,barron@ust.hk
+823,ENVR,Michael  EDESESS,Adjunct Associate Professor,4412,medesess@ust.hk
+824,ENVR,Calvin Lee KWAN,Adjunct Associate Professor,4412,clkwan@ust.hk
+825,ENVR,Arthur P S LAU,Adjunct Associate Professor,4361,pslau@ust.hk
+826,ENVR,Lam Lung YEUNG,Adjunct Associate Professor,2002,chyeungl@ust.hk
+827,ENVR,Samuel C T YU,Adjunct Associate Professor,2007F,samyu@ust.hk
+828,ENVR,Davis BOOKHART,Adjunct Assistant Professor,2007E,dbookhart@ust.hk
+829,ENVR,David BROWN,Adjunct Assistant Professor,4350,davidbrown@ust.hk
+830,ENVR,Jimmy W M CHAN,Adjunct Assistant Professor,4332,jimmy@ust.hk
+831,ENVR,Hilda HUANG,Adjunct Assistant Professor,4412,hildahuang@ust.hk
+832,ENVR,Louis K F LAM,Adjunct Assistant Professor,4412,louislkf@ust.hk
+833,ENVR,Norman CHEUNG,Senior Lecturer,4367,normancheung@ust.hk
+834,ENVR,Paul W FORSTER,Senior Lecturer,4354,pforster@ust.hk
+835,ENVR,Terrence YEE,Senior Lecturer,4358,ketfyee@ust.hk
+836,ENVR,Meike SAUERWEIN,Lecturer II,4350,meike@ust.hk
+837,ENVR,Elaine LO,Part-time Communication Tutor,4350,elainelo@ust.hk
+838,ENVR,Sharon CHONG,Executive Officer,4412,sharonchong@ust.hk
+839,ENVR,Amy S C LAU,Departmental Secretary,4412,amylau@ust.hk
+840,ENVR,Vanessa W S CHOY,Clerk,4412,waishan@ust.hk
+841,ENVR,Sherman S M LO,Program Assistant,4412,shermanlo@ust.hk
+842,ENVR,Arthur P S LAU,Assistant Research Scientist,4361,pslau@ust.hk
+843,ENVR,Ngai Ting LAU,Assistant Engineer,4362,ntlau@ust.hk
+844,ENVR,Wei HUANG,Assistant Computer Officer,4410,huangw@ust.hk
+845,ENVR,Frances K M KWAN,Technical Officer,4104,fkmkwan@ust.hk
+846,ENVR,Wing Keung TSANG,Technical Officer,4104,wintsang@ust.hk
+847,ENVR,Zhiqiang LIU,Research Associate,4355,liuzhq@ust.hk
+848,ENVR,Teng YAO,Research Associate,4410,tengyao@ust.hk
+849,ENVR,Chuanjun DU,Post-doctoral Fellow,4355,duchu@ust.hk
+850,ENVR,Hyunsu KIM,Post-doctoral Fellow,4374,hyunsu@ust.hk
+851,ENVR,Xingcheng LU,Post-doctoral Fellow,4374,xclu@ust.hk
+852,ENVR,Konstantinos SPANDAGOS,Post-doctoral Fellow,"",constantine@ust.hk
+853,ENVR,Lin SU,Post-doctoral Fellow,4374,sulin@ust.hk
+854,ENVR,Jong Hong LEE,Research Assistant,4113,winsorlee@ust.hk
+855,ENVR,Kai Lok LAM,Research Assistant,4114,lamkl@ust.hk
+856,ENVR,Sing LEUNG,Research Assistant,4114,jasonleung@ust.hk
+857,ENVR,Yutang LUO,Research Assistant,6115,luoyt@ust.hk
+858,ENVR,Xizi SONG,Research Assistant,6115,songxz@ust.hk
+859,FINA,Chu ZHANG,Acting Head/Professor,LSK5006,czhang@ust.hk
+860,FINA,Vidhan K GOYAL,Chair Professor,LSK5011,goyal@ust.hk
+861,FINA,Utpal BHATTACHARYA,Professor,LSK5007,ubhattac@ust.hk
+862,FINA,Yingying LI,Associate Professor,LSK4070,yyli@ust.hk
+863,FINA,Xuewen LIU,Associate Professor,LSK5060,xuewenliu@ust.hk
+864,FINA,Peter MACKAY,Associate Professor,LSK5079,pmackay@ust.hk
+865,FINA,Abhiroop MUKHERJEE,Associate Professor,LSK5057,amukherjee@ust.hk
+866,FINA,Kasper Meisner NIELSEN,Associate Professor,LSK5080,nielsen@ust.hk
+867,FINA,Jialin YU,Associate Professor,LSK5002,jialin@ust.hk
+868,FINA,Yan JI,Assistant Professor,LSK5005,jiy@ust.hk
+869,FINA,Kai LI,Assistant Professor,LSK5061,kaili@ust.hk
+870,FINA,Binying LIU,Assistant Professor,LSK5056,binyingl@ust.hk
+871,FINA,John NASH,Assistant Professor,LSK5059,jgfnash@ust.hk
+872,FINA,Deniz OKAT,Assistant Professor,LSK5058,okat@ust.hk
+873,FINA,George PANAYOTOV,Assistant Professor,LSK5085,panayotov@ust.hk
+874,FINA,Alminas ZALDOKAS,Assistant Professor,LSK5077,alminas@ust.hk
+875,FINA,Veronique LAFON-VINAIS,Associate Professor of Business Education,LSK5078,vlafon@ust.hk
+876,FINA,Lynn PI,Associate Professor of Business Education,LSK5073,lynnpi@ust.hk
+877,FINA,Ekkachai SAENYASIRI,Senior Lecturer,LSK5083,esaenyasiri@ust.hk
+878,FINA,K C CHAN,Adjunct Professor,LSK5009,kcchan@ust.hk
+879,FINA,Laurence C FRANKLIN,Adjunct Professor,LSK5003,lcfran@ust.hk
+880,FINA,Roger KING,Adjunct Professor,LSK5004,rking@ust.hk
+881,FINA,Bruno SOLNIK,Adjunct Professor,LSK5082,solnik@ust.hk
+882,FINA,Jerome YEN,Adjunct Professor,LSK5087,jyen@ust.hk
+883,FINA,Entela BENZ,Adjunct Associate Professor,LSK5042,entelabenz@ust.hk
+884,FINA,Philip CHENG,Adjunct Associate Professor,LSK5087,pcheng@ust.hk
+885,FINA,Winnie PENG,Adjunct Associate Professor,LSK5004,pengq@ust.hk
+886,FINA,Euphrasia LEUNG,Executive Officer,LSK5069,fnleung@ust.hk
+887,FINA,Elaine CHEUNG,Departmental Secretary,LSK5069,fnelaine@ust.hk
+888,FINA,Cathy S Y CHAN,Clerk,LSK5069,fncathy@ust.hk
+889,FINA,Rainbow P L LAI,Clerk,LSK5069,bmrlai@ust.hk
+890,FINA,Mei Ki YEUNG,Program Officer,LSK5069,mikiyeung@ust.hk
+891,FINA,Chi Wai George LO,Teaching Associate,LSK5068,georgelocw@ust.hk
+892,FINA,Bing Shin LEUNG,Teaching Associate,LSK5068,bbsleung@ust.hk
+893,FINA,Chi Lok YIP,Teaching Associate,LSK5068,victory@ust.hk
+894,FINA,Ching Ki CHOI,Instructional Assistant,LSK5068,katycck@ust.hk
+895,FINA,Otto Jone CHUNG,Instructional Assistant,LSK5068,chungoj@ust.hk
+896,FINA,Shu Wai LAM,Instructional Assistant,LSK5068,swlamust@ust.hk
+897,FINA,Man Chung Mandy SO,Instructional Assistant,LSK5068,mandyso@ust.hk
+898,FINA,Stone WONG,Instructional Assistant,LSK5068,stone@ust.hk
+899,FINA,Zhiwu HONG,Post-doctoral Fellow,LSK5068,zhiwuhong@ust.hk
+900,FINA,Bo ZHOU,Visiting Scholar,LSK5068,bozhouhkust@ust.hk
+901,FINA,Benas ZURAUSKAS,Research Assistant,LSK5068,benas@ust.hk
+902,FINA,VACANT ,Director,"",""
+903,FINA,Chu ZHANG,Director,LSK5006,czhang@ust.hk
+904,HUMA,Christian A DANIELS,Head/Professor,2376,cdani@ust.hk
+905,HUMA,Hermia Y L LI,Program Assistant,2377,hmhermia@ust.hk
+906,HUMA,James LEE,Chair Professor,3364,jqljzl@ust.hk
+907,HUMA,Billy K L SO,Chair Professor,3345,billyso@ust.hk
+908,HUMA,Jianmei LIU,Professor,3338,hmjmliu@ust.hk
+909,HUMA,Deborah T L SANG,Professor,3346,hmsang@ust.hk
+910,HUMA,Charles W H CHAN,Associate Professor,3357,hmwhchan@ust.hk
+911,HUMA,Li Fen CHEN,Associate Professor,3333,hmlfchen@ust.hk
+912,HUMA,Siu Woo CHEUNG,Associate Professor,3340,hmcheung@ust.hk
+913,HUMA,Joshua DERMAN,Associate Professor,3352,hmderman@ust.hk
+914,HUMA,Flora L T FU,Associate Professor,3359,hmltfu@ust.hk
+915,HUMA,Virgil K Y HO,Associate Professor,3349,hmvihoky@ust.hk
+916,HUMA,Tik Sang LIU,Associate Professor,3348,hmtsliu@ust.hk
+917,HUMA,Jianxiong MA,Associate Professor,3342,hmjxm@ust.hk
+918,HUMA,Eric S NELSON,Associate Professor,2370,hmericsn@ust.hk
+919,HUMA,Jenny L SMITH,Associate Professor,2378,hmsmith@ust.hk
+920,HUMA,Jingtao SUN,Associate Professor,3353,hmjtsun@ust.hk
+921,HUMA,Lisa L M WONG,Associate Professor,2358,hmlmlisa@ust.hk
+922,HUMA,Simon M H WONG,Associate Professor,3354,hmmhwong@ust.hk
+923,HUMA,Shengqing WU,Associate Professor,2380,hmswu@ust.hk
+924,HUMA,Kam Ming YIP,Associate Professor,3336,hmyming@ust.hk
+925,HUMA,Carine Y M YIU,Associate Professor,3339,yyiu@ust.hk
+926,HUMA,Min ZHANG,Associate Professor,3335,hmzm@ust.hk
+927,HUMA,David C CHANG,Assistant Professor,2350,changcheng@ust.hk
+928,HUMA,Daisy Y DU,Assistant Professor,2369,daisyyandu@ust.hk
+929,HUMA,Lucia H M LIU,Assistant Professor,3385,hmhmliu@ust.hk
+930,HUMA,Lawrence L C ZHANG,Assistant Professor,2385,hmlczhang@ust.hk
+931,HUMA,Bright SHENG,IAS Helmut & Anna Pao Sohmen Professor-at-Large,IAS1014,bsheng@ust.hk
+932,HUMA,Matthew TOMMASINI,Visiting Associate Professor,2360,mtommasini@ust.hk
+933,HUMA,May Yi SHAW,Assistant Professor of Humanities Education,3350,myshaw@ust.hk
+934,HUMA,Anna Y N KWONG,Senior Lecturer,2361,hmakwong@ust.hk
+935,HUMA,Isaac D DROSCHA,Lecturer,CYTG004,droscha@ust.hk
+936,HUMA,Ilari KAILA,Lecturer,UC RoomB,kaila@ust.hk
+937,HUMA,Sai Lok NAM,Lecturer,3399,shlewis@ust.hk
+938,HUMA,Cathy P PAN,Lecturer,3334,hmpanping@ust.hk
+939,HUMA,Nahum BROWN,Visiting Scholar,3334,hmnahumbrown@ust.hk
+940,HUMA,Benjamin K Y TSOU,Adjunct Professor,2365,hmbtsou@ust.hk
+941,HUMA,Robert WESSLING,Adjunct Associate Professor,5023,rwessling@ust.hk
+942,HUMA,Andrew H Y LING,Part-time Lecturer,CYTG004,andrewling@ust.hk
+943,HUMA,Amy M L SZE,Part-time Lecturer,CYTG004,amysze@ust.hk
+944,HUMA,Emily W Y CHEN,Lecturer on part-time basis,3332,hmemilychen@ust.hk
+945,HUMA,Guangtian HA,Lecturer on part-time basis,3332,hmgth@ust.hk
+946,HUMA,Galison W F LAU,Instructional Assistant,CYTG005,galisonlau@ust.hk
+947,HUMA,Chun Yin LAW,Instructional Assistant,3005,hmlcyin@ust.hk
+948,HUMA,Winnie W M PUN,Instructional Assistant,3005,winniepun@ust.hk
+949,HUMA,Perseus N W TSANG,Instructional Assistant,3005,hmper@ust.hk
+950,HUMA,Roderick K C YU,Instructional Assistant,CYTG005,roderickyu@ust.hk
+951,HUMA,Teresa M S WONG,Executive Officer,2338,hmteresa@ust.hk
+952,HUMA,Phil Y W LAM,Technician,3031,phillam@ust.hk
+953,HUMA,Ada C Y YIP,Program Coordinator,2338,hmada@ust.hk
+954,HUMA,Rita Y K CHUI,Clerk,2338,hmritayk@ust.hk
+955,HUMA,Kitty L Y HO,Clerk,3399,hmkitty@ust.hk
+956,HUMA,Jingtao SUN,Director,2388,hmjtsun@ust.hk
+957,HUMA,Tik Sang LIU,Director,3348,hmtsliu@ust.hk
+958,HUMA,Siu Woo CHEUNG,Associate Director,3340,hmcheung@ust.hk
+959,HUMA,Wing Ho WONG,Research Associate,3341,hmwwh@ust.hk
+960,HUMA,Yue QIU,Post-doctoral Fellow,3341,hmqy@ust.hk
+961,HUMA,Ching Yee FUNG,Research Assistant,3402,hmfcy@ust.hk
+962,HUMA,Shiu Yan KWOK,Research Assistant,3402,hmyanyan@ust.hk
+963,HUMA,Wai Lam LEUNG,Research Assistant,3402,wlleung@ust.hk
+964,HUMA,Ka Wai TSE,Research Assistant,3402,hmkwtse@ust.hk
+965,HUMA,Jenny S M WU,Research Assistant,3402,jenica@ust.hk
+966,IELM,Guillermo GALLEGO,Head/Crown Worldwide Professor of Engineering,5545,ggallego@ust.hk
+967,IELM,Jaime Y L SHING,Departmental Secretary,5551,iejaime@ust.hk
+968,IELM,Albert HA,Wei Lun Foundation Professor of Business,LSK4023,imayha@ust.hk
+969,IELM,Shaohui ZHENG,   Chair Professor,LSK4014,imzheng@ust.hk
+970,IELM,Ravindra S GOONETILLEKE,Professor,5548,ravindra@ust.hk
+971,IELM,Ajay JONEJA,Professor,5538,joneja@ust.hk
+972,IELM,Xiangtong QI,Professor,5543,ieemqi@ust.hk
+973,IELM,Richard H Y SO,Professor,5541,rhyso@ust.hk
+974,IELM,Fugee TSUNG,Professor,5546,season@ust.hk
+975,IELM,Rachel ZHANG,Professor,5584,rzhang@ust.hk
+976,IELM,Chung-Yee LEE,Professor Emeritus,5539,cylee@ust.hk
+977,IELM,Ning CAI,Associate Professor,5559D,ningcai@ust.hk
+978,IELM,Ying-Ju CHEN,Associate Professor,5537,imchen@ust.hk
+979,IELM,Qian LIU,Associate Professor,5559E,qianliu@ust.hk
+980,IELM,Jiheng ZHANG,Associate Professor,5581,jiheng@ust.hk
+981,IELM,Neville K S LEE,Associate Professor Emeritus,5547,nlee@ust.hk
+982,IELM,Ningyuan CHEN,Assistant Professor,5559F,nychen@ust.hk
+983,IELM,Jin QI,Assistant Professor,5559C,jinqi@ust.hk
+984,IELM,Qi QI,Assistant Professor,5559A,kaylaqi@ust.hk
+985,IELM,Xin WANG,Assistant Professor,5559,xinwang@ust.hk
+986,IELM,Xiaowei ZHANG,Assistant Professor,5559B,xiaoweiz@ust.hk
+987,IELM,Ada Xuan QIU,Lecturer,5549,xuanqiu@ust.hk
+988,IELM,Flora CHANG,Teaching Associate,5557,florac@ust.hk
+989,IELM,Terence CHEUNG,Teaching Associate,2592,ieterence@ust.hk
+990,IELM,Sarah COOK,Communication Tutor,5558,slcook@ust.hk
+991,IELM,Winnie CHOY,Executive Officer,5551,iewinnie@ust.hk
+992,IELM,Maggie TUNG,Executive Officer (Outreach & Development),5551,maggietung@ust.hk
+993,IELM,Andrey SIN,Project Assistant,5557,iekwsin@ust.hk
+994,IELM,Joyce CHAN,Clerk,5551,iejchan@ust.hk
+995,IELM,Vera LI,Clerk,5551,ievera@ust.hk
+996,IELM,Fona WONG,Clerk,5551,iefona@ust.hk
+997,IELM,Charles NG,Senior Technical Officer,4223,iechung@ust.hk
+998,IELM,Denil CHAN,Assistant Computer Officer,4223,iedenil@ust.hk
+999,IELM,Peggy MAK,Technical Associate,3203,iepeggy@ust.hk
+1000,IELM,Kwok Chu TIN,Technical Associate,4223,ietin@ust.hk
+1001,IELM,Atom YUEN,Technical Associate,3208,ieatom@ust.hk
+1002,IELM,Kwok Kuen YUNG,Technical Associate,4223,kkyung@ust.hk
+1003,IELM,Paul LEUNG,Junior Technician,3203,iepaul@ust.hk
+1004,IELM,Sangjo KIM,Post-doctoral Fellow,5549,sangjo@ust.hk
+1005,IELM,Anran LI,Research Assistant,5568,anranli@ust.hk
+1006,IELM,Patrick TSANG,Research Assistant,"",patricktsang@ust.hk
+1007,IELM,Hannah RAN,Project Assistant,5558,hannahrj@ust.hk
+1008,ISOM,Shaohui ZHENG,Head/Chair Professor,LSK4014,imzheng@ust.hk
+1009,ISOM,Kai Lung HUI,Deputy Head/Chair Professor,LSK4020,klhui@ust.hk
+1010,ISOM,Guillermo GALLEGO,Crown Worldwide Professor of Engineering,5545,ggallego@ust.hk
+1011,ISOM,Albert HA,Wei Lun Foundation Professor of Business,LSK4023,imayha@ust.hk
+1012,ISOM,Inchi HU,Chair Professor,LSK4076,imichu@ust.hk
+1013,ISOM,Kar Yan TAM,Chair Professor,LSK4024,kytam@ust.hk
+1014,ISOM,James Y L THONG,Michael Jebsen Professor of Business,LSK4066,jthong@ust.hk
+1015,ISOM,Lancelot JAMES,Professor,LSK4022,lancelot@ust.hk
+1016,ISOM,Qing LI,Professor,LSK4071,imqli@ust.hk
+1017,ISOM,Hongtao ZHANG,Professor,LSK4015,imhzhang@ust.hk
+1018,ISOM,Rachel Q ZHANG,Professor,5584,rzhang@ust.hk
+1019,ISOM,Ying-Ju CHEN,Associate Professor,LSK4035,imchen@ust.hk
+1020,ISOM,Ki Ling CHEUNG,Associate Professor,LSK4021,imcheung@ust.hk
+1021,ISOM,Theodore H K CLARK,Associate Professor,LSK4082,tclark@ust.hk
+1022,ISOM,Yingying LI,Associate Professor,LSK4070,yyli@ust.hk
+1023,ISOM,Javad NASIRY,Associate Professor,LSK4077,nasiry@ust.hk
+1024,ISOM,Mike K P SO,Associate Professor,LSK4075,immkpso@ust.hk
+1025,ISOM,Xuhu WAN,Associate Professor,LSK4072,imwan@ust.hk
+1026,ISOM,Yan XU,Associate Professor,LSK4074,xuyan@ust.hk
+1027,ISOM,Man YU,Associate Professor,LSK4069,manyu@ust.hk
+1028,ISOM,Xiaojun ZHANG,Associate Professor,LSK4045,xiaojunzhang@ust.hk
+1029,ISOM,Rong ZHENG,Associate Professor,LSK4042,rzheng@ust.hk
+1030,ISOM,Xinghua ZHENG,Associate Professor,LSK4067,xhzheng@ust.hk
+1031,ISOM,Yanzhen CHEN,Assistant Professor,LSK4060,imyanzhen@ust.hk
+1032,ISOM,Lilun DU,Assistant Professor,LSK4068,dulilun@ust.hk
+1033,ISOM,Bharadwaj KADIYALA,Assistant Professor,LSK4058,bkadiyala@ust.hk
+1034,ISOM,Yongsuk KIM,Assistant Professor,LSK4043,yongskim@ust.hk
+1035,ISOM,Tat Koon KOH,Assistant Professor,LSK4061,koh@ust.hk
+1036,ISOM,Dongwon LEE,Assistant Professor,LSK4036,dongwon@ust.hk
+1037,ISOM,Dongwook SHIN,Assistant Professor,LSK4039,dwshin@ust.hk
+1038,ISOM,Jing WANG,Assistant Professor,LSK4044,jwang@ust.hk
+1039,ISOM,Xuan WANG,Assistant Professor,LSK4079,xuanwang@ust.hk
+1040,ISOM,Hong XU,Assistant Professor,LSK4059,hxu@ust.hk
+1041,ISOM,Yi YANG,Assistant Professor,LSK4041,imyiyang@ust.hk
+1042,ISOM,Albert Y LO,Professor Emeritus,"",imaylo@ust.hk
+1043,ISOM,Shu Ming NG,Associate Professor Emeritus/Adjunct Associate Professor,LSK4062,imsmng@ust.hk
+1044,ISOM,Garvin Percy DIAS,Associate Professor of Business Education,LSK4037,percy@ust.hk
+1045,ISOM,Jeevan JAISINGH,Associate Professor of Business Education,LSK4038,jeevan@ust.hk
+1046,ISOM,James S H KWOK,Associate Professor of Business Education,LSK4080,jkwok@ust.hk
+1047,ISOM,Ronald LAU,Associate Professor of Business Education,LSK4081,rlau@ust.hk
+1048,ISOM,Betty LIN,Associate Professor of Business Education,4366,bettylin@ust.hk
+1049,ISOM,Jia JIA,Lecturer,LSK5045,justinjia@ust.hk
+1050,ISOM,Baoqian PAN,Lecturer,LSK5041,ismtpbq@ust.hk
+1051,ISOM,Hilton K H CHAN,Adjunct Professor,"",hilton@ust.hk
+1052,ISOM,Erwin HUANG,Adjunct Professor,"",erwinhuang@ust.hk
+1053,ISOM,Edwin KEH,Adjunct Professor,"",edwink@ust.hk
+1054,ISOM,Joseph PHI,Adjunct Professor,"",josephphi@ust.hk
+1055,ISOM,Weiyin HONG,Adjunct Associate Professor,"",whong@ust.hk
+1056,ISOM,Jack H H TEH,Adjunct Associate Professor,"",jteh@ust.hk
+1057,ISOM,Hang CHAN,Adjunct Assistant Professor,"",hchan@ust.hk
+1058,ISOM,Suri GURUMURTHI,Visiting Assistant Professor,LSK6041,imsuri@ust.hk
+1059,ISOM,Muller Y M CHEUNG,Visiting Scholar,LSK5045,mcheung@ust.hk
+1060,ISOM,Queenie K L LAM,Executive Officer,LSK4066,imqueen@ust.hk
+1061,ISOM,Mandy C M HO,Program Officer,LSK4066,immho@ust.hk
+1062,ISOM,Rolinda W Y TAM,Departmental Secretary,LSK4066,imrtam@ust.hk
+1063,ISOM,Mei Ying CHEUNG,Clerk,LSK4066,immian@ust.hk
+1064,ISOM,Alice Y C LAU,Clerk,LSK4066,imalice@ust.hk
+1065,ISOM,Winnie W Y LEE,Clerk,LSK4066,imwylee@ust.hk
+1066,ISOM,Mandy M Y TAM,Clerk,LSK4066,immandy@ust.hk
+1067,ISOM,Sandra WONG,Assistant Manager,LSK4082A,imsandra@ust.hk
+1068,ISOM,Cherry W Y CHIM,Assistant Manager,LSK2037,bmcchim@ust.hk
+1069,ISOM,Shirley S M LAM,Assistant Manager,LSK4066,imlam@ust.hk
+1070,ISOM,Edmond C F HO,Teaching Associate,LSK4065,imhcf@ust.hk
+1071,ISOM,Samuel S Y LAI,Teaching Associate,LSK4065,imsamuel@ust.hk
+1072,ISOM,Elvis W H LEE,Teaching Associate,LSK4065,imelvis@ust.hk
+1073,ISOM,Olivia H Y CHAN,Instructional Assistant,LSK4065,imolivia@ust.hk
+1074,ISOM,Athena M F CHAU,Instructional Assistant,LSK4065,imachau@ust.hk
+1075,ISOM,Michael T L CHEUNG,Instructional Assistant,LSK4065,immichael@ust.hk
+1076,ISOM,Stacy D S DENG,Instructional Assistant,LSK4065,imsdeng@ust.hk
+1077,ISOM,Sophie J GU,Instructional Assistant,LSK6031,imsophie@ust.hk
+1078,ISOM,Jing JIA,Instructional Assistant,LSK4065,imjing@ust.hk
+1079,ISOM,Adrienne Y S LEE,Instructional Assistant,LSK4065,imadrienne@ust.hk
+1080,ISOM,Paul C L LIU,Instructional Assistant,LSK4065,imclliu@ust.hk
+1081,ISOM,Hiu Fung LOK,Instructional Assistant,LSK4065,imhflok@ust.hk
+1082,ISOM,Tommy K W NG,Instructional Assistant,LSK4065,imtng@ust.hk
+1083,ISOM,Angel SO,Instructional Assistant,LSK6031,imso@ust.hk
+1084,ISOM,Jackie C W TAI,Instructional Assistant,LSK5032A,imjackie@ust.hk
+1085,ISOM,Charles K C WONG,Instructional Assistant,LSK4065,imcharles@ust.hk
+1086,LANG,Keith S T TONG,Director,3362,lcktong@ust.hk
+1087,LANG,Angela S Y CHENG,Secretary,3361,lcacheng@ust.hk
+1088,LANG,Nigel HUCKSTEP,Associate Director,3306,lcnigel@ust.hk
+1089,LANG,Martha P H TANG LAM,Associate Director (Administration),3414,lcmartha@ust.hk
+1090,LANG,Sarah CARMICHAEL,Senior Lecturer,3409,lcsarah@ust.hk
+1091,LANG,Nora HUSSIN,Senior Lecturer,3314,lcnora@ust.hk
+1092,LANG,Miguel LADAO,Senior Lecturer,3311,lcmiguel@ust.hk
+1093,LANG,Edward S L LI,Senior Lecturer,3410,lcedward@ust.hk
+1094,LANG,Po Lung LI,Senior Lecturer,3403,lcpolung@ust.hk
+1095,LANG,Xin LIANG,Senior Lecturer,3310,lcsheila@ust.hk
+1096,LANG,Sean MCMINN,Senior Lecturer,3389,lcmcminn@ust.hk
+1097,LANG,Melissa MEGAN,Senior Lecturer,3411,lcmmegan@ust.hk
+1098,LANG,Elza TSANG,Senior Lecturer,3415,lcelzatsang@ust.hk
+1099,LANG,Claudia WONG,Senior Lecturer,3406,lcclaudia@ust.hk
+1100,LANG,Liza S Y YEW,Senior Lecturer,3308,lcliza@ust.hk
+1101,LANG,Anita AU,Lecturer,3382,lcanita@ust.hk
+1102,LANG,Crystal CHAN,Lecturer,3407,lccrystal@ust.hk
+1103,LANG,Jessica CHAN,Lecturer,3416,lcjessica@ust.hk
+1104,LANG,Rosita CHENG,Lecturer,3412,lcrosita@ust.hk
+1105,LANG,Colin CHEUNG,Lecturer,3405,lccolin@ust.hk
+1106,LANG,Siu Chung CHONG,Lecturer,3405,lcscchong@ust.hk
+1107,LANG,Esther CHUNG,Lecturer,3309,lcesther@ust.hk
+1108,LANG,Graham ENGLAND,Lecturer,3304,lcgraham@ust.hk
+1109,LANG,Rebecca FARMER,Lecturer,3408,lcrebecca@ust.hk
+1110,LANG,Danyal FREEMAN,Lecturer,3408,lcdanyal@ust.hk
+1111,LANG,John FUNG,Lecturer,3412,lcjohnfung@ust.hk
+1112,LANG,Delian GASKELL,Lecturer,3382,lcdgaskell@ust.hk
+1113,LANG,Susanna P S HO,Lecturer,3388,lcschiu@ust.hk
+1114,LANG,Mark HOPKINS,Lecturer,3388,lcmark@ust.hk
+1115,LANG,Gloria KWAN,Lecturer,3405,lcgloria@ust.hk
+1116,LANG,Jessie LAM,Lecturer,3305,lcjlam@ust.hk
+1117,LANG,Levi LAM,Lecturer,3408,lclevilam@ust.hk
+1118,LANG,Eric LEE,Lecturer,3312,lceric@ust.hk
+1119,LANG,Pui LEE,Lecturer,3412,lcleepui@ust.hk
+1120,LANG,William LEE,Lecturer,3316,lcwlee@ust.hk
+1121,LANG,Benjamin LEUNG,Lecturer,3408,lcben@ust.hk
+1122,LANG,Angie LI,Lecturer,3404,lcangie@ust.hk
+1123,LANG,Eugene LI,Lecturer,3303,lceugene@ust.hk
+1124,LANG,Hung Ha LI,Lecturer,3309,lcwendy@ust.hk
+1125,LANG,Bruce MA,Lecturer,3312,lcmbruce@ust.hk
+1126,LANG,Min NUO,Lecturer,3309,lcnuomin@ust.hk
+1127,LANG,Emma RAO,Lecturer,3309,lcemmarao@ust.hk
+1128,LANG,Tao REN,Lecturer,3303,lcrentao@ust.hk
+1129,LANG,Dinesh SADHWANI,Lecturer,3412,lcdinesh@ust.hk
+1130,LANG,Kazuhiro SAKURAI,Lecturer,3405,lckazus@ust.hk
+1131,LANG,Ivy SEK,Lecturer,3416,lcivy@ust.hk
+1132,LANG,Kathy SIN,Lecturer,3315,lckathy@ust.hk
+1133,LANG,Anthony SIU,Lecturer,3316,lcanthony@ust.hk
+1134,LANG,Eunice TANG,Lecturer,3412,lceunicetang@ust.hk
+1135,LANG,Kin Hun TANG,Lecturer,3304,lckint@ust.hk
+1136,LANG,Alfred Jones TSANG,Lecturer,3412,lcalfred@ust.hk
+1137,LANG,Derek WONG,Lecturer,3405,lcderekwong@ust.hk
+1138,LANG,Elaine S Y WONG,Lecturer,3312,lcsukyi@ust.hk
+1139,LANG,Grace H Y WONG,Lecturer,3316,lcgrace@ust.hk
+1140,LANG,Kasina WONG,Lecturer,3305,lckasina@ust.hk
+1141,LANG,Nick WONG,Lecturer,3412,lcnickwong@ust.hk
+1142,LANG,Shaun WONG,Lecturer,3408,lcshaunwong@ust.hk
+1143,LANG,Susan WONG,Lecturer,3309,lcsusan@ust.hk
+1144,LANG,K Y WU,Lecturer,3316,lckywu@ust.hk
+1145,LANG,Xiu Fen XU,Lecturer,3309,lcxfxu@ust.hk
+1146,LANG,Ellen P C YIK,Lecturer,3312,lcelleny@ust.hk
+1147,LANG,Carmel YIP,Lecturer,3408,lccarmel@ust.hk
+1148,LANG,Ivan YUNG,Lecturer,3405,lcivan@ust.hk
+1149,LANG,Tong ZHOU,Lecturer,3309,lczhoutong@ust.hk
+1150,LANG,Wa MOK,Senior Instructor,3313,lcmokwa@ust.hk
+1151,LANG,Sue C F CHANG,Instructor,3391,lcsue@ust.hk
+1152,LANG,Amy M L CHI,Instructor,3305,lcamychi@ust.hk
+1153,LANG,Doreen K K CHONG,Instructor,3307,lcdchong@ust.hk
+1154,LANG,Anne CLAYTON,Instructor,3408,lcclayton@ust.hk
+1155,LANG,Pionie K L FOO,Instructor,3307,lcpfoo@ust.hk
+1156,LANG,Eddy FUNG,Instructor,3309,lcefung@ust.hk
+1157,LANG,Monica JIM,Instructor,3305,lcmonica@ust.hk
+1158,LANG,Keven S KASTEN,Instructor,3404,lckasten@ust.hk
+1159,LANG,Hoi-ming LEE,Instructor,3316,lcleehm@ust.hk
+1160,LANG,Joyce Y Y LEE,Instructor,3358,lcjlee@ust.hk
+1161,LANG,Linda Y O MAK,Instructor,3315,lclindam@ust.hk
+1162,LANG,Irene W Y NG,Instructor,3358,lcirene@ust.hk
+1163,LANG,Martha NG,Instructor,3305,lcmng@ust.hk
+1164,LANG,Leonard WEST,Instructor,3316,lclwest@ust.hk
+1165,LANG,Jerry WONG,Instructor,3316,lcjerry@ust.hk
+1166,LANG,Anna P S YU,Instructor,3407,lcapyu@ust.hk
+1167,LANG,Anna W Y YU,Instructor,3305,lcanna@ust.hk
+1168,LANG,Ka Ming YUEN,Instructor,3312,lckaming@ust.hk
+1169,LANG,Michelle ADAMS,Consultant,3022,lcadams@ust.hk
+1170,LANG,Roger AGASSE,Consultant,3022,lcroger@ust.hk
+1171,LANG,Ana ALIAS MARTINEZ,Consultant,3022,lcanalim@ust.hk
+1172,LANG,Sony IP,Consultant,3022,lcsonyip@ust.hk
+1173,LANG,Anna JUNG,Consultant,3022,lcannajung@ust.hk
+1174,LANG,Elisabeth MOK,Consultant,3022,lcelisabeth@ust.hk
+1175,LANG,Salvador MORALES VENEGAS,Consultant,3022,lcsalvador@ust.hk
+1176,LANG,Koji SHIOMI,Consultant,3022,lckoji@ust.hk
+1177,LANG,Karina SUEN,Consultant,3408,lckarina@ust.hk
+1178,LANG,Thomas CHAN,Language Activity Officer,3019,lcthomas@ust.hk
+1179,LANG,Fiona HO,Language Activity Officer,3019,lcfiona@ust.hk
+1180,LANG,Sandy LI,Language Activity Officer,3019,lcsandyli@ust.hk
+1181,LANG,Sophie LI,Language Activity Officer,3019,lcsophieli@ust.hk
+1182,LANG,May LIAO,Language Activity Officer,3019,lcmayliao@ust.hk
+1183,LANG,Johannes CHANDRA,Instructional Assistant,3025,lcjchan@ust.hk
+1184,LANG,Joan TANG,Instructional Assistant,3019,lcjoantang@ust.hk
+1185,LANG,Andrew CHUNG,Research Assistant,3416,lcandrew@ust.hk
+1186,LANG,Pancy PANG,Research Assistant,3416,lcpancyp@ust.hk
+1187,LANG,Steven CHENG,Program Assistant,3019,lcstcheng@ust.hk
+1188,LANG,Felix LI,Program Assistant,3023,lcfelix@ust.hk
+1189,LANG,Christy SZETO,Project Assistant,3416,lcchristy@ust.hk
+1190,LANG,Bronson SO,Senior Technician,3018,lcming@ust.hk
+1191,LANG,Rocky CHAN,Technician,3025,lcrocky@ust.hk
+1192,LANG,Michael CHO,Technician,3024,lccycho@ust.hk
+1193,LANG,Mandy TSANG,Technician,3023,lcmandy@ust.hk
+1194,LANG,Cindy XU,Technician,3019,lccindyxu@ust.hk
+1195,LANG,Doris S F LEE,Executive Officer,3399,lcdoris@ust.hk
+1196,LANG,Candice W Y POON,Executive Officer,3399,lcpoon@ust.hk
+1197,LANG,Jova S L CHAN,Clerk,3399,lcjova@ust.hk
+1198,LANG,Carra S M KEE,Clerk,3019,lccarra@ust.hk
+1199,LANG,Carman KWONG,Clerk,3018,lcckwong@ust.hk
+1200,LANG,Carmen S K LEE,Clerk,3399,lccarmen@ust.hk
+1201,LANG,Coney WAN,Clerk,3399,lcconey@ust.hk
+1202,LANG,Elaine Y L WONG,Clerk,3399,lcelaine@ust.hk
+1203,LIFS,Karl HERRUP,Head/Chair Professor,5466,herrup@ust.hk
+1204,LIFS,Nancy Y IP,The Morningside Professor of Life Science,6359,boip@ust.hk
+1205,LIFS,Randy Y C POON,Chair Professor,5526,rycpoon@ust.hk
+1206,LIFS,Peiyuan QIAN,David von Hansemann Professor of Science,5443,boqianpy@ust.hk
+1207,LIFS,Karl W K TSIM,Chair Professor,5456,botsim@ust.hk
+1208,LIFS,Wenxiong WANG,Chair Professor,CYT 5002,wwang@ust.hk
+1209,LIFS,Yung Hou WONG,Chair Professor,5461,boyung@ust.hk
+1210,LIFS,Mingjie ZHANG,Kerry Holdings Professor of Science,5532,mzhang@ust.hk
+1211,LIFS,David K BANFIELD,Professor,5441,bodkb@ust.hk
+1212,LIFS,King Lau CHOW,Professor,5442,bokchow@ust.hk
+1213,LIFS,Robert K M KO,Professor,5534,bcrko@ust.hk
+1214,LIFS,Ning LI,Professor,5460,boningli@ust.hk
+1215,LIFS,Hongbin LIU,Professor,CYT 5005,liuhb@ust.hk
+1216,LIFS,Andrew L MILLER,Professor,5453,almiller@ust.hk
+1217,LIFS,Robert Z QI,Professor,5458,qirz@ust.hk
+1218,LIFS,Zilong WEN,Professor,5449,zilong@ust.hk
+1219,LIFS,Joseph T Y WONG,Professor,5454,botin@ust.hk
+1220,LIFS,Zhenguo WU,Professor,5527,bczgwu@ust.hk
+1221,LIFS,Jun XIA,Professor,5447,jxia@ust.hk
+1222,LIFS,Hannah H XUE,Professor,5528,hxue@ust.hk
+1223,LIFS,Guang ZHU,Professor,5519,gzhu@ust.hk
+1224,LIFS,Bik K YEUNG TYE,Visiting Professor,5435,biktye@ust.hk
+1225,LIFS,Donald C CHANG,Adjunct Professor,5503,bochang@ust.hk
+1226,LIFS,Dennis P H HSIEH,Professor Emeritus,"",dphsieh@ust.hk
+1227,LIFS,Shain-Dow KUNG,Professor Emeritus,"",aakung@ust.hk
+1228,LIFS,Benjamin H PENG,Professor Emeritus,5503,penghb@ust.hk
+1229,LIFS,Jerry H C WANG,Professor Emeritus,"",jerwang@ust.hk
+1230,LIFS,Jeffrey T F WONG,Professor Emeritus,G106,bcjtw@ust.hk
+1231,LIFS,Yuk Shan WONG,Professor Emeritus,"",yswong@ust.hk
+1232,LIFS,Madeline C S WU,Professor Emeritus,5503,bomwu@ust.hk
+1233,LIFS,Yong XIE,Professor Emeritus,5503,boyxie@ust.hk
+1234,LIFS,Kenny K CHUNG,Associate Professor,5439,bckchung@ust.hk
+1235,LIFS,Pingbo HUANG,Associate Professor,5463,bohuangp@ust.hk
+1236,LIFS,Stanley C K LAU,Associate Professor,CYT 5003,scklau@ust.hk
+1237,LIFS,Chun LIANG,Associate Professor,5524,bccliang@ust.hk
+1238,LIFS,Kai LIU,Associate Professor,5445,kailiu@ust.hk
+1239,LIFS,Ho Yi MAK,Associate Professor,5437,hym@ust.hk
+1240,LIFS,Wan Keung WONG,Associate Professor,5520,bcwkrw@ust.hk
+1241,LIFS,Amy K Y FU,Research Associate Professor,5477,boamy@ust.hk
+1242,LIFS,Raymond S C WONG,Visiting Associate Professor,5507,bcrayw@ust.hk
+1243,LIFS,Karen Kit Yu CHAN,Assistant Professor,CYT 5004,karenchan@ust.hk
+1244,LIFS,Tom H T CHEUNG,S H Ho Assistant Professor of Life Science,5522,tcheung@ust.hk
+1245,LIFS,Yusong GUO,Assistant Professor,5530,guoyusong@ust.hk
+1246,LIFS,Toyotaka ISHIBASHI,Assistant Professor,5509,toyotaka@ust.hk
+1247,LIFS,Danny LEUNG,Assistant Professor,5452,dcyleung@ust.hk
+1248,LIFS,Tuan Anh NGUYEN,Assistant Professor,5513,tuananh@ust.hk
+1249,LIFS,Hyokeun PARK,Assistant Professor,5473,hkpark@ust.hk
+1250,LIFS,Julie SEMMELHACK,Assistant Professor,5462,jsemmelhack@ust.hk
+1251,LIFS,Jiguang WANG,Assistant Professor,4352,jgwang@ust.hk
+1252,LIFS,Angela WU,Assistant Professor,5512,angelawu@ust.hk
+1253,LIFS,Yan YAN,Assistant Professor,5511,yany@ust.hk
+1254,LIFS,Qinglu ZENG,Assistant Professor,CYT 5006,zeng@ust.hk
+1255,LIFS,Kim H M CHOW,Research Assistant Professor,6212,heimanchow@ust.hk
+1256,LIFS,Sarah E HO,Research Assistant Professor,6236,barnie@ust.hk
+1257,LIFS,Ken H T MA,Research Assistant Professor,6146,kenma@ust.hk
+1258,LIFS,Liane SLAUGHTER,Research Assistant Professor,6225,slaughter@ust.hk
+1259,LIFS,Zhu YANG,Research Assistant Professor,6207,zhuyang@ust.hk
+1260,LIFS,Fei YE,Research Assistant Professor,7164,feiye@ust.hk
+1261,LIFS,Yuanliang ZHAI,Research Assistant Professor,6320,zhai@ust.hk
+1262,LIFS,Bo ZHOU,Research Assistant Professor,6274,bzhou@ust.hk
+1263,LIFS,Kim Wan CHAN,Scientific Officer,6141,kchan@ust.hk
+1264,LIFS,Anthony S L CHAN,Scientific Officer,6141,anthonyc@ust.hk
+1265,LIFS,Ada W Y FU,Scientific Officer,6313,bowyfu@ust.hk
+1266,LIFS,Ka Wing LEUNG,Scientific Officer,6145,lkwing@ust.hk
+1267,LIFS,Nandita MULLAPUDI,Scientific Officer,CYT 5009,nandita@ust.hk
+1268,LIFS,Yu-Pong NG,Scientific Officer,6141,bond@ust.hk
+1269,LIFS,Estella P S TONG,Assistant Scientific Officer,6141,estellat@ust.hk
+1270,LIFS,Eugene S C HUNG,Lecturer,5451,bohsc@ust.hk
+1271,LIFS,Ice W P KO,Lecturer,5444,iceko@ust.hk
+1272,LIFS,Philip Y LAM,Lecturer,5515,ylam@ust.hk
+1273,LIFS,Melody K W LEUNG,Lecturer,5450,bomleung@ust.hk
+1274,LIFS,Jessica C M TANG,Teaching Associate,5505,bocemun@ust.hk
+1275,LIFS,Bobby T K YIM,Teaching Associate,5505,bobby@ust.hk
+1276,LIFS,Yu CHEN,Visiting Scholar,6313,bcyuchen@ust.hk
+1277,LIFS,Helen CHEUNG,Visiting Scholar,5507,cheungh@ust.hk
+1278,LIFS,Dorothy P S IEONG,Visiting Scholar,6232,ieong@ust.hk
+1279,LIFS,Yan JIN,Visiting Scholar,6244,yanjin@ust.hk
+1280,LIFS,Ada KOO,Visiting Scholar,6235,adakoo@ust.hk
+1281,LIFS,Keith W Y KWONG,Visiting Scholar,6311,kwongwy@ust.hk
+1282,LIFS,Sze Ying LAM,Visiting Scholar,6249,seeing@ust.hk
+1283,LIFS,Wen Jiun LAM,Visiting Scholar,6243,wjlam@ust.hk
+1284,LIFS,William LAM,Visiting Scholar,6218,wlam@ust.hk
+1285,LIFS,Xiaojuan LIU,Visiting Scholar,6305,liuxiaojuan@ust.hk
+1286,LIFS,Hau In LUN,Visiting Scholar,CYT 5007,hauin@ust.hk
+1287,LIFS,Flora W K MAT,Visiting Scholar,6293,bcmwk@ust.hk
+1288,LIFS,Ada H L SIU,Visiting Scholar,7167,bcada@ust.hk
+1289,LIFS,Xulun SUN,Visiting Scholar,6202,xsunae@ust.hk
+1290,LIFS,Joyce W C WONG,Visiting Scholar,6206B,joycewong@ust.hk
+1291,LIFS,Qingping XIONG,Visiting Scholar,6233,""
+1292,LIFS,Naining XU,Visiting Scholar,6274,xunaining@ust.hk
+1293,LIFS,Wei YANG,Visiting Scholar,6278,""
+1294,LIFS,Cynthia S T YAU,Visiting Scholar,CYT 5007,cynthiastyau@ust.hk
+1295,LIFS,Qi YIN,Visiting Scholar,CYT 5007,yinqi@ust.hk
+1296,LIFS,Shuwen ZHANG,Visiting Scholar,CYT 5001,shuwen@ust.hk
+1297,LIFS,Xin ZHANG,Visiting Scholar,6260C,zhangxinn@ust.hk
+1298,LIFS,Yunfeng ZHENG,Visiting Scholar,6145,""
+1299,LIFS,Aftab AMIN,Post-doctoral Fellow,6278,aftabamin@ust.hk
+1300,LIFS,Lin CAI,Post-doctoral Fellow,CML 101,lincai@ust.hk
+1301,LIFS,Li CHEN,Post-doctoral Fellow,6219,lchenap@ust.hk
+1302,LIFS,Keyu CHEN,Post-doctoral Fellow,7164,kchenae@ust.hk
+1303,LIFS,Violet Z FENG,Post-doctoral Fellow,6276,zhefeng@ust.hk
+1304,LIFS,Biaobin JIANG,Post-doctoral Fellow,4337,jbb@ust.hk
+1305,LIFS,Chuen KAM,Post-doctoral Fellow,6306,bcckam@ust.hk
+1306,LIFS,Jeffery J KELU,Post-doctoral Fellow,6236,jjkelu@ust.hk
+1307,LIFS,Chun Man KWOK,Post-doctoral Fellow,6246,alvink@ust.hk
+1308,LIFS,Yiu Yiu LEE,Post-doctoral Fellow,6235,yiuyiu@ust.hk
+1309,LIFS,Philip Y X LI,Post-doctoral Fellow,CYT 5007,liyongxin@ust.hk
+1310,LIFS,Haibin LIU,Post-doctoral Fellow,6278,haibin@ust.hk
+1311,LIFS,Haiyang LIU,Post-doctoral Fellow,6276,liuhy@ust.hk
+1312,LIFS,Pengfei LIU,Post-doctoral Fellow,6305,lpfnano@ust.hk
+1313,LIFS,Joyce P Y MAK,Post-doctoral Fellow,7313,joycemak@ust.hk
+1314,LIFS,Alan K L NG,Post-doctoral Fellow,6311,bcalan@ust.hk
+1315,LIFS,Helena H L NG,Post-doctoral Fellow,6235,helenang@ust.hk
+1316,LIFS,Xiaojing QIAO,Post-doctoral Fellow,6305,""
+1317,LIFS,Yuehong SHEN,Post-doctoral Fellow,6305,yuehongshen@ust.hk
+1318,LIFS,Wai Kin SO,Post-doctoral Fellow,6206B,sowaikin@ust.hk
+1319,LIFS,Jin SUN,Post-doctoral Fellow,CYT 5007,sunj@ust.hk
+1320,LIFS,Honglei TIAN,Post-doctoral Fellow,6306,thl@ust.hk
+1321,LIFS,Shun Wa TSANG,Post-doctoral Fellow,6211,biotsw@ust.hk
+1322,LIFS,Kai Hei TSE,Post-doctoral Fellow,6212,frankitse@ust.hk
+1323,LIFS,Wenxue WU,Post-doctoral Fellow,CYT 5001,wuwenxue@ust.hk
+1324,LIFS,Menglong ZENG,Post-doctoral Fellow,6276,menglong@ust.hk
+1325,LIFS,Chao ZHANG,Post-doctoral Fellow,6305,chaozhang@ust.hk
+1326,LIFS,Weipeng ZHANG,Post-doctoral Fellow,CYT 5007,wpzhangae@ust.hk
+1327,LIFS,Yongqian ZHAO,Post-doctoral Fellow,6320,yongqian@ust.hk
+1328,LIFS,Zhongyu ZHOU,Post-doctoral Fellow,6233,zhouzhongyu@ust.hk
+1329,LIFS,Qixu CAI,Research Associate,6276,qxcai@ust.hk
+1330,LIFS,Eric X CAO,Research Associate,6223,bocaoxx@ust.hk
+1331,LIFS,Gallant K L CHAN,Research Associate,6233,gallant@ust.hk
+1332,LIFS,Xinrong FU,Research Associate,6312,bcxrfu@ust.hk
+1333,LIFS,Yanyan GANG,Research Associate,6274,yygeng@ust.hk
+1334,LIFS,Guowei GONG,Research Associate,6244,amygong@ust.hk
+1335,LIFS,Herbert W H LAM,Research Associate,6320,herbertlam@ust.hk
+1336,LIFS,Lap Kay LAW,Research Associate,6233,""
+1337,LIFS,Shuk Kwan LEE,Research Associate,6320,clairelsk@ust.hk
+1338,LIFS,Eriol P K LEONG,Research Associate,6294,eriol@ust.hk
+1339,LIFS,Jianchao LI,Research Associate,7164,jcli@ust.hk
+1340,LIFS,Zhijie LIN,Research Associate,7164,linzhijie@ust.hk
+1341,LIFS,Changdong LIU,Research Associate,6274,lcd@ust.hk
+1342,LIFS,Na LU,Research Associate,6206C,luna@ust.hk
+1343,LIFS,Caleb Y L LUI,Research Associate,6313,caleblui@ust.hk
+1344,LIFS,Eric Z MA,Research Associate,G106,ericzma@ust.hk
+1345,LIFS,Yang SHEN,Research Associate,6313,evasyshen@ust.hk
+1346,LIFS,Carole SHUM,Research Associate,6313,caroleshum@ust.hk
+1347,LIFS,Edward K F TAM,Research Associate,6313,edwardtam@ust.hk
+1348,LIFS,Joanne C N TAM,Research Associate,6211,tcnjoanne@ust.hk
+1349,LIFS,Sue S Y TSANG,Research Associate,G106,sytsang@ust.hk
+1350,LIFS,Raymond WAN,Research Associate,6206B,raymondwan@ust.hk
+1351,LIFS,CHUNG KAI WONG,Research Associate,6147,chungkai@ust.hk
+1352,LIFS,Xiamen XIA,Research Associate,CYT 5001,xxia@ust.hk
+1353,LIFS,Olivia H XU,Research Associate,6313,oliviaxu@ust.hk
+1354,LIFS,Tao YE,Research Associate,6313,taoye@ust.hk
+1355,LIFS,Shuwen ZHANG,Research Associate,CML 101,shuwen@ust.hk
+1356,LIFS,Han ZHU,Research Associate,6312,hdenniszhu@ust.hk
+1357,LIFS,Amy S Y FONG,Executive Officer (UG & PG Programs),5466,bcamy@ust.hk
+1358,LIFS,Peggy P M CHAN,Education Development Officer,5466,pchan@ust.hk
+1359,LIFS,Alice H T KWOK,Education Development Officer,6515,alicekwok@ust.hk
+1360,LIFS,Angel H K CHEUNG,Project Coordinator,5475,angelcheung@ust.hk
+1361,LIFS,Ray R DUAN,Project Coordinator,6145,duanran@ust.hk
+1362,LIFS,Frances Y Y CHUEN,Senior Technician,6302,bcycheun@ust.hk
+1363,LIFS,Rui FENG,Senior Technician,2158,ruifeng@ust.hk
+1364,LIFS,Wai Pang LAM,Senior Technician,6214,bopang@ust.hk
+1365,LIFS,Simon C L LAU,Senior Technician,6217,bosimon@ust.hk
+1366,LIFS,Mandy C M CHAN,Technician,6236,chingman@ust.hk
+1367,LIFS,Joanne L N CHAN,Technician,7164,lnchan@ust.hk
+1368,LIFS,Frances S L CHAN,Technician,6215,bofranc@ust.hk
+1369,LIFS,Wilson S H CHAN,Technician,6218,bowilson@ust.hk
+1370,LIFS,Joy S C CHAN,Technician,6296,bojoy@ust.hk
+1371,LIFS,Samuel C S CHENG,Technician,CYT5006A,samcheng@ust.hk
+1372,LIFS,Tingxia DONG,Technician,6244,botina@ust.hk
+1373,LIFS,Gigi C C LAM,Technician,6311,btgigi@ust.hk
+1374,LIFS,Isaac K S LAM,Technician,CYT5006A,isaaclam@ust.hk
+1375,LIFS,Candy P Y LEE,Technician,CYT5006A,bocandy@ust.hk
+1376,LIFS,Nelson T K LEE,Technician,6279,neltklee@ust.hk
+1377,LIFS,Peggy W K LEE,Technician,6293,bcsauyat@ust.hk
+1378,LIFS,Hoi Yan LEUNG,Technician,6294,hoiyan@ust.hk
+1379,LIFS,Wai Wah LEUNG,Technician,6226,rickie@ust.hk
+1380,LIFS,Kim K C LI,Technician,CYT5006A,bokim@ust.hk
+1381,LIFS,Ka Chun LOK,Technician,4150,kclok@ust.hk
+1382,LIFS,Jianping REN,Technician,6212,borenjp@ust.hk
+1383,LIFS,Ka Lun SO,Technician,6223,boscot@ust.hk
+1384,LIFS,Lisa SOO,Technician,CYT5006A,bosoolai@ust.hk
+1385,LIFS,Kelvin K L SOU,Technician,6278,bckasou@ust.hk
+1386,LIFS,Jason P M TAM,Technician,2228,bctpm@ust.hk
+1387,LIFS,Wai Lin TUNG,Technician,6306,bcwlt@ust.hk
+1388,LIFS,Carol L M WONG,Technician,6312,lmcarolw@ust.hk
+1389,LIFS,Francis T W WONG,Technician,6206C,bofrwong@ust.hk
+1390,LIFS,Wai Shing WONG,Technician,6207,wswong@ust.hk
+1391,LIFS,Yau Ming WONG,Technician,6220,bovge@ust.hk
+1392,LIFS,Marcus C W YAN,Technician,6319,marcus@ust.hk
+1393,LIFS,Vivian C YU,Technician,6246,bovivian@ust.hk
+1394,LIFS,Penny S N LEE,Departmental Secretary,5466,bopenny@ust.hk
+1395,LIFS,Winsome Y P LEE,Departmental Secretary,5466,winsome@ust.hk
+1396,LIFS,Annie W T AU,Clerk,5466,boannieau@ust.hk
+1397,LIFS,Michelle O L HWOI,Clerk,5466,bomichel@ust.hk
+1398,LIFS,Wilmond W M LAI,Clerk,5466,bcwmlai@ust.hk
+1399,LIFS,Noreen L S LEE,Clerk,5466,bcnoreen@ust.hk
+1400,LIFS,Michael K L MA,Clerk,5466,micma@ust.hk
+1401,LIFS,Catherine M Y WONG,Clerk,5466,bocat@ust.hk
+1402,LIFS,Dora P L WONG,Clerk,5466,bopldora@ust.hk
+1403,LIFS,Nasir Mahmood ABBASI,Research Assistant,4337,nmabbasi@ust.hk
+1404,LIFS,Ying Jin ANG,Research Assistant,6255,julieang@ust.hk
+1405,LIFS,Angelo CHAN,Research Assistant,6255,angelochan@ust.hk
+1406,LIFS,Hong CHAN,Research Assistant,CYT 5007,""
+1407,LIFS,Wing Man CHAN,Research Assistant,6294,wingman@ust.hk
+1408,LIFS,Xianwei CHEN,Research Assistant,6312,xianweichen@ust.hk
+1409,LIFS,Annie S T CHEUNG,Research Assistant,6141,anniecst@ust.hk
+1410,LIFS,Chan Yuen CHEUNG,Research Assistant,CYT 5007,francisjohn@ust.hk
+1411,LIFS,Jerry K H CHEUNG,Research Assistant,6145,jerryckh@ust.hk
+1412,LIFS,Vic S C CHIANG,Research Assistant,6313,vscchiang@ust.hk
+1413,LIFS,Bin Bin CUI,Research Assistant,6225,binbincui@ust.hk
+1414,LIFS,Wing Nin DIK,Research Assistant,6311,""
+1415,LIFS,Dongbo DING,Research Assistant,6202,dingdb@ust.hk
+1416,LIFS,Lan FU,Research Assistant,5503,lanfu@ust.hk
+1417,LIFS,Hei Yin FUNG,Research Assistant,6145,asterfung@ust.hk
+1418,LIFS,Lin GAO,Research Assistant,6255,lingao@ust.hk
+1419,LIFS,Timothy Y C HO,Research Assistant,6293,bchycaa@ust.hk
+1420,LIFS,Yuen Man HO,Research Assistant,6145,janetho@ust.hk
+1421,LIFS,Elizabeth S Y HU,Research Assistant,6206B,elizabethhu@ust.hk
+1422,LIFS,Cheng Cheng HUANG,Research Assistant,6147,""
+1423,LIFS,Hanli HUANG,Research Assistant,4337,hanli@ust.hk
+1424,LIFS,Yan HUANG,Research Assistant,6206A,yhuangbq@ust.hk
+1425,LIFS,Nelson K W HUNG,Research Assistant,6313,bchkw@ust.hk
+1426,LIFS,Capucine M M JACOB,Research Assistant,6141,capucine@ust.hk
+1427,LIFS,Qinghong JIANG,Research Assistant,6255,qhjiang@ust.hk
+1428,LIFS,Claire KNOX,Research Assistant,CYT 5007,cesk@ust.hk
+1429,LIFS,Cara W S KWONG,Research Assistant,6313,sicara@ust.hk
+1430,LIFS,Marcus M K KWONG,Research Assistant,CYT 5009,marcuskwong@ust.hk
+1431,LIFS,Nicole C H LAI,Research Assistant,6313,nicolelai@ust.hk
+1432,LIFS,Ambrose Y P LAM,Research Assistant,6313,ambroselam@ust.hk
+1433,LIFS,Kim S W LAM,Research Assistant,6255,kimlam@ust.hk
+1434,LIFS,Eric W K LAU,Research Assistant,CML 101,ericlwk@ust.hk
+1435,LIFS,Manton M H LEUNG,Research Assistant,7152,manton@ust.hk
+1436,LIFS,Sophia T C LEUNG,Research Assistant,6260,sophialtc@ust.hk
+1437,LIFS,Chun Hei LI,Research Assistant,6213,lchei@ust.hk
+1438,LIFS,Hoi Ming LI,Research Assistant,G106,hmli@ust.hk
+1439,LIFS,Qian LI,Research Assistant,6321,qlian@ust.hk
+1440,LIFS,Rachel C K LI,Research Assistant,6220,chingki@ust.hk
+1441,LIFS,Rui LI,Research Assistant,6293,rliab@ust.hk
+1442,LIFS,Shaohua LI,Research Assistant,6305,lshsabrina@ust.hk
+1443,LIFS,Xionghui LI,Research Assistant,6147,lixionghui@ust.hk
+1444,LIFS,Yubing LI,Research Assistant,7164,liyb@ust.hk
+1445,LIFS,Chichiu LO,Research Assistant,CML 101,lochichiu@ust.hk
+1446,LIFS,Kai Kin LO,Research Assistant,6213,""
+1447,LIFS,Heting MAO,Research Assistant,6305,maoheting@ust.hk
+1448,LIFS,Abigail MIRANDA,Research Assistant,6313,abigail@ust.hk
+1449,LIFS,Wayne C W NG,Research Assistant,CYT 5009,wayneng@ust.hk
+1450,LIFS,Matthew Y H PANG,Research Assistant,6260,yhpangab@ust.hk
+1451,LIFS,Ka Man POON,Research Assistant,6244,poonkm@ust.hk
+1452,LIFS,Christopher B PREUSCH,Research Assistant,6206B,cpreusch@ust.hk
+1453,LIFS,Jiaming QIU,Research Assistant,6147,qiujiaming@ust.hk
+1454,LIFS,Ming SHE,Research Assistant,6147,""
+1455,LIFS,Wenjin SHI,Research Assistant,6260,wshiab@ust.hk
+1456,LIFS,Angelie C SHUI,Research Assistant,6206B,shuiangelie@ust.hk
+1457,LIFS,Mona M Y SIU,Research Assistant,6206B,mymsiu@ust.hk
+1458,LIFS,Shangjin TAN,Research Assistant,6248,shangjin@ust.hk
+1459,LIFS,Vincent W H TANG,Research Assistant,6313,vintang@ust.hk
+1460,LIFS,Wai Lun TANG,Research Assistant,6145,roytwl@ust.hk
+1461,LIFS,Daniel C S TONG,Research Assistant,CYT 5007,""
+1462,LIFS,Man Hon TSANG,Research Assistant,CYT 5007,tsangmh@ust.hk
+1463,LIFS,Harris C H TSO,Research Assistant,CYT 5007,harristso@ust.hk
+1464,LIFS,Yang WANG,Research Assistant,6233,carolinewyy@ust.hk
+1465,LIFS,Esther WONG,Research Assistant,CYT 5007,estherwong@ust.hk
+1466,LIFS,Junjie XIE,Research Assistant,6305,""
+1467,LIFS,Jiali YANG,Research Assistant,6305,""
+1468,LIFS,Ping YAO,Research Assistant,6233,yaopingkib@ust.hk
+1469,LIFS,Ada W S YIP,Research Assistant,6145,duckris@ust.hk
+1470,LIFS,Shui Wa YUN,Research Assistant,6306,miayun@ust.hk
+1471,LIFS,Lisa Y YUNG,Research Assistant,6296,bolisa@ust.hk
+1472,LIFS,Miaomiao ZHANG,Research Assistant,6305,zhangmiao@ust.hk
+1473,LIFS,Changlong ZHAO,Research Assistant,6319,clzhao@ust.hk
+1474,LIFS,Jianxi ZHU,Research Assistant,6243,dashex197@ust.hk
+1475,LIFS,Ka Ho CHAN,Junior Research Assistant,6233,""
+1476,LIFS,Kelvin K H CHU,Junior Research Assistant,CTY 5007,""
+1477,LIFS,Thomas T L CHEUNG,Project Assistant,6307,thomascheung@ust.hk
+1478,LIFS,Cuiru LIN,Project Assistant,6226,cuiru@ust.hk
+1479,LIFS,Lo Ha TSUI,Project Assistant,6319,""
+1480,LIFS,Murphy H Y WONG,Project Assistant,5505,murphy@ust.hk
+1481,LIFS,Shun Wa WONG,Project Assistant,6232,""
+1482,LIFS,Fun Yee CHAN,Laboratory Assistant,6226,bofychan@ust.hk
+1483,LIFS,Yung Ming CHOW,Laboratory Assistant,6202,boymchow@ust.hk
+1484,LIFS,Lai Wan KWONG,Laboratory Assistant,6313,laiwan@ust.hk
+1485,LIFS,May C M NG,Laboratory Attendant,6307,bcmay@ust.hk
+1486,LIFS,Kent P K O'YANG,Laboratory Attendant,6307,kentoy@ust.hk
+1487,LIFS,Becky Y K WONG,Laboratory Attendant,6307,bcbecky@ust.hk
+1488,LIFS,Brenda F Y YU,Laboratory Attendant,6307,bcbrenda@ust.hk
+1489,LIFS,Zhiwen XU,Research Assistant Professor,7165,xzwzb@ust.hk
+1490,LIFS,Cario W S LO,Research Associate,7165,cariolo@ust.hk
+1491,LIFS,Carol C F LAU,Research Assistant,7165,carolcf@ust.hk
+1492,LIFS,Liting ZHAI,Research Assistant,7165,zhailiting@ust.hk
+1493,LIFS,Yung Hou WONG,Director,5461,boyung@ust.hk
+1494,LIFS,Zhenguo WU,Associate Director,5527,bczgwu@ust.hk
+1495,LIFS,Flora Y W LAU,Clerk,5466,btflora@ust.hk
+1496,LIFS,Judy L C TSAI,Clerk,5466,btjudy@ust.hk
+1497,LIFS,Fanny C F IP,Assistant Project Manager,6141,boicf@ust.hk
+1498,LIFS,Guangmiao FU,Scientific Officer,CYT 5014,fugmiao@ust.hk
+1499,LIFS,Sejal M MODY,Scientific Officer,5481,smody@ust.hk
+1500,LIFS,Catherine C K WONG,Scientific Officer,5483,btchikit@ust.hk
+1501,LIFS,Wendy W Y WOO,Scientific Officer,5502,btwendy@ust.hk
+1502,LIFS,Fangyuan KANG,Visiting Scholar,CYT 5014,kangfy@ust.hk
+1503,LIFS,Daniel H S LEE,Visiting Scholar,5507,danielhslee@ust.hk
+1504,LIFS,Wen Bo LYU,Visiting Scholar,CYT 5014,lyuwenbo@ust.hk
+1505,LIFS,Peiran SUN,Visiting Scholar,4150,peiran@ust.hk
+1506,LIFS,Kit CHEUNG,Research Assistant,6141,cheungck@ust.hk
+1507,LIFS,Annie S T CHEUNG,Research Assistant,6141,anniecst@ust.hk
+1508,LIFS,Ni FAN,Research Assistant,CYT 5014,serenafan@ust.hk
+1509,LIFS,Sam H K MA,Research Assistant,4150,samma@ust.hk
+1510,LIFS,Yuki Y K TANG,Research Assistant,4150,yukito@ust.hk
+1511,LIFS,Sulan YU,Research Assistant,4150,yusulan@ust.hk
+1512,LIFS,Ann N C WONG,Laboratory Assistant,6141,ann@ust.hk
+1513,LIFS,Yung Hou WONG,Program Director,5461,boyung@ust.hk
+1514,LIFS,Shi Chung NG,Professor,5507,shicng@ust.hk
+1515,LIFS,Daniel H S LEE,Adjunct Professor,5507,danielhslee@ust.hk
+1516,LIFS,Bobby T K YIM,Teaching Associate,5505,bobby@ust.hk
+1517,LIFS,Nancy Y IP,Director,6359,boip@ust.hk
+1518,LIFS,Yung-Hou WONG,Director,5461,boyung@ust.hk
+1519,LIFS,Jun WAN,Research Assistant Professor,6276,wanj@ust.hk
+1520,LIFS,Haiyang LIU,Post-doctoral Fellow,6276,liuhy@ust.hk
+1521,LIFS,Nancy Y IP,Director,6359,boip@ust.hk
+1522,LIFS,Mingjie ZHANG,Associate Director,5532,mzhang@ust.hk
+1523,LIFS,Nancy Y IP,Director,6359,boip@ust.hk
+1524,LIFS,Zhenguo WU,Associate Director,5527,bczgwu@ust.hk
+1525,LIFS,Anthony JAMES,Director,5488,aejames@ust.hk
+1526,LIFS,William K W CHAU,Scientific Officer,5488,bokwchau@ust.hk
+1527,LIFS,Siva W H TSANG,Scientific Officer,5488,tsangwh@ust.hk
+1528,LIFS,Ka Yan CHU,Technician,7201,bocrystal@ust.hk
+1529,LIFS,Samuel W L LAI,Technician,7201,bosamuel@ust.hk
+1530,LIFS,Phoebe L W CHEUNG,Junior Technician,7201,bophoebe@ust.hk
+1531,LIFS,Peter M R EGUIA,Junior Technician,7309,bopetermark@ust.hk
+1532,LIFS,Sophia W Y CHAN,Instructional Assistant,7201,bosophie@ust.hk
+1533,LIFS,Sharon LO,Instructional Assistant,7309,bosharon@ust.hk
+1534,LIFS,Kam Wing HO,Project Assistant,7201,bokelvin@ust.hk
+1535,LIFS,Hon Sang LAW,Project Assistant,7201,bolawhonsang@ust.hk
+1536,LIFS,Yuk Ying CHAN,Clerk,5488,bojoyce@ust.hk
+1537,LIFS,Elaine Y H CHAN,Laboratory Assistant,5488,boelainech@ust.hk
+1538,LIFS,Kwok Keung CHEUNG,Laboratory Assistant,7201,bokk@ust.hk
+1539,LIFS,Wai Ming FUNG,Laboratory Assistant,7309,bomarco@ust.hk
+1540,LIFS,Kwok Fung IP,Laboratory Assistant,7309,bokwok@ust.hk
+1541,LIFS,Yau Fat LAI,Laboratory Assistant,7201,bowoody@ust.hk
+1542,LIFS,Kwong Pui WONG,Laboratory Assistant,7201,""
+1543,LIFS,Ying Keung YU,Laboratory Assistant,7201,""
+1544,LIFS,Kwok Leung CHAN,Laboratory Attendant,7309,boklchan@ust.hk
+1545,MAE,Christopher Y H CHAO,Head/Chair Professor,2576,meyhchao@ust.hk
+1546,MAE,Huihe QIU,Associate Head/Professor,2546,meqiu@ust.hk
+1547,MAE,Qingping SUN,Associate Head/Professor,2593,meqpsun@ust.hk
+1548,MAE,Lotta TSE,Departmental Secretary,2569,melotta@ust.hk
+1549,MAE,Jang Kyo KIM,Chair Professor,2595,mejkkim@ust.hk
+1550,MAE,Ricky SW LEE,Chair Professor,2577,rickylee@ust.hk
+1551,MAE,Wei SHYY,Chair Professor,6336,weishyy@ust.hk
+1552,MAE,Kun XU,Chair Professor,3444,makxu@ust.hk
+1553,MAE,Xin ZHANG,Swire Professor of Aerospace Engineering,2577C,aexzhang@ust.hk
+1554,MAE,Tianshou ZHAO,Cheong Ying Chan Professor of Engineering & Environment,2594,metzhao@ust.hk
+1555,MAE,Lilong CAI,Professor,2545,melcai@ust.hk
+1556,MAE,David C C LAM,Professor,2559,medcclam@ust.hk
+1557,MAE,Kai TANG,Professor,2560,mektang@ust.hk
+1558,MAE,Michael Y. WANG,Professor,CYT 2010,mywang@ust.hk
+1559,MAE,Jingshen WU,Professor,2561,mejswu@ust.hk
+1560,MAE,In LEE,Visiting Professor,2567,meinlee@ust.hk
+1561,MAE,Francesco CIUCCI,Associate Professor,2577A,mefrank@ust.hk
+1562,MAE,Yongsheng GAO,Associate Professor,2558,meygao@ust.hk
+1563,MAE,Baoling HUANG,Associate Professor,2577B,mebhuang@ust.hk
+1564,MAE,Xun HUANG,Associate Professor,2556,huangxun@ust.hk
+1565,MAE,Yi-Kuen LEE,Associate Professor,2547,meyklee@ust.hk
+1566,MAE,Zhigang LI,Associate Professor,2557,mezli@ust.hk
+1567,MAE,Wenjing YE,Associate Professor,2562,mewye@ust.hk
+1568,MAE,Shuhuai YAO,Associate Professor,2577F,meshyao@ust.hk
+1569,MAE,Jinglei YANG,Associate Professor,2553,maeyang@ust.hk
+1570,MAE,Wenbin SONG,Visiting Associate Professor,2604,meswb@ust.hk
+1571,MAE,Sherry X CHEN,Assistant Professor,2551,xianchen@ust.hk
+1572,MAE,Qing CHEN,Assistant Professor,2544,chenqing@ust.hk
+1573,MAE,Larry LI,Assistant Professor,2577D,larryli@ust.hk
+1574,MAE,Rhea LIEM,Assistant Professor,2549,rpliem@ust.hk
+1575,MAE,Jungwon SEO,Assistant Professor,2577E,junseo@ust.hk
+1576,MAE,Robin MA,Assistant Professor of Engineering Education,2552,melwma@ust.hk
+1577,MAE,Hong TAO,Lecturer,2554,maehongtao@ust.hk
+1578,MAE,Yiu Wing MAI,Adjunct Professor,"",meywmai@ust.hk
+1579,MAE,Chung Nin KO,Adjunct Associate Professor,2577G,mecnko@ust.hk
+1580,MAE,Stephen KL LEE,Adjunct Associate Professor,2124,stevelee@ust.hk
+1581,MAE,Wenbin SONG,Adjunct Associate Professor,"",meswb@ust.hk
+1582,MAE,Vincent LI,Adjunct Assistant Professor,"",emvli@ust.hk
+1583,MAE,Edwin TSO,Research Assistant Professor,2565,mecytso@ust.hk
+1584,MAE,Jianbo XU,Research Assistant Professor,CYT4004,mejianbo@ust.hk
+1585,MAE,Qingbin ZHENG,Research Assistant Professor,2572,mezheng@ust.hk
+1586,MAE,Jay Chung CHEN,Professor Emeritus,"",""
+1587,MAE,Ping CHENG,Professor Emeritus,"",""
+1588,MAE,Chin Tsau HSU,Professor Emeritus,2555,mecthsu@ust.hk
+1589,MAE,Yang LENG,Professor Emeritus,"",meleng@ust.hk
+1590,MAE,Pin TONG,Professor Emeritus,"",""
+1591,MAE,Tongxi YU,Professor Emeritus,3658,metxyu@ust.hk
+1592,MAE,Matthew M F YUEN,Professor Emeritus,2577G,meymf@ust.hk
+1593,MAE,Tong Yi ZHANG,Professor Emeritus,"",mezhangt@ust.hk
+1594,MAE,See Chun KOT,Senior Lecturer Emeritus,"",mesckot@ust.hk
+1595,MAE,Sunny CHAN,Teaching Associate,2563,sunnychan@ust.hk
+1596,MAE,Stanley LEUNG,Teaching Associate,2563,yunyuen@ust.hk
+1597,MAE,Jackson HUNG,Project Coordinator,CYT2008,jwkhung@ust.hk
+1598,MAE,Susie PEVERELLE,Communication Tutor,2566,mesusie@ust.hk
+1599,MAE,Graham YOUNG,Communication Tutor,2566,megraham@ust.hk
+1600,MAE,Joey LEE,Executive Officer,2568,joeylee@ust.hk
+1601,MAE,Ronnie TSE,Executive Officer (UG Programs),2568,mertse@ust.hk
+1602,MAE,Mandy LEUNG,Program Assistant (Outreach & Development),2568,memandy@ust.hk
+1603,MAE,Connie CHAN,Clerk,2568,meccyu@ust.hk
+1604,MAE,Amy LAU,Clerk,2568,meamy@ust.hk
+1605,MAE,Miranda SHIU,Clerk,2568,memshiu@ust.hk
+1606,MAE,Wan Lap YEUNG,Assistant Scientific Officer,4225,mewanlap@ust.hk
+1607,MAE,Man Chung SUEN,Assistant Computer Officer,2606,mesuen@ust.hk
+1608,MAE,Siu Kay LI,Chief Technical Officer,2548,mechskli@ust.hk
+1609,MAE,Chung Wai KWOK,Senior Technical Officer,2136,mecwkwok@ust.hk
+1610,MAE,Saviour T Y LEUNG,Senior Technical Officer,CYT1001C,melty@ust.hk
+1611,MAE,Shiu Wah WOO,Senior Technical Officer,1213,meswwoo@ust.hk
+1612,MAE,Elton WU,Senior Technical Officer,2606,meelton@ust.hk
+1613,MAE,Thomas CHAU,Technical Officer,4225,mewhchau@ust.hk
+1614,MAE,Alex FOK,Technical Officer,4226B,meknfok@ust.hk
+1615,MAE,Matthew LAI,Technical Officer,1213,mekklai@ust.hk
+1616,MAE,Ervine C T LIM,Technical Officer,4226A,melim@ust.hk
+1617,MAE,Chi Shing SETO,Technical Officer,4222,medick@ust.hk
+1618,MAE,Chi Keung KAM,Artisan,2201,mekam@ust.hk
+1619,MAE,Huihe QIU,Professor,2546,meqiu@ust.hk
+1620,MAE,Paul W C LAI,Engineer,5588,egpaull@ust.hk
+1621,MAE,Shiu Wah WOO,Senior Technical Officer,1213,meswwoo@ust.hk
+1622,MAE,Matthew LAI,Technical Officer,1213,mekklai@ust.hk
+1623,MARK,Anaimalai V MUTHUKRISHNAN,Head/Professor,LSK4011,mkmuthu@ust.hk
+1624,MARK,Jaideep SENGUPTA,Synergis-Geoffrey YEH Professor of Business,LSK4006,mkjaisen@ust.hk
+1625,MARK,Rashmi ADAVAL,Professor,LSK4008,mkadaval@ust.hk
+1626,MARK,Anirban MUKHOPADHYAY,Professor,LSK4002,anirban.mukhopadhyay@ust.hk
+1627,MARK,Amy DALTON,Associate Professor,LSK4053,mkamy@ust.hk
+1628,MARK,Kristiaan HELSEN,Associate Professor,LSK4009,mkhel@ust.hk
+1629,MARK,Jiewen HONG,Associate Professor,LSK4013,mkjiewen@ust.hk
+1630,MARK,Jun KIM,Associate Professor,LSK4052,junkim@ust.hk
+1631,MARK,Ralf VAN DER LANS,Associate Professor,LSK4003,rlans@ust.hk
+1632,MARK,Ying ZHAO,Associate Professor,LSK4012,mkyzhao@ust.hk
+1633,MARK,Rongrong ZHOU,Associate Professor,LSK4010,mkrrzhou@ust.hk
+1634,MARK,Young Eun HUH,Assistant Professor,LSK4051,younghuh@ust.hk
+1635,MARK,Christine KIM,Assistant Professor,LSK4050,christinekim@ust.hk
+1636,MARK,Song LIN,Assistant Professor,LSK4005,mksonglin@ust.hk
+1637,MARK,Wenbo WANG,Assistant Professor,LSK4054,wenbowang@ust.hk
+1638,MARK,Cassian CHEUNG,Adjunct Professor,LSK4018,cassian@ust.hk
+1639,MARK,Eugene RAITT,Adjunct Professor,LSK4016C,generaitt@ust.hk
+1640,MARK,Robert S WYER,Adjunct Professor,LSK4018,mkwyer@ust.hk
+1641,MARK,Joseph SALVACRUZ,Professor of Business Practice,LSK4007,mkjcs@ust.hk
+1642,MARK,Yue ZHAO,Adjunct Associate Professor,LSK4057,oliver@ust.hk
+1643,MARK,Rod DUCLOS,Adjunct Assistant Professor,LSK4018,mkrod@ust.hk
+1644,MARK,Coral PUIG GARRIGO,Adjunct Assistant Professor,LSK4056,coralpuig@ust.hk
+1645,MARK,Ana VALENZUELA,Visiting Professor,LSK4051,avalenzuela@ust.hk
+1646,MARK,Bernard LEE,Visiting Assistant Professor,LSK4016A,mkblee@ust.hk
+1647,MARK,Roberta GIANNINI,Visiting Scholar,LSK4016B,mkroberta@ust.hk
+1648,MARK,Roxanne M C LAU,Executive Officer,LSK4018,mkrox@ust.hk
+1649,MARK,Grace M Y CHAN,Departmental Secretary,LSK4018,mkgrace@ust.hk
+1650,MARK,Terry S Y LAW,Clerk,LSK4018,mkterry@ust.hk
+1651,MARK,Anita Y M LEUNG,Clerk,LSK4018,mkanita@ust.hk
+1652,MARK,Agnes P Y CHAN,Teaching Associate,LSK4016,mkagnes@ust.hk
+1653,MARK,Esther M W NIP,Teaching Associate,LSK4016,mkesther@ust.hk
+1654,MARK,Mark C H WU,Teaching Associate,LSK4016,mkwu@ust.hk
+1655,MARK,Pauline CHAN,Instructional Assistant,LSK4025,paulinechan@ust.hk
+1656,MARK,Kitty HUNG,Instructional Assistant,LSK4018,kittyhung@ust.hk
+1657,MARK,Poey LAI,Instructional Assistant,LSK4025,poeylai@ust.hk
+1658,MARK,Lily WONG,Instructional Assistant,LSK4025,lilywong@ust.hk
+1659,MATH,Xiao Ping WANG,Head/Chair Professor,3457,mawang@ust.hk
+1660,MATH,Emily S Y CHAN,Departmental Secretary,3461,maemily@ust.hk
+1661,MATH,Tie Zheng QIAN,Associate Head/Professor,3424,maqian@ust.hk
+1662,MATH,Tony F CHAN,Chair Professor,6349,tonyfchan@ust.hk
+1663,MATH,Jian Ping GAN,Chair Professor,3482,magan@ust.hk
+1664,MATH,Jing Song HUANG,Chair Professor,3459,mahuang@ust.hk
+1665,MATH,Jian Shu LI,Chair Professor,3458,matom@ust.hk
+1666,MATH,Wei Ping LI,Chair Professor,3427,mawpli@ust.hk
+1667,MATH,Allen MOY,Chair Professor,3439,amoy@ust.hk
+1668,MATH,Gunther UHLMANN,IAS Si Yuan Professor,IAS 4010,gunther@ust.hk
+1669,MATH,Yang WANG,Chair Professor,3451,yangwang@ust.hk
+1670,MATH,Kun XU,Chair Professor,3444,makxu@ust.hk
+1671,MATH,Jeffrey R CHASNOV,Professor,3456,machas@ust.hk
+1672,MATH,Beifang CHEN,Professor,3438,mabfchen@ust.hk
+1673,MATH,Kani CHEN,Professor,3426,makchen@ust.hk
+1674,MATH,Jimmy C H FUNG,Professor,3452,majfung@ust.hk
+1675,MATH,Ji Shan HU,Professor,3455,majhu@ust.hk
+1676,MATH,Bing Yi JING,Professor,3437,majing@ust.hk
+1677,MATH,Yue Kuen KWOK,Professor,3445,maykwok@ust.hk
+1678,MATH,Dong LI,Professor,3447,madli@ust.hk
+1679,MATH,Shi Qing LING,Professor,3460,maling@ust.hk
+1680,MATH,Guo Wu MENG,Professor,3484,mameng@ust.hk
+1681,MATH,Mo MU,Professor,3436,mamu@ust.hk
+1682,MATH,Man Yu WONG,Professor,3431,mamywong@ust.hk
+1683,MATH,Li Xin WU,Professor,3449,malwu@ust.hk
+1684,MATH,Yang XIANG,Professor,3476,maxiang@ust.hk
+1685,MATH,Min YAN,Professor,3487,mamyan@ust.hk
+1686,MATH,Yong Chang ZHU,Professor,3425,mazhu@ust.hk
+1687,MATH,Thomas BAIN,Professor of Science Practice,3461,tombain@ust.hk
+1688,MATH,Cho Hoi HUI,Professor of Science Practice,3461,machhui@ust.hk
+1689,MATH,Jack CK WONG,Professor of Science Practice,3461,chakkeiwong@ust.hk
+1690,MATH,Qiang DU,Adjunct Professor,3461,madu@ust.hk
+1691,MATH,Qi Man SHAO,Adjunct Professor,3461,maqmshao@ust.hk
+1692,MATH,Tong ZHANG,Adjunct Professor,3461,matzhang@ust.hk
+1693,MATH,Jian Feng CAI,Associate Professor,3443,jfcai@ust.hk
+1694,MATH,Huai Liang CHANG,Associate Professor,3490,mahlchang@ust.hk
+1695,MATH,Yik Man CHIANG,Associate Professor,3481,machiang@ust.hk
+1696,MATH,Shing Yu LEUNG,Associate Professor,3434,masyleung@ust.hk
+1697,MATH,Kin Yin LI,Associate Professor,3471,makyli@ust.hk
+1698,MATH,Mao Sheng XIONG,Associate Professor,3488,mamsxiong@ust.hk
+1699,MATH,Yuan YAO,Associate Professor,3430,yuany@ust.hk
+1700,MATH,Yves Zhiyi GUO,Associate Professor of Science Practice,3461,mayguo@ust.hk
+1701,MATH,Chung Dak SHUM,Associate Professor of Science Practice,3461,cdshum@ust.hk
+1702,MATH,Zhigang BAO,Assistant Professor,3429,mazgbao@ust.hk
+1703,MATH,Tsz Ho FONG,Assistant Professor,3488,mafong@ust.hk
+1704,MATH,Tian Ling JIN,Assistant Professor,3483,tianlingjin@ust.hk
+1705,MATH,Eric MARBERG,Assistant Professor,3492,emarberg@ust.hk
+1706,MATH,Xian Hua PENG,Assistant Professor,3470,maxhpeng@ust.hk
+1707,MATH,Yangqiu SONG,Assistant Professor,3508,yqsong@ust.hk
+1708,MATH,Can YANG,Assistant Professor,3432,macyang@ust.hk
+1709,MATH,Hai ZHANG,Assistant Professor,3442,haizhang@ust.hk
+1710,MATH,Ke WANG,Research Assistant Professor,3491,kewang@ust.hk
+1711,MATH,Avery CHING,Lecturer,3435,maaching@ust.hk
+1712,MATH,Hon Ming HO,Lecturer,3433,mastanho@ust.hk
+1713,MATH,Yin Bon KU,Lecturer,3450,maybku@ust.hk
+1714,MATH,Tsz Kin LAM,Lecturer,3435,tklam@ust.hk
+1715,MATH,Wing Lung LEE,Lecturer,3446,malung@ust.hk
+1716,MATH,Chi Man LEUNG,Lecturer,3446,chimanleung@ust.hk
+1717,MATH,Guibo YE,Lecturer,3491,magbye@ust.hk
+1718,MATH,Chi Wai YU,Lecturer,3433,macwyu@ust.hk
+1719,MATH,Kam Hang CHENG,Post-doctoral Fellow,3486,kero@ust.hk
+1720,MATH,Bing GAO,Post-doctoral Fellow,3489,mabgao@ust.hk
+1721,MATH,Yuan GAO,Post-doctoral Fellow,3485,maygao@ust.hk
+1722,MATH,Hailiang HU,Post-doctoral Fellow,3450,mahlhu@ust.hk
+1723,MATH,Haixia LIU,Post-doctoral Fellow,3485,mahxliu@ust.hk
+1724,MATH,Shousheng LUO,Post-doctoral Fellow,3473,massluo@ust.hk
+1725,MATH,Chiu Yin TSANG,Post-doctoral Fellow,3486,macytsang@ust.hk
+1726,MATH,Erxiao WANG,Post-doctoral Fellow,3486,maexwang@ust.hk
+1727,MATH,Liya WANG,Post-doctoral Fellow,3478,malywang@ust.hk
+1728,MATH,Chaozhen WEI,Post-doctoral Fellow,IAS2026,iasczwei@ust.hk
+1729,MATH,Yin XIAN,Post-doctoral Fellow,3473,mayxian@ust.hk
+1730,MATH,Kai YANG,Post-doctoral Fellow,3489,makyang@ust.hk
+1731,MATH,Guojian YIN,Post-doctoral Fellow,3485,magjyin@ust.hk
+1732,MATH,Changjuan ZHANG,Post-doctoral Fellow,3478,macjzhang@ust.hk
+1733,MATH,Ningchen YING,Post-doctoral Fellow,3478,mancying@ust.hk
+1734,MATH,Rui ZHANG,Post-doctoral Fellow,3489,maruizhang@ust.hk
+1735,MATH,Rex CW HUI,Visiting Scholar,3478,macwhui@ust.hk
+1736,MATH,Roberto LEONARDUZZI,Visiting Scholar,3469,rleonarduzzi@ust.hk
+1737,MATH,Jinshan ZENG,Visiting Scholar,3428,majszeng@ust.hk
+1738,MATH,Zhen LI,Research Associate,3473,mazli@ust.hk
+1739,MATH,Chang LIU,Research Associate,3478,maliu@ust.hk
+1740,MATH,Xiang LI,Research Assistant,3473,maxli@ust.hk
+1741,MATH,Haiqin WANG,Research Assistant,3478,mahaiqinwang@ust.hk
+1742,MATH,Tianbai XIAO,Research Assistant,3478,xiaotb@ust.hk
+1743,MATH,Yun Hung CHAN,Instructional Assistant,3012,mazeta@ust.hk
+1744,MATH,Wing Cheong CHENG,Instructional Assistant,3012,matcheng@ust.hk
+1745,MATH,Hoi Sang KONG,Instructional Assistant,3011,mahsk@ust.hk
+1746,MATH,Kitty M C LEE,Instructional Assistant,3011,makittylee@ust.hk
+1747,MATH,Shixin LIANG,Instructional Assistant,3012,masxliang@ust.hk
+1748,MATH,Ho Ming LEUNG,Instructional Assistant,3011,malhm@ust.hk
+1749,MATH,Xi Lin LI,Instructional Assistant,3012,maxilin@ust.hk
+1750,MATH,Jingjing WANG,Instructional Assistant,3011,majjwang@ust.hk
+1751,MATH,Cook H W WONG,Computer Officer,3210,macook@ust.hk
+1752,MATH,Paul W C LAM,Assistant Computer Officer,3209C,mapaul@ust.hk
+1753,MATH,Julian KW NG,Project Coordinator,3454,julianng@ust.hk
+1754,MATH,Ignatius SK WONG,Analyst Programmer,3454,ignatius@ust.hk
+1755,MATH,Priscilla L S WONG,Executive Officer,3461,mapriswg@ust.hk
+1756,MATH,Joyce C S IP,Project Officer,3453,majoyceip@ust.hk
+1757,MATH,Elina M Y CHIU,Clerk,3461,maelina@ust.hk
+1758,MATH,Janette S K CHO,Clerk,3461,macho@ust.hk
+1759,MATH,Debbie L K POON,Clerk,3461,madebbie@ust.hk
+1760,MATH,Odissa M S WONG,Clerk,3461,maodissa@ust.hk
+1761,MATH,Sindy S T TING,Program Assistant,3461,masindy@ust.hk
+1762,MATH,Maggie L N HUI,Office Assistant,3461,mamaggie@ust.hk
+1763,MATH,Kani CHEN,Program Director,3426,makchen@ust.hk
+1764,MATH,Leanne Y Q ZHONG,Program Manager,3461,malzhong@ust.hk
+1765,MATH,Ankie N M NG,Program Officer,3453,maankie@ust.hk
+1766,MATH,Allen MOY,Program Director,3439,amoy@ust.hk
+1767,MATH,Ankie N M NG,Program Officer,3453,maankie@ust.hk
+1768,MGMT,Yaping GONG,Head/Professor,LSK5015,mnygong@ust.hk
+1769,MGMT,Jiatao LI,Chair Professor,LSK5024,mnjtli@ust.hk
+1770,MGMT,Riki TAKEUCHI,Professor,LSK5032,mnrikit@ust.hk
+1771,MGMT,Melody CHAO,Associate Professor,LSK5072,mchao@ust.hk
+1772,MGMT,Jinyu HE,Associate Professor,LSK5021,mnjhe@ust.hk
+1773,MGMT,Huiwen LIAN,Associate Professor,LSK5013,huiwen@ust.hk
+1774,MGMT,Bilian Ni SULLIVAN,Associate Professor,LSK5023,mnbilian@ust.hk
+1775,MGMT,Ellick WONG,Associate Professor,LSK5071,mnewong@ust.hk
+1776,MGMT,Jing ZHU,Associate Professor,LSK5012,jingzhu@ust.hk
+1777,MGMT,Jaee CHO,Assistant Professor,LSK5030,jaeecho@ust.hk
+1778,MGMT,David DANIELS,Assistant Professor,LSK5044,ddaniels@ust.hk
+1779,MGMT,Sam GARG,Assistant Professor,LSK5029,samgarg@ust.hk
+1780,MGMT,Chaitali (Tali) KAPADIA,Assistant Professor,LSK5031,talikapadia@ust.hk
+1781,MGMT,Yong H. KIM,Assistant Professor,LSK5014,yhk@ust.hk
+1782,MGMT,Yonghoon G. LEE,Assistant Professor,LSK5051,yglee@ust.hk
+1783,MGMT,John LI,Assistant Professor,LSK5053,qiangli@ust.hk
+1784,MGMT,Pavel ZHELYAZKOV,Assistant Professor,LSK5070,pzhelyazkov@ust.hk
+1785,MGMT,Christy ZHOU KOVAL,Assistant Professor,LSK5052,christyzk@ust.hk
+1786,MGMT,Larry J L FARH,Professor Emeritus,LSK5022,mnlfarh@ust.hk
+1787,MGMT,Stephen NASON,Professor of Business Practice,LSK5020,mnsnason@ust.hk
+1788,MGMT,Paul FORSTER,Associate Professor of Business Education,4354,pforster@ust.hk
+1789,MGMT,Roger LEVERMORE,Associate Professor of Business Education,LSK5043,rjleverm@ust.hk
+1790,MGMT,Emily M NASON,Associate Professor of Business Education,LSK1037,enason@ust.hk
+1791,MGMT,Mark MIHOREAN,Assistant Professor of Business Education,LSK5050,markmi@ust.hk
+1792,MGMT,Roger R CHEN,Adjunct Professor,"",rchen@ust.hk
+1793,MGMT,Steven J DEKREY,Adjunct Professor,LSK6053,sjdekrey@ust.hk
+1794,MGMT,Laurence C FRANKLIN,Adjunct Professor,LSK5003,lcfran@ust.hk
+1795,MGMT,Marshall MEYER,Adjunct Professor,"",meyer@ust.hk
+1796,MGMT,James ROOT,Adjunct Professor,"",jroot@ust.hk
+1797,MGMT,Caroline WANG,Adjunct Professor,LSK5054,wangcc@ust.hk
+1798,MGMT,Po Chi WU,Adjunct Professor,"",wupc@ust.hk
+1799,MGMT,Kin H CHAN,Adjunct Associate Professor,"",kinchan@ust.hk
+1800,MGMT,Johnny CHEN,Adjunct Associate Professor,"",johnnychen@ust.hk
+1801,MGMT,Chiat Thian CHEW,Adjunct Associate Professor,"",acchew@ust.hk
+1802,MGMT,Frank CHING,Adjunct Associate Professor,"",frching@ust.hk
+1803,MGMT,Patty FARH,Adjunct Associate Professor,"",patty.farh@ust.hk
+1804,MGMT,Wendy GRUSIN,Adjunct Associate Professor,"",wendyg@ust.hk
+1805,MGMT,Mitya NEW,Adjunct Associate Professor,"",chrisnew@ust.hk
+1806,MGMT,Joon Nak CHOI,Adjunct Assistant Professor,LSK5027,jnchoi@ust.hk
+1807,MGMT,Mary HO,Adjunct Assistant Professor,LSK5063,maryho@ust.hk
+1808,MGMT,Carmen NG,Adjunct Assistant Professor,LSK5063,carmenkng@ust.hk
+1809,MGMT,Lucia YEUNG,Adjunct Assistant Professor,LSK5027,luciayeung@ust.hk
+1810,MGMT,Margaret M L CHAN,Executive Officer,LSK5018,immar@ust.hk
+1811,MGMT,Daphne CHEUNG,Program Officer,LSK5018,mndaphne@ust.hk
+1812,MGMT,Claire W H LEE,Program Assistant,LSK5018,mnclaire@ust.hk
+1813,MGMT,Karina YICK,Clerk,LSK5018,mnkarina@ust.hk
+1814,MGMT,Sangeetha RAMALINGAM,Teaching Associate,LSK5025,geeth@ust.hk
+1815,MGMT,Michael L C CHAN,Instructional Assistant,LSK5018,chanlc@ust.hk
+1816,MGMT,Delana DU,Instructional Assistant,LSK5016,delanan@ust.hk
+1817,MGMT,Kitty K Y LAU,Instructional Assistant,LSK5016,kittylau@ust.hk
+1818,MGMT,Jay Barry NG,Instructional Assistant,LSK5025,bmbng@ust.hk
+1819,MGMT,Becky TSUI,Instructional Assistant,LSK5018,mnbecky@ust.hk
+1820,MGMT,Ginnie TSUI,Instructional Assistant,LSK5016,gtyl@ust.hk
+1821,MGMT,Queenie YAM,Instructional Assistant,LSK5018,queenieyam@ust.hk
+1822,MGMT,Peter YIP,Instructional Assistant,LSK5018,peteryip@ust.hk
+1823,PHYS,Michael S ALTMAN,Head/Professor,4463,phaltman@ust.hk
+1824,PHYS,Louiza M S LAW,Departmental Secretary,4462,llaw@ust.hk
+1825,PHYS,Che Ting CHAN,Daniel C K Yu Professor of Science,4449,phchan@ust.hk
+1826,PHYS,Andrew COHEN,Lam Woo Foundation Professor,IAS1001,acohen@ust.hk
+1827,PHYS,Tai Kai NG,Chair Professor,4432,phtai@ust.hk
+1828,PHYS,Ping SHENG,Dr William M W Mong Professor of Nanoscience,4450,sheng@ust.hk
+1829,PHYS,George SMOOT,IAS TT & WF Chao Foundation Professor,IAS4018,gfsmoot@ust.hk
+1830,PHYS,Ching W TANG,IAS Bank of East Asia Professor,IAS2010,ching.tang@ust.hk
+1831,PHYS,Penger TONG,Chair Professor,4456,penger@ust.hk
+1832,PHYS,Henry TYE,Chair Professor,IAS4001,iastye@ust.hk
+1833,PHYS,Ning WANG,Chair Professor,4442,phwang@ust.hk
+1834,PHYS,Xi DAI,Professor,4445,daix@ust.hk
+1835,PHYS,Shengwang DU,Professor,4477,dusw@ust.hk
+1836,PHYS,Yilong HAN,Professor,4447,yilong@ust.hk
+1837,PHYS,Pak Wo LEUNG,Professor,4438,phleung@ust.hk
+1838,PHYS,Nian LIN,Professor,4474,phnlin@ust.hk
+1839,PHYS,Iam Keong SOU,Professor,4459,phiksou@ust.hk
+1840,PHYS,Wing Yim TAM,Professor,4481,phtam@ust.hk
+1841,PHYS,Ophelia K C TSUI,Professor,4455,okctsui@ust.hk
+1842,PHYS,Jiannong WANG,Professor,4436,phjwang@ust.hk
+1843,PHYS,Xiangrong WANG,Professor,4454,phxwan@ust.hk
+1844,PHYS,Weijia WEN,Professor,4422,phwen@ust.hk
+1845,PHYS,Kam Sing WONG,Professor,4453,phkswong@ust.hk
+1846,PHYS,Michael K Y WONG,Professor,4443,phkywong@ust.hk
+1847,PHYS,Zhiyu YANG,Professor,4458,phyang@ust.hk
+1848,PHYS,Xixiang ZHANG,Adjunct Professor,"",phxxz@ust.hk
+1849,PHYS,Ho Bun CHAN,Associate Professor,4421,hochan@ust.hk
+1850,PHYS,Bradley A FOREMAN,Associate Professor,4473,phbaf@ust.hk
+1851,PHYS,Kam Tuen LAW,Dr Tai-chin Lo Associate Professor of Science,4471,phlaw@ust.hk
+1852,PHYS,Tsan Hang LI,Associate Professor,4441,jensenli@ust.hk
+1853,PHYS,Rolf W LORTZ,Associate Professor,4478,lortz@ust.hk
+1854,PHYS,Kwok Yip SZETO,Associate Professor,4476,phszeto@ust.hk
+1855,PHYS,Gyu Boong JO,Assistant Professor,4434,gbjo@ust.hk
+1856,PHYS,Junwei LIU,Assistant Professor,4440,liuj@ust.hk
+1857,PHYS,Tao LIU,Assistant Professor,4470,taoliu@ust.hk
+1858,PHYS,Ding PAN,Assistant Professor,4460,dingpan@ust.hk
+1859,PHYS,Hyokeun PARK,Assistant Professor,5473,hkpark@ust.hk
+1860,PHYS,Yi WANG,Assistant Professor,4435,phyw@ust.hk
+1861,PHYS,Wenjie CHEN,Research Assistant Professor,4482,wjchen@ust.hk
+1862,PHYS,Dongshi GUAN,Research Assistant Professor,4482,dongshi@ust.hk
+1863,PHYS,Heejeong JEONG,Research Assistant Professor,IAS2024,hjjeong@ust.hk
+1864,PHYS,Kirill A PROKOFIEV,Research Assistant Professor,IAS4017,kprok@ust.hk
+1865,PHYS,Ting ZHANG,Research Assistant Professor,4482,phzting@ust.hk
+1866,PHYS,Tian Wen CHEN,Lecturer,4451,twchen@ust.hk
+1867,PHYS,Sanna Y HUI,Executive Officer,4461A,sannahui@ust.hk
+1868,PHYS,Helen Y M CHAN,Clerk,4461,phhelen@ust.hk
+1869,PHYS,Iris S C CHOW,Clerk,4461,phiris@ust.hk
+1870,PHYS,Jacma SAID,Clerk,4461,phjacma@ust.hk
+1871,PHYS,Chelsia S H TAM,Clerk,4461,phshtam@ust.hk
+1872,PHYS,Shirley S L LEE,Office Assistant,4461,phshirle@ust.hk
+1873,PHYS,Jones C Y CHOY,Assistant Computer Officer,6139,phjoneschoy@ust.hk
+1874,PHYS,Sannie S Y WU,Project Assistant,4439,phsywu@ust.hk
+1875,PHYS,Man Fung CHEUNG,Teaching Associate,4444,cheungmf@ust.hk
+1876,PHYS,Sai Kit CHEUNG,Teaching Associate,4448,leoncheungsk@ust.hk
+1877,PHYS,Ting Pong CHOY,Teaching Associate,4448,tingchoy@ust.hk
+1878,PHYS,Yee Fai NG,Teaching Associate,4444,phyfng@ust.hk
+1879,PHYS,Tony H T FUNG,Instructional Assistant,4469,tonyfunght@ust.hk
+1880,PHYS,Kai Ming LAU,Instructional Assistant,4469,minglau@ust.hk
+1881,PHYS,Cheung Shun LI,Instructional Assistant,4469,cslia@ust.hk
+1882,PHYS,Gary K L NG,Instructional Assistant,4469,phklgng@ust.hk
+1883,PHYS,David K S MAK,Senior Technical Officer,6133,phksmak@ust.hk
+1884,PHYS,Ka Lun LEUNG,Technical Associate,6133,kalun@ust.hk
+1885,PHYS,Chi Ming TAM,Technical Associate,6133,phcmtam@ust.hk
+1886,PHYS,Michelle C K NAM,Technician,6133,phmichelle@ust.hk
+1887,PHYS,Che Kin LEE,Assistant Computer Officer,6133,phcklee@ust.hk
+1888,PHYS,Tze Kin CHEUNG,Chief Technician,4124,cheungtk@ust.hk
+1889,PHYS,Patrick Y P LUK,Senior Technical Officer,4121A,phypluk@ust.hk
+1890,PHYS,Walter C M HO,Technical Associate,4142,phwalter@ust.hk
+1891,PHYS,Ulf LAMPE,Technical Associate,4121A,phulampe@ust.hk
+1892,PHYS,Chi Wing NG,Technical Associate,4121A,phcwng@ust.hk
+1893,PHYS,Gordon C T SUEN,Technical Associate,4121A,gordon@ust.hk
+1894,PHYS,Kwok Fai YEUNG,Technical Associate,4121A,phfai@ust.hk
+1895,PHYS,Xictor L X PANG,Technician,4146,phx@ust.hk
+1896,PHYS,Jiannong WANG,Director,4436,phjwang@ust.hk
+1897,SOSC,Kellee S TSAI,Head/Chair Professor,3380,ktsai@ust.hk
+1898,SOSC,Josephine C M WONG,Departmental Secretary,3379,sojowong@ust.hk
+1899,SOSC,Yongshun CAI,Chair Professor,2375,socai@ust.hk
+1900,SOSC,James K S KUNG,Yan Ai Foundation Professor of Social Science,2384,sojk@ust.hk
+1901,SOSC,James LEE,Chair Professor,3364,jqljzl@ust.hk
+1902,SOSC,Albert PARK,Chair Professor,3337,albertpark@ust.hk
+1903,SOSC,Alvin Y SO,Chair Professor,3381,soalvin@ust.hk
+1904,SOSC,David Stephen ZWEIG,Chair Professor,3386,sozweig@ust.hk
+1905,SOSC,Cameron CAMPBELL,Professor,3387,camcam@ust.hk
+1906,SOSC,X L DING,Professor,3392,soxld@ust.hk
+1907,SOSC,Carsten A HOLZ,Professor,2383,socholz@ust.hk
+1908,SOSC,Yimin LIN,Professor,2357,y.lin@ust.hk
+1909,SOSC,Xiaogang WU,Professor,3374,sowu@ust.hk
+1910,SOSC,Xun WU,Professor,4616A,wuxun@ust.hk
+1911,SOSC,Michelle YIK,Professor,2338,michelle.yik@ust.hk
+1912,SOSC,Harry HARDING,Visiting Professor,2368,hharding@ust.hk
+1913,SOSC,Barry V SAUTMAN,Visiting Professor,3383,sobarrys@ust.hk
+1914,SOSC,Rehav RUBIN,Elman Family Visiting Professor of Jewish and Israeli Studies,3377,rrubin@ust.hk
+1915,SOSC,Stuart GIETEL-BASTEN,Associate Professor,2347,sgb@ust.hk
+1916,SOSC,Li HAN,Associate Professor,3390,lihan@ust.hk
+1917,SOSC,Wenkai HE,Associate Professor,3376,hewenkai@ust.hk
+1918,SOSC,Agnes S M KU,Associate Professor,3369,soagnes@ust.hk
+1919,SOSC,John Z MA,Associate Professor,3384,sojohnma@ust.hk
+1920,SOSC,Kira MATUS,Associate Professor,4616D,kmatus@ust.hk
+1921,SOSC,Gerald R PATCHELL,Associate Professor,2354,sopatch@ust.hk
+1922,SOSC,Naubahar SHARIF,Associate Professor,2353,sosn@ust.hk
+1923,SOSC,Ming SING,Associate Professor,2352,somsing@ust.hk
+1924,SOSC,Kevin K P TAM,Associate Professor,2351,kevintam@ust.hk
+1925,SOSC,Jin WANG,Associate Professor,3367,sojinwang@ust.hk
+1926,SOSC,Jimin ZHAO,Research Associate Professor,2348,jiminzhao@ust.hk
+1927,SOSC,Eva CHEN,Assistant Professor,2346,evaechen@ust.hk
+1928,SOSC,Hye Jee CHO,Assistant Professor,3378,socho@ust.hk
+1929,SOSC,Guojun HE,Assistant Professor,2381,gjhe@ust.hk
+1930,SOSC,Jean Ji Yeon HONG,Assistant Professor,2349,jyhong@ust.hk
+1931,SOSC,Franziska Barbara KELLER,Assistant Professor,3356,fbkeller@ust.hk
+1932,SOSC,Yatang LIN,Assistant Professor,LSK6052,linyt@ust.hk
+1933,SOSC,Jane Y ZHANG,Assistant Professor,2356,janezhang@ust.hk
+1934,SOSC,Sujata BALASUBRAMANIAN,Research Assistant Professor,3370,sujata@ust.hk
+1935,SOSC,James K L WONG,Research Assistant Professor,2387,jameskalei@ust.hk
+1936,SOSC,Duoduo XU,Research Assistant Professor,3302,ddxu@ust.hk
+1937,SOSC,Julian GROVES,Associate Professor of Social Science Education,3371,sojulian@ust.hk
+1938,SOSC,Beatrice P Y LAI,Lecturer,2387,beatricelai@ust.hk
+1939,SOSC,Hongbo WANG,Lecturer,3021,hbwang@ust.hk
+1940,SOSC,Chi Ho CHOY,Teaching Associate,3005,choyho@ust.hk
+1941,SOSC,Ying DENG,Teaching Associate,3005,daphnedy@ust.hk
+1942,SOSC,Vivien PONG,Teaching Associate,3005,vivienpong@ust.hk
+1943,SOSC,Siu Hei WONG,Teaching Associate,3005,wongshei@ust.hk
+1944,SOSC,Yuk Ha WONG,Teaching Associate,3005,wyukha@ust.hk
+1945,SOSC,Bill Chi Shing CHAN,Instructional Assistant,3005,chischan@ust.hk
+1946,SOSC,Ka Yee WONG,Instructional Assistant,3005,egkayee@ust.hk
+1947,SOSC,Dora T K LEE,Executive Officer,2338,sodora@ust.hk
+1948,SOSC,Henry C F CHAN,Computer Technician,3031,sochanh@ust.hk
+1949,SOSC,Peggy C M CHAN,Clerk,2338,sopeggy@ust.hk
+1950,SOSC,Vicky F C LAI,Clerk,2338,sovlai@ust.hk
+1951,SOSC,Wendy Y F TSANG,Clerk,3399,sowendy@ust.hk
+1952,SOSC,Albert PARK,Associate Director,3337,albertpark@ust.hk
+1953,SOSC,Xiaogang WU,Director,3374,sowu@ust.hk
+1954,SOSC,John MA,Associate Director,3384,sojohnma@ust.hk
+1955,SOSC,Albert PARK,Associate Director,3337,albertpark@ust.hk
+1956,SOSC,Maggie M Y KU,Project Officer,3302,magku@ust.hk
+1957,SOSC,David Stephen ZWEIG,Director,3386,sozweig@ust.hk
+1958,SOSC,Gerald R PATCHELL,Associate Director,2354,sopatch@ust.hk
+1959,SOSC,Meggy M K WAN,Executive Officer,2338,someggy@ust.hk
