@@ -64,23 +64,23 @@ public class SearchEngine {
             // establish connection to SQL database
             Category.getDatabaseConnection();
 
-            // throw new SQLException("*** throwing error to test static database ***");
+            throw new SQLException("*** throwing error to test static database ***");
 
-            if (categoryResult instanceof Transport){
-                if (categoryResult instanceof Minibus)
-                    reply = ((Minibus) categoryResult).getArrivalTimeFromSQL();
-                // ** may add SQL database for Bus **
-            }
-            else if (categoryResult instanceof Academic){
-                if (categoryResult instanceof Staff)
-                    reply = ((Staff) categoryResult).getContactInfoFromSQL();
-            }
-            else if (categoryResult instanceof Social){
-                if (categoryResult instanceof Societies)
-                    reply = ((Societies) categoryResult).getSocietyWebsiteFromSQL();
-                else if (categoryResult instanceof Recreation)
-                    reply = ((Recreation) categoryResult).getBookingInfoFromSQL();
-            }
+            // if (categoryResult instanceof Transport){
+            //     if (categoryResult instanceof Minibus)
+            //         reply = ((Minibus) categoryResult).getArrivalTimeFromSQL();
+            //     // ** may add SQL database for Bus **
+            // }
+            // else if (categoryResult instanceof Academic){
+            //     if (categoryResult instanceof Staff)
+            //         reply = ((Staff) categoryResult).getContactInfoFromSQL();
+            // }
+            // else if (categoryResult instanceof Social){
+            //     if (categoryResult instanceof Societies)
+            //         reply = ((Societies) categoryResult).getSocietyWebsiteFromSQL();
+            //     else if (categoryResult instanceof Recreation)
+            //         reply = ((Recreation) categoryResult).getBookingInfoFromSQL();
+            // }
         }
         // when one of exceptions occurs => load static database
         catch (URISyntaxException e) {  // mostly not happen in practical

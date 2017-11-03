@@ -1,0 +1,30 @@
+# name,application_link,instruction_link
+
+Student Amenities Room,https://sao.ust.hk/facilities/pdf/ASC_Room.pdf,
+Equipment,https://sao.ust.hk/facilities/pdf/ASC_Equipment.pdf,
+Mobile Stage,https://sao.ust.hk/facilities/pdf/ASC_MobileStage.pdf,
+Temporary Power Supply,https://sao.ust.hk/facilities/pdf/ASC_TempPower.pdf,
+BBQ Facilities,https://sao.ust.hk/facilities/pdf/ASC_BBQ.pdf,
+LG4 Common Room,,https://sao.ust.hk/facilities/popup_info_LG4_amenities.html
+Music Room,https://w6.ab.ust.hk/fbs,https://sao.ust.hk/facilities/popup_info_LG4_amenities.html
+Piano Room,https://w6.ab.ust.hk/fbs,https://sao.ust.hk/facilities/popup_info_LG4_amenities.html
+Band Room,https://sao.ust.hk/facilities/pdf/ASC_Band.pdf,https://sao.ust.hk/facilities/popup_info_LG4_amenities.html
+Yangqin/Guzheng,https://sao.ust.hk/facilities/pdf/ASC_ChiOrch.pdf,https://sao.ust.hk/facilities/popup_info_LG4_amenities.html
+LG5 Meeting Room,https://w6.ab.ust.hk/fbs,https://sao.ust.hk/facilities/popup_info_LG5_amenities.html
+Activity Room,https://w6.ab.ust.hk/fbs,https://sao.ust.hk/facilities/popup_info_LG5_amenities.html
+Conference Room,,https://sao.ust.hk/facilities/popup_info_LG5_amenities.html
+LG5 Common Room,,https://sao.ust.hk/facilities/popup_info_LG5_amenities.html
+Multi-function Room,,https://sao.ust.hk/facilities/popup_info_LG5_amenities.html
+Creativity Room,https://sao.ust.hk/facilities/pdf/ASC_Creativity.pdf,https://sao.ust.hk/facilities/popup_info_LG5_amenities.html
+Workshop,,https://sao.ust.hk/facilities/popup_info_LG5_amenities.html
+Reflection Room,https://sao.ust.hk/facilities/pdf/ASC_ReflectionRoom.pdf,https://sao.ust.hk/facilities/Reflection_Room.html
+Dark Room,https://sao.ust.hk/facilities/pdf/ASC_Dark.pdf,https://sao.ust.hk/facilities/popup_info_LG5_amenities.html
+LG5 Promotion Counter,https://sao.ust.hk/facilities/pdf/ASC_PromoCounter.pdf,https://sao.ust.hk/facilities/popup_info_LG5_Promo_Ctr.html
+UG Hall 2 Common Room,,https://sao.ust.hk/facilities/popup_info_Seafront_amenities.html
+UG Hall 6 Common Room,,https://sao.ust.hk/facilities/popup_info_Seafront_amenities.html
+UG Hall 6 Meeting Room,,https://sao.ust.hk/facilities/popup_info_Seafront_amenities.html
+Commual Area,https://www.ab.ust.hk/fmo/Forms/Communal.PDF,https://sao.ust.hk/facilities/amenities_communal_areas.html
+Lecture Theatre,,https://sao.ust.hk/facilities/amenities_lecture_theaters.html
+Classroom,,https://sao.ust.hk/facilities/amenities_lecture_theaters.html
+Tsang Shiu Tim Art Hall,https://sao.ust.hk/aesthetics/Forms/app_tstah.pdf,
+Library Study Room,http://lbbooking.ust.hk,
