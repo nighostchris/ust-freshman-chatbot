@@ -49,7 +49,7 @@ public abstract class Category {
                 if (result.equals(academicKeyword))
                     academicResults.add(academicKeyword);
 
-            // Social.QUERY_KEYWORD = Social.
+            // Social.QUERY_KEYWORD = Societies.QUERY_KEYWORD U Recreation.QUERY_KEYWORD
             for (String socialKeyword : Social.QUERY_KEYWORD)
                 if (result.equals(socialKeyword))
                     socialResults.add(socialKeyword);

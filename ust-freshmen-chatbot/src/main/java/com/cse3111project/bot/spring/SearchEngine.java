@@ -78,6 +78,8 @@ public class SearchEngine {
             else if (categoryResult instanceof Social){
                 if (categoryResult instanceof Societies)
                     reply = ((Societies) categoryResult).getSocietyWebsiteFromSQL();
+                else if (categoryResult instanceof Recreation)
+                    reply = ((Recreation) categoryResult).getBookingInfoFromSQL();
             }
         }
         // when one of exceptions occurs => load static database
@@ -121,6 +123,8 @@ public class SearchEngine {
                 else if (categoryResult instanceof Social){
                     if (categoryResult instanceof Societies)
                         reply = ((Societies) categoryResult).getSocietyWebsiteFromStatic();
+                    else if (categoryResult instanceof Recreation)
+                        reply = ((Recreation) categoryResult).getBookingInfoFromStatic();
                 }
             }
         }

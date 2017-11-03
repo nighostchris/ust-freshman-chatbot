@@ -5,12 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.io.InputStream;
+import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
 
 import java.util.Scanner;
 import java.util.ArrayList;
 import com.cse3111project.bot.spring.utility.Utilities;
-
-import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -209,7 +208,7 @@ public class Societies extends Social {
     }
 
     // reply societies' link based on user query by searching static database
-    // only used when SQL database is failed to load
+    // only used when SQL database is failed to load, serving as backup
     public String getSocietyWebsiteFromStatic() throws StaticDatabaseFileNotFoundException {
         Scanner staticDatabaseReader = null;
         try {
@@ -245,8 +244,11 @@ public class Societies extends Social {
     // reply the ultimate results based on user query
     private String replyResults(final ArrayList<SocietyInfo> results){
         StringBuilder replyBuilder = new StringBuilder("Results:\n");
-        for (SocietyInfo result : results)
-            replyBuilder.append(result.toString());
+        for (int i = 0; i < results.size(); i++){
+            replyBuilder.append(results.get(i).toString());
+            if (i != results.size() - 1)
+                replyBuilder.append("\n");
+        }
 
         return replyBuilder.toString();
     }
