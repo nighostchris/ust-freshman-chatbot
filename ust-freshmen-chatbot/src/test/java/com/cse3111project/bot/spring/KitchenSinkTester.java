@@ -178,7 +178,7 @@ public class KitchenSinkTester {
         assertThat(answer).isNotNull();
         log.info("reply: {}", answer);
         // assertThat(answer.contains("91M") && answer.contains("arrival time")).isEqualTo(true);
-        assertThat(answer.equals("here")).isEqualTo(true);
+        assertThat(answer.equals("in here")).isEqualTo(true);
 
         log.info("--- End of partialMatchBus1() ---");
     }
@@ -197,7 +197,7 @@ public class KitchenSinkTester {
         assertThat(answer).isNotNull();
         log.info("reply: {}", answer);
         // assertThat(answer.contains("91M") && answer.contains("arrival time")).isEqualTo(true);
-        assertThat(answer.equals("here")).isEqualTo(true);
+        assertThat(answer.equals("in here")).isEqualTo(true);
 
         log.info("--- End of partialMatchBus1_1() ---");
     }

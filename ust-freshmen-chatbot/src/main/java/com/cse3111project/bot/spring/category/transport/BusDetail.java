@@ -27,11 +27,11 @@ class BusDetail
 		southGateArrivalTime = new ArrayList<String>();
 		northGateArrivalTime = new ArrayList<String>();
 		
-        webCrawling();
+        // webCrawling();
 	}
 	
     // crawling data from KMB database
-	private void webCrawling() throws Exception
+	String webCrawling() throws Exception
 	{
         // 91M from UST to Choi Hung
         URI uToCHM = new URI(UST2CHOIHUNG91M);
@@ -42,32 +42,39 @@ class BusDetail
         // 91 from UST to Clear Water Bay
         URI uToCWB = new URI(UST2CLEARWATERBAY91);
         // call update function
-        updateETA(uToCHM, 0);
-        updateETA(uToCHNotM, 0);
-        updateETA(uToPoLam, 1);
-        updateETA(uToCWB, 1);
+        return updateETA(uToCHM, 0);
+        // updateETA(uToCHNotM, 0);
+        // updateETA(uToPoLam, 1);
+        // updateETA(uToCWB, 1);
 	}
 	
     // obtain and extract ETA from JSON object
-	private void updateETA(URI uri, int gate) throws Exception
+	private String updateETA(URI uri, int gate) throws Exception
 	{
-		// get json from kmb
-		Scanner sc = new Scanner(uri.toURL().openStream());
-		String json = sc.nextLine();
-		
-		// get the 3 eta for bus route
-		JSONObject obj = new JSONObject(json);
-		JSONArray time = obj.getJSONArray("response");
-		for (int i = 0; i < 3; i++)
-		{
-			JSONObject eta = time.getJSONObject(i);
-			String etaTime = eta.getString("t").substring(0, 5);
-			if (gate == 0)
-				southGateArrivalTime.add(etaTime);
-			else
-				northGateArrivalTime.add(etaTime);
-		}
-		sc.close();
+        Scanner sc = null;
+        try {
+            // get json from kmb
+            sc = new Scanner(uri.toURL().openStream());
+            return "in here";
+        }
+		// String json = sc.nextLine();
+		// 
+		// // get the 3 eta for bus route
+		// JSONObject obj = new JSONObject(json);
+		// JSONArray time = obj.getJSONArray("response");
+		// for (int i = 0; i < 3; i++)
+		// {
+		// 	JSONObject eta = time.getJSONObject(i);
+		// 	String etaTime = eta.getString("t").substring(0, 5);
+		// 	if (gate == 0)
+		// 		southGateArrivalTime.add(etaTime);
+		// 	else
+		// 		northGateArrivalTime.add(etaTime);
+		// }
+        finally {
+            if (sc != null)
+                sc.close();
+        }
 	}
 	
 	// get eta for south gate stop

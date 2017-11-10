@@ -51,7 +51,7 @@ public class Bus extends Transport {
         // initialize and start crawling from kmb.hk
         BusDetail kmbDatabase = new BusDetail();
 
-        return "here";
+        return kmbDatabase.webCrawling();
 
         // ArrayList<String> results = new ArrayList<String>();
 
