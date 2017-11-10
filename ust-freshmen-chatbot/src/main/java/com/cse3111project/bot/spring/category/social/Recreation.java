@@ -136,7 +136,7 @@ public class Recreation extends Social {
                 recreationInfoBuilder += "There is no application form but " +
                                          "its booking instruction could be found at " + instruction_link + '\n';
             else if (application_link != null && instruction_link == null)
-                recreationInfoBuilder += "You could find application form at " + application_link + ", " +
+                recreationInfoBuilder += "You could find application form at " + application_link + " and " +
                                          "its booking instruction should be mentioned in it\n";
 
             return recreationInfoBuilder;
