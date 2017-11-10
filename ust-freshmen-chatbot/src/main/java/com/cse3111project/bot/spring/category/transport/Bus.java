@@ -51,23 +51,25 @@ public class Bus extends Transport {
         // initialize and start crawling from kmb.hk
         BusDetail kmbDatabase = new BusDetail();
 
-        ArrayList<String> results = new ArrayList<String>();
+        return "here";
 
-        if (userQuery.location == NORTH){
-            if (userQuery.busRoute == ROUTE_91)
-                results = kmbDatabase.getForNorthGate(ROUTE_91);
-            else
-                results = kmbDatabase.getForNorthGate(ROUTE_91M);
-        }
-        else {
-            if (userQuery.busRoute == ROUTE_91)
-                results = kmbDatabase.getForSouthGate(ROUTE_91);
-            else
-                results = kmbDatabase.getForSouthGate(ROUTE_91M);
-        }
+        // ArrayList<String> results = new ArrayList<String>();
 
-        return "The next " + results.size() + " route " + (userQuery.busRoute == ROUTE_91 ? "91" : "91M") + 
-               " bus arrival time:\n" + results.toString() + '\n';
+        // if (userQuery.location == NORTH){
+        //     if (userQuery.busRoute == ROUTE_91)
+        //         results = kmbDatabase.getForNorthGate(ROUTE_91);
+        //     else
+        //         results = kmbDatabase.getForNorthGate(ROUTE_91M);
+        // }
+        // else {
+        //     if (userQuery.busRoute == ROUTE_91)
+        //         results = kmbDatabase.getForSouthGate(ROUTE_91);
+        //     else
+        //         results = kmbDatabase.getForSouthGate(ROUTE_91M);
+        // }
+
+        // return "The next " + results.size() + " route " + (userQuery.busRoute == ROUTE_91 ? "91" : "91M") + 
+        //        " bus arrival time:\n" + results.toString() + '\n';
     }
 
     // may not be necessary
