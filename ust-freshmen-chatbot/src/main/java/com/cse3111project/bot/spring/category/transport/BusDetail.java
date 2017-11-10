@@ -1,6 +1,6 @@
 package com.cse3111project.bot.spring.category.transport;
 
-import java.net.URL;
+import java.net.URI;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -34,13 +34,13 @@ class BusDetail
 	private void webCrawling() throws Exception
 	{
         // 91M from UST to Choi Hung
-        URL uToCHM = new URL(UST2CHOIHUNG91M);
+        URI uToCHM = new URI(UST2CHOIHUNG91M);
         // 91 from UST to Choi Hung
-        URL uToCHNotM = new URL(UST2CHOIHUNG91);
+        URI uToCHNotM = new URI(UST2CHOIHUNG91);
         // 91M from UST to Po Lam
-        URL uToPoLam = new URL(UST2POLAM91M);
+        URI uToPoLam = new URI(UST2POLAM91M);
         // 91 from UST to Clear Water Bay
-        URL uToCWB = new URL(UST2CLEARWATERBAY91);
+        URI uToCWB = new URI(UST2CLEARWATERBAY91);
         // call update function
         updateETA(uToCHM, 0);
         updateETA(uToCHNotM, 0);
@@ -49,10 +49,10 @@ class BusDetail
 	}
 	
     // obtain and extract ETA from JSON object
-	private void updateETA(URL url, int gate) throws Exception
+	private void updateETA(URI uri, int gate) throws Exception
 	{
 		// get json from kmb
-		Scanner sc = new Scanner(url.openStream());
+		Scanner sc = new Scanner(uri.toURL().openStream());
 		String json = sc.nextLine();
 		
 		// get the 3 eta for bus route
