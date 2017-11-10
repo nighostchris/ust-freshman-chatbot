@@ -93,7 +93,7 @@ subprojects {
             dependency 'com.squareup.retrofit2:retrofit:2.2.0'
             dependency 'org.assertj:assertj-core:3.6.2'  // ***
             dependency 'org.projectlombok:lombok:1.16.12'
-            dependency 'org.json:json:20171018'
+            // dependency 'org.json:json:20171018'
             dependency 'com.fasterxml.jackson.core:jackson-databind:2.8.8.1'
         }
     }
@@ -101,6 +101,8 @@ subprojects {
     dependencies {
         compileOnly 'org.projectlombok:lombok'
         testCompileOnly 'org.projectlombok:lombok'
+
+        compile 'org.json:json:20171018'
 
         compileOnly "org.springframework.boot:spring-boot-configuration-processor" // http://docs.spring.io/spring-boot/docs/current/reference/html/configuration-metadata.html#configuration-metadata-annotation-processor
 
