@@ -182,6 +182,24 @@ public class KitchenSinkTester {
         log.info("--- End of partialMatchBus1() ---");
     }
 
+    // partial match bus keyword case 1.1: middle + 2 matches (route + location) + different case +
+    //                                     merged with other char
+    // KMB database           -- pass
+    @Test
+    public void partialMatchBus1_1() throws Exception {
+        log.info("--- partialMatchBus1_1() ---");
+
+        String answer = null;
+
+        answer = this.searchEngine.search("What is the arrival time of 91M route? I am at south gate");
+
+        assertThat(answer).isNotNull();
+        log.info("reply: {}", answer);
+        assertThat(answer.contains("91M") && answer.contains("arrival time")).isEqualTo(true);
+
+        log.info("--- End of partialMatchBus1_1() ---");
+    }
+
     // partial match bus keyword case 2: end + merged with other char + no location provided
     // KMB database           -- pass
     @Test

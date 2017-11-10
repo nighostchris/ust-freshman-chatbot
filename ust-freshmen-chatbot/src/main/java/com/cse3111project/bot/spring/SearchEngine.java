@@ -51,9 +51,12 @@ public class SearchEngine {
         }
 
         try {
+            // if search for arrival time of Bus
+            // => no need to use SQL database
+            // ==> no need to establish connection below to waste time
             if (categoryResult instanceof Transport)
                 if (categoryResult instanceof Bus)
-                    reply = ((Bus) categoryResult).getArrivalTimeFromKMB();
+                    return ((Bus) categoryResult).getArrivalTimeFromKMB();
         }
         catch (Exception e) {
             Utilities.errorLog("unexpected error occurred while reading from KMB database", e);
@@ -64,7 +67,7 @@ public class SearchEngine {
             // establish connection to SQL database
             Category.getDatabaseConnection();
 
-            throw new SQLException("*** throwing error to test static database ***");
+            // throw new SQLException("*** throwing error to test static database ***");
 
             if (categoryResult instanceof Transport){
                 if (categoryResult instanceof Minibus)
