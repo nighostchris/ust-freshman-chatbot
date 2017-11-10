@@ -11,7 +11,12 @@ Click + from the left sidebar and choose "Fork this repository".
 ## IMPORTANT
 
 Everyone please scan the following QR code and add our team chatbot as friend
+
 ![QR code](https://qr-official.line.me/M/xMDv53tZAe.png)
+
+testbot (for testing in LINE app after JUnit-tested, NOTE that TA should not add this as friend)
+
+![QR code](https://qr-official.line.me/M/jskpbdk16u.png)
 
 # new requirement for Topic 3
 ## Thanksgiving Party
