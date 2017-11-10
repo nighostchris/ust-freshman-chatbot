@@ -57,7 +57,6 @@ public class SearchEngine {
             if (categoryResult instanceof Transport)
                 if (categoryResult instanceof Bus)
                     return ((Bus) categoryResult).getArrivalTimeFromKMB();
-                    // return "here";
         }
         catch (Exception e) {
             Utilities.errorLog("unexpected error occurred while reading from KMB database", e);
