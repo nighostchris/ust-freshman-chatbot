@@ -5,7 +5,7 @@ import com.cse3111project.bot.spring.category.function.timetable.TimeTable;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.linecorp.bot.client.LineMessagingClient;
+import com.linecorp.bot.client.LineMessagingService;
 import com.linecorp.bot.model.event.MessageEvent;
 import com.linecorp.bot.model.event.message.TextMessageContent;
 import com.linecorp.bot.model.message.Message;
@@ -15,7 +15,7 @@ import com.linecorp.bot.model.response.BotApiResponse;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 import com.linecorp.bot.spring.boot.annotation.EventMapping;
 
-import java.util.concurrent.ExecutionException;
+// import java.util.concurrent.ExecutionException;
 
 // import java.io.ObjectInputStream;
 // import java.io.FileInputStream;
@@ -40,7 +40,7 @@ import lombok.NonNull;
 @LineMessageHandler
 public abstract class Function extends Category {
     @Autowired
-    private LineMessagingClient client;
+    private LineMessagingService client;
 
     public static final String QUERY_KEYWORD[] = TimeTable.FUNCTION_KEYWORD;
 
@@ -69,7 +69,7 @@ public abstract class Function extends Category {
 
     // user text message would be handled here
     @EventMapping
-    public void handleTextMessageEvent(MessageEvent<TextMessageContent> event) throws Exception {
+    public void handleTextMessageEvent(MessageEvent<TextMessageContent> event){
         currentEvent = event;
         userMessage = event.getMessage().getText();  // obtain user message
         // a reply token would be issued every time when user sends a message (triggering this event)
@@ -80,32 +80,19 @@ public abstract class Function extends Category {
         return currentEvent.getReplyToken() != prevReplyToken;
     }
 
-	private void reply(@NonNull String replyToken, @NonNull Message message){
-		reply(replyToken, Collections.singletonList(message));
-	}
-
-	private void reply(@NonNull String replyToken, @NonNull List<Message> messages){
-		try {
-			BotApiResponse apiResponse = client.replyMessage(new ReplyMessage(replyToken, messages)).get();
-		}
-        catch (InterruptedException | ExecutionException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-    // duplicated from KitchenSinkController..
-	private void replyText(@NonNull String replyToken, @NonNull String message){
-		if (replyToken.isEmpty()) {
-			throw new IllegalArgumentException("replyToken must not be empty");
-		}
-		if (message.length() > 1000)
-			message = message.substring(0, 1000 - 2) + "..";
-
-		this.reply(currentEvent.getReplyToken(), new TextMessage(message));
-	}
-
     protected void replyText(@NonNull String reply){
-        this.replyText(currentEvent.getReplyToken(), reply);
+        if (reply.length() > 1000)  // truncate the reply if it is too long
+            reply = reply.substring(0, 1000 - 2) + "..";
+
+        ReplyMessage replyMessage = new ReplyMessage(currentEvent.getReplyToken(), 
+                                                     Collections.singletonList(new TextMessage(reply)));
+
+        try {
+            BotApiResponse apiResponse = client.replyMessage(replyMessage).execute().body();
+        }
+        catch (IOException e) {
+            Utilities.errorLog("I/O error occurred while trying to reply", e);
+        }
     }
 
     protected String getUserMessage() { return this.userMessage; }

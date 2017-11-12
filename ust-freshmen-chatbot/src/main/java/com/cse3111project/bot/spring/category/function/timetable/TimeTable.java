@@ -137,7 +137,7 @@ public class TimeTable extends Function {
         loop: while (true) {
             replyText("Save the current timetable?[Y/N]\n\n" + user.toString());
             while (!userHasReplied());
-            String userResponse = super.getUserMessage();
+            String userResponse = getUserMessage();
             switch (userResponse) {
                 case "Y": case "y": case "Yes": case "yes":
                     this.save();
@@ -161,7 +161,7 @@ public class TimeTable extends Function {
         try {
             replyText("Enter month and day for event (Separated by Space):");
             while (!userHasReplied());
-            String dateParts[] = super.getUserMessage().split(" ");
+            String dateParts[] = getUserMessage().split(" ");
             if (dateParts.length != 2)
                 throw new IllegalArgumentException("2 arguments should be given:\n<month> <day>");
 
@@ -173,7 +173,7 @@ public class TimeTable extends Function {
 
             replyText("Enter event start and end time in hour (0-23, Separated by Space): ");
             while (!userHasReplied());
-            String timeslotParts[] = super.getUserMessage().split(" ");
+            String timeslotParts[] = getUserMessage().split(" ");
             if (timeslotParts.length != 2)
                 throw new IllegalArgumentException("2 arguments should be given:\n<starting time> <ending time>");
 
@@ -185,7 +185,7 @@ public class TimeTable extends Function {
 
             replyText("Enter activity name:");
             while (!userHasReplied());
-            activityName = super.getUserMessage();
+            activityName = getUserMessage();
 
             user.addEventDate(month, day);
             Date date = user.searchDate(month, day);
@@ -220,7 +220,7 @@ public class TimeTable extends Function {
 
             replyText("Enter month and day for removal:");
             while (!userHasReplied());
-            String[] dateParts = super.getUserMessage().split(" ");
+            String[] dateParts = getUserMessage().split(" ");
             if (dateParts.length != 2)
                 throw new IllegalArgumentException("2 arguments should be given:\n<month> <day>");
 
@@ -245,7 +245,7 @@ public class TimeTable extends Function {
                 else {
                     replyText("Enter activity name:");
                     while (!userHasReplied());
-                    activityName = super.getUserMessage();
+                    activityName = getUserMessage();
                     if (date.removeActivity(activityName))
                         replyText("Event deleted.");
                     else
@@ -306,7 +306,7 @@ public class TimeTable extends Function {
             replyText("Enter New Username (for later retrieving the timetable): ");
             // wait for user reply
             while (!userHasReplied()); 
-            user = new People(super.getUserMessage());
+            user = new People(getUserMessage());
         }
 
 		// user = tm.searchPeople(username);
@@ -325,7 +325,7 @@ public class TimeTable extends Function {
                                                             .append("4) Display all event")
                                                             .append("Enter q to save/leave");
             replyText(replyBuilder.toString());
-            while (!userHasReplied()); input = super.getUserMessage();
+            while (!userHasReplied()); input = getUserMessage();
 			switch (input)
 			{
 				case "1":
