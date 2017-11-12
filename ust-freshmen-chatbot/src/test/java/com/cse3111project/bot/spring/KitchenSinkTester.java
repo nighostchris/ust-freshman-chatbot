@@ -344,6 +344,7 @@ public class KitchenSinkTester {
 
         assertThat(answer).isNotNull();
         assertThat(answer instanceof TimeTable).isEqualTo(true);
+        // assertThat(((TimeTable) answer).getController().getFunctionEvent() instanceof TimeTable);
 
         log.info("--- End of partialMatchTimeTable1() ---");
     }

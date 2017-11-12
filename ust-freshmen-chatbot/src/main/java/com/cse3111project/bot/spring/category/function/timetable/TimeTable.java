@@ -299,7 +299,6 @@ public class TimeTable extends Function {
     // entry point for TimeTable function
     @Override
 	public void run(){
-        replyText("testing reply");
 		// TimeManager tm = new TimeManager();
         this.read();  // attempt to read the saved time schedule if exists
         if (user == null){  // no save / error occurred while reading save
@@ -317,14 +316,14 @@ public class TimeTable extends Function {
 		// }
 
         String input = "";
+        StringBuilder menuBuilder = new StringBuilder().append("\n1) Add event")
+                                                       .append("2) Remove event")
+                                                       .append("3) Display event for particular date")
+                                                       .append("4) Display all event")
+                                                       .append("Enter q to save/leave");
         while (input != "q")
 		{
-            StringBuilder replyBuilder = new StringBuilder().append("\n1) Add event")
-                                                            .append("2) Remove event")
-                                                            .append("3) Display event for particular date")
-                                                            .append("4) Display all event")
-                                                            .append("Enter q to save/leave");
-            replyText(replyBuilder.toString());
+            replyText(menuBuilder.toString());
             while (!userHasReplied()); input = getUserMessage();
 			switch (input)
 			{
