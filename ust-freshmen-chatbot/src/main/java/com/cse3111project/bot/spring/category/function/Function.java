@@ -84,7 +84,7 @@ public abstract class Function extends Category {
     // }
 
     protected boolean userHasReplied(){
-        return userMessage != null;
+        return replyToken != null;
     }
 
     // protected void replyText(@NonNull String reply){

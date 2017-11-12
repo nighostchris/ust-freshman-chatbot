@@ -235,8 +235,11 @@ public class KitchenSinkController {
             response = "I don\'t understand what you are saying. Could you be more clearer?";
         else if (response instanceof String)
             this.replyText(replyToken, (String) response);
-        else if (response instanceof Function)
+        else if (response instanceof Function){
+            // retrieve current reply token first
+            ((Function) response).retrieveReplyToken(replyToken);
             ((Function) response).run();  // launch the sub-application
+        }
     }
 
     private void handleFunctionContent(String replyToken, Event event,
