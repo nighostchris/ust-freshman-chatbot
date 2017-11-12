@@ -44,7 +44,8 @@ import lombok.extern.slf4j.Slf4j;  // logging
 
 import com.cse3111project.bot.spring.SearchEngine;
 
-import com.cse3111project.bot.spring.category.transport.*;
+import com.cse3111project.bot.spring.category.transport.Minibus;
+import com.cse3111project.bot.spring.category.function.timetable.TimeTable;
 
 @Slf4j
 @RunWith(SpringRunner.class)
@@ -328,5 +329,22 @@ public class KitchenSinkTester {
                    ((String) answer).contains("Study Room")).isEqualTo(true);
 
         log.info("--- End of partialMatchRecreation2() ---");
+    }
+
+    // partial match timetable keyword case 1: end + merged with other char + different case
+    @Test
+    public void partialMatchTimeTable1() throws Exception {
+        log.info("--- partialMatchTimeTable1() ---");
+
+        Object answer = null;
+
+        // would match timetable and TA ....
+        // ==> resolved in Category.analyze()
+        answer = this.searchEngine.search("I would like to use the Timetable function.");
+
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof TimeTable).isEqualTo(true);
+
+        log.info("--- End of partialMatchTimeTable1() ---");
     }
 }

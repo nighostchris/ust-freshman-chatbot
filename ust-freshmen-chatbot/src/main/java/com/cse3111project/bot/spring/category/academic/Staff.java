@@ -22,7 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 public class Staff extends Academic {
     public static final String STAFF_NAME_KEYWORD[];
 
-    public static final String STAFF_POSITION_KEYWORD[] = { "Professor", "Prof.", "TA", "Teaching Assistant",
+    public static final String STAFF_POSITION_KEYWORD[] = { "Professor", "Prof.", "Prof",
+                                                            "TA", "Teaching Assistant",
                                                             "Lecturer", "Instructor", "Teacher" };
 
     private static final String SQL_TABLE = "hkust_directories";

@@ -69,6 +69,10 @@ public abstract class Category {
             transportResults.size() > socialResults.size() && 
             transportResults.size() > functionResults.size())
             return Transport.query(transportResults);
+        else if (functionResults.size() >= transportResults.size() && 
+                 functionResults.size() >= academicResults.size() &&
+                 functionResults.size() >= socialResults.size())  // see partialMatchTimeTable1()
+            return Function.query(functionResults);
         else if (academicResults.size() > transportResults.size() && 
                  academicResults.size() > socialResults.size() &&
                  academicResults.size() > functionResults.size())
@@ -77,10 +81,6 @@ public abstract class Category {
                  socialResults.size() > academicResults.size() &&
                  socialResults.size() > functionResults.size())
             return Social.query(socialResults);
-        else if (functionResults.size() > transportResults.size() && 
-                 functionResults.size() > academicResults.size() &&
-                 functionResults.size() > socialResults.size())
-            return Function.query(functionResults);
         else  // query should not have overlap in a single sentence (untested) ***
             throw new AmbiguousQueryException("I am not quite sure what you are talking about, " +
                                               "could you be more clearer?");
