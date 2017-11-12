@@ -10,23 +10,22 @@ import org.json.*;
 class BusDetail
 {
     // 91M from UST to Choi Hung
-    private static final String UST2CHOIHUNG91M = "http://etav3.kmb.hk/?action=geteta&lang=tc&route=91M&bound=1&stop=HK02T10000&stop_seq=12&serviceType=1";
+    private static final String ROUTE91MSOUTHGATE = "http://etav3.kmb.hk/?action=geteta&lang=tc&route=91M&bound=1&stop=HK02T10000&stop_seq=12&serviceType=1";
     // 91 from UST to Choi Hung
-    private static final String UST2CHOIHUNG91 = "http://etav3.kmb.hk/?action=geteta&lang=tc&route=91&bound=1&stop=HK02T10000&stop_seq=15&serviceType=1";
+    private static final String ROUTE91SOUTHGATE = "http://etav3.kmb.hk/?action=geteta&lang=tc&route=91&bound=1&stop=HK02T10000&stop_seq=15&serviceType=1";
     // 91M from UST to Po Lam
-    private static final String UST2POLAM91M = "http://etav3.kmb.hk/?action=geteta&lang=tc&route=91M&bound=1&stop=HK01T11000&stop_seq=16&serviceType=1";
+    private static final String ROUTE91MNORTHGATE = "http://etav3.kmb.hk/?action=geteta&lang=tc&route=91M&bound=1&stop=HK01T11000&stop_seq=16&serviceType=1";
     // 91 from UST to Clear Water Bay
-    private static final String UST2CLEARWATERBAY91 = "http://etav3.kmb.hk/?action=geteta&lang=tc&route=91&bound=1&stop=HK01T10500&stop_seq=15&serviceType=1";
+    private static final String ROUTE91NORTHGATE = "http://etav3.kmb.hk/?action=geteta&lang=tc&route=91&bound=1&stop=HK01T10500&stop_seq=15&serviceType=1";
 
-	private ArrayList<String> southGateArrivalTime;
-	private ArrayList<String> northGateArrivalTime;
+    private ArrayList<String> ROUTE91MSouthGateArrivalTime = new ArrayList<>();
+    private ArrayList<String> ROUTE91SouthGateArrivalTime = new ArrayList<>();
+    private ArrayList<String> ROUTE91MNorthGateArrivalTime = new ArrayList<>();
+    private ArrayList<String> ROUTE91NorthGateArrivalTime = new ArrayList<>();
 	
     // only visible to Bus (Transport package)
 	BusDetail() throws Exception
 	{
-		southGateArrivalTime = new ArrayList<String>();
-		northGateArrivalTime = new ArrayList<String>();
-		
         webCrawling();
 	}
 	
@@ -34,23 +33,25 @@ class BusDetail
 	private void webCrawling() throws Exception
 	{
         // 91M from UST to Choi Hung
-        URI uToCHM = new URI(UST2CHOIHUNG91M);
+        URI uToCHM = new URI(ROUTE91MSOUTHGATE);
         // 91 from UST to Choi Hung
-        URI uToCHNotM = new URI(UST2CHOIHUNG91);
+        URI uToCHNotM = new URI(ROUTE91SOUTHGATE);
         // 91M from UST to Po Lam
-        URI uToPoLam = new URI(UST2POLAM91M);
+        URI uToPoLam = new URI(ROUTE91MNORTHGATE);
         // 91 from UST to Clear Water Bay
-        URI uToCWB = new URI(UST2CLEARWATERBAY91);
+        URI uToCWB = new URI(ROUTE91NORTHGATE);
         // call update function
-        updateETA(uToCHM, 0);
-        updateETA(uToCHNotM, 0);
-        updateETA(uToPoLam, 1);
-        updateETA(uToCWB, 1);
+        ROUTE91MSouthGateArrivalTime = updateETA(uToCHM);
+        ROUTE91SouthGateArrivalTime = updateETA(uToCHNotM);
+        ROUTE91MNorthGateArrivalTime = updateETA(uToPoLam);
+        ROUTE91NorthGateArrivalTime = updateETA(uToCWB);
 	}
 	
     // obtain and extract ETA from JSON object
-	private void updateETA(URI uri, int gate) throws Exception
+	private ArrayList<String> updateETA(URI uri) throws Exception
 	{
+        ArrayList<String> arrivalTime = new ArrayList<>();
+
         // get json from kmb
         Scanner sc = new Scanner(uri.toURL().openStream());
 		String json = sc.nextLine();
@@ -58,47 +59,33 @@ class BusDetail
 		// get the 3 eta for bus route
 		JSONObject obj = new JSONObject(json);
 		JSONArray time = obj.getJSONArray("response");
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < time.length(); i++)
 		{
-			JSONObject eta = time.getJSONObject(i);
-			String etaTime = eta.getString("t").substring(0, 5);
-			if (gate == 0)
-				southGateArrivalTime.add(etaTime);
-			else
-				northGateArrivalTime.add(etaTime);
+            JSONObject eta = time.getJSONObject(i);
+            String etaTime = eta.getString("t").substring(0, 5);
+            arrivalTime.add(etaTime);
 		}
+
         sc.close();
+
+        return arrivalTime;
 	}
 	
+    // ** may be changed as static later **
 	// get eta for south gate stop
 	// int 0 for getting 91M and int 1 for getting 91
 	// return ArrayList of 3 strings about eta of next 3 bus
-	public ArrayList<String> getForSouthGate(int mornotm)
+	ArrayList<String> getForSouthGate(int mornotm)
 	{
-		ArrayList<String> result = new ArrayList<String>();
-		if (mornotm == 0)
-			for (int i = 0; i < 3; i++)
-				result.add(southGateArrivalTime.get(i));
-		else
-            for (int i = 0; i < 3; i++)
-                result.add(southGateArrivalTime.get(i + 3));
-
-        return result;
+        return (mornotm == 0 ? ROUTE91MSouthGateArrivalTime : ROUTE91SouthGateArrivalTime);
 	}
 	
+    // ** may be changed as static later **
 	// get eta for north gate stop
 	// int 0 for getting 91M and int 1 for getting 91
 	// return ArrayList of 3 strings about eta of next 3 bus
-	public ArrayList<String> getForNorthGate(int mornotm)
+	ArrayList<String> getForNorthGate(int mornotm)
 	{
-		ArrayList<String> result = new ArrayList<String>();
-		if (mornotm == 0)
-			for (int i = 0; i < 3; i++)
-				result.add(northGateArrivalTime.get(i));
-		else
-			for (int i = 0; i < 3; i++)
-				result.add(northGateArrivalTime.get(i + 3));
-
-        return result;
+        return (mornotm == 0 ? ROUTE91MNorthGateArrivalTime : ROUTE91NorthGateArrivalTime);
 	}
 }

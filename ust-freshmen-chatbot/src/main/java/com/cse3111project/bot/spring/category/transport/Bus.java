@@ -66,6 +66,9 @@ public class Bus extends Transport {
                 results = kmbDatabase.getForSouthGate(ROUTE_91M);
         }
 
+        if (results.isEmpty())
+            return "Currently there is no available estimated arrival time from KMB database. Sorry";
+
         return "The next " + results.size() + " route " + (userQuery.busRoute == ROUTE_91 ? "91" : "91M") + 
                " bus arrival time:\n" + results.toString() + '\n';
     }
