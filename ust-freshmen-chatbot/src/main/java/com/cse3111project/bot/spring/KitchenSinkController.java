@@ -16,6 +16,9 @@
 
 package com.cse3111project.bot.spring;
 
+import com.cse3111project.bot.spring.category.function.Function;
+import com.cse3111project.bot.spring.category.function.timetable.TimeTable;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UncheckedIOException;
@@ -92,9 +95,6 @@ public class KitchenSinkController {
 
 	@EventMapping
 	public void handleTextMessageEvent(MessageEvent<TextMessageContent> event) throws Exception {
-		log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-		log.info("This is your entry point:");
-		log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 		TextMessageContent message = event.getMessage();
 		handleTextContent(event.getReplyToken(), event, message);
 	}
@@ -186,13 +186,14 @@ public class KitchenSinkController {
 		try {
 			BotApiResponse apiResponse = lineMessagingClient.replyMessage(new ReplyMessage(replyToken, messages)).get();
 			log.info("Sent messages: {}", apiResponse);
-		} 
+		}
         catch (InterruptedException | ExecutionException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	private void replyText(@NonNull String replyToken, @NonNull String message) {
+    // should have no disadvantage for relaxing the method access
+	public void replyText(@NonNull String replyToken, @NonNull String message) {
 		if (replyToken.isEmpty()) {
 			throw new IllegalArgumentException("replyToken must not be empty");
 		}
@@ -211,15 +212,22 @@ public class KitchenSinkController {
         String text = content.getText();
         log.info("Got text message from {}: {}", replyToken, text);
 
-        String reply = null;
+        Object reply = null;
 
-        reply = searchEngine.search(text);  // search from SQL database
+        reply = searchEngine.search(text);  // start analyzing what user is querying for
 
         if (reply == null)
             reply = "I don\'t understand what you are saying. Could you be more clearer?";
+        else if (reply instanceof String)
+            this.replyText(replyToken, (String) reply);
+        else if (reply instanceof Function)
+            if (reply instanceof TimeTable){  // calling TimeTable function
+                // equip this controller in order to use its functions
+                Function.equipController(this);
+                ((TimeTable) reply).run();  // reply in loop, handling text in there
+            }
 
-        log.info("Returns echo message {}: {}", replyToken, reply);
-        this.replyText(replyToken, reply);
+        // log.info("Returns echo message {}: {}", replyToken, reply);
     }
 
     // create URI for static resources

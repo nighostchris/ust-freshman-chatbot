@@ -3,6 +3,7 @@ package com.cse3111project.bot.spring.category;
 import com.cse3111project.bot.spring.category.transport.Transport;
 import com.cse3111project.bot.spring.category.academic.Academic;
 import com.cse3111project.bot.spring.category.social.Social;
+import com.cse3111project.bot.spring.category.function.Function;
 
 import java.sql.SQLException;
 
@@ -19,13 +20,15 @@ import com.cse3111project.bot.spring.exception.StaffNotFoundException;
 // split the search into categories
 // - transport
 // - academic
+// - social
 // --- coming soon ---
 public abstract class Category {
     // going to use Utilities.concatArrays() to concatenate all QUERY_KEYWORDs in each catagory
     // as more Categories are defined
     public static final String QUERY_KEYWORD[] = Utilities.concatArrays(Academic.QUERY_KEYWORD, 
                                                                         Transport.QUERY_KEYWORD,
-                                                                        Social.QUERY_KEYWORD);
+                                                                        Social.QUERY_KEYWORD,
+                                                                        Function.QUERY_KEYWORD);
 
     // there is only one SQLDatabase deployed => declare static
     protected static SQLDatabaseEngine SQLDatabase = null;
@@ -36,6 +39,7 @@ public abstract class Category {
         ArrayList<String> transportResults = new ArrayList<>();
         ArrayList<String> academicResults = new ArrayList<>();
         ArrayList<String> socialResults = new ArrayList<>();
+        ArrayList<String> functionResults = new ArrayList<>();
 
         for (String result : matchedResults){
             // Transport.QUERY_KEYWORD = Minibus.QUERY_KEYWORD U Bus.QUERY_KEYWORD
@@ -53,18 +57,30 @@ public abstract class Category {
             for (String socialKeyword : Social.QUERY_KEYWORD)
                 if (result.equals(socialKeyword))
                     socialResults.add(socialKeyword);
+
+            // Function.QUERY_KEYWORD = TimeTable.FUNCTION_KEYWORD
+            for (String functionKeyword : Function.QUERY_KEYWORD)
+                if (result.equals(functionKeyword))
+                    functionResults.add(functionKeyword);
         }
 
         // each of categories should be UNIQUE, NO query keyword between categories is overlapping
         if (transportResults.size() > academicResults.size() && 
-            transportResults.size() > socialResults.size())
+            transportResults.size() > socialResults.size() && 
+            transportResults.size() > functionResults.size())
             return Transport.query(transportResults);
         else if (academicResults.size() > transportResults.size() && 
-                 academicResults.size() > socialResults.size())
+                 academicResults.size() > socialResults.size() &&
+                 academicResults.size() > functionResults.size())
             return Academic.query(academicResults);
         else if (socialResults.size() > transportResults.size() && 
-                 socialResults.size() > academicResults.size())
+                 socialResults.size() > academicResults.size() &&
+                 socialResults.size() > functionResults.size())
             return Social.query(socialResults);
+        else if (functionResults.size() > transportResults.size() && 
+                 functionResults.size() > academicResults.size() &&
+                 functionResults.size() > socialResults.size())
+            return Function.query(functionResults);
         else  // query should not have overlap in a single sentence (untested) ***
             throw new AmbiguousQueryException("I am not quite sure what you are talking about, " +
                                               "could you be more clearer?");

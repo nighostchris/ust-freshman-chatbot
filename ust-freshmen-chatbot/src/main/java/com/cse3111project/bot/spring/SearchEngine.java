@@ -4,6 +4,8 @@ import com.cse3111project.bot.spring.category.Category;
 import com.cse3111project.bot.spring.category.transport.*;
 import com.cse3111project.bot.spring.category.academic.*;
 import com.cse3111project.bot.spring.category.social.*;
+import com.cse3111project.bot.spring.category.function.Function;
+import com.cse3111project.bot.spring.category.function.timetable.TimeTable;
 // import com.cse3111project.bot.spring.SQLDatabaseEngine;
 
 // import javax.annotation.PostConstruct;
@@ -15,6 +17,9 @@ import java.sql.SQLException;
 
 import java.net.URISyntaxException;
 
+import java.nio.file.FileAlreadyExistsException;
+import java.io.IOException;
+
 import java.util.ArrayList;
 import com.cse3111project.bot.spring.utility.Utilities;
 
@@ -24,9 +29,13 @@ import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundExcepti
 
 public class SearchEngine {
     // conducting search based on userQuery
-    // if matched certain QUERY_KEYWORD, reply accordingly using SQLDatabase first
-    // if SQLDatabase is failed to load => use the backup static database
-	String search(String userQuery){
+    // if matched certain QUERY_KEYWORD, reply accordingly 
+    // Possible response:
+    // - general query e.g. finding the office location of staff => return String
+    //   query result would be searched on SQL database first
+    //   if SQLDatabase is failed to load => use the backup static database
+    // - application e.g. TimeTable function => return the application object
+	Object search(String userQuery){
         String reply = null;  // chatbot reply according to userQuery
 
         Category categoryResult = null;  // storing search result of user query
@@ -40,6 +49,7 @@ public class SearchEngine {
         if (matchedResults.isEmpty())  // if doesn't match any result from the QUERY_KEYWORD list
             return null;  // reply unable to understand what user is asking for
 
+        // --- Analyzing ---
         // if found matched results, find out what category the user is asking for
         try {
             categoryResult = Category.analyze(matchedResults);
@@ -50,6 +60,13 @@ public class SearchEngine {
             return e.getMessage();
         }
 
+        // --- Application Module ---
+        // return the function query object
+        if (categoryResult instanceof Function)
+            if (categoryResult instanceof TimeTable)
+                return categoryResult;
+
+        // --- KMB database ---
         try {
             // if search for arrival time of Bus
             // => no need to use SQL database
@@ -63,6 +80,7 @@ public class SearchEngine {
             return "Unexpected error occurred while reading from KMB database. Sorry";
         }
 
+        // --- SQL Database ---
         try {
             // establish connection to SQL database
             Category.getDatabaseConnection();
@@ -110,6 +128,7 @@ public class SearchEngine {
             }
         }
 
+        // --- static database ---
         try {
             if (SQLErrorThrown){
                 if (categoryResult instanceof Transport){

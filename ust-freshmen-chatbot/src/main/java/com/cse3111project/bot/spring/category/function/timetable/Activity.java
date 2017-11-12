@@ -1,19 +1,23 @@
-package com.cse3111project.bot.spring.category.timetable;
+package com.cse3111project.bot.spring.category.function.timetable;
 
-public class Activity implements Comparable<Activity>
+import java.io.Serializable;
+
+class Activity implements Comparable<Activity>, Serializable
 {
+    private static final long serialVersionUID = 1L;
+
 	private String name;
 	private Timeslot timeslot;
 	
-	public Activity(String name, Timeslot timeslot)
+	Activity(String name, Timeslot timeslot)
 	{
 		this.name = name;
 		this.timeslot = timeslot;
 	}
 	
-	public String getName() { return name; }
+	String getName() { return name; }
 	
-	public Timeslot getTimeslot() { return timeslot; }
+	Timeslot getTimeslot() { return timeslot; }
 	
 	@Override
 	public int compareTo(Activity a)
