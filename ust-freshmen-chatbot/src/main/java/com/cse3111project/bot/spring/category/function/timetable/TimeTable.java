@@ -299,6 +299,7 @@ public class TimeTable extends Function {
     // entry point for TimeTable function
     @Override
 	public void run(){
+        replyText("testing reply");
 		// TimeManager tm = new TimeManager();
         this.read();  // attempt to read the saved time schedule if exists
         if (user == null){  // no save / error occurred while reading save
