@@ -192,8 +192,7 @@ public class KitchenSinkController {
 		}
 	}
 
-    // should have no disadvantage for relaxing the method access
-	public void replyText(@NonNull String replyToken, @NonNull String message) {
+	private void replyText(@NonNull String replyToken, @NonNull String message) {
 		if (replyToken.isEmpty()) {
 			throw new IllegalArgumentException("replyToken must not be empty");
 		}
@@ -222,8 +221,6 @@ public class KitchenSinkController {
             this.replyText(replyToken, (String) reply);
         else if (reply instanceof Function)
             if (reply instanceof TimeTable){  // calling TimeTable function
-                // equip this controller in order to use its functions
-                Function.equipController(this);
                 ((TimeTable) reply).run();  // reply in loop, handling text in there
             }
 

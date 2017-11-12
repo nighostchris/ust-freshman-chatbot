@@ -3,12 +3,19 @@ package com.cse3111project.bot.spring.category.function;
 import com.cse3111project.bot.spring.category.Category;
 import com.cse3111project.bot.spring.category.function.timetable.TimeTable;
 
-import com.cse3111project.bot.spring.KitchenSinkController;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.model.event.MessageEvent;
 import com.linecorp.bot.model.event.message.TextMessageContent;
+import com.linecorp.bot.model.message.Message;
+import com.linecorp.bot.model.message.TextMessage;
+import com.linecorp.bot.model.ReplyMessage;
+import com.linecorp.bot.model.response.BotApiResponse;
 import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 import com.linecorp.bot.spring.boot.annotation.EventMapping;
+
+import java.util.concurrent.ExecutionException;
 
 // import java.io.ObjectInputStream;
 // import java.io.FileInputStream;
@@ -23,17 +30,24 @@ import java.nio.file.Files;
 import java.nio.file.FileAlreadyExistsException;
 import java.io.IOException;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.ArrayList;
 import com.cse3111project.bot.spring.utility.Utilities;
 
+import lombok.NonNull;
+
 @LineMessageHandler
 public abstract class Function extends Category {
+    @Autowired
+    private LineMessagingClient client;
+
     public static final String QUERY_KEYWORD[] = TimeTable.FUNCTION_KEYWORD;
 
     protected Path saveRootDir = FileSystems.getDefault().getPath("function");
 
     // just grab the current controller every time before launching sub-applications
-    private static KitchenSinkController controller = null;
+    // private static KitchenSinkController controller = null;
 
     private MessageEvent<TextMessageContent> currentEvent = null;
     private String userMessage = null;
@@ -53,10 +67,6 @@ public abstract class Function extends Category {
         return new TimeTable();
     }
 
-    public static void equipController(KitchenSinkController controller){
-        Function.controller = controller;
-    }
-
     // user text message would be handled here
     @EventMapping
     public void handleTextMessageEvent(MessageEvent<TextMessageContent> event) throws Exception {
@@ -70,10 +80,32 @@ public abstract class Function extends Category {
         return currentEvent.getReplyToken() != prevReplyToken;
     }
 
-    protected void replyText(String reply){
-        if (reply == null)  // should NOT be null
-            reply = "";
-        controller.replyText(currentEvent.getReplyToken(), reply);
+	private void reply(@NonNull String replyToken, @NonNull Message message){
+		reply(replyToken, Collections.singletonList(message));
+	}
+
+	private void reply(@NonNull String replyToken, @NonNull List<Message> messages){
+		try {
+			BotApiResponse apiResponse = client.replyMessage(new ReplyMessage(replyToken, messages)).get();
+		}
+        catch (InterruptedException | ExecutionException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+    // duplicated from KitchenSinkController..
+	private void replyText(@NonNull String replyToken, @NonNull String message){
+		if (replyToken.isEmpty()) {
+			throw new IllegalArgumentException("replyToken must not be empty");
+		}
+		if (message.length() > 1000)
+			message = message.substring(0, 1000 - 2) + "..";
+
+		this.reply(currentEvent.getReplyToken(), new TextMessage(message));
+	}
+
+    protected void replyText(@NonNull String reply){
+        this.replyText(currentEvent.getReplyToken(), reply);
     }
 
     protected String getUserMessage() { return this.userMessage; }
