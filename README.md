@@ -18,6 +18,19 @@ testbot (for testing in LINE app after JUnit-tested, NOTE that TA should not add
 
 ![QR code](https://qr-official.line.me/M/jskpbdk16u.png)
 
+---
+## Feature Summary
+- Shortest path between user input and destination in campus  (XO)	Algorithm Complete, wait for connecting to Category
+- Find course website for freshman 							  (X)	
+- Provide academic advice like study path					  (XO)	Course Crawler Done
+- Time manager function	helping freshman manage time		  (XO)	Stuck At Displaying output to LINE client
+- Provide links to various booking system					  (O)
+- Get ETA for bus and minibus								  (O)
+- Search for all societies available in UST					  (O)
+- UST staff information enquiry function					  (O)
+- Waitlist Result											  (X)	
+- Credit Transfer											  (XO)	Course Crawler Done
+
 # new requirement for Topic 3
 ## Thanksgiving Party
 
@@ -28,18 +41,6 @@ After half semester your freshmen friends seems learned a lot from statistics cl
 For H-group you will need to allow an admin to upload the poster via LINE directly, with a special command that only avaliable to particular account. For non H-group, you can simply place the poster image as a static resource.
 
 ---
-## Feature Summary
-- Shortest path between user input and destination in campus  (X)
-- Find course website for freshman 							  (X)
-- Provide academic advice like study path					  (X)
-- Time manager function	helping freshman manage time		  (XO)
-- Provide links to various booking system					  (O)
-- Get ETA for bus and minibus								  (O)
-- Search for all societies available in UST					  (O)
-- UST staff information enquiry function					  (O)
-- Waitlist Result											  (X)
-- Credit Transfer											  (X)
----
 ### Nov 20 - Milestone 3
 - A bitbucket repository containing their code.
 - Rational of change of architecture design, if any
@@ -48,7 +49,7 @@ For H-group you will need to allow an admin to upload the poster via LINE direct
 - Documentation of their code
 - Evident of using project management software
 - Evident of fulfillment of the proposed feature
-- Evident of fulfillment of the new clientâ€™s requirement
+- Evident of fulfillment of the new client’s requirement
 ---
 ### Nov 28 / 30 - Presentation
 ---
