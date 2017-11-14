@@ -128,7 +128,7 @@ public class KitchenSinkTester {
         log.info("--- End of partialMatchMinibus3() ---");
     }
 
-    // partial match staff keyword case 1: at the middle + exact staff name
+    // partial match staff keyword case 1: at the middle + exact staff name <lastName> <firstName>
     // heroku SQL database    -- pass
     // local static database  -- pass
     @Test
@@ -166,6 +166,25 @@ public class KitchenSinkTester {
                    ((String) answer).contains("LI Xin")).isEqualTo(true);
 
         log.info("--- End of partialMatchStaff2() ---");
+    }
+
+    // partial match staff keyword case 3: multiple matches + exact staff name <firstName> <lastName>
+    // heroku SQL database    -- pass
+    // local static database  -- pass
+    @Test
+    public void partialMatchStaff3() throws Exception {
+        log.info("--- partialMatchStaff3() ---");
+
+        Object answer = null;
+
+        answer = this.searchEngine.search("Where is the office of Prof. Sunghun Kim?");
+
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", (String) answer);
+        assertThat(((String) answer).contains("Results:") && ((String) answer).contains("KIM Sunghun")).isEqualTo(true);
+
+        log.info("--- End of partialMatchStaff3() ---");
     }
 
     // partial match bus keyword case 1: middle + 2 matches (route + location) + different case

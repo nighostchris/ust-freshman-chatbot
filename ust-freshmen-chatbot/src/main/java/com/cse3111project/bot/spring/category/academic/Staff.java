@@ -4061,14 +4061,13 @@ public class Staff extends Academic {
         }
     }
 
-    // transform the query so that it could be searched in SQL / static database
-    @Deprecated  // replaced by .containsLastName()
-    private ArrayList<String> transform(final ArrayList<String> queryStaffNameList){
+    // transform the query as <lastName> <firstName> so that it could be searched in SQL / static database
+    private ArrayList<String> transform(){
         ArrayList<String> transformedUserQuery = new ArrayList<>();
 
         // in SQL / static database, name format:
         // <last name> <first name>
-        for (String query : queryStaffNameList){
+        for (String query : this.queryStaffNameList){
             int midIndex = new Double(Math.ceil(STAFF_NAME_KEYWORD.length / 2.0)).intValue();
             // search the right half array which each name's format:
             // <first name> <last name>
@@ -4088,44 +4087,44 @@ public class Staff extends Academic {
     // search by staff name(s)
     // return staff contact(s) using SQL database
     public String getContactInfoFromSQL() throws SQLException {
-        // ArrayList<String> transformedUserQuery = this.transform(queryStaffNameList);
+        // transform staff name as <lastName> <firstName>
+        ArrayList<String> transformedUserQuery = this.transform();
         ArrayList<StaffInfo> results = new ArrayList<>();
 
         Utilities.arrayLog("query staff list", queryStaffNameList);
 
-        for (String userQuery : queryStaffNameList){
-            PreparedStatement SQLQuery = null;
-            ResultSet rs = null;
+        PreparedStatement SQLQuery = null;
+        ResultSet rs = null;
+        try {
+            // StringBuilder for PERFORMANCE in for loop
+            StringBuilder SQLStatement = new StringBuilder("SELECT name, position, officeLocation, email FROM ")
+                                             .append(SQL_TABLE).append(" WHERE name = ?");
+
+            for (int i = 1; i < transformedUserQuery.size(); i++)
+                SQLStatement.append(" OR name = ?");
+
+            SQLQuery = SQLDatabase.prepare(SQLStatement.toString());
+
+            for (int i = 0; i < transformedUserQuery.size(); i++)
+                SQLQuery.setString(i + 1, transformedUserQuery.get(i));
+
+            rs = SQLQuery.executeQuery();
+
+            // format:
+            // id department name position officeLocation email
+            while (rs.next())
+                results.add(new StaffInfo(rs.getString(1), rs.getString(2), 
+                            rs.getString(3), rs.getString(4)));
+        }
+        finally {
             try {
-                // StringBuilder for PERFORMANCE in for loop
-                String SQLStatement = new StringBuilder("SELECT * FROM ").append(SQL_TABLE)
-                                          .append(" WHERE name = ?")
-                                          .toString();
-
-                SQLQuery = SQLDatabase.prepare(SQLStatement);
-
-                SQLQuery.setString(1, userQuery);
-
-                rs = SQLQuery.executeQuery();
-
-                // format:
-                // id department name position officeLocation email
-                while (rs.next()){
-                    if (userQuery.equals(rs.getString(3)))
-                        results.add(new StaffInfo(rs.getString(3), rs.getString(4), 
-                                                  rs.getString(5), rs.getString(6)));
-                }
+                if (rs != null)
+                    rs.close();
+                if (SQLQuery != null)
+                    SQLQuery.close();
             }
-            finally {
-                try {
-                    if (rs != null)
-                        rs.close();
-                    if (SQLQuery != null)
-                        SQLQuery.close();
-                }
-                catch (SQLException e) {
-                    Utilities.errorLog("Unable to close query statement object", e);
-                }
+            catch (SQLException e) {
+                Utilities.errorLog("Unable to close query statement object", e);
             }
         }
 
