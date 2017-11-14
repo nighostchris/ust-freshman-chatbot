@@ -6,6 +6,7 @@ import com.cse3111project.bot.spring.category.academic.*;
 import com.cse3111project.bot.spring.category.social.*;
 import com.cse3111project.bot.spring.category.function.Function;
 import com.cse3111project.bot.spring.category.function.timetable.TimeTable;
+import com.cse3111project.bot.spring.category.campus.*;
 // import com.cse3111project.bot.spring.SQLDatabaseEngine;
 
 // import javax.annotation.PostConstruct;
@@ -17,13 +18,15 @@ import java.sql.SQLException;
 
 import java.net.URISyntaxException;
 
-import java.nio.file.FileAlreadyExistsException;
 import java.io.IOException;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.ArrayList;
 import com.cse3111project.bot.spring.utility.Utilities;
 
 import com.cse3111project.bot.spring.exception.StaffNotFoundException;
+import com.cse3111project.bot.spring.exception.RoomNotFoundException;
 import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
 import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
 
@@ -46,8 +49,9 @@ public class SearchEngine {
 
         Utilities.arrayLog("matchedResults", matchedResults);
 
-        if (matchedResults.isEmpty())  // if doesn't match any result from the QUERY_KEYWORD list
-            return null;  // reply unable to understand what user is asking for
+        // if doesn't match any result from the QUERY_KEYWORD list
+        if (matchedResults == null || matchedResults.isEmpty())
+            return null;
 
         // --- Analyzing ---
         // if found matched results, find out what category the user is asking for
@@ -56,7 +60,10 @@ public class SearchEngine {
         }
         // if results are found, but specified staff is not found on database or 
         // the entire query is ambiguous => reply corresponding message
-        catch (StaffNotFoundException | AmbiguousQueryException e) {
+        catch (StaffNotFoundException | RoomNotFoundException | AmbiguousQueryException e) {
+            return e.getMessage();
+        }
+        catch (IOException e) {  // MalformedURLException would also be redirected here
             return e.getMessage();
         }
 
@@ -65,6 +72,16 @@ public class SearchEngine {
         if (categoryResult instanceof Function)
             if (categoryResult instanceof TimeTable)
                 return categoryResult;
+
+        // --- Web Crawling from pathadvisor.ust.hk ---
+        try {
+            if (categoryResult instanceof Campus)
+                if (categoryResult instanceof CampusETA)
+                    return ((CampusETA) categoryResult).getCampusETA();
+        }
+        catch (IOException e) {  // MalformedURLException would also be redirected here
+            return e.getMessage();
+        }
 
         // --- KMB database ---
         try {
@@ -161,7 +178,7 @@ public class SearchEngine {
 
     // symbols needed to be omitted in user query
     // may add Unicode / emojis later **
-    public static final String OMITTED_SYMBOLS = "!@#$%^&*()-_=+[]{}\\|:;\'\",<>/?";
+    public static final String OMITTED_SYMBOLS = "!@#$%^&*()_=+[]{}\\|:;\'\",<>/?";
 
     private ArrayList<String> parse(String userQuery){
         StringBuilder queryBuilder = new StringBuilder(userQuery);
@@ -178,20 +195,76 @@ public class SearchEngine {
 
         // assign to the transformed user query text + lower casing
         userQuery = queryBuilder.toString().toLowerCase();
+        // List<String> queryParts = Arrays.asList(userQuery.split(" "));
+        // truncated empty string ""
+        // List<String> truncatedQueryParts = new ArrayList<>();
+        // for (int i = 0; i < queryParts.size(); i++)
+        //     if (queryParts.get(i).length() != 0)
+        //         truncatedQueryParts.add(queryParts.get(i));
+        // if (truncatedQueryParts.isEmpty()) return null;
 
         ArrayList<String> matchedResults = new ArrayList<>();
 
-        // may use Wagner Fischer's algorithm (handle user's typos) in the future
-        // => more accurate
-        for (String keyword : Category.QUERY_KEYWORD)
-            if (userQuery.contains(keyword.toLowerCase()))  // partial match
-                matchedResults.add(keyword);
+        // ** use editDistance() to handle user typos later if have time **
+        for (String keyword : Category.QUERY_KEYWORD){
+            if (userQuery.contains(keyword.toLowerCase())){  // partial match (match exact substring)
+                for (int i = 0; i < Staff.STAFF_POSITION_KEYWORD.length; i++){
+                    if (keyword.equals(Staff.STAFF_POSITION_KEYWORD[i])){
+                        // if really querying staff (providing staff position)
+                        // partial match may match some strange results, e.g. "TA" and "time table"
+                        if (Staff.isExactPosition(userQuery, keyword.toLowerCase()))
+                            matchedResults.add(keyword);
+                        break;
+                    }
+                    else if (i == Staff.STAFF_POSITION_KEYWORD.length - 1)
+                        matchedResults.add(keyword);
+                }
+            }
+        }
 
-        Utilities.arrayLog("before .containsLastName(): {}", matchedResults);
+        Utilities.arrayLog("before .containsLastName()", matchedResults);
 
         // detect last name (full name) after STAFF_POSITION_KEYWORD, e.g. Lecturer, Professor, Prof., ...
         Staff.containsLastName(userQuery, matchedResults);
 
+        // detect location name if provided
+        CampusETA.detectLocationName(userQuery, matchedResults);
+
         return matchedResults;
+    }
+
+    // find the minimum edit distance between str1 and str2 
+    // (able to handle user typos / resolve partial match strange problem, see partialMatchTimeTable1())
+    // using dynamic programming
+    // but not applied yet
+    private static int editDistance(String str1, String str2){
+        // 2D matrix of size (str1.length() + 1) x (str2.length() + 1)
+        int dp[][] = new int[str2.length() + 1][str1.length() + 1];
+
+        // base case
+        // from str1.substring(0, i) to str2.substring(0, 0) ("")
+        // => i deletions
+        for (int i = 0; i <= str1.length(); i++)
+            dp[0][i] = i;
+        // from str1.substring(0, 0) ("") to str2.substring(0, j)
+        // => j insertions
+        for (int j = 1; j <= str2.length(); j++)
+            dp[j][0] = j;
+
+        for (int j = 1; j <= str2.length(); j++){
+            for (int i = 1; i <= str1.length(); i++){
+                // find the minimum edit distance between str1.substring(0, i - 1) and str2.substring(0, j - 1)
+                // if the last character of str1 and str2 are equal
+                if (str1.charAt(i - 1) == str2.charAt(j - 1))
+                    dp[j][i] = dp[j - 1][i - 1];
+                else
+                    dp[j][i] = Utilities.min(dp[j - 1][i - 1] + 1,  // replacement cost
+                                             dp[j - 1][i] + 1,      // deletion cost
+                                             dp[j][i - 1] + 1       // insertion cost
+                                            );
+            }
+        }
+
+        return dp[str2.length()][str1.length()];
     }
 }

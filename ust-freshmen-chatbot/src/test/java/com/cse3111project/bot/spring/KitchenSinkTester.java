@@ -339,7 +339,8 @@ public class KitchenSinkTester {
         Object answer = null;
 
         // would match timetable and TA ....
-        // ==> resolved in Category.analyze()
+        // ==> resolved in ~~Category.analyze()~~
+        // ====> resolved using SearchEngine.editDistance()
         answer = this.searchEngine.search("I would like to use the Timetable function.");
 
         assertThat(answer).isNotNull();
@@ -347,5 +348,42 @@ public class KitchenSinkTester {
         // assertThat(((TimeTable) answer).getController().getFunctionEvent() instanceof TimeTable);
 
         log.info("--- End of partialMatchTimeTable1() ---");
+    }
+
+    // partial match campus keyword case 1: end + merged with other char
+    @Test
+    public void partialMatchCampus1() throws Exception {
+        log.info("--- partialMatchCampus1() ---");
+        Object answer = this.searchEngine.search("Can I know eta from 4619 to 2407?");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("It takes")).isEqualTo(true);
+        log.info("--- End of partialMatchCampus1() ---");
+    }
+
+    // partial match campus keyword case 2: end + merged with other char + 
+    //                                      starting point string consisting of multiple words 
+    //                                      (to test HTML encoding) + different case
+    @Test
+    public void partialMatchCampus2() throws Exception {
+        log.info("--- partialMatchCampus2() ---");
+        Object answer = this.searchEngine.search("Can I know eta from LTA back entrance to 2504?");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("It takes")).isEqualTo(true);
+        log.info("--- End of partialMatchCampus2() ---");
+    }
+
+    // partial match campus keyword case 3: end + merged with other char + 
+    //                                      only providing starting point without ending point
+    @Test
+    public void partialMatchCampus3() throws Exception {
+        log.info("--- partialMatchCampus3() ---");
+        Object answer = this.searchEngine.search("Can I know eta from 4619?");
+        assertThat(answer).isNull();
+        log.info("reply: {}", answer);
+        log.info("--- End of partialMatchCampus3() ---");
     }
 }

@@ -232,7 +232,7 @@ public class KitchenSinkController {
         response = searchEngine.search(query);  // start analyzing what user is querying for
 
         if (response == null)
-            response = "I don\'t understand what you are saying. Could you be more clearer?";
+            this.replyText(replyToken, "I don\'t understand what you are saying. Could you be more clearer?");
         else if (response instanceof String)
             this.replyText(replyToken, (String) response);
         else if (response instanceof Function){
@@ -240,6 +240,8 @@ public class KitchenSinkController {
             ((Function) response).retrieveReplyToken(replyToken);
             ((Function) response).run();  // launch the sub-application
         }
+        else  // SHOULD NOT HAPPEN
+            this.replyText(replyToken, "Fatal Error: Unexpected error occurred");
     }
 
     private void handleFunctionContent(String replyToken, Event event,

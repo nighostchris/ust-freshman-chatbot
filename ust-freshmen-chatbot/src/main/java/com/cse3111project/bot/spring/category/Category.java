@@ -4,10 +4,15 @@ import com.cse3111project.bot.spring.category.transport.Transport;
 import com.cse3111project.bot.spring.category.academic.Academic;
 import com.cse3111project.bot.spring.category.social.Social;
 import com.cse3111project.bot.spring.category.function.Function;
+import com.cse3111project.bot.spring.category.campus.Campus;
 
 import java.sql.SQLException;
 
 import java.net.URISyntaxException;
+import java.net.MalformedURLException;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import com.cse3111project.bot.spring.SQLDatabaseEngine;
 
@@ -16,11 +21,14 @@ import com.cse3111project.bot.spring.utility.Utilities;
 
 import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
 import com.cse3111project.bot.spring.exception.StaffNotFoundException;
+import com.cse3111project.bot.spring.exception.RoomNotFoundException;
 
 // split the search into categories
 // - transport
 // - academic
 // - social
+// - function **
+// - campus
 // --- coming soon ---
 public abstract class Category {
     // going to use Utilities.concatArrays() to concatenate all QUERY_KEYWORDs in each catagory
@@ -29,17 +37,22 @@ public abstract class Category {
                                                                         Transport.QUERY_KEYWORD,
                                                                         Social.QUERY_KEYWORD,
                                                                         Function.QUERY_KEYWORD);
+                                                                        // Campus.QUERY_KEYWORD);
+    // Campus.QUERY_KEYWORD not enlisted since it only consists of CAMPUS_DIRECTION_KEYWORD
+    // which would be handled in CampusETA.detectLocationName() in SearchEngine.parse()
 
     // there is only one SQLDatabase deployed => declare static
     protected static SQLDatabaseEngine SQLDatabase = null;
 
-    // analyze partially matched results and determine which category the user is questioning for
+    // categorize matched results and determine which category the user is questioning for
     public static Category analyze(final ArrayList<String> matchedResults) 
-            throws AmbiguousQueryException, StaffNotFoundException {
+            throws AmbiguousQueryException, StaffNotFoundException, RoomNotFoundException,
+                   MalformedURLException, FileNotFoundException, IOException {
         ArrayList<String> transportResults = new ArrayList<>();
         ArrayList<String> academicResults = new ArrayList<>();
         ArrayList<String> socialResults = new ArrayList<>();
         ArrayList<String> functionResults = new ArrayList<>();
+        ArrayList<String> campusResults = new ArrayList<>();
 
         for (String result : matchedResults){
             // Transport.QUERY_KEYWORD = Minibus.QUERY_KEYWORD U Bus.QUERY_KEYWORD
@@ -62,28 +75,34 @@ public abstract class Category {
             for (String functionKeyword : Function.QUERY_KEYWORD)
                 if (result.equals(functionKeyword))
                     functionResults.add(functionKeyword);
+
+            // Campus.QUERY_KEYWORD = CampusETA.CAMPUS_DIRECTION_KEYWORD
+            for (String campusKeyword : Campus.QUERY_KEYWORD)
+                if (result.contains(campusKeyword))  // contains direction keyword "from", "to"
+                    campusResults.add(result);
         }
 
         // each of categories should be UNIQUE, NO query keyword between categories is overlapping
-        if (transportResults.size() > academicResults.size() && 
-            transportResults.size() > socialResults.size() && 
-            transportResults.size() > functionResults.size())
+        // functionResults.size() should be placed before academicResults.size()
+        // since they have a ridiculously overlap: "TA" and "time table", see partialMatchTimeTable1()
+        // ** Update: no need anymore because of the change in .parse()
+        int mostMatch = Utilities.max(transportResults.size(), academicResults.size(), 
+                                      socialResults.size(), functionResults.size(), 
+                                      campusResults.size());
+
+        if (mostMatch == transportResults.size())
             return Transport.query(transportResults);
-        else if (functionResults.size() >= transportResults.size() && 
-                 functionResults.size() >= academicResults.size() &&
-                 functionResults.size() >= socialResults.size())  // see partialMatchTimeTable1()
+        if (mostMatch == functionResults.size())
             return Function.query(functionResults);
-        else if (academicResults.size() > transportResults.size() && 
-                 academicResults.size() > socialResults.size() &&
-                 academicResults.size() > functionResults.size())
+        if (mostMatch == academicResults.size())
             return Academic.query(academicResults);
-        else if (socialResults.size() > transportResults.size() && 
-                 socialResults.size() > academicResults.size() &&
-                 socialResults.size() > functionResults.size())
+        if (mostMatch == socialResults.size())
             return Social.query(socialResults);
-        else  // query should not have overlap in a single sentence (untested) ***
-            throw new AmbiguousQueryException("I am not quite sure what you are talking about, " +
-                                              "could you be more clearer?");
+        if (mostMatch == campusResults.size())
+            return Campus.query(campusResults);
+
+        throw new AmbiguousQueryException("I am not quite sure what you are talking about, " +
+                                          "could you be more clearer?");
     }
 
     // extract matchedResults based on what category the user is searching for

@@ -3964,6 +3964,20 @@ public class Staff extends Academic {
                                           };
     }
 
+    // check whether user is REALLY querying staff and providing staff position
+    // especially "TA" which is a common subset from other Category.QUERY_KEYWORD
+    // e.g. "TA" vs "timetable", "TA" vs "LTA"
+    public static boolean isExactPosition(String userQuery, String keyword){
+        // all staff positions consist of one word except "Teaching Assistant" 
+        // which should be .transform()-ed to "TA" already
+        int i = userQuery.indexOf(keyword);
+        int j = userQuery.indexOf(' ', i);  // locate the end of word + " "
+        for (; i >= 0 && userQuery.charAt(i) != ' '; i--);  // locate " " + the beginning of word
+        String queryWord = userQuery.substring(i + 1, j);
+
+        return queryWord.equals(keyword);
+    }
+
     // check whether contains last name if specified staff position, e.g. Professor, Instructor, ...
     // if so, append to matchedResults
     // NOTE that full name should be found by partial match method in SearchEngine.parse()
@@ -3984,6 +3998,9 @@ public class Staff extends Academic {
                         // find that word
                         i = userQuery.indexOf(staffPositionKeyword.toLowerCase(), j);
                         if (i == -1) break;  // not found
+                        // if user is not querying for staff but matched (broad) staff positions, e.g. TA
+                        // if (!this.isExactPosition(userQuery, staffPositionKeyword, i)) break;
+
                         // find <Space> after that word
                         i = userQuery.indexOf(' ', i);
                         // skip all <Space>s in between and find non-whitespace character
@@ -4010,7 +4027,7 @@ public class Staff extends Academic {
                                     newResults.add(STAFF_NAME_KEYWORD[k]);
                             }
                         }
-                        Utilities.arrayLog("current new results", newResults);
+                        Utilities.arrayLog("newResults in .containsLastName()", newResults);
 
                         if (j == -1) break;
                     }
