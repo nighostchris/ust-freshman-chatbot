@@ -20,8 +20,6 @@ import java.net.URISyntaxException;
 
 import java.io.IOException;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.ArrayList;
 import com.cse3111project.bot.spring.utility.Utilities;
 
@@ -194,25 +192,20 @@ public class SearchEngine {
         }
 
         // assign to the transformed user query text + lower casing
-        userQuery = queryBuilder.toString().toLowerCase();
-        // List<String> queryParts = Arrays.asList(userQuery.split(" "));
-        // truncated empty string ""
-        // List<String> truncatedQueryParts = new ArrayList<>();
-        // for (int i = 0; i < queryParts.size(); i++)
-        //     if (queryParts.get(i).length() != 0)
-        //         truncatedQueryParts.add(queryParts.get(i));
-        // if (truncatedQueryParts.isEmpty()) return null;
+        userQuery = queryBuilder.toString();  // some methods need to preserve the casing of userQuery
 
         ArrayList<String> matchedResults = new ArrayList<>();
 
         // ** use editDistance() to handle user typos later if have time **
         for (String keyword : Category.QUERY_KEYWORD){
-            if (userQuery.contains(keyword.toLowerCase())){  // partial match (match exact substring)
+            String userQueryLowerCase = userQuery.toLowerCase();
+            String keywordLowerCase = keyword.toLowerCase();
+            if (userQueryLowerCase.contains(keywordLowerCase)){  // partial match (match exact substring)
                 for (int i = 0; i < Staff.STAFF_POSITION_KEYWORD.length; i++){
                     if (keyword.equals(Staff.STAFF_POSITION_KEYWORD[i])){
                         // if really querying staff (providing staff position)
                         // partial match may match some strange results, e.g. "TA" and "time table"
-                        if (Staff.isExactPosition(userQuery, keyword.toLowerCase()))
+                        if (Staff.isExactPosition(userQueryLowerCase, keywordLowerCase))
                             matchedResults.add(keyword);
                         break;
                     }
@@ -225,9 +218,10 @@ public class SearchEngine {
         Utilities.arrayLog("before .containsLastName()", matchedResults);
 
         // detect last name (full name) after STAFF_POSITION_KEYWORD, e.g. Lecturer, Professor, Prof., ...
-        Staff.containsLastName(userQuery, matchedResults);
+        Staff.containsLastName(userQuery.toLowerCase(), matchedResults);
 
         // detect location name if provided
+        // pass userQuery to preserve casing
         CampusETA.detectLocationName(userQuery, matchedResults);
 
         return matchedResults;

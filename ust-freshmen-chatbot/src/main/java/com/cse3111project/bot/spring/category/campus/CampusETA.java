@@ -42,7 +42,7 @@ public class CampusETA extends Campus
 	}
 
     // try to detect location name, e.g. LTA, from transformed user query
-    // @param userQuery: omitted symbols (!@#$%...) + toLowerCase()
+    // @param userQuery: omitted symbols (!@#$%...)
     public static void detectLocationName(String userQuery, ArrayList<String> matchedResults){
         StringBuilder fromLocation = new StringBuilder();
         StringBuilder toLocation = new StringBuilder();
