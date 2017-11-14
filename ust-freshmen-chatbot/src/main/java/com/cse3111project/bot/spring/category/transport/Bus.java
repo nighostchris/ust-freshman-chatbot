@@ -11,15 +11,17 @@ import com.cse3111project.bot.spring.utility.Utilities;
 public class Bus extends Transport {
     public static final String QUERY_KEYWORD[];
 
-    public static final String ROUTE_91_KEYWORD[]  = { "91", "route 91", "91 route" };
-    public static final String ROUTE_91M_KEYWORD[] = { "91M", "route 91M", "91M route" };
+    public static final String ROUTE_91_KEYWORD[]  = { "91", "91 route", "route 91", 
+                                                       "91 bus", "bus route 91", "bus 91 route" };
+    public static final String ROUTE_91M_KEYWORD[] = { "91M", "91M route", "route 91M",
+                                                       "91M bus", "bus route 91M", "bus 91M route" };
 
     public static final String DIRECTION_KEYWORD[] = { "north gate", "south gate" };
     public static final int NORTH = 0;
     public static final int SOUTH = 1;
 
     static {
-        QUERY_KEYWORD = Utilities.concatArrays(new String[] { "bus", "kmb" }, DIRECTION_KEYWORD,
+        QUERY_KEYWORD = Utilities.concatArrays(DIRECTION_KEYWORD,
                                                ROUTE_91_KEYWORD, ROUTE_91M_KEYWORD);
     }
 

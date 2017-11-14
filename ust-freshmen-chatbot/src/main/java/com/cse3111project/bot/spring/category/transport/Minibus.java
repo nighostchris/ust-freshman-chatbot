@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.io.InputStream;
 
 import java.util.Calendar;
+import java.util.TimeZone;
 import java.util.Scanner;
 import java.util.ArrayList;
 import com.cse3111project.bot.spring.utility.Utilities;
@@ -18,17 +19,21 @@ import lombok.extern.slf4j.Slf4j;  // logging
 
 @Slf4j
 public class Minibus extends Transport {
-    public static final String QUERY_KEYWORD[] = { "minibus", "minibus 11", "11 minibus" };
+    public static final String QUERY_KEYWORD[] = { "minibus 11", "minibus route 11", 
+                                                   "11 minibus", "route 11 minibus" };
 
     private static final String SQL_TABLE = "minibus11record";
     // use only when the SQL database is failed to load in order not to break the program
     private static final String STATIC_DATABASE = "/static/transport/minibusDatabase.txt";
 
+    private Calendar currentTime = null;
+
     // attempt to estimate the arrival time of minibus based on self-collected data from SQL database
     // ** might be too slow **
     // @Override
     public String getArrivalTimeFromSQL() throws SQLException {
-        currentTime = Calendar.getInstance();  // get current time
+        // get current time in Hong Kong
+        currentTime = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"));
         // not enough data => use currentHr to approximate first
         int currentHr = currentTime.get(Calendar.HOUR_OF_DAY);  // get current hr in 24-hr format
         // int currentMin = currentTime.get(MINUTE);
@@ -117,7 +122,7 @@ public class Minibus extends Transport {
     // *** LAST RESORT ***
     // @Override
     public String getArrivalTimeFromStatic() throws StaticDatabaseFileNotFoundException {
-        currentTime = Calendar.getInstance();  // get current time
+        currentTime = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"));  // get current time
         int currentHr = currentTime.get(Calendar.HOUR_OF_DAY);  // get current hr in 24-hr format
 
         // initialize array of arrivalTime to compute the avgMinWaitingTime and avgMaxWaitingTime

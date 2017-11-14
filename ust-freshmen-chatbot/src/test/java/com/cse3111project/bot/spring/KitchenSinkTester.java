@@ -103,10 +103,7 @@ public class KitchenSinkTester {
 
         answer = this.searchEngine.search("Get Minibus arrival time");
 
-        assertThat(answer).isNotNull();
-        assertThat(answer instanceof String).isEqualTo(true);
-        log.info("reply: {}", (String) answer);
-        assertThat(((String) answer).contains("Estimated Arrival Time")).isEqualTo(true);
+        assertThat(answer).isNull();
 
         log.info("--- End of partialMatchMinibus2() ---");
     }
@@ -383,7 +380,6 @@ public class KitchenSinkTester {
         log.info("--- partialMatchCampus3() ---");
         Object answer = this.searchEngine.search("Can I know eta from 4619?");
         assertThat(answer).isNull();
-        log.info("reply: {}", answer);
         log.info("--- End of partialMatchCampus3() ---");
     }
 }

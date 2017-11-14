@@ -16,9 +16,6 @@ import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
 //           -> Minibus
 //           -> Bus
 public abstract class Transport extends Category {
-    // compute ESTIMATED arrival time according to currentTime
-    protected Calendar currentTime = null;
-
     // would be used in SearchEngine.search()
     public static final String QUERY_KEYWORD[] = Utilities.concatArrays(Minibus.QUERY_KEYWORD, 
                                                                         Bus.QUERY_KEYWORD);
