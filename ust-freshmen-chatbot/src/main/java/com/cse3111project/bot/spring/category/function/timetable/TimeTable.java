@@ -290,8 +290,50 @@ public class TimeTable extends Function {
             replyText(e.getMessage());
         }
     }
-
     // option 4
+    private void displayFreeTimeslotAtParticularDate(){
+    	int month = 0; int day = 0;
+    	try {
+            replyText("Enter month and day for display (Separated by Space):");
+            while (!userHasReplied());
+            String dateParts[] = this.getUserMessage().split(" ");
+            if (dateParts.length != 2)
+                throw new IllegalArgumentException("2 arguments should be given:\n<month> <day>");
+
+            // try to convert month, day string into Integer
+            // throw NumberFormatException if not convertible
+            month = new Integer(dateParts[0]).intValue();
+            day = new Integer(dateParts[1]).intValue();
+            Date.checkValidity(month, day);
+
+            Date date = user.searchDate(month, day);
+            replyText("Free timeslot on" + month + "/" + day +":");
+            if (date == null)
+                replyText("00:00 - 23:59");
+            else
+            {
+
+				String freetime = "0:00 - ";
+				for (Activity loop : date.getActivity())
+				{
+					freetime += loop.getTimeslot().getStart();
+					freetime += ":00\n";
+					freetime += loop.getTimeslot().getEnd();
+					freetime += ":00 - ";
+				}
+				freetime += "23:59";
+            	replyText(freetime);
+            }
+                
+        }
+        catch (NumberFormatException e) {
+            replyText("Entered invalid date format. Please try again");
+        }
+        catch (IllegalArgumentException | InvalidDateException e) {
+            replyText(e.getMessage());
+        }
+    }
+    // option 5
     private void displayAllEvents(){
         replyText(user.toString());
     }
