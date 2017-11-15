@@ -19,7 +19,7 @@ public abstract class Campus extends Category
     // public static final String QUERY_KEYWORD[] = CampusETA.CAMPUS_DIRECTION_KEYWORD;
     public static final String QUERY_KEYWORD[] = { "from", "to" };
 
-    public static Category query(final ArrayList<String> extractedResults) 
+    public static Category analyze(final ArrayList<String> extractedResults) 
             throws RoomNotFoundException, MalformedURLException, FileNotFoundException, IOException
     {
         // extractedResults should merely consist of 

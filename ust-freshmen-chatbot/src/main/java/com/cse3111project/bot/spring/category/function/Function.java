@@ -56,7 +56,7 @@ public abstract class Function extends Category {
     private String replyToken = null;
     // private String prevReplyToken = null;
 
-    public static Category query(final ArrayList<String> extractedResults){
+    public static Category analyze(final ArrayList<String> extractedResults){
         // ArrayList<String> timetableKeywords = new ArrayList<>();
 
         // there is only one subcategory in Function

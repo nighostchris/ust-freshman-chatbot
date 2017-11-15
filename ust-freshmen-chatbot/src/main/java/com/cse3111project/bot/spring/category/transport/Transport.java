@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import com.cse3111project.bot.spring.utility.Utilities;
 
-// import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
 import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
 
 // Transport
@@ -20,9 +19,7 @@ public abstract class Transport extends Category {
     public static final String QUERY_KEYWORD[] = Utilities.concatArrays(Minibus.QUERY_KEYWORD, 
                                                                         Bus.QUERY_KEYWORD);
 
-    // public static final boolean HAVE_STATE = 0;  // later may implement Serializable **
-
-    public static Category query(final ArrayList<String> extractedResults) throws AmbiguousQueryException {
+    public static Category analyze(final ArrayList<String> extractedResults) throws AmbiguousQueryException {
         ArrayList<String> minibusKeywords = new ArrayList<>();
         ArrayList<String> busRoute91Keywords = new ArrayList<>();
         ArrayList<String> busRoute91MKeywords = new ArrayList<>();
@@ -73,11 +70,4 @@ public abstract class Transport extends Category {
                                                   "(south or north gate). Please query again.");
         }
     }
-
-    // estimate arrival time from SQL database
-    // may not be necessary for KMB (later may be inserted into it)
-    // public abstract String getArrivalTimeFromSQL() throws SQLException;
-
-    // if fail to connect SQL database, load the static file to estimate arrival time
-    // public abstract String getArrivalTimeFromStatic() throws StaticDatabaseFileNotFoundException;
 }

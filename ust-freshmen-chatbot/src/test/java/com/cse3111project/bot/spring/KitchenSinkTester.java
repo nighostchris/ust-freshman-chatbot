@@ -7,9 +7,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.io.InputStream;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+// import java.io.InputStream;
+// import java.util.List;
+// import java.util.concurrent.TimeUnit;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.google.common.io.ByteStreams;
+// import com.google.common.io.ByteStreams;
 
 import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.model.ReplyMessage;
@@ -39,10 +39,10 @@ import com.linecorp.bot.model.event.message.TextMessageContent;
 import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.spring.boot.annotation.LineBotMessages;
 
-import lombok.NonNull;
+// import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;  // logging
 
-import com.cse3111project.bot.spring.SearchEngine;
+import com.cse3111project.bot.spring.model.engine.SearchEngine;
 
 import com.cse3111project.bot.spring.category.transport.Minibus;
 import com.cse3111project.bot.spring.category.function.timetable.TimeTable;
@@ -76,17 +76,12 @@ public class KitchenSinkTester {
     public void partialMatchMinibus1() throws Exception {
         log.info("--- partialMatchMinibus1() ---");
 
-        // { "minibus", "minibus 11", "11 minibus" }
-        for (String minibusKeyword : Minibus.QUERY_KEYWORD){
-            StringBuilder questionBuilder = new StringBuilder("What is the arrival time of ")
-                                                .append(minibusKeyword).append('?');
-            Object answer = this.searchEngine.search(questionBuilder.toString());
+        Object answer = this.searchEngine.search("What is the arrival time of minibus 11?");
 
-            assertThat(answer).isNotNull();
-            assertThat(answer instanceof String).isEqualTo(true);
-            log.info("reply: {}", (String) answer);
-            assertThat(((String) answer).contains("Estimated Arrival Time")).isEqualTo(true);
-        }
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", (String) answer);
+        assertThat(((String) answer).contains("Estimated Arrival Time")).isEqualTo(true);
 
         log.info("--- End of partialMatchMinibus1() ---");
     }
@@ -201,7 +196,8 @@ public class KitchenSinkTester {
         log.info("reply: {}", (String) answer);
         assertThat(answer instanceof String).isEqualTo(true);
         assertThat((((String) answer).contains("91M") && ((String) answer).contains("arrival time")) ||
-                    ((String) answer).contains("no available")).isEqualTo(true);
+                    ((String) answer).contains("no available") ||
+                    ((String) answer).contains("missed")).isEqualTo(true);
         // assertThat(answer.equals("here")).isEqualTo(true);
 
         log.info("--- End of partialMatchBus1() ---");
@@ -222,7 +218,8 @@ public class KitchenSinkTester {
         assertThat(answer instanceof String).isEqualTo(true);
         log.info("reply: {}", (String) answer);
         assertThat((((String) answer).contains("91") && ((String) answer).contains("arrival time")) ||
-                   ((String) answer).contains("no available")).isEqualTo(true);
+                   ((String) answer).contains("no available") ||
+                   ((String) answer).contains("missed")).isEqualTo(true);
         // assertThat(answer.equals("here")).isEqualTo(true);
 
         log.info("--- End of partialMatchBus1_1() ---");

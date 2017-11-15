@@ -1,20 +1,29 @@
 package com.cse3111project.bot.spring.category.social;
 
+// import com.cse3111project.bot.spring.model.engine.DatabaseEngine;
+import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
+import com.cse3111project.bot.spring.model.engine.SQLDatabaseEngine;
+import com.cse3111project.bot.spring.model.engine.marker.StaticAccessible;
+import com.cse3111project.bot.spring.model.engine.StaticDatabaseEngine;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import java.io.InputStream;
-import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
+import java.net.URISyntaxException;
 
 import java.util.Scanner;
 import java.util.ArrayList;
 import com.cse3111project.bot.spring.utility.Utilities;
 
+import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
+import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
+import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class Societies extends Social {
+public class Societies extends Social implements SQLAccessible, StaticAccessible {
     public static final String QUERY_KEYWORD[];
 
     public static final String SOCIETY_KEYWORD[] = { "Chinese Folk Art Society",
@@ -140,12 +149,14 @@ public class Societies extends Social {
 
     public static final String SOCIETIES_LINK = "https://hkustsucouncil.wordpress.com/standing-committees/the-affiliated-societies-committee/list-of-affiliated-societies/";
 
-    // encapsulation
+    // format:
+    // id name website_link
     private static final String SQL_TABLE = "hkust_societies";
-    private static final String STATIC_DATABASE = "/static/social/societiesDatabase.txt";
+    private static final String STATIC_TABLE = "/static/social/societiesDatabase.txt";
 
     // user may query more than 1 societies
-    private ArrayList<String> userQuery = null;
+    private ArrayList<String> userQuery;
+    private ArrayList<SocietyInfo> results;
 
     Societies(final ArrayList<String> userQuery){
         this.userQuery = userQuery;  // MUST NOT BE EMPTY
@@ -168,63 +179,44 @@ public class Societies extends Social {
     }
 
     // reply societies' link based on user query by searching SQL database
-    public String getSocietyWebsiteFromSQL() throws SQLException {
-        PreparedStatement SQLQuery = null;
-        ResultSet rs = null;
-        try {
-            ArrayList<SocietyInfo> results = new ArrayList<>();
+    @Override
+    public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
+        try (SQLDatabaseEngine database = new SQLDatabaseEngine(this, SQL_TABLE)) {
+            results = new ArrayList<>();
 
             // user query MUST NOT be empty
-            String SQLStatement = "SELECT name, website_link FROM " + SQL_TABLE +
-                                  " WHERE name ILIKE concat(\'%\', ?, \'%\')";
+            StringBuilder SQLStatement = new StringBuilder("SELECT name, website_link FROM ")
+                                             .append(SQL_TABLE)
+                                             .append(" WHERE name ILIKE concat(\'%\', ?, \'%\')");
+
             for (int i = 1; i < userQuery.size(); i++)
-                SQLStatement += " OR name ILIKE concat(\'%\', ?, \'%\')";
+                SQLStatement.append(" OR name ILIKE concat(\'%\', ?, \'%\')");
 
-            log.info("SQLStatement: {}", SQLStatement);
+            log.info("SQLStatement: {}", SQLStatement.toString());
 
-            SQLQuery = SQLDatabase.prepare(SQLStatement);
-
+            PreparedStatement SQLQuery = database.prepare(SQLStatement.toString());
             for (int i = 0; i < userQuery.size(); i++)
                 SQLQuery.setString(i + 1, userQuery.get(i));
 
-            rs = SQLQuery.executeQuery();
+            ResultSet reader = database.executeQuery();
+            while (reader.next())
+                results.add(new SocietyInfo(reader.getString(1), reader.getString(2)));
 
-            while (rs.next())
-                results.add(new SocietyInfo(rs.getString(1), rs.getString(2)));
-
-            return this.replyResults(results);
-        }
-        finally {
-            try {
-                if (rs != null)
-                    rs.close();
-                if (SQLQuery != null)
-                    rs.close();
-            }
-            catch (SQLException e) {
-                Utilities.errorLog("Unable to close query statement object", e);
-            }
+            return super.replyResults(results);
         }
     }
 
     // reply societies' link based on user query by searching static database
     // only used when SQL database is failed to load, serving as backup
-    public String getSocietyWebsiteFromStatic() throws StaticDatabaseFileNotFoundException {
-        Scanner staticDatabaseReader = null;
-        try {
-            ArrayList<SocietyInfo> results = new ArrayList<>();
+    @Override
+    public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
+        try (StaticDatabaseEngine database = new StaticDatabaseEngine(this, STATIC_TABLE)) {
+            results = new ArrayList<>();
 
-            // get runtime database file
-            InputStream is = this.getClass().getResourceAsStream(STATIC_DATABASE);
-            if (is == null)
-                throw new StaticDatabaseFileNotFoundException(STATIC_DATABASE + " file not found");
-
-            staticDatabaseReader = new Scanner(is);
-
-            // format:
-            // id name website_link
-            while (staticDatabaseReader.hasNextLine()){
-                String line = staticDatabaseReader.nextLine();
+            Scanner reader = database.executeQuery();
+            while (reader.hasNextLine()){
+                String line = reader.nextLine();
+                // starting with # is considered as an comment
                 if (line.startsWith("#") || line.length() == 0)
                     continue;
 
@@ -233,23 +225,7 @@ public class Societies extends Social {
                     results.add(new SocietyInfo(societyName, line.split(",")[2]));
             }
 
-            return this.replyResults(results);
+            return super.replyResults(results);
         }
-        finally {
-            if (staticDatabaseReader != null)
-                staticDatabaseReader.close();
-        }
-    }
-
-    // reply the ultimate results based on user query
-    private String replyResults(final ArrayList<SocietyInfo> results){
-        StringBuilder replyBuilder = new StringBuilder("Results:\n");
-        for (int i = 0; i < results.size(); i++){
-            replyBuilder.append(results.get(i).toString());
-            if (i != results.size() - 1)
-                replyBuilder.append("\n");
-        }
-
-        return replyBuilder.toString();
     }
 }

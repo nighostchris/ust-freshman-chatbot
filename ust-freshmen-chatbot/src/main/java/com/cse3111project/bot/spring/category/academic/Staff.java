@@ -1,45 +1,52 @@
 package com.cse3111project.bot.spring.category.academic;
 
+// import com.cse3111project.bot.spring.model.engine.DatabaseEngine;
+import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
+import com.cse3111project.bot.spring.model.engine.SQLDatabaseEngine;
+import com.cse3111project.bot.spring.model.engine.marker.StaticAccessible;
+import com.cse3111project.bot.spring.model.engine.StaticDatabaseEngine;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.cse3111project.bot.spring.SQLDatabaseEngine;
-
 import java.net.URISyntaxException;
-
-import java.io.InputStream;
-import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
 
 import java.util.Scanner;
 import java.util.ArrayList;
 import com.cse3111project.bot.spring.utility.Utilities;
 
+import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
+import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
+import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
+
 import lombok.extern.slf4j.Slf4j;
 
 // Staff Category
+// SQL database, static database are available
 @Slf4j
-public class Staff extends Academic {
+public class Staff extends Academic implements SQLAccessible, StaticAccessible {
     public static final String STAFF_NAME_KEYWORD[];
 
     public static final String STAFF_POSITION_KEYWORD[] = { "Professor", "Prof.", "Prof",
                                                             "TA", "Teaching Assistant",
                                                             "Lecturer", "Instructor", "Teacher" };
 
+    // format:
+    // id department name position officeLocation email
     private static final String SQL_TABLE = "hkust_directories";
-    private static final String STATIC_DATABASE = "/static/academic/staffDatabase.txt";
+    private static final String STATIC_TABLE = "/static/academic/staffDatabase.txt";
 
     // temporarily just consider queried staff name
-    // private String department;  // MAY USE hashmap in the future ***
-    private ArrayList<String> queryStaffNameList;
+    // private String department;  // MAY USE HashMap in the future ***
+    private ArrayList<String> userQuery;
+    private ArrayList<StaffInfo> results;
 
-    Staff(final ArrayList<String> queryStaffNameList){
-        this.queryStaffNameList = queryStaffNameList;
+    Staff(final ArrayList<String> userQuery) {
+        this.userQuery = this.transform(userQuery);
     }
 
-    // Temporary solution:  *****
     // initialize QUERY_KEYWORD from SQL database
-    // After tried everything, hard coding is the best way
     static {
         STAFF_NAME_KEYWORD = new String[] { // last name at the front
                                             "CHEN Kevin C W",
@@ -4062,12 +4069,12 @@ public class Staff extends Academic {
     }
 
     // transform the query as <lastName> <firstName> so that it could be searched in SQL / static database
-    private ArrayList<String> transform(){
+    private ArrayList<String> transform(final ArrayList<String> userQuery){
         ArrayList<String> transformedUserQuery = new ArrayList<>();
 
         // in SQL / static database, name format:
         // <last name> <first name>
-        for (String query : this.queryStaffNameList){
+        for (String query : userQuery){
             int midIndex = new Double(Math.ceil(STAFF_NAME_KEYWORD.length / 2.0)).intValue();
             // search the right half array which each name's format:
             // <first name> <last name>
@@ -4086,111 +4093,68 @@ public class Staff extends Academic {
 
     // search by staff name(s)
     // return staff contact(s) using SQL database
-    public String getContactInfoFromSQL() throws SQLException {
-        // transform staff name as <lastName> <firstName>
-        ArrayList<String> transformedUserQuery = this.transform();
-        ArrayList<StaffInfo> results = new ArrayList<>();
+    @Override
+    public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
+        try (SQLDatabaseEngine database = new SQLDatabaseEngine(this, SQL_TABLE)) {
+            // transform staff name as <lastName> <firstName> before querying on SQL database
+            results = new ArrayList<>();
 
-        Utilities.arrayLog("query staff list", queryStaffNameList);
+            Utilities.arrayLog("query staff", userQuery);
 
-        PreparedStatement SQLQuery = null;
-        ResultSet rs = null;
-        try {
-            // StringBuilder for PERFORMANCE in for loop
             StringBuilder SQLStatement = new StringBuilder("SELECT name, position, officeLocation, email FROM ")
                                              .append(SQL_TABLE).append(" WHERE name = ?");
 
-            for (int i = 1; i < transformedUserQuery.size(); i++)
+            for (int i = 1; i < userQuery.size(); i++)
                 SQLStatement.append(" OR name = ?");
 
-            SQLQuery = SQLDatabase.prepare(SQLStatement.toString());
+            PreparedStatement SQLQuery = database.prepare(SQLStatement.toString());
+            for (int i = 0; i < userQuery.size(); i++)
+                SQLQuery.setString(i + 1, userQuery.get(i));
 
-            for (int i = 0; i < transformedUserQuery.size(); i++)
-                SQLQuery.setString(i + 1, transformedUserQuery.get(i));
-
-            rs = SQLQuery.executeQuery();
-
-            // format:
-            // id department name position officeLocation email
-            while (rs.next())
-                results.add(new StaffInfo(rs.getString(1), rs.getString(2), 
-                            rs.getString(3), rs.getString(4)));
-        }
-        finally {
-            try {
-                if (rs != null)
-                    rs.close();
-                if (SQLQuery != null)
-                    SQLQuery.close();
+            ResultSet reader = database.executeQuery();
+            while (reader.next()){
+                results.add(new StaffInfo(reader.getString(1), reader.getString(2), 
+                                          reader.getString(3), reader.getString(4)));
             }
-            catch (SQLException e) {
-                Utilities.errorLog("Unable to close query statement object", e);
-            }
+
+            // ONLY happens when the SQL database and static database are NOT synchronized
+            if (results.isEmpty())
+                return "Specified staff not found. Sorry";
+
+            return super.replyResults(results);
         }
-
-        // ONLY happens when the SQL database and static database are NOT synchronized
-        if (results.isEmpty())
-            return "Specified staff not found, sorry";
-
-        return this.replyResults(results);
     }
 
     // return staff contact(s) using static database
     // only used when fail to connect SQL database
-    public String getContactInfoFromStatic() throws StaticDatabaseFileNotFoundException {
-        Scanner staffReader = null;
-        // ArrayList<String> transformedUserQuery = this.transform(queryStaffNameList);
-        ArrayList<StaffInfo> results = new ArrayList<>();
-        try {
-            InputStream is = this.getClass().getResourceAsStream(STATIC_DATABASE);
-            if (is == null)
-                throw new StaticDatabaseFileNotFoundException(STATIC_DATABASE + " file not found");
+    @Override
+    public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
+        try (StaticDatabaseEngine database = new StaticDatabaseEngine(this, STATIC_TABLE)) {
+            results = new ArrayList<>();
 
-            staffReader = new Scanner(is);
+            Scanner reader = database.executeQuery();
 
-            while (staffReader.hasNextLine()){
+            while (reader.hasNextLine()){
                 // format:
                 // id department staffName position officeLocation email
-                String line = staffReader.nextLine();
+                String line = reader.nextLine();
 
                 if (line.startsWith("#") || line.length() == 0)
                     continue;
 
                 String staffName = line.split(",")[2];
-                for (String userQuery : queryStaffNameList){
-                    if (userQuery.equals(staffName))
+                for (String query : userQuery){
+                    if (query.equals(staffName))
                         results.add(new StaffInfo(line.split(",")[2], line.split(",")[3],
                                                   line.split(",")[4], line.split(",")[5]));
                 }
             }
 
-            // SHOULD NOT HAPPEN
+            // occurs only when the static initialized STAFF_NAME_KEYWORD and static database are not sync
             if (results.isEmpty())
-                return "Specified staff not found, sorry";
+                return "Specified staff not found. Sorry";
 
-            return this.replyResults(results);
+            return super.replyResults(results);
         }
-        finally {
-            if (staffReader != null)  // safe .close()
-                staffReader.close();
-        }
-    }
-
-    // reply the ultimate result searched from SQL / static database
-    // format:
-    // Results:
-    // <staff 1 info>
-    // 
-    // <staff 2 info>
-    // ...
-    private String replyResults(ArrayList<StaffInfo> results){
-        StringBuilder replyBuilder = new StringBuilder("Results:\n");
-        for (int i = 0; i < results.size(); i++){
-            replyBuilder.append(results.get(i).toString());
-            if (i != results.size() - 1)
-                replyBuilder.append("\n");
-        }
-
-        return replyBuilder.toString();
     }
 }

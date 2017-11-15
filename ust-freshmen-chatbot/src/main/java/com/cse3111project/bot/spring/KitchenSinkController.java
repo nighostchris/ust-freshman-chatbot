@@ -16,6 +16,8 @@
 
 package com.cse3111project.bot.spring;
 
+import com.cse3111project.bot.spring.model.engine.SearchEngine;
+
 import com.cse3111project.bot.spring.category.function.Function;
 
 import java.io.IOException;

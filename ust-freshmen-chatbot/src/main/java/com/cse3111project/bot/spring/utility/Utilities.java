@@ -57,7 +57,7 @@ public final class Utilities {
     // error log format:
     // <errMsg>: <exception name>: <exception message>
     // ... <error stack trace> ...
-    public static void errorLog(String errMsg, Exception errObj){
+    public static void errorLog(String errMsg, Throwable errObj){
         PrintStream stderr = System.err;  // store original stderr
 
         ByteArrayOutputStream os = new ByteArrayOutputStream();

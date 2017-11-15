@@ -14,8 +14,7 @@ import java.net.MalformedURLException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import com.cse3111project.bot.spring.SQLDatabaseEngine;
-
+import java.util.List;
 import java.util.ArrayList;
 import com.cse3111project.bot.spring.utility.Utilities;
 
@@ -30,7 +29,7 @@ import com.cse3111project.bot.spring.exception.RoomNotFoundException;
 // - function **
 // - campus
 // --- coming soon ---
-public abstract class Category {
+public class Category {
     // going to use Utilities.concatArrays() to concatenate all QUERY_KEYWORDs in each catagory
     // as more Categories are defined
     public static final String QUERY_KEYWORD[] = Utilities.concatArrays(Academic.QUERY_KEYWORD, 
@@ -41,11 +40,11 @@ public abstract class Category {
     // Campus.QUERY_KEYWORD not enlisted since it only consists of CAMPUS_DIRECTION_KEYWORD
     // which would be handled in CampusETA.detectLocationName() in SearchEngine.parse()
 
-    // there is only one SQLDatabase deployed => declare static
-    protected static SQLDatabaseEngine SQLDatabase = null;
+    // not every Category has a SQLDatabase
+    // protected static SQLDatabaseEngine SQLDatabase = null;
 
     // categorize matched results and determine which category the user is questioning for
-    public static Category analyze(final ArrayList<String> matchedResults) 
+    public static Category analyze(final List<String> matchedResults) 
             throws AmbiguousQueryException, StaffNotFoundException, RoomNotFoundException,
                    MalformedURLException, FileNotFoundException, IOException {
         ArrayList<String> transportResults = new ArrayList<>();
@@ -91,15 +90,15 @@ public abstract class Category {
                                       campusResults.size());
 
         if (mostMatch == transportResults.size())
-            return Transport.query(transportResults);
+            return Transport.analyze(transportResults);
         if (mostMatch == functionResults.size())
-            return Function.query(functionResults);
+            return Function.analyze(functionResults);
         if (mostMatch == academicResults.size())
-            return Academic.query(academicResults);
+            return Academic.analyze(academicResults);
         if (mostMatch == socialResults.size())
-            return Social.query(socialResults);
+            return Social.analyze(socialResults);
         if (mostMatch == campusResults.size())
-            return Campus.query(campusResults);
+            return Campus.analyze(campusResults);
 
         throw new AmbiguousQueryException("I am not quite sure what you are talking about, " +
                                           "could you be more clearer?");
@@ -119,16 +118,32 @@ public abstract class Category {
     //                     matchedResults.remove(result);
     // }
 
-    // setup a connection to SQL database
-    public static void getDatabaseConnection() throws URISyntaxException, SQLException {
-        SQLDatabase = new SQLDatabaseEngine();
+    // declared here just for visibility (don't want to cast in SearchEngine.search())
+    // INTENDED TO BE OVERRIDDEN by class who implements SQLAccessible
+    public synchronized String getDataFromSQL() throws Throwable {
+        throw new RuntimeException(this.getClass().getName() + ".getDataFromSQL() is not intended to be used");
     }
 
-    // close connection to SQL database
-    public static void closeDatabaseConnection() throws SQLException {
-        if (SQLDatabase != null){  // safe .close()
-            SQLDatabase.closeConnection();
-            SQLDatabase = null;  // avoid dangling reference
+    // declared here just for visibility (don't want to cast in SearchEngine.search())
+    // INTENDED TO BE OVERRIDDEN by class who implements StaticAccessible
+    public synchronized String getDataFromStatic() throws Throwable {
+        throw new RuntimeException(this.getClass().getName() + ".getDataFromStatic() is not intended to be used");
+    }
+
+    // reply a list of results
+    protected String replyResults(final List<?> results){
+        StringBuilder replyBuilder = new StringBuilder("Results:\n");
+        for (int i = 0; i < results.size(); i++){
+            replyBuilder.append(results.get(i).toString());
+            if (i != results.size() - 1)
+                replyBuilder.append("\n");
         }
+
+        return replyBuilder.toString();
+    }
+
+    // reply a single result
+    protected String replyResults(){
+        return this.toString();
     }
 }

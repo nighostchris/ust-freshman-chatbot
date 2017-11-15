@@ -1,28 +1,44 @@
-package com.cse3111project.bot.spring;
+package com.cse3111project.bot.spring.model.engine;
+
+import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import com.cse3111project.bot.spring.utility.Utilities;
+
+import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
+
 import lombok.extern.slf4j.Slf4j;  // logging
 
-// this class wraps the SQL connection for better encapsulation
+// this class wraps the SQL connection
 @Slf4j
-public class SQLDatabaseEngine {
-    private Connection SQLConnection = null;
+public class SQLDatabaseEngine extends DatabaseEngine implements AutoCloseable {
+    private static SQLDatabaseEngine database;
 
-    // only SearchEngine can use  -- no longer true
-    public SQLDatabaseEngine() throws URISyntaxException, SQLException {
-        SQLConnection = this.getConnection();
+    private Connection connection;
+    private PreparedStatement query;
+    private ResultSet reader;
+
+    public SQLDatabaseEngine(Object classObj, final String SQL_TABLE) throws URISyntaxException, SQLException, NotSQLAccessibleError {
+        super(SQL_TABLE);
+
+        // force to implement SQLAccessible interface in order to use SQLDatabaseEngine
+        // ** no need to throw, already handled in SearchEngine.search() **
+        if (!(classObj instanceof SQLAccessible))
+            throw new NotSQLAccessibleError(classObj.getClass().getName() + " class is not SQLAccessible");
+
+        connection = this.getConnection();
         // SQLConnection = this.getLocalConnection();
     }
 
     // establish connection with SQL database using JDBC
-    // may be moved to Utilities class
 	private Connection getConnection() throws URISyntaxException, SQLException {
 		Connection connection = null;
         // get database URL from environment variable, need to be set in build.gradle
@@ -63,15 +79,34 @@ public class SQLDatabaseEngine {
     }
 
     // wraps the Connection.prepareStatement() method
-    public PreparedStatement prepare(String SQLStatement) throws SQLException {
-        return SQLConnection.prepareStatement(SQLStatement);
+    public PreparedStatement prepare(String SQLstatement) throws SQLException {
+        this.query = connection.prepareStatement(SQLstatement);
+        
+        return this.query;
     }
 
-    // safely .close() connection to SQL
-    public void closeConnection() throws SQLException {
-        if (SQLConnection != null){
-            SQLConnection.close();
-            SQLConnection = null;  // avoid dangling reference
+    // perform query on SQL database
+    @Override
+    public final synchronized ResultSet executeQuery() throws SQLException {
+        reader = query.executeQuery();
+
+        return this.reader;
+    }
+
+    // safely .close() SQL connection and query object
+    @Override
+    public void close(){
+        try {
+            if (reader != null)
+                reader.close();
+            if (query != null)
+                query.close();
+            if (connection != null)
+                connection.close();
+        }
+        // just suppress the error since indeed the query result can be found
+        catch (SQLException e) {
+            Utilities.errorLog("Unable to close SQL database / query object", e);
         }
     }
 }

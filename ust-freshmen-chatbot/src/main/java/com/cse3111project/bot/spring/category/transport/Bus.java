@@ -5,9 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import com.cse3111project.bot.spring.utility.Utilities;
 
-// import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
-
-// need web grabber to grab (best) estimated arrival time from KMB official website
 public class Bus extends Transport {
     public static final String QUERY_KEYWORD[];
 
@@ -43,6 +40,7 @@ public class Bus extends Transport {
     }
 
     private BusQuery userQuery = null;
+    private ArrayList<String> results = new ArrayList<>();
 
     Bus(int busRoute, int location) {
         userQuery = new BusQuery(busRoute, location);
@@ -50,39 +48,32 @@ public class Bus extends Transport {
 
     // obtain the most accurate arrival time from kmb.hk
     public String getArrivalTimeFromKMB() throws Exception {
-        // initialize and start crawling from kmb.hk
-        BusDetail kmbDatabase = new BusDetail();
-
-        ArrayList<String> results = new ArrayList<String>();
-
         if (userQuery.location == NORTH){
             if (userQuery.busRoute == ROUTE_91)
-                results = kmbDatabase.getForNorthGate(ROUTE_91);
+                results = BusDetail.getForNorthGate(ROUTE_91);
             else
-                results = kmbDatabase.getForNorthGate(ROUTE_91M);
+                results = BusDetail.getForNorthGate(ROUTE_91M);
         }
         else {
             if (userQuery.busRoute == ROUTE_91)
-                results = kmbDatabase.getForSouthGate(ROUTE_91);
+                results = BusDetail.getForSouthGate(ROUTE_91);
             else
-                results = kmbDatabase.getForSouthGate(ROUTE_91M);
+                results = BusDetail.getForSouthGate(ROUTE_91M);
         }
 
+        return super.replyResults();
+    }
+    
+    @Override
+    public String toString(){
         if (results.isEmpty())
-            return "Currently there is no available estimated arrival time from KMB database. Sorry";
+            return "Currently there is no available arrival time from KMB database. Sorry";
+
+        if (results.contains("尾班車已過"))
+            return "You have missed the last " + (userQuery.busRoute == ROUTE_91 ? "91" : "91M") + " bus." + 
+                   " Try to take minibus instead.";
 
         return "The next " + results.size() + " route " + (userQuery.busRoute == ROUTE_91 ? "91" : "91M") + 
-               " bus arrival time:\n" + results.toString() + '\n';
+               " bus arrival time:\n" + results.toString();
     }
-
-    // may not be necessary
-    // @Override
-    // public String getArrivalTimeFromSQL() throws SQLException {
-    //     return "*** not implemented yet ***";
-    // }
-
-    // @Override
-    // public String getArrivalTimeFromStatic() throws StaticDatabaseFileNotFoundException {
-    //     return "*** not implemented yet ***";
-    // }
 }

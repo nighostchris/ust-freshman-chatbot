@@ -1,4 +1,4 @@
-package com.cse3111project.bot.spring;
+package com.cse3111project.bot.spring.model.engine;
 
 import com.cse3111project.bot.spring.category.Category;
 import com.cse3111project.bot.spring.category.transport.*;
@@ -9,13 +9,16 @@ import com.cse3111project.bot.spring.category.function.timetable.TimeTable;
 import com.cse3111project.bot.spring.category.campus.*;
 // import com.cse3111project.bot.spring.SQLDatabaseEngine;
 
-// import javax.annotation.PostConstruct;
+import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
+import com.cse3111project.bot.spring.model.engine.marker.StaticAccessible;
+
 import java.sql.Connection;
 // import javax.sql.DataSource;
 import java.sql.DriverManager;
 import java.sql.SQLTimeoutException;
 import java.sql.SQLException;
 
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 
 import java.io.IOException;
@@ -23,10 +26,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import com.cse3111project.bot.spring.utility.Utilities;
 
+import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
+import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
 import com.cse3111project.bot.spring.exception.StaffNotFoundException;
 import com.cse3111project.bot.spring.exception.RoomNotFoundException;
 import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
-import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
+// import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
 
 public class SearchEngine {
     // conducting search based on userQuery
@@ -36,11 +41,10 @@ public class SearchEngine {
     //   query result would be searched on SQL database first
     //   if SQLDatabase is failed to load => use the backup static database
     // - application e.g. TimeTable function => return the application object
-	Object search(String userQuery){
+	public Object search(String userQuery){
         String reply = null;  // chatbot reply according to userQuery
 
         Category categoryResult = null;  // storing search result of user query
-        boolean SQLErrorThrown = false;  // flag if exception is thrown while connecting to SQL database
 
         // parse and manipulate the query
         ArrayList<String> matchedResults = this.parse(userQuery);
@@ -61,7 +65,10 @@ public class SearchEngine {
         catch (StaffNotFoundException | RoomNotFoundException | AmbiguousQueryException e) {
             return e.getMessage();
         }
-        catch (IOException e) {  // MalformedURLException would also be redirected here
+        catch (MalformedURLException e) {
+            return "Internal Error occurred. Sorry";
+        }
+        catch (IOException e) {
             return e.getMessage();
         }
 
@@ -83,9 +90,6 @@ public class SearchEngine {
 
         // --- KMB database ---
         try {
-            // if search for arrival time of Bus
-            // => no need to use SQL database
-            // ==> no need to establish connection below to waste time
             if (categoryResult instanceof Transport)
                 if (categoryResult instanceof Bus)
                     return ((Bus) categoryResult).getArrivalTimeFromKMB();
@@ -97,78 +101,35 @@ public class SearchEngine {
 
         // --- SQL Database ---
         try {
-            // establish connection to SQL database
-            Category.getDatabaseConnection();
+            // throw new Exception("*** throwing error to test static database ***");
 
-            // throw new SQLException("*** throwing error to test static database ***");
-
-            if (categoryResult instanceof Transport){
-                if (categoryResult instanceof Minibus)
-                    reply = ((Minibus) categoryResult).getArrivalTimeFromSQL();
-                // ** may add SQL database for Bus **
-            }
-            else if (categoryResult instanceof Academic){
-                if (categoryResult instanceof Staff)
-                    reply = ((Staff) categoryResult).getContactInfoFromSQL();
-            }
-            else if (categoryResult instanceof Social){
-                if (categoryResult instanceof Societies)
-                    reply = ((Societies) categoryResult).getSocietyWebsiteFromSQL();
-                else if (categoryResult instanceof Recreation)
-                    reply = ((Recreation) categoryResult).getBookingInfoFromSQL();
-            }
+            // if SQL Database is available to that category
+            if (categoryResult instanceof SQLAccessible)
+                return categoryResult.getDataFromSQL();
         }
         // when one of exceptions occurs => load static database
-        catch (URISyntaxException e) {  // mostly not happen in practical
-            Utilities.errorLog("Database URI cannot be recognized", e);
-            SQLErrorThrown = true;
+        catch (URISyntaxException e) {
+            Utilities.errorLog("Invalid URI", e);
         }
         catch (SQLTimeoutException e) {
             Utilities.errorLog("Database connection timeout", e);
-            SQLErrorThrown = true;
         }
         catch (SQLException e) {
             Utilities.errorLog("Unable to connect database", e);
-            SQLErrorThrown = true;
         }
-        finally {
-            try {
-                Category.closeDatabaseConnection();
-            }
-            catch (SQLException e) {
-                Utilities.errorLog("Unable to close database", e);
-                // not treated as SQLErrorThrown = true (no need to use static database) since
-                // it is successful to access the database beforehand and assign to reply String
-                // => just suppress the exception
-            }
+        catch (Throwable e) {
+            Utilities.errorLog(e.getMessage(), e);
         }
 
         // --- static database ---
         try {
-            if (SQLErrorThrown){
-                if (categoryResult instanceof Transport){
-                    if (categoryResult instanceof Minibus)
-                        reply = ((Minibus) categoryResult).getArrivalTimeFromStatic();
-                    // ** may add static database for Bus **
-                    // if (categoryResult instanceof Bus)
-                    //     reply = ((Bus) categoryResult).getArrivalTimeFromStatic();
-                }
-                else if (categoryResult instanceof Academic){
-                    if (categoryResult instanceof Staff)
-                        reply = ((Staff) categoryResult).getContactInfoFromStatic();
-                }
-                else if (categoryResult instanceof Social){
-                    if (categoryResult instanceof Societies)
-                        reply = ((Societies) categoryResult).getSocietyWebsiteFromStatic();
-                    else if (categoryResult instanceof Recreation)
-                        reply = ((Recreation) categoryResult).getBookingInfoFromStatic();
-                }
-            }
+            if (categoryResult instanceof StaticAccessible)
+                return categoryResult.getDataFromStatic();
         }
         // if failed on LAST RESORT ....
-        catch (StaticDatabaseFileNotFoundException e) {
-            Utilities.errorLog("Static database file not found", e);
-            return "***\n1001010100\nOh It seEms I aM bRokEn\n0101010001\n***";
+        catch (Throwable e) {
+            Utilities.errorLog(e.getMessage(), e);
+            reply = "***\n1001010100\nOh It seEms I aM bRokEn\n0101010001\n***";
         }
 
         return reply;
@@ -231,34 +192,34 @@ public class SearchEngine {
     // (able to handle user typos / resolve partial match strange problem, see partialMatchTimeTable1())
     // using dynamic programming
     // but not applied yet
-    private static int editDistance(String str1, String str2){
-        // 2D matrix of size (str1.length() + 1) x (str2.length() + 1)
-        int dp[][] = new int[str2.length() + 1][str1.length() + 1];
+    // private static int editDistance(String str1, String str2){
+    //     // 2D matrix of size (str1.length() + 1) x (str2.length() + 1)
+    //     int dp[][] = new int[str2.length() + 1][str1.length() + 1];
 
-        // base case
-        // from str1.substring(0, i) to str2.substring(0, 0) ("")
-        // => i deletions
-        for (int i = 0; i <= str1.length(); i++)
-            dp[0][i] = i;
-        // from str1.substring(0, 0) ("") to str2.substring(0, j)
-        // => j insertions
-        for (int j = 1; j <= str2.length(); j++)
-            dp[j][0] = j;
+    //     // base case
+    //     // from str1.substring(0, i) to str2.substring(0, 0) ("")
+    //     // => i deletions
+    //     for (int i = 0; i <= str1.length(); i++)
+    //         dp[0][i] = i;
+    //     // from str1.substring(0, 0) ("") to str2.substring(0, j)
+    //     // => j insertions
+    //     for (int j = 1; j <= str2.length(); j++)
+    //         dp[j][0] = j;
 
-        for (int j = 1; j <= str2.length(); j++){
-            for (int i = 1; i <= str1.length(); i++){
-                // find the minimum edit distance between str1.substring(0, i - 1) and str2.substring(0, j - 1)
-                // if the last character of str1 and str2 are equal
-                if (str1.charAt(i - 1) == str2.charAt(j - 1))
-                    dp[j][i] = dp[j - 1][i - 1];
-                else
-                    dp[j][i] = Utilities.min(dp[j - 1][i - 1] + 1,  // replacement cost
-                                             dp[j - 1][i] + 1,      // deletion cost
-                                             dp[j][i - 1] + 1       // insertion cost
-                                            );
-            }
-        }
+    //     for (int j = 1; j <= str2.length(); j++){
+    //         for (int i = 1; i <= str1.length(); i++){
+    //             // find the minimum edit distance between str1.substring(0, i - 1) and str2.substring(0, j - 1)
+    //             // if the last character of str1 and str2 are equal
+    //             if (str1.charAt(i - 1) == str2.charAt(j - 1))
+    //                 dp[j][i] = dp[j - 1][i - 1];
+    //             else
+    //                 dp[j][i] = Utilities.min(dp[j - 1][i - 1] + 1,  // replacement cost
+    //                                          dp[j - 1][i] + 1,      // deletion cost
+    //                                          dp[j][i - 1] + 1       // insertion cost
+    //                                         );
+    //         }
+    //     }
 
-        return dp[str2.length()][str1.length()];
-    }
+    //     return dp[str2.length()][str1.length()];
+    // }
 }
