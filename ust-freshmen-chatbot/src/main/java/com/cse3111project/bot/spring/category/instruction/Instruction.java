@@ -38,14 +38,16 @@ public class Instruction extends Category
 	
 	public static Category analyze(final ArrayList<String> extractedResults)
     {
+		String reply = "";
         for (String result : extractedResults)
         {
             if (result.equals(QUERY_KEYWORD[0]))
-                return new Instruction(HELP_QUERY);
+                reply = HELP_QUERY;
             else if (result.equals(QUERY_KEYWORD[1]))
-            	return new Instruction(DIRECTORY_QUERY);
+            	reply = DIRECTORY_QUERY;
             else
-                return new Instruction(KMB_QUERY);
+                reply = KMB_QUERY;
         }
+        return new Instruction(reply);
     }
 }
