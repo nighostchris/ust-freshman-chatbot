@@ -7,6 +7,7 @@ import com.cse3111project.bot.spring.category.social.*;
 import com.cse3111project.bot.spring.category.function.Function;
 import com.cse3111project.bot.spring.category.function.timetable.TimeTable;
 import com.cse3111project.bot.spring.category.campus.*;
+import com.cse3111project.bot.spring.category.instruction.*;
 // import com.cse3111project.bot.spring.SQLDatabaseEngine;
 
 import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
