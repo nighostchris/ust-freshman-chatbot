@@ -471,7 +471,7 @@ public class KitchenSinkTester {
     @Test
     public void userHelpTest7() throws Exception {
         log.info("--- userHelpTest7() ---");
-        Object answer = this.searchEngine.search("/book");
+        Object answer = this.searchEngine.search("/facb");
         assertThat(answer).isNotNull();
         assertThat(answer instanceof String).isEqualTo(true);
         log.info("reply: {}", answer);

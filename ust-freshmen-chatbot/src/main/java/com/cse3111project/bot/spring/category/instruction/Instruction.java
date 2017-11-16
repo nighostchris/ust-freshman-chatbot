@@ -7,7 +7,7 @@ public class Instruction extends Category
 {
 	private String reply;
 	
-	public static final String QUERY_KEYWORD[] = { "/help", "/dir", "/kmb", "/minibus", "/society", "/campus", "/book" };
+	public static final String QUERY_KEYWORD[] = { "/help", "/dir", "/kmb", "/minibus", "/society", "/campus", "/facb" };
 	
 	private static final String HELP_QUERY = "Commands available for checking guidelines on\n"
 										   + "different features of this chatbot:\n"
