@@ -141,7 +141,7 @@ public class SearchEngine {
 
     // symbols needed to be omitted in user query
     // may add Unicode / emojis later **
-    public static final String OMITTED_SYMBOLS = "!@#$%^&*()_=+[]{}\\|:;\'\",<>/?";
+    public static final String OMITTED_SYMBOLS = "!@#$%^&*()_=+[]{}\\|:;\'\",<>?";
 
     private ArrayList<String> parse(String userQuery){
         StringBuilder queryBuilder = new StringBuilder(userQuery);
