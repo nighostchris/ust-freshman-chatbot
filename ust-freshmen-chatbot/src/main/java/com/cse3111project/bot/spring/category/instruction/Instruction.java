@@ -3,7 +3,7 @@ package com.cse3111project.bot.spring.category.instruction;
 import java.util.ArrayList;
 import com.cse3111project.bot.spring.category.Category;
 
-public abstract class Instruction extends Category
+public class Instruction extends Category
 {
 	private static String reply;
 	
@@ -35,6 +35,6 @@ public abstract class Instruction extends Category
             else
             	reply = KMB_QUERY;
         }
-        return this;
+        return new Instruction();
     }
 }
