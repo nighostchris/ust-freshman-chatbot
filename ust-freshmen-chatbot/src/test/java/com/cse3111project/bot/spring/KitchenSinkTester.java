@@ -412,4 +412,70 @@ public class KitchenSinkTester {
         assertThat(((String) answer).contains("Commands")).isEqualTo(true);
         log.info("--- End of userHelpTest1() ---");
     }
+    
+    @Test
+    public void userHelpTest2() throws Exception {
+        log.info("--- userHelpTest2() ---");
+        Object answer = this.searchEngine.search("/dir");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("Kim")).isEqualTo(true);
+        log.info("--- End of userHelpTest2() ---");
+    }
+    
+    @Test
+    public void userHelpTest3() throws Exception {
+        log.info("--- userHelpTest3() ---");
+        Object answer = this.searchEngine.search("/kmb");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("ETA of 91m")).isEqualTo(true);
+        log.info("--- End of userHelpTest3() ---");
+    }
+    
+    @Test
+    public void userHelpTest4() throws Exception {
+        log.info("--- userHelpTest4() ---");
+        Object answer = this.searchEngine.search("/minibus");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("by our bot!")).isEqualTo(true);
+        log.info("--- End of userHelpTest4() ---");
+    }
+    
+    @Test
+    public void userHelpTest5() throws Exception {
+        log.info("--- userHelpTest5() ---");
+        Object answer = this.searchEngine.search("/society");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("search all")).isEqualTo(true);
+        log.info("--- End of userHelpTest5() ---");
+    }
+    
+    @Test
+    public void userHelpTest6() throws Exception {
+        log.info("--- userHelpTest6() ---");
+        Object answer = this.searchEngine.search("/campus");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("takes from one")).isEqualTo(true);
+        log.info("--- End of userHelpTest6() ---");
+    }
+    
+    @Test
+    public void userHelpTest7() throws Exception {
+        log.info("--- userHelpTest7() ---");
+        Object answer = this.searchEngine.search("/booking");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("Hall 6")).isEqualTo(true);
+        log.info("--- End of userHelpTest7() ---");
+    }
 }
