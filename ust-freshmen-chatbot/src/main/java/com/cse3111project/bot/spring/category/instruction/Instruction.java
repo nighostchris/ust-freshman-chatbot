@@ -5,7 +5,7 @@ import com.cse3111project.bot.spring.category.Category;
 
 public class Instruction extends Category
 {
-	private static String reply;
+	public static String reply;
 	
 	public static final String QUERY_KEYWORD[] = { "/help", "/dir", "/kmb" };
 	
