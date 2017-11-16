@@ -28,9 +28,9 @@ public abstract class Instruction extends Category
     {
         for (String result : extractedResults)
         {
-            if (result.contains(QUERY_KEYWORD[0])
+            if (result.contains(QUERY_KEYWORD[0]))
                 reply = HELP_QUERY;
-            else if (result.contains(QUERY_KEYWORD[1])
+            else if (result.contains(QUERY_KEYWORD[1]))
             	reply = DIRECTORY_QUERY;
             else
             	reply = KMB_QUERY;
