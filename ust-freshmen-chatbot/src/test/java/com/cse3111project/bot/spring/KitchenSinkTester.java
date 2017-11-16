@@ -11,6 +11,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // import java.util.List;
 // import java.util.concurrent.TimeUnit;
 
+import com.cse3111project.bot.spring.category.instruction.Instruction;
+import java.util.List;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -43,6 +45,7 @@ import com.linecorp.bot.spring.boot.annotation.LineBotMessages;
 import lombok.extern.slf4j.Slf4j;  // logging
 
 import com.cse3111project.bot.spring.model.engine.SearchEngine;
+import com.cse3111project.bot.spring.category.Category;
 
 import com.cse3111project.bot.spring.category.transport.Minibus;
 import com.cse3111project.bot.spring.category.function.timetable.TimeTable;
@@ -53,6 +56,8 @@ import com.cse3111project.bot.spring.category.function.timetable.TimeTable;
 public class KitchenSinkTester {
 	@Autowired  // autowired to SearchEngine
 	private SearchEngine searchEngine;
+	private Category category;
+	private List<String> test;
 	
     // test if key is not found in database
     // local SQL database     -- pass
@@ -402,9 +407,11 @@ public class KitchenSinkTester {
     @Test
     public void userHelpTest() throws Exception {
         log.info("--- userHelpTest() ---");
-        Object answer = this.searchEngine.search("/help");
+    	test.add("help");
+        Object answer = this.category.analyze(test);
         assertThat(answer).isNotNull();
-        Log.info("reply: {}", answer);
+        assertThat(answer instanceof Instruction).isEqualTo(true);
+        log.info("reply: {}", answer);
         assertThat(((String) answer).contains("features"));
         log.info("--- End of userHelpTest() ---");
     }
