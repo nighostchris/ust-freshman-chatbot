@@ -84,7 +84,7 @@ public class Category {
                     campusResults.add(result);
             
             for (String instructionKeyword : Instruction.QUERY_KEYWORD)
-            	if (result.equals(instructionKeyword))
+            	if (result.contains(instructionKeyword))
             		instructionResults.add(result);
         }
 
