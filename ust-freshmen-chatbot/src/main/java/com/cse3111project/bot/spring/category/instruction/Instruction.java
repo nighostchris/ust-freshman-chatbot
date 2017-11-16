@@ -7,7 +7,7 @@ public class Instruction extends Category
 {
 	private String reply;
 	
-	public static final String QUERY_KEYWORD[] = { "/help", "/dir", "/kmb" };
+	public static final String QUERY_KEYWORD[] = { "/help", "/dir", "/kmb", "/minibus" };
 	
 	private static final String HELP_QUERY = "Commands available for checking different\n"
 										   + "features of this chatbot:\n"
@@ -23,6 +23,11 @@ public class Instruction extends Category
 										  + "You can get ETA of 91 and 91m in UST by our bot!\n"
 										  + "e.g.1 Can I know ETA of 91m at south gate?\n"
 										  + "e.g.2 When will 91 arrive at north gate?";
+	
+	private static final String MINIBUS_QUERY = "Tips on Minibus ETA Enquiry\n"
+											  + "You can get ETA of minibus in UST by our bot!\n"
+											  + "e.g.1 What is the arrival time of minibus 11?\n"
+											  + "e.g.2 11 Minibus arrival time please?";
 	
 	public Instruction()
 	{
@@ -45,8 +50,10 @@ public class Instruction extends Category
                 reply = HELP_QUERY;
             else if (result.equals(QUERY_KEYWORD[1]))
             	reply = DIRECTORY_QUERY;
+            else if (result.equals(QUERY_KEYWORD[2]))
+            	reply = KMB_QUERY;
             else
-                reply = KMB_QUERY;
+                reply = MINIBUS_QUERY;
         }
         return new Instruction(reply);
     }

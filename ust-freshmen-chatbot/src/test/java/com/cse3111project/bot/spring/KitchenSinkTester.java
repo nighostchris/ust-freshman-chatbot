@@ -407,9 +407,9 @@ public class KitchenSinkTester {
         log.info("--- userHelpTest1() ---");
         Object answer = this.searchEngine.search("/help");
         assertThat(answer).isNotNull();
-        assertThat(answer instanceof Instruction).isEqualTo(true);
+        assertThat(answer instanceof String).isEqualTo(true);
         log.info("reply: {}", answer);
-        assertThat(((String) answer).contains("features")).isEqualTo(true);
+        assertThat(((String) answer).contains("Commands")).isEqualTo(true);
         log.info("--- End of userHelpTest1() ---");
     }
 }
