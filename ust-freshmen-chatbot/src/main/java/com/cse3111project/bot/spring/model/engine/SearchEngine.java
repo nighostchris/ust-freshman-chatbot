@@ -77,6 +77,9 @@ public class SearchEngine {
         if (categoryResult instanceof Function)
             if (categoryResult instanceof TimeTable)
                 return categoryResult;
+        
+        if (categoryResult instanceof Instruction)
+        	return categoryResult;
 
         // --- Web Crawling from pathadvisor.ust.hk ---
         try {

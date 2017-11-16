@@ -5,6 +5,7 @@ import com.cse3111project.bot.spring.category.academic.Academic;
 import com.cse3111project.bot.spring.category.social.Social;
 import com.cse3111project.bot.spring.category.function.Function;
 import com.cse3111project.bot.spring.category.campus.Campus;
+import com.cse3111project.bot.spring.category.instruction.Instruction;
 
 import java.sql.SQLException;
 
@@ -35,7 +36,8 @@ public class Category {
     public static final String QUERY_KEYWORD[] = Utilities.concatArrays(Academic.QUERY_KEYWORD, 
                                                                         Transport.QUERY_KEYWORD,
                                                                         Social.QUERY_KEYWORD,
-                                                                        Function.QUERY_KEYWORD);
+                                                                        Function.QUERY_KEYWORD,
+                                                                        Instruction.QUERY_KEYWORD);
                                                                         // Campus.QUERY_KEYWORD);
     // Campus.QUERY_KEYWORD not enlisted since it only consists of CAMPUS_DIRECTION_KEYWORD
     // which would be handled in CampusETA.detectLocationName() in SearchEngine.parse()
@@ -52,6 +54,7 @@ public class Category {
         ArrayList<String> socialResults = new ArrayList<>();
         ArrayList<String> functionResults = new ArrayList<>();
         ArrayList<String> campusResults = new ArrayList<>();
+        ArrayList<String> instructionResults = new ArrayList<>();
 
         for (String result : matchedResults){
             // Transport.QUERY_KEYWORD = Minibus.QUERY_KEYWORD U Bus.QUERY_KEYWORD
@@ -79,6 +82,10 @@ public class Category {
             for (String campusKeyword : Campus.QUERY_KEYWORD)
                 if (result.contains(campusKeyword))  // contains direction keyword "from", "to"
                     campusResults.add(result);
+            
+            for (String instructionKeyword : Instruction.QUERY_KEYWORD)
+            	if (result.contains(instructionKeyword))
+            		instructionResults.add(result);
         }
 
         // each of categories should be UNIQUE, NO query keyword between categories is overlapping
@@ -87,7 +94,7 @@ public class Category {
         // ** Update: no need anymore because of the change in .parse()
         int mostMatch = Utilities.max(transportResults.size(), academicResults.size(), 
                                       socialResults.size(), functionResults.size(), 
-                                      campusResults.size());
+                                      campusResults.size(), instructionResults.size());
 
         if (mostMatch == transportResults.size())
             return Transport.analyze(transportResults);
@@ -99,6 +106,8 @@ public class Category {
             return Social.analyze(socialResults);
         if (mostMatch == campusResults.size())
             return Campus.analyze(campusResults);
+        if (mostMatch == instructionResults.size())
+        	return Instruction.analyze(instructionResults);
 
         throw new AmbiguousQueryException("I am not quite sure what you are talking about, " +
                                           "could you be more clearer?");
