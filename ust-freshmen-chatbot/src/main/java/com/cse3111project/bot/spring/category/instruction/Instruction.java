@@ -16,7 +16,7 @@ public class Instruction extends Category
 										   + "/minibus  Minibus ETA Enquiry\n"
 										   + "/society  Societies Enquiry\n"
 										   + "/campus  Campus ETA Enquiry\n"
-										   + "/book  Facilities Booking Website Enquiry";
+										   + "/facb  Facilities Booking Website Enquiry";
 	
 	private static final String DIRECTORY_QUERY = "Tips on HKUST Staff Directory Enquiry\n"
 												+ "You can search details of any valid staff available in UST!\n"
