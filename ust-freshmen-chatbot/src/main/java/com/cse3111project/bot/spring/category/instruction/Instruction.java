@@ -5,7 +5,7 @@ import com.cse3111project.bot.spring.category.Category;
 
 public class Instruction extends Category
 {
-	public static String reply;
+	private String reply;
 	
 	public static final String QUERY_KEYWORD[] = { "/help", "/dir", "/kmb" };
 	
@@ -24,17 +24,28 @@ public class Instruction extends Category
 										  + "e.g.1 Can I know ETA of 91m at south gate?\n"
 										  + "e.g.2 When will 91 arrive at north gate?";
 	
+	public Instruction()
+	{
+		reply = "";
+	}
+	
+	public Instruction(String reply)
+	{
+		this.reply = reply;
+	}
+	
+	public String getReply() { return reply; }
+	
 	public static Category analyze(final ArrayList<String> extractedResults)
     {
         for (String result : extractedResults)
         {
             if (result.equals(QUERY_KEYWORD[0]))
-                reply = HELP_QUERY;
+                return new Instruction(HELP_QUERY);
             else if (result.equals(QUERY_KEYWORD[1]))
-            	reply = DIRECTORY_QUERY;
+            	return new Instruction(DIRECTORY_QUERY);
             else
-            	reply = KMB_QUERY;
+                return new Instruction(KMB_QUERY);
         }
-        return new Instruction();
     }
 }

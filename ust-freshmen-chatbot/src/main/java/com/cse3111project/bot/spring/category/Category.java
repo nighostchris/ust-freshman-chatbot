@@ -29,6 +29,7 @@ import com.cse3111project.bot.spring.exception.RoomNotFoundException;
 // - social
 // - function **
 // - campus
+// - instruction
 // --- coming soon ---
 public class Category {
     // going to use Utilities.concatArrays() to concatenate all QUERY_KEYWORDs in each catagory
@@ -84,7 +85,7 @@ public class Category {
                     campusResults.add(result);
             
             for (String instructionKeyword : Instruction.QUERY_KEYWORD)
-            	if (result.contains(instructionKeyword))
+            	if (result.equals(instructionKeyword))
             		instructionResults.add(result);
         }
 

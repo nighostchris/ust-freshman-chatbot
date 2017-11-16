@@ -80,7 +80,7 @@ public class SearchEngine {
                 return categoryResult;
         
         if (categoryResult instanceof Instruction)
-        	reply = Instruction.reply;
+        	return ((Instruction) categoryResult).getReply();
 
         // --- Web Crawling from pathadvisor.ust.hk ---
         try {

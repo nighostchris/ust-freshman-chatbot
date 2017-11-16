@@ -56,8 +56,6 @@ import com.cse3111project.bot.spring.category.function.timetable.TimeTable;
 public class KitchenSinkTester {
 	@Autowired  // autowired to SearchEngine
 	private SearchEngine searchEngine;
-	private Category category;
-	private List<String> test;
 	
     // test if key is not found in database
     // local SQL database     -- pass
@@ -405,14 +403,13 @@ public class KitchenSinkTester {
     }
     
     @Test
-    public void userHelpTest() throws Exception {
-        log.info("--- userHelpTest() ---");
-    	test.add("help");
-        Object answer = this.category.analyze(test);
+    public void userHelpTest1() throws Exception {
+        log.info("--- userHelpTest1() ---");
+        Object answer = this.searchEngine.search("/help");
         assertThat(answer).isNotNull();
         assertThat(answer instanceof Instruction).isEqualTo(true);
         log.info("reply: {}", answer);
-        assertThat(((String) answer).contains("features"));
-        log.info("--- End of userHelpTest() ---");
+        assertThat(((String) answer).contains("features")).isEqualTo(true);
+        log.info("--- End of userHelpTest1() ---");
     }
 }
