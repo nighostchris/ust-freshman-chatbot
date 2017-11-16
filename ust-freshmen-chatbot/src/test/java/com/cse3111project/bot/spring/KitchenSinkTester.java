@@ -398,4 +398,14 @@ public class KitchenSinkTester {
         assertThat(answer).isNull();
         log.info("--- End of partialMatchCampus3() ---");
     }
+    
+    @Test
+    public void userHelpTest() throws Exception {
+        log.info("--- userHelpTest() ---");
+        Object answer = this.searchEngine.search("/help");
+        assertThat(answer).isNotNull();
+        Log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("features"));
+        log.info("--- End of userHelpTest() ---");
+    }
 }
