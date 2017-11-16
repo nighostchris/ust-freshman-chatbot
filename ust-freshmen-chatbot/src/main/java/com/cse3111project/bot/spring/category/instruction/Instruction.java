@@ -7,16 +7,16 @@ public class Instruction extends Category
 {
 	private String reply;
 	
-	public static final String QUERY_KEYWORD[] = { "/help", "/dir", "/kmb", "/minibus", "/society", "/campus", "/booking" };
+	public static final String QUERY_KEYWORD[] = { "/help", "/dir", "/kmb", "/minibus", "/society", "/campus", "/book" };
 	
 	private static final String HELP_QUERY = "Commands available for checking guidelines on\n"
 										   + "different features of this chatbot:\n"
-										   + "/dir Directory Enquiry\n"
-										   + "/kmb KMB ETA Enquiry\n"
-										   + "/minibus Minibus ETA Enquiry\n"
-										   + "/society Societies Enquiry\n"
-										   + "/campus Campus ETA Enquiry\n"
-										   + "/booking Facilities Booking Website Enquiry";
+										   + "/dir  Directory Enquiry\n"
+										   + "/kmb  KMB ETA Enquiry\n"
+										   + "/minibus  Minibus ETA Enquiry\n"
+										   + "/society  Societies Enquiry\n"
+										   + "/campus  Campus ETA Enquiry\n"
+										   + "/book  Facilities Booking Website Enquiry";
 	
 	private static final String DIRECTORY_QUERY = "Tips on HKUST Staff Directory Enquiry\n"
 												+ "You can search details of any valid staff available in UST!\n"
