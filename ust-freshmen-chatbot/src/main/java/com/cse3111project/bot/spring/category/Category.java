@@ -110,7 +110,7 @@ public class Category {
         	return Instruction.analyze(instructionResults);
 
         throw new AmbiguousQueryException("I am not quite sure what you are talking about, " +
-                                          "could you be more clearer?");
+                                          "could you be more clearer?\n Maybe you want to try out /help");
     }
 
     // extract matchedResults based on what category the user is searching for
