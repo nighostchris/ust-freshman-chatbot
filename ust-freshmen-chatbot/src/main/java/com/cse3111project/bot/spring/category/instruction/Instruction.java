@@ -35,6 +35,6 @@ public abstract class Instruction extends Category
             else
             	reply = KMB_QUERY;
         }
-        return reply;
+        return this;
     }
 }
