@@ -152,8 +152,14 @@ public class Category {
         return replyBuilder.toString();
     }
 
-    // reply a single result
-    protected String replyResults(){
+    /**
+     * This method will take no parameter, which transform an ArrayList of result into a single 
+     * String by calling toString() method of corresponding class (category).
+     * @return String This method will return a single String which is the actual output to the
+     * 				  screen of LINE client.
+     */
+    protected String replyResults()
+    {
         return this.toString();
     }
 }

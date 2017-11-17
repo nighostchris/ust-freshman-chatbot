@@ -7,6 +7,11 @@ import java.util.ArrayList;
 
 import org.json.*;
 
+/**
+ * The BusDetail Class handles all the actual data retrieval from the KMB database and return the 
+ * result. It was used and called in Bus Class when needed.
+ * @version 1.0
+ */
 final class BusDetail
 {
     // 91M from UST to Choi Hung
@@ -17,37 +22,17 @@ final class BusDetail
     private static final String ROUTE91MNORTHGATE = "http://etav3.kmb.hk/?action=geteta&lang=tc&route=91M&bound=1&stop=HK01T11000&stop_seq=16&serviceType=1";
     // 91 from UST to Clear Water Bay
     private static final String ROUTE91NORTHGATE = "http://etav3.kmb.hk/?action=geteta&lang=tc&route=91&bound=1&stop=HK01T10500&stop_seq=15&serviceType=1";
-
-    // private ArrayList<String> ROUTE91MSouthGateArrivalTime = new ArrayList<>();
-    // private ArrayList<String> ROUTE91SouthGateArrivalTime = new ArrayList<>();
-    // private ArrayList<String> ROUTE91MNorthGateArrivalTime = new ArrayList<>();
-    // private ArrayList<String> ROUTE91NorthGateArrivalTime = new ArrayList<>();
 	
-    // only visible to Bus (Transport package)
-	// BusDetail() throws Exception
-	// {
-    //     webCrawling();
-	// }
-	
-    // crawling data from KMB database
-	// private void webCrawling() throws Exception
-	// {
-    //     // 91M from UST to Choi Hung
-    //     URI uToCHM = new URI(ROUTE91MSOUTHGATE);
-    //     // 91 from UST to Choi Hung
-    //     URI uToCHNotM = new URI(ROUTE91SOUTHGATE);
-    //     // 91M from UST to Po Lam
-    //     URI uToPoLam = new URI(ROUTE91MNORTHGATE);
-    //     // 91 from UST to Clear Water Bay
-    //     URI uToCWB = new URI(ROUTE91NORTHGATE);
-    //     // call update function
-    //     // ROUTE91MSouthGateArrivalTime = updateETA(uToCHM);
-    //     // ROUTE91SouthGateArrivalTime = updateETA(uToCHNotM);
-    //     // ROUTE91MNorthGateArrivalTime = updateETA(uToPoLam);
-    //     // ROUTE91NorthGateArrivalTime = updateETA(uToCWB);
-	// }
-	
-    // obtain and extract ETA from JSON object
+    /** 
+     * This method will connect to KMB database, retrieve the data in JSON format and
+     * perform further process on the data.
+     * @param uri This method will take in a URI object which represents the link to corresponding
+     * 			  KMB database.
+     * @return ArrayList<String> This method will return an ArrayList of String which contains all
+     * 							 the available estimated arrival time of bus from the Bus Database.
+     * @throws Exception This method will throw Exception when encounter Database-connection or
+     * 					 URL malform problem.
+     */
 	private static ArrayList<String> updateETA(URI uri) throws Exception
 	{
         ArrayList<String> arrivalTime = new ArrayList<>();
@@ -71,19 +56,29 @@ final class BusDetail
         return arrivalTime;
 	}
 	
-    // ** may be changed as static later **
-	// get eta for south gate stop
-	// int 0 for getting 91M and int 1 for getting 91
-	// return ArrayList of 3 strings about eta of next 3 bus
+	/**
+	 * This method will return the processed data of estimated arrival time of bus in South
+	 * gate bus stop of UST.
+	 * @param mornotm Only required parameter of the function, which represents whether the bus
+	 * 				  route is 91 or 91M. Integer value of 0 means 91M while 1 means 91.
+	 * @return ArrayList<String> This method will return an ArrayList of String which contains
+	 * 							 all the ETA of bus from KMB database.
+	 * @throws Exception
+	 */
 	static ArrayList<String> getForSouthGate(int mornotm) throws Exception
 	{
         return updateETA(new URI(mornotm == 0 ? ROUTE91MSOUTHGATE : ROUTE91SOUTHGATE));
 	}
 	
-    // ** may be changed as static later **
-	// get eta for north gate stop
-	// int 0 for getting 91M and int 1 for getting 91
-	// return ArrayList of 3 strings about eta of next 3 bus
+	/**
+	 * This method will return the processed data of estimated arrival time of bus in North
+	 * gate bus stop of UST.
+	 * @param mornotm Only required parameter of the function, which represents whether the bus
+	 * 		  route is 91 or 91M. Integer value of 0 means 91M while 1 means 91.
+	 * @return ArrayList<String> This method will return an ArrayList of String which contains
+	 * 							 all the ETA of bus from KMB database.
+	 * @throws Exception
+	 */
 	static ArrayList<String> getForNorthGate(int mornotm) throws Exception
 	{
         return updateETA(new URI(mornotm == 0 ? ROUTE91MNORTHGATE : ROUTE91NORTHGATE));
