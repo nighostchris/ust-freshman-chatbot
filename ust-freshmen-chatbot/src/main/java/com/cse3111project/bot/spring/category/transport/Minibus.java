@@ -1,12 +1,11 @@
 package com.cse3111project.bot.spring.category.transport;
 
-// import com.cse3111project.bot.spring.model.engine.DatabaseEngine;
 import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
 import com.cse3111project.bot.spring.model.engine.SQLDatabaseEngine;
 import com.cse3111project.bot.spring.model.engine.marker.StaticAccessible;
 import com.cse3111project.bot.spring.model.engine.StaticDatabaseEngine;
 
-import java.sql.PreparedStatement;  // use PreparedStatement to avoid SQL injection
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Time;
 import java.sql.SQLException;
@@ -23,7 +22,13 @@ import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
 import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
 import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
 
-public class Minibus extends Transport implements SQLAccessible, StaticAccessible {
+/**
+ * The Minibus class inherits from the Transport category and handle all user query about
+ * estimaed arrival time of minibus in the campus.
+ * @version 1.0
+ */
+public class Minibus extends Transport implements SQLAccessible, StaticAccessible 
+{
     public static final String QUERY_KEYWORD[] = { "minibus 11", "minibus route 11", 
                                                    "11 minibus", "route 11 minibus" };
 
@@ -60,7 +65,15 @@ public class Minibus extends Transport implements SQLAccessible, StaticAccessibl
         this.minAboardHrDiff = 24;
     }
 
-    // attempt to estimate the arrival time of minibus based on self-collected data from SQL database
+    /**
+     * This method requires no parameter, which returns the estimated arrival time of minibus
+     * from database.
+     * @return String This method will return a string which contains the next available
+     * 				  estimated arrival time of minibus.
+     * @throws NotSQLAccessibleError
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     @Override
     public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
         // *** executing multiple queries on SQL is too slow ***
@@ -94,7 +107,14 @@ public class Minibus extends Transport implements SQLAccessible, StaticAccessibl
         }
     }
 
-    // if unfortunately fail to connect SQL database, load the static file to estimate arrival time
+    /**
+     * This method requires no parameter, which returns the estimated arrival time of minibus 
+     * from static database when we encounter trouble in connecting SQL database.
+     * @return String This method will return a string which contains the next available
+     * 				  estimated arrival time of minibus.
+     * @throws NotStaticAccessibleError
+     * @throws StaticDatabaseFileNotFoundException
+     */
     @Override
     public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
         try (StaticDatabaseEngine database = new StaticDatabaseEngine(this, STATIC_TABLE)) {
@@ -125,6 +145,10 @@ public class Minibus extends Transport implements SQLAccessible, StaticAccessibl
         }
     }
 
+    /**
+     * This method takes no parameter, which will compute the average arrival time of minibus
+     * and store the result to instance variables, not producing any return value.
+     */
     private void computeAvgArrivalTime(){
         double totalMinWaitingTime = 0;
         double totalMaxWaitingTime = 0;
@@ -142,6 +166,12 @@ public class Minibus extends Transport implements SQLAccessible, StaticAccessibl
         this.avgMaxWaitingTime = new Long(Math.round(totalMaxWaitingTime / numOfData)).intValue();
     }
 
+    /**
+     * This method will further process the data retrieved from database and make it to
+     * be more clear to the user about the minibus arrival time.
+     * @return String This method will return a String representation of Minibus class with all 
+     * 		   the details embedded.
+     */
     @Override
     public String toString(){
         return "Estimated Arrival Time: " + avgMinWaitingTime + '-' + avgMaxWaitingTime + " min";
