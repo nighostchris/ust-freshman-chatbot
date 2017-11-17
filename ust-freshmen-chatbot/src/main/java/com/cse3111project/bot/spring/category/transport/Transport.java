@@ -11,15 +11,27 @@ import com.cse3111project.bot.spring.utility.Utilities;
 
 import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
 
-// Transport
-//           -> Minibus
-//           -> Bus
-public abstract class Transport extends Category {
+/**
+ * The Transport abstract class acts as the main controller for coordinating all the
+ * user-query on transportation details on campus.  
+ * @version 1.0
+ */
+public abstract class Transport extends Category 
+{
     // would be used in SearchEngine.search()
     public static final String QUERY_KEYWORD[] = Utilities.concatArrays(Minibus.QUERY_KEYWORD, 
                                                                         Bus.QUERY_KEYWORD);
 
-    public static Category analyze(final ArrayList<String> extractedResults) throws AmbiguousQueryException {
+    /**
+     * This method will take in useful keywords from user-query and analyze about
+     * what sub-category the user is querying on Transport category.
+     * @param extractedResults This is the only parameter of the function, which is a 
+     * 						   list of processed keyword from the user-query
+     * @return Category This returns the sub-category of which the user-query belongs to
+     * @throws AmbiguousQueryException	Throws exception upon unclear user-query
+     */
+    public static Category analyze(final ArrayList<String> extractedResults) throws AmbiguousQueryException 
+    {
         ArrayList<String> minibusKeywords = new ArrayList<>();
         ArrayList<String> busRoute91Keywords = new ArrayList<>();
         ArrayList<String> busRoute91MKeywords = new ArrayList<>();
