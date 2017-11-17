@@ -1,6 +1,6 @@
 package com.cse3111project.bot.spring.directoryCrawler;
 
-import com.cse3111project.bot.spring.SQLDatabaseEngine;
+import com.cse3111project.bot.spring.model.engine.SQLDatabaseEngine;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
