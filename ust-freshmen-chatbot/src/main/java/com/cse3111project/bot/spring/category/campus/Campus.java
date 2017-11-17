@@ -14,6 +14,11 @@ import com.cse3111project.bot.spring.exception.RoomNotFoundException;
 
 // Campus
 //          -> CampusETA
+/**
+ * 
+ * @version 1.0
+ *
+ */
 public abstract class Campus extends Category 
 {
     // public static final String QUERY_KEYWORD[] = CampusETA.CAMPUS_DIRECTION_KEYWORD;
