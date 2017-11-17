@@ -26,9 +26,9 @@ public abstract class Transport extends Category
      * This method will take in useful keywords from user-query and analyze about
      * what sub-category the user is querying on Transport category.
      * @param extractedResults This is the only parameter of the function, which is a 
-     * 						   list of processed keyword from the user-query
+     * 						   list of processed keyword from the user-query.
      * @return Category This returns the sub-category of which the user-query belongs to
-     * @throws AmbiguousQueryException	Throws exception upon unclear user-query
+     * @throws AmbiguousQueryException	Throws exception upon unclear user-query.
      */
     public static Category analyze(final ArrayList<String> extractedResults) throws AmbiguousQueryException 
     {
