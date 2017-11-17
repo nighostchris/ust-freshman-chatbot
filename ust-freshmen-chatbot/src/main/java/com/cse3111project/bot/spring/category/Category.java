@@ -23,15 +23,14 @@ import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
 import com.cse3111project.bot.spring.exception.StaffNotFoundException;
 import com.cse3111project.bot.spring.exception.RoomNotFoundException;
 
-// split the search into categories
-// - transport
-// - academic
-// - social
-// - function **
-// - campus
-// - instruction
-// --- coming soon ---
-public class Category {
+/**
+ * The Category Class classify different features of the chatbot into different categories, act
+ * as the framework of classes of features like Transport and Academic. It coordinates the 
+ * communication between SearchEngine and different features.
+ * @version 1.0
+ */
+public class Category 
+{
     // going to use Utilities.concatArrays() to concatenate all QUERY_KEYWORDs in each catagory
     // as more Categories are defined
     public static final String QUERY_KEYWORD[] = Utilities.concatArrays(Academic.QUERY_KEYWORD, 
@@ -39,17 +38,31 @@ public class Category {
                                                                         Social.QUERY_KEYWORD,
                                                                         Function.QUERY_KEYWORD,
                                                                         Instruction.QUERY_KEYWORD);
-                                                                        // Campus.QUERY_KEYWORD);
     // Campus.QUERY_KEYWORD not enlisted since it only consists of CAMPUS_DIRECTION_KEYWORD
     // which would be handled in CampusETA.detectLocationName() in SearchEngine.parse()
 
     // not every Category has a SQLDatabase
     // protected static SQLDatabaseEngine SQLDatabase = null;
 
-    // categorize matched results and determine which category the user is questioning for
+    /**
+     * This method will compare the keywords of user query and the pre-defined keywords of different
+     * classes, perform further analyzes and determine which category the user is questioning for
+     * @param matchedResults
+     * @return
+     * @throws AmbiguousQueryException Throws exception upon unclear user-query.
+     * @throws StaffNotFoundException Throws exception when the user is asking for details of UST
+     * 								  staffs but there is no matching results.
+     * @throws RoomNotFoundException Throws exception when the user is asking for estimated time
+     * 								 to go from one place to another place within campus, but the
+     * 								 room is invalid.
+     * @throws MalformedURLException Throws exeception when URL has malform problem.
+     * @throws FileNotFoundException Throws exception when static database cannot be loaded.
+     * @throws IOException
+     */
     public static Category analyze(final List<String> matchedResults) 
-            throws AmbiguousQueryException, StaffNotFoundException, RoomNotFoundException,
-                   MalformedURLException, FileNotFoundException, IOException {
+           throws AmbiguousQueryException, StaffNotFoundException, RoomNotFoundException,
+                  MalformedURLException, FileNotFoundException, IOException 
+    {
         ArrayList<String> transportResults = new ArrayList<>();
         ArrayList<String> academicResults = new ArrayList<>();
         ArrayList<String> socialResults = new ArrayList<>();
@@ -84,6 +97,7 @@ public class Category {
                 if (result.contains(campusKeyword))  // contains direction keyword "from", "to"
                     campusResults.add(result);
             
+            // Instruction.QUERY_KEYWORD = Instruction.QUERY_KEYWORD
             for (String instructionKeyword : Instruction.QUERY_KEYWORD)
             	if (result.equals(instructionKeyword))
             		instructionResults.add(result);
@@ -114,33 +128,32 @@ public class Category {
                                           "could you be more clearer? Maybe you want to try out /help");
     }
 
-    // extract matchedResults based on what category the user is searching for
-    // protected static void extract(ArrayList<String> matchedResults, String category){
-    //     if (!category.equals("Transport"))
-    //         for (String result : matchedResults)
-    //             for (String transportKeyword : Transport.QUERY_KEYWORD)
-    //                 if (result.equals(transportKeyword))
-    //                     matchedResults.remove(transportKeyword);
-    //     else if (!category.equals("Academic"))
-    //         for (String result : matchedResults)
-    //             for (String academicKeyword : Academic.QUERY_KEYWORD)
-    //                 if (result.equals(academicKeyword))
-    //                     matchedResults.remove(result);
-    // }
-
-    // declared here just for visibility (don't want to cast in SearchEngine.search())
-    // INTENDED TO BE OVERRIDDEN by class who implements SQLAccessible
+    /**
+     * This method is intended to be overriden by class who implements StaticAccessible, which is used to
+     * get data from SQL database if there is any.
+     * @return
+     * @throws Throwable Throws throwable that indicates this function cannot be used.
+     */
     public synchronized String getDataFromSQL() throws Throwable {
         throw new RuntimeException(this.getClass().getName() + ".getDataFromSQL() is not intended to be used");
     }
 
-    // declared here just for visibility (don't want to cast in SearchEngine.search())
-    // INTENDED TO BE OVERRIDDEN by class who implements StaticAccessible
+    /**
+     * This method is intended to be overriden by class who implements StaticAccessible, which is used to
+     * get data from static database if there is any.
+     * @return String This method will return the query result from static database.
+     * @throws Throwable Throws throwable that indicates this function cannot be used.
+     */
     public synchronized String getDataFromStatic() throws Throwable {
         throw new RuntimeException(this.getClass().getName() + ".getDataFromStatic() is not intended to be used");
     }
 
-    // reply a list of results
+    /**
+     * This method will take an ArrayList of query result and transform it into a single 
+     * String by looping through the list and append each elements to the final display result string.
+     * @return String This method will return a single String which is the actual output to the
+     * 				  screen of LINE client.
+     */
     protected String replyResults(final List<?> results){
         StringBuilder replyBuilder = new StringBuilder("Results:\n");
         for (int i = 0; i < results.size(); i++){
@@ -153,8 +166,8 @@ public class Category {
     }
 
     /**
-     * This method will take no parameter, which transform an ArrayList of result into a single 
-     * String by calling toString() method of corresponding class (category).
+     * This method will take no parameter and just call the toString() method of the class who invoke 
+     * this method to get a single string of query-result.
      * @return String This method will return a single String which is the actual output to the
      * 				  screen of LINE client.
      */
