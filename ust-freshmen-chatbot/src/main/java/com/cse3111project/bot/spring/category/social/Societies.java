@@ -1,6 +1,5 @@
 package com.cse3111project.bot.spring.category.social;
 
-// import com.cse3111project.bot.spring.model.engine.DatabaseEngine;
 import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
 import com.cse3111project.bot.spring.model.engine.SQLDatabaseEngine;
 import com.cse3111project.bot.spring.model.engine.marker.StaticAccessible;
@@ -22,8 +21,14 @@ import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundExcepti
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * The Societies class inherits from Social category and handles all the user query about
+ * societies and clubs available in UST.
+ * @version 1.0
+ */
 @Slf4j
-public class Societies extends Social implements SQLAccessible, StaticAccessible {
+public class Societies extends Social implements SQLAccessible, StaticAccessible 
+{
     public static final String QUERY_KEYWORD[];
 
     public static final String SOCIETY_KEYWORD[] = { "Chinese Folk Art Society",
@@ -141,7 +146,8 @@ public class Societies extends Social implements SQLAccessible, StaticAccessible
                                                      "Biochemistry Students’ Society"
                                                  };
 
-    static {
+    static 
+    {
         QUERY_KEYWORD = Utilities.concatArrays(new String[] { "HKUST society", "HKUST soc", "HKUST societies",
                                                               "UST society", "UST soc", "UST societies" },
                                                SOCIETY_KEYWORD);
@@ -158,27 +164,49 @@ public class Societies extends Social implements SQLAccessible, StaticAccessible
     private ArrayList<String> userQuery;
     private ArrayList<SocietyInfo> results;
 
-    Societies(final ArrayList<String> userQuery){
+    /**
+     * Constructor of Societies class, which will store the processed user-query as instance variable.
+     * @param userQuery The only parameter taken by constructor, which is a list of keywords extracted from user-query.
+     */
+    Societies(final ArrayList<String> userQuery)
+    {
         this.userQuery = userQuery;  // MUST NOT BE EMPTY
     }
 
-    // used to wrap the society info
-    class SocietyInfo {
+    /**
+     * The SocietyInfo class is the inner class of Societies, which is used to wrap society info.
+     */
+    class SocietyInfo
+    {
         private String name;
         private String link;
 
-        // only be visible within this class
-        private SocietyInfo(String name, String link){
+        /**
+         * Constructor of SocietyInfo.
+         * @param name Name of society / club.
+         * @param link Website of society / club if available.
+         */
+        private SocietyInfo(String name, String link)
+        {
             this.name = name; this.link = link;
         }
 
+        /**
+         * This method converts all instance variable of a SocietyInfo object as a single String.
+         */
         @Override
         public String toString(){
             return name + ": " + link + '\n';
         }
     }
 
-    // reply societies' link based on user query by searching SQL database
+    /**
+     * This method will connect to the SQL database and retrieve data on details of societies and clubs.
+     * @return String
+     * @throws NotSQLAccessibleError Throws error when the class is not SQLAccessible.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     @Override
     public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
         try (SQLDatabaseEngine database = new SQLDatabaseEngine(this, SQL_TABLE)) {
@@ -206,8 +234,13 @@ public class Societies extends Social implements SQLAccessible, StaticAccessible
         }
     }
 
-    // reply societies' link based on user query by searching static database
-    // only used when SQL database is failed to load, serving as backup
+    /**
+     * This method will connect to the static database and retrieve data on details of societies and clubs.
+     * It is used when the SQL database has run into some trouble of connection.
+     * @return String
+     * @throws NotStaticAccessibleError Throws error when the class is not SQLAccessible.
+     * @throws StaticDatabaseFileNotFoundException Throws error when static database can't be found / connected.
+     */
     @Override
     public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
         try (StaticDatabaseEngine database = new StaticDatabaseEngine(this, STATIC_TABLE)) {
