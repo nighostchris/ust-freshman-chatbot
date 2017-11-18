@@ -12,6 +12,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import com.cse3111project.bot.spring.utility.Utilities;
 
+/**
+ * The CampusETA Class inherits from Campus Class, which handle the actual calculation of distance between
+ * the 2 locations indicated by user and store the time required as instance variable.
+ * @version 1.0
+ */
 public class CampusETA extends Campus
 {
 	private String startPoint;
@@ -25,14 +30,15 @@ public class CampusETA extends Campus
 	
 	public static final String CAMPUS_DIRECTION_KEYWORD[] = { "from", "to" };
 	
-	// public CampusETA ()
-	// {
-	// 	startPoint = "";
-	// 	endPoint = "";
-	// 	eta = 0;
-	// 	timeMatrix = new CampusMapping();
-	// }
-	
+	/**
+	 * This is the constructor of CampusETA Class, which will accept the 2 valid locations by users and
+	 * store as instance variable for further calculation later on in this class.
+	 * @param startPoint First parameter taken by the constructor, representing the name of the starting 
+	 * 					 location of the user.
+	 * @param endPoint Second parameter taken by the constructor, representing the name of the destination
+	 * 				   that the user wants to go.
+	 * @throws FileNotFoundException
+	 */
 	CampusETA(String startPoint, String endPoint) throws FileNotFoundException
 	{
 		this.startPoint = startPoint;
@@ -41,9 +47,16 @@ public class CampusETA extends Campus
 		timeMatrix = new CampusMapping();
 	}
 
-    // try to detect location name, e.g. LTA, from transformed user query
-    // @param userQuery: omitted symbols (!@#$%...)
-    public static void detectLocationName(String userQuery, ArrayList<String> matchedResults){
+    /**
+     * This method will try to detect location name within the campus from transformed user query. It is
+     * supposed to be called in Category Class.
+     * @param userQuery First parameter taken by the method, representing the user query without invalid
+     * 				    symbol.
+     * @param matchedResults Second parameter taken by the method, representing the keywords detected from the
+     * 						 user query.
+     */
+	public static void detectLocationName(String userQuery, ArrayList<String> matchedResults)
+    {
         StringBuilder fromLocation = new StringBuilder();
         StringBuilder toLocation = new StringBuilder();
 
@@ -84,8 +97,16 @@ public class CampusETA extends Campus
         Utilities.arrayLog("matchedResults after CampusETA.detectLocationName()", matchedResults);
     }
 	
-	// use this function to check if the room inputted by user is valid before calculating the eta
-	// should done in category class
+	/**
+	 * This method will check if the location / room inputted by user is valid before calculating the actual
+	 * estimated time for the user to walk between. It is supposed to be called in Category class.
+	 * @param startPoint First parameter taken by the method, representing the current position of the user.
+	 * @param endPoint Second parameter taken by the method, representing the destination of user.
+	 * @return Boolean This method will return a boolean value indicating whether the 2 locations inputted by
+	 * 				   the user is correct. True when valid locations, false otherwise.
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
 	public static boolean locationValid(String startPoint, String endPoint) 
             throws MalformedURLException, IOException
 	{
@@ -135,12 +156,30 @@ public class CampusETA extends Campus
 		// return true;
 	}
 	
+	/**
+	 * This method is the getter method for instance variable startPoint.
+	 * @return String return instance variable startPoint.
+	 */
 	public String getStartPoint() { return startPoint; }
 	
+	/**
+	 * This method is the getter method for instance variable endPoint.
+	 * @return String return instance variable endPoint.
+	 */
 	public String getEndPoint() { return endPoint; }
 	
+	/**
+	 * This method is the getter method for instance variable eta.
+	 * @return double return the instnace variable eta.
+	 */
 	public double getETA() { return eta; }
 	
+	/**
+	 * This method is going to calculate the estimated time to go from startPoint to endPoint
+	 * defined by the user.
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
 	private void calculateETA() throws MalformedURLException, IOException
 	{
         URL startDetail = null; URL endDetail = null;
@@ -177,12 +216,30 @@ public class CampusETA extends Campus
         }
 	}
 	
+	/**
+	 * This method will calculate the distance between 2 points with the x, y coordinates of them
+	 * known to the program, and transform the distance to time required to walk through.
+	 * @param x1 First parameter taken by the method, representing the x coordinate of Point 1.
+	 * @param y1 Second parameter taken by the method, representing the y coordinate of Point 1.
+	 * @param x2 Third parameter taken by the method, representing the x coordinate of Point 2.
+	 * @param y2 Last parameter taken by the method, representing the y coordinate of Point 2.
+	 * @return double This method will return the time to walk between 2 points in double format.
+	 */
 	private double distanceToMinute(int x1, int y1, int x2, int y2)
 	{
 		double distance = Math.sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1));
 		return distance * MINUTE_PER_PIXEL;
 	}
 	
+	/**
+	 * This method will further adjust the time estimated in the first draft from calculateETA() method,
+	 * which consider also the floor difference and the campus building difference between the 2 points.
+	 * @param startFloor First parameter taken by the method, representing the located floor of startPoint.
+	 * @param endFloor Second parameter taken by the method, representing the located floor of endPoint.
+	 * @param firstDraft Last parameter taken by the method, representing the rough estimation from the 
+	 * 					 calculateETA() method.
+	 * @return double This method will return the final estimation of the time required in double format.
+	 */
 	private double adjustDraft(String startFloor, String endFloor, double firstDraft)
 	{
 		int start = timeMatrix.locationOnMatrix(startFloor);
@@ -191,6 +248,11 @@ public class CampusETA extends Campus
 		return firstDraft + (double)adjust / 60;
 	}
 	
+	/** 
+	 * This method will transform a double type value into a String that represents the time in text format.
+	 * @param eta Only parameter taken by the method, representing the time want to transform, e.g. eta.
+	 * @return String This method will return a String which represents eta.
+	 */
 	private String numberToTimeString(double eta)
 	{
 		String result = "";
@@ -206,45 +268,25 @@ public class CampusETA extends Campus
 		return result;
 	}
 	
+	/**
+	 * This method will calculate the eta between 2 points and return the time result.
+	 * @return String the text format of the eta.
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
 	public String getCampusETA() throws MalformedURLException, IOException
 	{
 		calculateETA();
 		return this.toString();
 	}
 	
+	/**
+	 * This method will wrap the text format of eta in a nicer way to display to LINE client.
+	 * @return String
+	 */
 	@Override
 	public String toString()
 	{
 		return "It takes " + numberToTimeString(eta) + " to go from " + startPoint + " to " + endPoint;
 	}
-	
-	// test locally
-	/*public static void main(String[] main)
-	{
-		CampusETA test = new CampusETA("4016D", "1001C");	// nab to cyt
-		CampusETA test2 = new CampusETA("709A", "6010");	// cyt to cyt
-		CampusETA test3 = new CampusETA("LTB", "3001");		// ab to ias
-		CampusETA test4 = new CampusETA("LTB", "G021");		// ab to nab
-		CampusETA test5 = new CampusETA("3014D", "7011");	// cyt to nab
-		CampusETA test6 = new CampusETA("2011", "7011");	// ias to nab
-		try 
-		{
-			test.calculateETA();
-			System.out.println(test.toString());
-			test2.calculateETA();
-			System.out.println(test2.toString());
-			test3.calculateETA();
-			System.out.println(test3.toString());
-			test4.calculateETA();
-			System.out.println(test4.toString());
-			test5.calculateETA();
-			System.out.println(test5.toString());
-			test6.calculateETA();
-			System.out.println(test6.toString());
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}*/
 }
