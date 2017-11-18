@@ -17,16 +17,30 @@ import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
 
 import lombok.extern.slf4j.Slf4j;  // logging
 
-// this class wraps the SQL connection
+/**
+ * SQLDatabaseEngine inherits from DatabaseEngine class, which handles the actual communication between client and 
+ * SQL server, and retrieve the corresponding data. Connection object is wrapped in this class as well.
+ * @version 1.0
+ */
 @Slf4j
-public class SQLDatabaseEngine extends DatabaseEngine implements AutoCloseable {
+public class SQLDatabaseEngine extends DatabaseEngine implements AutoCloseable 
+{
     private static SQLDatabaseEngine database;
 
     private Connection connection;
     private PreparedStatement query;
     private ResultSet reader;
 
-    public SQLDatabaseEngine(Object classObj, final String SQL_TABLE) throws URISyntaxException, SQLException, NotSQLAccessibleError {
+    /**
+     * Constructor of SQLDatabaseEngine
+     * @param classObj First parameter taken by this method, which is the Category object.
+     * @param SQL_TABLE Second parameter taken by this method, which is the name of table in database.
+     * @throws URISyntaxException
+     * @throws SQLException
+     * @throws NotSQLAccessibleError
+     */
+    public SQLDatabaseEngine(Object classObj, final String SQL_TABLE) throws URISyntaxException, SQLException, NotSQLAccessibleError 
+    {
         super(SQL_TABLE);
 
         // force to implement SQLAccessible interface in order to use SQLDatabaseEngine
@@ -38,7 +52,12 @@ public class SQLDatabaseEngine extends DatabaseEngine implements AutoCloseable {
         // SQLConnection = this.getLocalConnection();
     }
 
-    // establish connection with SQL database using JDBC
+    /**
+     * This method establish connection with SQL database using JDBC.
+     * @return Connection
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
 	private Connection getConnection() throws URISyntaxException, SQLException {
 		Connection connection = null;
         // get database URL from environment variable, need to be set in build.gradle
@@ -59,9 +78,16 @@ public class SQLDatabaseEngine extends DatabaseEngine implements AutoCloseable {
 		return connection;
 	}
 
-    // local connection for testing
-    // see the DATABASE_URL example in ust-freshmen-chatbot/build.gradle 
-    private Connection getLocalConnection() throws URISyntaxException, SQLException {
+
+	/**
+	 * This method is used to test local database connection.
+	 * @return Connection
+	 * @throws URISyntaxException
+	 * @throws SQLException
+	 */
+    private Connection getLocalConnection() throws URISyntaxException, SQLException 
+    {
+        // see the DATABASE_URL example in ust-freshmen-chatbot/build.gradle 
         Connection connection = null;
 
         URI databaseURI = new URI(System.getenv("DATABASE_URL"));
@@ -78,14 +104,23 @@ public class SQLDatabaseEngine extends DatabaseEngine implements AutoCloseable {
         return connection;
     }
 
-    // wraps the Connection.prepareStatement() method
-    public PreparedStatement prepare(String SQLstatement) throws SQLException {
+    /**
+     * This method wraps the Connection.prepareStatement() method.
+     * @param SQLstatement
+     * @return
+     * @throws SQLException
+     */
+    public PreparedStatement prepare(String SQLstatement) throws SQLException 
+    {
         this.query = connection.prepareStatement(SQLstatement);
-        
         return this.query;
     }
 
-    // perform query on SQL database
+    /**
+     * This method will perform query on SQL database.
+     * @return
+     * @throws SQLException
+     */
     @Override
     public final synchronized ResultSet executeQuery() throws SQLException {
         reader = query.executeQuery();
@@ -93,9 +128,12 @@ public class SQLDatabaseEngine extends DatabaseEngine implements AutoCloseable {
         return this.reader;
     }
 
-    // safely .close() SQL connection and query object
+    /**
+     * This method will safely close SQL connection and the corresponding query object.
+     */
     @Override
-    public void close(){
+    public void close()
+    {
         try {
             if (reader != null)
                 reader.close();
