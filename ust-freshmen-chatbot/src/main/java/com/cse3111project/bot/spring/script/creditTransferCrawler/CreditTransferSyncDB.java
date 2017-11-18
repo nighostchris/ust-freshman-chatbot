@@ -1,6 +1,6 @@
 package com.cse3111project.bot.spring.script.creditTransferCrawler;
 
-import com.cse3111project.bot.spring.SQLDatabaseEngine;
+import com.cse3111project.bot.spring.model.engine.SQLDatabaseEngine;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -31,10 +31,10 @@ public class CreditTransferSyncDB {
 	}
 	
 	private void insertToDatabase() throws URISyntaxException, SQLException {
-		SQLDatabaseEngine de = new SQLDatabaseEngine(); // creating this object will get connection to db
 		
 		switch(this.option) {
 			case 1:
+				SQLDatabaseEngine de = new SQLDatabaseEngine(this, "examinations_credits"); // creating this object will get connection to db
 				// check if the table exists, it will create it if it does not exist
 				String createExamTableSQL = "CREATE TABLE IF NOT EXISTS public.examinations_credits"
 						+ "(id SERIAL PRIMARY KEY, examination varchar(255),"
@@ -57,8 +57,10 @@ public class CreditTransferSyncDB {
 					insertExamData.executeUpdate();
 				}
 				insertExamData.close();
+				de.closeConnection();
 				break;
 			case 2:
+				SQLDatabaseEngine de = new SQLDatabaseEngine(this, "local_institutions_credits"); // creating this object will get connection to db
 				// check if the table exists, it will create it if it does not exist
 				String createLocalTableSQL = "CREATE TABLE IF NOT EXISTS public.local_institutions_credits"
 						+ "(id SERIAL PRIMARY KEY, institution varchar(255),"
@@ -81,8 +83,10 @@ public class CreditTransferSyncDB {
 					insertLocalData.executeUpdate();
 				}
 				insertLocalData.close();
+				de.closeConnection();
 				break;
 			case 3:
+				SQLDatabaseEngine de = new SQLDatabaseEngine(this, "non_local_institutions_credits"); // creating this object will get connection to db
 				// check if the table exists, it will create it if it does not exist
 				String createNonLocalTableSQL = "CREATE TABLE IF NOT EXISTS public.non_local_institutions_credits"
 						+ "(id SERIAL PRIMARY KEY, country varchar (255), institution varchar(255),"
@@ -106,9 +110,9 @@ public class CreditTransferSyncDB {
 					insertNonLocalData.executeUpdate();
 				}
 				insertNonLocalData.close();
+				de.closeConnection();
 				break;
 		}
-		de.closeConnection();
 	}
 
 //	 for testing
