@@ -1,181 +1,49 @@
 package com.cse3111project.bot.spring.category.transport;
 
-import java.sql.PreparedStatement;  // use PreparedStatement to avoid SQL injection
+import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
+import com.cse3111project.bot.spring.model.engine.SQLDatabaseEngine;
+import com.cse3111project.bot.spring.model.engine.marker.StaticAccessible;
+import com.cse3111project.bot.spring.model.engine.StaticDatabaseEngine;
+
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Time;
 import java.sql.SQLException;
 
-import java.io.InputStream;
+import java.net.URISyntaxException;
 
 import java.util.Calendar;
+import java.util.TimeZone;
 import java.util.Scanner;
 import java.util.ArrayList;
 import com.cse3111project.bot.spring.utility.Utilities;
 
+import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
+import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
 import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
 
-import lombok.extern.slf4j.Slf4j;  // logging
+/**
+ * The Minibus class inherits from the Transport category and handle all user query about
+ * estimaed arrival time of minibus in the campus.
+ * @version 1.0
+ */
+public class Minibus extends Transport implements SQLAccessible, StaticAccessible 
+{
+    public static final String QUERY_KEYWORD[] = { "minibus 11", "minibus route 11", 
+                                                   "11 minibus", "route 11 minibus" };
 
-@Slf4j
-public class Minibus extends Transport {
-    public static final String QUERY_KEYWORD[] = { "minibus", "minibus 11", "11 minibus" };
-
+    // format:
+    // travelDate isRushHour ChoiHung2UST minWaitingTime maxWaitingTime aboardTime arrivalTime
     private static final String SQL_TABLE = "minibus11record";
-    // use only when the SQL database is failed to load in order not to break the program
-    private static final String STATIC_DATABASE = "/static/transport/minibusDatabase.txt";
+    private static final String STATIC_TABLE = "/static/transport/minibusDatabase.txt";
 
-    // attempt to estimate the arrival time of minibus based on self-collected data from SQL database
-    // ** might be too slow **
-    // @Override
-    public String getArrivalTimeFromSQL() throws SQLException {
-        currentTime = Calendar.getInstance();  // get current time
-        // not enough data => use currentHr to approximate first
-        int currentHr = currentTime.get(Calendar.HOUR_OF_DAY);  // get current hr in 24-hr format
-        // int currentMin = currentTime.get(MINUTE);
+    // get current time in Hong Kong
+    private Calendar currentTime;
 
-        // accumluate minWaitingTime, maxWaitingTime from database to compute the average
-        int totalMinWaitingTime = 0;
-        int totalMaxWaitingTime = 0;
-        int numOfData = 0;
-        // enlarge the hour range if timeslot not found
-        for (int hrRange = 1; numOfData == 0 && hrRange <= 24; hrRange++){
-            // [0..currentHr]
-            int pastHr = (currentHr - hrRange + 1 > 0 ? currentHr - hrRange + 1 : 0);
-            // [currenHr + 1..24]
-            int nextHr = (currentHr + hrRange < 24 ? currentHr + hrRange : 24);
-            String pastHrString = (pastHr < 10 ? "0" + pastHr : new Integer(pastHr).toString());
-            String nextHrString = (nextHr < 10 ? "0" + nextHr : new Integer(nextHr).toString());
+    private int minAboardHrDiff;
+    private int avgMinWaitingTime; private int avgMaxWaitingTime;
 
-            PreparedStatement SQLQuery = null;
-            ResultSet rs = null;
-            try {
-                // prepare a SQL query
-                // String SQLStatement = "SELECT minWaitingTime, maxWaitingTime FROM " + SQL_TABLE +
-                //                       " WHERE aboardTime BETWEEN ? AND ?"; 
-
-                // use StringBuilder rather than operator+() (string concatenation operator)
-                // in for loop for PERFORMANCE
-                String SQLStatement = new StringBuilder("SELECT minWaitingTime, maxWaitingTime ")
-                                          .append("FROM ").append(SQL_TABLE)
-                                          .append(" WHERE aboardTime ")
-                                          .append("BETWEEN ? AND ?").toString();
-
-                SQLQuery = SQLDatabase.prepare(SQLStatement);
-
-                // public static Time java.sql.Time.valueOf(String timeFormat);
-                // where timeFormat: hh:mm:ss
-                // log.info("pastHrString: {}", pastHrString);
-                // log.info("nextHrString: {}", nextHrString);
-
-                Time pastHrTimeFormat = Time.valueOf(pastHrString + ":00:00");
-                Time nextHrTimeFormat = null;
-                // *** NOTE that if nextHr == 24 => JDBC would convert time format as 00:00:00
-                // since it uses  % 24  to try to fix programmers' time REGARDLESS OF invalid
-                if (nextHrString.equals("24"))
-                    nextHrTimeFormat = Time.valueOf("23:59:59");
-                else
-                    nextHrTimeFormat = Time.valueOf(nextHrString + ":00:00");
-
-                log.info("pastHrTimeFormat: {}", pastHrTimeFormat);
-                log.info("nextHrTimeFormat: {}", nextHrTimeFormat);
-
-                // convert to SQL TIME format
-                SQLQuery.setTime(1, pastHrTimeFormat);
-                SQLQuery.setTime(2, nextHrTimeFormat);
-
-                rs = SQLQuery.executeQuery();  // NEVER null
-
-                // column format:
-                // travelDate isRushHour ChoiHung2UST minWaitingTime maxWaitingTime aboardTime arrivalTime
-                while (rs.next()){
-                    totalMinWaitingTime += rs.getInt(1);
-                    totalMaxWaitingTime += rs.getInt(2);
-                    numOfData++;
-                }
-            }
-            // if exception occurs => must execute .close() before exiting this method
-            finally {  // after query, .close() resources
-                try {
-                    if (rs != null)  // safe .close()
-                        rs.close();
-                    if (SQLQuery != null)
-                        SQLQuery.close();
-                }
-                catch (SQLException e) {  // mostly not happen since not using threading
-                    Utilities.errorLog("Unable to close query statement object", e);
-                }
-            }
-        }
-
-        int avgMinWaitingTime = new Long(Math.round((double) totalMinWaitingTime / numOfData)).intValue();
-        int avgMaxWaitingTime = new Long(Math.round((double) totalMaxWaitingTime / numOfData)).intValue();
-
-        return "Estimated Arrival Time: " + avgMinWaitingTime + '-' + avgMaxWaitingTime + " min";
-    }
-
-    // if unfortunately fail to connect SQL database, load the static file to estimate arrival time
-    // *** LAST RESORT ***
-    // @Override
-    public String getArrivalTimeFromStatic() throws StaticDatabaseFileNotFoundException {
-        currentTime = Calendar.getInstance();  // get current time
-        int currentHr = currentTime.get(Calendar.HOUR_OF_DAY);  // get current hr in 24-hr format
-
-        // initialize array of arrivalTime to compute the avgMinWaitingTime and avgMaxWaitingTime
-        ArrayList<ArrivalTime> arrivalTime = new ArrayList<>();
-        int minAboardHrDiff = 24;  // attempt to find the minimum aboard hr diff
-                                   // initialize to the largest diff |aboardHr - currentHr|
-                                   // so that easier to find min
-
-        // read static database
-        Scanner staticDatabaseReader = null;
-        try {
-            InputStream is = this.getClass().getResourceAsStream(STATIC_DATABASE);
-            if (is == null)  // static database file not found
-                throw new StaticDatabaseFileNotFoundException(STATIC_DATABASE + " file not found");
-            // load static database file
-            staticDatabaseReader = new Scanner(is);
-
-            // column format:
-            // travelDate isRushHour ChoiHung2UST minWaitingTime maxWaitingTime aboardTime arrivalTime
-            while (staticDatabaseReader.hasNextLine()){
-                String line = staticDatabaseReader.nextLine();
-                // start with # is considered as comment, see /static/transport/minibusDatabase.txt
-                if (line.startsWith("#") || line.length() == 0)
-                    continue;
-
-                String parts[] = line.split(",");
-                int aboardHrDiff = Math.abs(new Integer(parts[5].split(":")[0]) - currentHr);
-                arrivalTime.add(new ArrivalTime(new Integer(parts[3]), new Integer(parts[4]), 
-                                                aboardHrDiff));
-                if (aboardHrDiff < minAboardHrDiff)  // find minimum aboard hour difference
-                    minAboardHrDiff = aboardHrDiff;
-            }
-        }
-        finally {
-            if (staticDatabaseReader != null)  // safe .close() resources
-                staticDatabaseReader.close();
-        }
-
-        log.info("minAboardHrDiff: {}", minAboardHrDiff);  // for testing
-
-        // accumulate waiting time to compute average
-        int totalMinWaitingTime = 0;
-        int totalMaxWaitingTime = 0;
-        int numOfData = 0;
-
-        for (ArrivalTime arrival : arrivalTime){
-            if (arrival.aboardHrDiff == minAboardHrDiff){
-                totalMinWaitingTime += arrival.minWaitingTime;
-                totalMaxWaitingTime += arrival.maxWaitingTime;
-                numOfData++;
-            }
-        }
-
-        int avgMinWaitingTime = new Long(Math.round((double) totalMinWaitingTime / numOfData)).intValue();
-        int avgMaxWaitingTime = new Long(Math.round((double) totalMaxWaitingTime / numOfData)).intValue();
-
-        return "Estimated Arrival Time: " + avgMinWaitingTime + '-' + avgMaxWaitingTime + " min";
-    }
+    private ArrayList<ArrivalTime> arrivalTime;
 
     class ArrivalTime {
         private int minWaitingTime;
@@ -189,5 +57,123 @@ public class Minibus extends Transport {
             this.maxWaitingTime = maxWaitingTime;
             this.aboardHrDiff = aboardHrDiff;
         }
+    }
+
+    private void init(){
+        currentTime = Calendar.getInstance(TimeZone.getTimeZone("GMT+8:00"));
+        // reset as the largest diff |aboardHr - currentHr| so that it would be easier to find min
+        this.minAboardHrDiff = 24;
+    }
+
+    /**
+     * This method requires no parameter, which returns the estimated arrival time of minibus
+     * from database.
+     * @return String This method will return a string which contains the next available
+     * 				  estimated arrival time of minibus.
+     * @throws NotSQLAccessibleError
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
+    @Override
+    public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
+        // *** executing multiple queries on SQL is too slow ***
+        // enlarge the hour range if timeslot not found
+        // for (int hrRange = 1; numOfData == 0 && hrRange <= 24; hrRange++) { ... }
+
+        try (SQLDatabaseEngine database = new SQLDatabaseEngine(this, SQL_TABLE)) {
+            this.init();
+            int currentHr = currentTime.get(Calendar.HOUR_OF_DAY);  // get current hr in 24-hr format
+            arrivalTime = new ArrayList<>();
+
+            StringBuilder SQLStatement = new StringBuilder("SELECT minWaitingTime, maxWaitingTime, aboardTime FROM ")
+                                             .append(SQL_TABLE);
+
+            database.prepare(SQLStatement.toString());
+
+            ResultSet reader = database.executeQuery();
+            while (reader.next()){
+                int minWaitingTime = reader.getInt(1);
+                int maxWaitingTime = reader.getInt(2);
+                int aboardHrDiff = Math.abs(new Integer(reader.getTime(3).toString().split(":")[0]) - currentHr);
+                arrivalTime.add(new ArrivalTime(minWaitingTime, maxWaitingTime, aboardHrDiff));
+
+                if (aboardHrDiff < this.minAboardHrDiff)  // find minimum aboard hour difference
+                    this.minAboardHrDiff = aboardHrDiff;
+            }
+
+            this.computeAvgArrivalTime();
+
+            return super.replyResults();
+        }
+    }
+
+    /**
+     * This method requires no parameter, which returns the estimated arrival time of minibus 
+     * from static database when we encounter trouble in connecting SQL database.
+     * @return String This method will return a string which contains the next available
+     * 				  estimated arrival time of minibus.
+     * @throws NotStaticAccessibleError
+     * @throws StaticDatabaseFileNotFoundException
+     */
+    @Override
+    public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
+        try (StaticDatabaseEngine database = new StaticDatabaseEngine(this, STATIC_TABLE)) {
+            this.init();
+            int currentHr = currentTime.get(Calendar.HOUR_OF_DAY);  // get current hr in 24-hr format
+            arrivalTime = new ArrayList<>();
+
+            Scanner reader = database.executeQuery();
+
+            while (reader.hasNextLine()){
+                String line = reader.nextLine();
+                // starting with # is considered as comment
+                if (line.startsWith("#") || line.length() == 0)
+                    continue;
+
+                String parts[] = line.split(",");
+                int aboardHrDiff = Math.abs(new Integer(parts[5].split(":")[0]) - currentHr);
+                arrivalTime.add(new ArrivalTime(new Integer(parts[3]), new Integer(parts[4]), 
+                                                aboardHrDiff));
+
+                if (aboardHrDiff < this.minAboardHrDiff)  // find minimum aboard hour difference
+                    this.minAboardHrDiff = aboardHrDiff;
+            }
+
+            this.computeAvgArrivalTime();
+            
+            return super.replyResults();
+        }
+    }
+
+    /**
+     * This method takes no parameter, which will compute the average arrival time of minibus
+     * and store the result to instance variables, not producing any return value.
+     */
+    private void computeAvgArrivalTime(){
+        double totalMinWaitingTime = 0;
+        double totalMaxWaitingTime = 0;
+        int numOfData = 0;
+
+        for (ArrivalTime arrival : arrivalTime){
+            if (arrival.aboardHrDiff == this.minAboardHrDiff){
+                totalMinWaitingTime += arrival.minWaitingTime;
+                totalMaxWaitingTime += arrival.maxWaitingTime;
+                numOfData++;
+            }
+        }
+
+        this.avgMinWaitingTime = new Long(Math.round(totalMinWaitingTime / numOfData)).intValue();
+        this.avgMaxWaitingTime = new Long(Math.round(totalMaxWaitingTime / numOfData)).intValue();
+    }
+
+    /**
+     * This method will further process the data retrieved from database and make it to
+     * be more clear to the user about the minibus arrival time.
+     * @return String This method will return a String representation of Minibus class with all 
+     * 		   the details embedded.
+     */
+    @Override
+    public String toString(){
+        return "Estimated Arrival Time: " + avgMinWaitingTime + '-' + avgMaxWaitingTime + " min";
     }
 }

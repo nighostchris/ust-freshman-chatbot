@@ -1,4 +1,4 @@
-package com.cse3111project.bot.spring.directoryEnquiry;
+package com.cse3111project.bot.spring.directoryCrawler;
 
 import java.util.ArrayList;
 

@@ -16,6 +16,10 @@
 
 package com.cse3111project.bot.spring;
 
+import com.cse3111project.bot.spring.model.engine.SearchEngine;
+
+import com.cse3111project.bot.spring.category.function.Function;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UncheckedIOException;
@@ -90,13 +94,27 @@ public class KitchenSinkController {
 	@Autowired
 	private LineMessagingClient lineMessagingClient;
 
+	private SearchEngine searchEngine;
+
+    private Function functionEvent;
+
+	public KitchenSinkController() {
+        this(null);
+	}
+
+    // used in Function
+    public KitchenSinkController(Function functionEvent) {
+        this.searchEngine = (functionEvent == null ? new SearchEngine() : null);
+        this.functionEvent = functionEvent;
+    }
+
 	@EventMapping
 	public void handleTextMessageEvent(MessageEvent<TextMessageContent> event) throws Exception {
-		log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-		log.info("This is your entry point:");
-		log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 		TextMessageContent message = event.getMessage();
-		handleTextContent(event.getReplyToken(), event, message);
+        if (functionEvent == null)
+            handleQueryContent(event.getReplyToken(), event, message);
+        else
+            handleFunctionContent(event.getReplyToken(), event, message);
 	}
 
 	@EventMapping
@@ -186,13 +204,14 @@ public class KitchenSinkController {
 		try {
 			BotApiResponse apiResponse = lineMessagingClient.replyMessage(new ReplyMessage(replyToken, messages)).get();
 			log.info("Sent messages: {}", apiResponse);
-		} 
+		}
         catch (InterruptedException | ExecutionException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	private void replyText(@NonNull String replyToken, @NonNull String message) {
+    // should have no disadvantage for relaxing the access
+	public void replyText(@NonNull String replyToken, @NonNull String message) {
 		if (replyToken.isEmpty()) {
 			throw new IllegalArgumentException("replyToken must not be empty");
 		}
@@ -206,20 +225,34 @@ public class KitchenSinkController {
 		reply(replyToken, new StickerMessage(content.getPackageId(), content.getStickerId()));
 	}
 
-	private void handleTextContent(String replyToken, Event event, 
-                                   TextMessageContent content) throws Exception {
-        String text = content.getText();
-        log.info("Got text message from {}: {}", replyToken, text);
+	private void handleQueryContent(String replyToken, Event event, 
+                                    TextMessageContent content) throws Exception {
+        String query = content.getText();
 
-        String reply = null;
+        Object response = null;
 
-        reply = searchEngine.search(text);  // search from SQL database
+        response = searchEngine.search(query);  // start analyzing what user is querying for
 
-        if (reply == null)
-            reply = "I don\'t understand what you are saying. Could you be more clearer?";
+        if (response == null)
+            this.replyText(replyToken, "I don\'t understand what you are saying. Could you be more clearer?");
+        else if (response instanceof String)
+            this.replyText(replyToken, (String) response);
+        else if (response instanceof Function){
+            // retrieve current reply token first
+            ((Function) response).retrieveReplyToken(replyToken);
+            ((Function) response).run();  // launch the sub-application
+        }
+        else  // SHOULD NOT HAPPEN
+            this.replyText(replyToken, "Fatal Error: Unexpected error occurred");
+    }
 
-        log.info("Returns echo message {}: {}", replyToken, reply);
-        this.replyText(replyToken, reply);
+    private void handleFunctionContent(String replyToken, Event event,
+                                       TextMessageContent content) throws Exception {
+        String command = content.getText();
+
+        // redirect the user message to Function
+        functionEvent.retrieveUserMessage(command);
+        functionEvent.retrieveReplyToken(replyToken);
     }
 
     // create URI for static resources
@@ -261,14 +294,6 @@ public class KitchenSinkController {
 		return new DownloadedContent(tempFile, createUri("/downloaded/" + tempFile.getFileName()));
 	}
 	
-
-	public KitchenSinkController() {
-        searchEngine = new SearchEngine();
-	}
-
-	private SearchEngine searchEngine;
-	
-
 	//The annontation @Value is from the package lombok.Value
 	//Basically what it does is to generate constructor and getter for the class below
 	//See https://projectlombok.org/features/Value

@@ -1,18 +1,26 @@
 package com.cse3111project.bot.spring.category.social;
 
+// import com.cse3111project.bot.spring.model.engine.DatabaseEngine;
+import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
+import com.cse3111project.bot.spring.model.engine.SQLDatabaseEngine;
+import com.cse3111project.bot.spring.model.engine.marker.StaticAccessible;
+import com.cse3111project.bot.spring.model.engine.StaticDatabaseEngine;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import java.io.InputStream;
-import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
+import java.net.URISyntaxException;
 
 import java.util.Scanner;
 import java.util.ArrayList;
 import com.cse3111project.bot.spring.utility.Utilities;
 
+import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
+import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
+import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
 
-public class Recreation extends Social {
+public class Recreation extends Social implements SQLAccessible, StaticAccessible {
     public static final String QUERY_KEYWORD[];
 
     public static final String AMENITIES_KEYWORD[];
@@ -68,16 +76,17 @@ public class Recreation extends Social {
                                                LIBRARY_KEYWORD, AMENITIES_KEYWORD);
     }
 
-    // solely contains the UST amenities info
-    // since there is only one link to book library study room => not intended to insert
+    // format:
+    // name application_link instruction_link
     private static final String SQL_TABLE = "amenities";
-    private static final String STATIC_DATABASE = "/static/social/amenitiesDatabase.txt";
+    private static final String STATIC_TABLE = "/static/social/amenitiesDatabase.txt";
 
     // user may have searched multiple recreations
     private ArrayList<String> userQuery;
+    private ArrayList<RecreationInfo> results;
 
     Recreation(final ArrayList<String> userQuery){
-        this.userQuery = userQuery;
+        this.userQuery = this.transform(userQuery);
     }
 
     // transform the alias of amenities from user query
@@ -144,100 +153,62 @@ public class Recreation extends Social {
     }
 
     // reply booking information and instructions from SQL database
-    public String getBookingInfoFromSQL() throws SQLException {
-        PreparedStatement SQLQuery = null;
-        ResultSet rs = null;
-        try {
-            ArrayList<String> transformedUserQuery = this.transform(userQuery);
-            ArrayList<RecreationInfo> results = new ArrayList<>();
+    @Override
+    public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
+        try (SQLDatabaseEngine database = new SQLDatabaseEngine(this, SQL_TABLE)) {
+            results = new ArrayList<>();
 
             // userQuery MUST NOT BE EMPTY
-            String SQLStatement = "SELECT * FROM " + SQL_TABLE + 
-                                  " WHERE name ILIKE concat(\'%\', ?, \'%\')";
-            for (int i = 1; i < transformedUserQuery.size(); i++)
-                SQLStatement += " OR name ILIKE concat(\'%\', ?, \'%\')";
+            StringBuilder SQLStatement = new StringBuilder("SELECT * FROM ").append(SQL_TABLE)
+                                             .append(" WHERE name ILIKE concat(\'%\', ?, \'%\')");
+            for (int i = 1; i < userQuery.size(); i++)
+                SQLStatement.append(" OR name ILIKE concat(\'%\', ?, \'%\')");
 
-            SQLQuery = SQLDatabase.prepare(SQLStatement);
+            PreparedStatement SQLQuery = database.prepare(SQLStatement.toString());
+            for (int i = 0; i < userQuery.size(); i++)
+                SQLQuery.setString(i + 1, userQuery.get(i));
 
-            for (int i = 0; i < transformedUserQuery.size(); i++)
-                SQLQuery.setString(i + 1, transformedUserQuery.get(i));
-
-            rs = SQLQuery.executeQuery();
+            ResultSet reader = database.executeQuery();
 
             // format:
             // name application_link instruction_link
-            while (rs.next())
-                results.add(new RecreationInfo(rs.getString(1), rs.getString(2), rs.getString(3)));
+            while (reader.next())
+                results.add(new RecreationInfo(reader.getString(1), reader.getString(2), reader.getString(3)));
 
-            return this.replyResults(results);
-        }
-        finally {
-            try {
-                if (SQLQuery != null)
-                    SQLQuery.close();
-                if (rs != null)
-                    rs.close();
-            }
-            catch (SQLException e) {
-                Utilities.errorLog("Unable to close query statement object", e);
-            }
+            return super.replyResults(results);
         }
     }
 
     // reply booking information and instructions from static database
     // only used when the SQL databsae is not accessible
-    public String getBookingInfoFromStatic() throws StaticDatabaseFileNotFoundException {
-        Scanner staticDatabaseReader = null;
-        try {
-            ArrayList<String> transformedUserQuery = this.transform(userQuery);
-            ArrayList<RecreationInfo> results = new ArrayList<>();
+    @Override
+    public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
+        try (StaticDatabaseEngine database = new StaticDatabaseEngine(this, STATIC_TABLE)) {
+            results = new ArrayList<>();
 
-            InputStream is = this.getClass().getResourceAsStream(STATIC_DATABASE);
-            if (is == null)
-                throw new StaticDatabaseFileNotFoundException(STATIC_DATABASE + " file not found");
+            Scanner reader = database.executeQuery();
 
-            staticDatabaseReader = new Scanner(is);
-
-            while (staticDatabaseReader.hasNextLine()){
-                String line = staticDatabaseReader.nextLine();
+            while (reader.hasNextLine()){
+                String line = reader.nextLine();
                 // line starting with # is considered as comment
                 if (line.startsWith("#") || line.length() == 0)
                     continue;
 
-                // format:
-                // name application_link instruction_link
                 String recreationInfo[] = line.split(",", 3);  // split at most 2 commas (3 parts)
                                                                // and insert empty string if encountered
-                for (String query : transformedUserQuery){
+                for (String query : userQuery){
                     if (recreationInfo[0].toLowerCase().contains(query.toLowerCase())){
                         for (int i = 0; i < recreationInfo.length; i++)
                             if (recreationInfo[i].length() == 0)
                                 recreationInfo[i] = null;  // reassign to null for empty string
                             
-                            results.add(new RecreationInfo(recreationInfo[0], recreationInfo[1], recreationInfo[2]));
+                            results.add(new RecreationInfo(recreationInfo[0], recreationInfo[1], 
+                                                           recreationInfo[2]));
                     }
                 }
-
             }
 
-            return this.replyResults(results);
+            return super.replyResults(results);
         }
-        finally {
-            if (staticDatabaseReader != null)
-                staticDatabaseReader.close();
-        }
-    }
-
-    // reply ultimate result after searching from SQL / static database
-    // may use generics to generalize this method **
-    private String replyResults(ArrayList<RecreationInfo> results){
-        StringBuilder replyBuilder = new StringBuilder("Results:\n");
-        for (int i = 0; i < results.size(); i++){
-            replyBuilder.append(results.get(i).toString());
-            if (i != results.size() - 1)
-                replyBuilder.append("\n");
-        }
-
-        return replyBuilder.toString();
     }
 }

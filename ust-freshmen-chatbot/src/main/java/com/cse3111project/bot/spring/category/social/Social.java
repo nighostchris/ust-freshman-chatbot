@@ -15,7 +15,7 @@ public abstract class Social extends Category {
     public static final String QUERY_KEYWORD[] = Utilities.concatArrays(Societies.QUERY_KEYWORD,
                                                                         Recreation.QUERY_KEYWORD);
 
-    public static Category query(final ArrayList<String> extractedResults) throws AmbiguousQueryException {
+    public static Category analyze(final ArrayList<String> extractedResults) throws AmbiguousQueryException {
         // will be expanded later
         ArrayList<String> societiesKeywords = new ArrayList<>();
         ArrayList<String> recreationKeywords = new ArrayList<>();

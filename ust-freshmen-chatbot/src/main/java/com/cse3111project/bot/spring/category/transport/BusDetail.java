@@ -7,50 +7,36 @@ import java.util.ArrayList;
 
 import org.json.*;
 
-class BusDetail
+/**
+ * The BusDetail Class handles all the actual data retrieval from the KMB database and return the 
+ * result. It was used and called in Bus Class when needed.
+ * @version 1.0
+ */
+final class BusDetail
 {
     // 91M from UST to Choi Hung
-    private static final String UST2CHOIHUNG91M = "http://etav3.kmb.hk/?action=geteta&lang=tc&route=91M&bound=1&stop=HK02T10000&stop_seq=12&serviceType=1";
+    private static final String ROUTE91MSOUTHGATE = "http://etav3.kmb.hk/?action=geteta&lang=tc&route=91M&bound=1&stop=HK02T10000&stop_seq=12&serviceType=1";
     // 91 from UST to Choi Hung
-    private static final String UST2CHOIHUNG91 = "http://etav3.kmb.hk/?action=geteta&lang=tc&route=91&bound=1&stop=HK02T10000&stop_seq=15&serviceType=1";
+    private static final String ROUTE91SOUTHGATE = "http://etav3.kmb.hk/?action=geteta&lang=tc&route=91&bound=1&stop=HK02T10000&stop_seq=15&serviceType=1";
     // 91M from UST to Po Lam
-    private static final String UST2POLAM91M = "http://etav3.kmb.hk/?action=geteta&lang=tc&route=91M&bound=1&stop=HK01T11000&stop_seq=16&serviceType=1";
+    private static final String ROUTE91MNORTHGATE = "http://etav3.kmb.hk/?action=geteta&lang=tc&route=91M&bound=1&stop=HK01T11000&stop_seq=16&serviceType=1";
     // 91 from UST to Clear Water Bay
-    private static final String UST2CLEARWATERBAY91 = "http://etav3.kmb.hk/?action=geteta&lang=tc&route=91&bound=1&stop=HK01T10500&stop_seq=15&serviceType=1";
+    private static final String ROUTE91NORTHGATE = "http://etav3.kmb.hk/?action=geteta&lang=tc&route=91&bound=1&stop=HK01T10500&stop_seq=15&serviceType=1";
+	
+    /** 
+     * This method will connect to KMB database, retrieve the data in JSON format and
+     * perform further process on the data.
+     * @param uri This method will take in a URI object which represents the link to corresponding
+     * 			  KMB database.
+     * @return ArrayList<String> This method will return an ArrayList of String which contains all
+     * 							 the available estimated arrival time of bus from the Bus Database.
+     * @throws Exception This method will throw Exception when encounter Database-connection or
+     * 					 URL malform problem.
+     */
+	private static ArrayList<String> updateETA(URI uri) throws Exception
+	{
+        ArrayList<String> arrivalTime = new ArrayList<>();
 
-	private ArrayList<String> southGateArrivalTime;
-	private ArrayList<String> northGateArrivalTime;
-	
-    // only visible to Bus (Transport package)
-	BusDetail() throws Exception
-	{
-		southGateArrivalTime = new ArrayList<String>();
-		northGateArrivalTime = new ArrayList<String>();
-		
-        webCrawling();
-	}
-	
-    // crawling data from KMB database
-	private void webCrawling() throws Exception
-	{
-        // 91M from UST to Choi Hung
-        URI uToCHM = new URI(UST2CHOIHUNG91M);
-        // 91 from UST to Choi Hung
-        URI uToCHNotM = new URI(UST2CHOIHUNG91);
-        // 91M from UST to Po Lam
-        URI uToPoLam = new URI(UST2POLAM91M);
-        // 91 from UST to Clear Water Bay
-        URI uToCWB = new URI(UST2CLEARWATERBAY91);
-        // call update function
-        updateETA(uToCHM, 0);
-        updateETA(uToCHNotM, 0);
-        updateETA(uToPoLam, 1);
-        updateETA(uToCWB, 1);
-	}
-	
-    // obtain and extract ETA from JSON object
-	private void updateETA(URI uri, int gate) throws Exception
-	{
         // get json from kmb
         Scanner sc = new Scanner(uri.toURL().openStream());
 		String json = sc.nextLine();
@@ -58,47 +44,43 @@ class BusDetail
 		// get the 3 eta for bus route
 		JSONObject obj = new JSONObject(json);
 		JSONArray time = obj.getJSONArray("response");
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < time.length(); i++)
 		{
-			JSONObject eta = time.getJSONObject(i);
-			String etaTime = eta.getString("t").substring(0, 5);
-			if (gate == 0)
-				southGateArrivalTime.add(etaTime);
-			else
-				northGateArrivalTime.add(etaTime);
+            JSONObject eta = time.getJSONObject(i);
+            String etaTime = eta.getString("t").substring(0, 5);
+            arrivalTime.add(etaTime);
 		}
+
         sc.close();
+
+        return arrivalTime;
 	}
 	
-	// get eta for south gate stop
-	// int 0 for getting 91M and int 1 for getting 91
-	// return ArrayList of 3 strings about eta of next 3 bus
-	public ArrayList<String> getForSouthGate(int mornotm)
+	/**
+	 * This method will return the processed data of estimated arrival time of bus in South
+	 * gate bus stop of UST.
+	 * @param mornotm Only required parameter of the function, which represents whether the bus
+	 * 				  route is 91 or 91M. Integer value of 0 means 91M while 1 means 91.
+	 * @return ArrayList<String> This method will return an ArrayList of String which contains
+	 * 							 all the ETA of bus from KMB database.
+	 * @throws Exception
+	 */
+	static ArrayList<String> getForSouthGate(int mornotm) throws Exception
 	{
-		ArrayList<String> result = new ArrayList<String>();
-		if (mornotm == 0)
-			for (int i = 0; i < 3; i++)
-				result.add(southGateArrivalTime.get(i));
-		else
-            for (int i = 0; i < 3; i++)
-                result.add(southGateArrivalTime.get(i + 3));
-
-        return result;
+        return updateETA(new URI(mornotm == 0 ? ROUTE91MSOUTHGATE : ROUTE91SOUTHGATE));
 	}
 	
-	// get eta for north gate stop
-	// int 0 for getting 91M and int 1 for getting 91
-	// return ArrayList of 3 strings about eta of next 3 bus
-	public ArrayList<String> getForNorthGate(int mornotm)
+	/**
+	 * This method will return the processed data of estimated arrival time of bus in North
+	 * gate bus stop of UST.
+	 * @param mornotm Only required parameter of the function, which represents whether the bus
+	 * 		  route is 91 or 91M. Integer value of 0 means 91M while 1 means 91.
+	 * @return ArrayList<String> This method will return an ArrayList of String which contains
+	 * 							 all the ETA of bus from KMB database.
+	 * @throws Exception
+	 */
+	static ArrayList<String> getForNorthGate(int mornotm) throws Exception
 	{
-		ArrayList<String> result = new ArrayList<String>();
-		if (mornotm == 0)
-			for (int i = 0; i < 3; i++)
-				result.add(northGateArrivalTime.get(i));
-		else
-			for (int i = 0; i < 3; i++)
-				result.add(northGateArrivalTime.get(i + 3));
-
-        return result;
+        return updateETA(new URI(mornotm == 0 ? ROUTE91MNORTHGATE : ROUTE91NORTHGATE));
 	}
 }

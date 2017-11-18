@@ -103,6 +103,7 @@ subprojects {
         testCompileOnly 'org.projectlombok:lombok'
 
         compile 'org.json:json:20171018'
+        compile 'org.jsoup:jsoup:1.11.1'
 
         compileOnly "org.springframework.boot:spring-boot-configuration-processor" // http://docs.spring.io/spring-boot/docs/current/reference/html/configuration-metadata.html#configuration-metadata-annotation-processor
 

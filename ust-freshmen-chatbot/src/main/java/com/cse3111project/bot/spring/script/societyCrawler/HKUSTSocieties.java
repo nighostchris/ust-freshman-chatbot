@@ -1,4 +1,4 @@
-package com.cse3111project.bot.spring.society;
+package com.cse3111project.bot.spring.societyCrawler;
 
 import java.util.ArrayList;
 import java.net.URL;

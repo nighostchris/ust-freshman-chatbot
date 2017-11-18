@@ -3,7 +3,7 @@ package com.cse3111project.bot.spring.utility;
 import java.io.PrintStream;
 import java.io.ByteArrayOutputStream;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;  // logging
 
@@ -13,10 +13,7 @@ public final class Utilities {
     // make sure no one could instantiate Utilities object since all methods here would be static
     private Utilities() { }
 
-    // concatenate two arrays, might be expanded as
-    // - variadic arguments  -- done
-    // - generics
-    // if needed
+    // concatenate two arrays, might be expanded as generics if necessary
     // Time Complexity: O(sum of arrays length)
     public static String[] concatArrays(String[]... arrays){
         int newArrSize = 0;
@@ -33,10 +30,34 @@ public final class Utilities {
         return newArr;
     }
 
+    // find the maximum between arguments
+    // later may be expanded as generics if necessary
+    // Time Complexity: O(args.length)
+    public static int max(int... args){
+        int maximum = args[0];
+        for (int i = 1; i < args.length; i++)
+            if (maximum < args[i])
+                maximum = args[i];
+
+        return maximum;
+    }
+
+    // find the minimum between arguments
+    // later may be expanded as generics if necessary
+    // Time Complexity: O(args.length)
+    public static int min(int... args){
+        int minimum = args[0];
+        for (int i = 1; i < args.length; i++)
+            if (minimum > args[i])
+                minimum = args[i];
+
+        return minimum;
+    }
+
     // error log format:
     // <errMsg>: <exception name>: <exception message>
     // ... <error stack trace> ...
-    public static void errorLog(String errMsg, Exception errObj){
+    public static void errorLog(String errMsg, Throwable errObj){
         PrintStream stderr = System.err;  // store original stderr
 
         ByteArrayOutputStream os = new ByteArrayOutputStream();
@@ -51,7 +72,7 @@ public final class Utilities {
     }
 
     // log all elements
-    public static void arrayLog(String msg, ArrayList<String> items){
+    public static void arrayLog(String msg, List<String> items){
         StringBuilder logBuilder = new StringBuilder();
 
         for (int i = 0; i < items.size(); i++){

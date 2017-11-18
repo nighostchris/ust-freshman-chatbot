@@ -7,10 +7,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.io.InputStream;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+// import java.io.InputStream;
+// import java.util.List;
+// import java.util.concurrent.TimeUnit;
 
+import com.cse3111project.bot.spring.category.instruction.Instruction;
+import java.util.List;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -27,7 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.google.common.io.ByteStreams;
+// import com.google.common.io.ByteStreams;
 
 import com.linecorp.bot.client.LineMessagingClient;
 import com.linecorp.bot.model.ReplyMessage;
@@ -39,16 +41,18 @@ import com.linecorp.bot.model.event.message.TextMessageContent;
 import com.linecorp.bot.model.message.TextMessage;
 import com.linecorp.bot.spring.boot.annotation.LineBotMessages;
 
-import lombok.NonNull;
+// import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;  // logging
 
-import com.cse3111project.bot.spring.SearchEngine;
+import com.cse3111project.bot.spring.model.engine.SearchEngine;
+import com.cse3111project.bot.spring.category.Category;
 
-import com.cse3111project.bot.spring.category.transport.*;
+import com.cse3111project.bot.spring.category.transport.Minibus;
+import com.cse3111project.bot.spring.category.function.timetable.TimeTable;
 
 @Slf4j
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = { KitchenSinkTester.class, SearchEngine.class })  // test SQL Database
+@SpringBootTest(classes = { KitchenSinkTester.class, SearchEngine.class })
 public class KitchenSinkTester {
 	@Autowired  // autowired to SearchEngine
 	private SearchEngine searchEngine;
@@ -60,7 +64,7 @@ public class KitchenSinkTester {
 	@Test
 	public void testNotFound() throws Exception {
         log.info("--- testNotFound() ---");
-        String answer = this.searchEngine.search("How are you?");  // if not found, return null
+        Object answer = this.searchEngine.search("How are you?");  // if not found, return null
 
 		assertThat(answer).isNull();
 
@@ -75,16 +79,12 @@ public class KitchenSinkTester {
     public void partialMatchMinibus1() throws Exception {
         log.info("--- partialMatchMinibus1() ---");
 
-        // { "minibus", "minibus 11", "11 minibus" }
-        for (String minibusKeyword : Minibus.QUERY_KEYWORD){
-            StringBuilder questionBuilder = new StringBuilder("What is the arrival time of ")
-                                                .append(minibusKeyword).append('?');
-            String answer = this.searchEngine.search(questionBuilder.toString());
+        Object answer = this.searchEngine.search("What is the arrival time of minibus 11?");
 
-            assertThat(answer).isNotNull();
-            log.info("reply: {}", answer);
-            assertThat(answer.contains("Estimated Arrival Time")).isEqualTo(true);
-        }
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", (String) answer);
+        assertThat(((String) answer).contains("Estimated Arrival Time")).isEqualTo(true);
 
         log.info("--- End of partialMatchMinibus1() ---");
     }
@@ -97,13 +97,11 @@ public class KitchenSinkTester {
     public void partialMatchMinibus2() throws Exception {
         log.info("--- partialMatchMinibus2() ---");
 
-        String answer = null;
+        Object answer = null;
 
         answer = this.searchEngine.search("Get Minibus arrival time");
 
-        assertThat(answer).isNotNull();
-        log.info("reply: {}", answer);
-        assertThat(answer.contains("Estimated Arrival Time")).isEqualTo(true);
+        assertThat(answer).isNull();
 
         log.info("--- End of partialMatchMinibus2() ---");
     }
@@ -116,32 +114,34 @@ public class KitchenSinkTester {
     public void partialMatchMinibus3() throws Exception {
         log.info("--- partialMatchMinibus3() ---");
 
-        String answer = null;
+        Object answer = null;
 
         answer = this.searchEngine.search("11 Minibus arrival time please?");
 
         assertThat(answer).isNotNull();
-        log.info("reply: {}", answer);
-        assertThat(answer.contains("Estimated Arrival Time")).isEqualTo(true);
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", (String) answer);
+        assertThat(((String) answer).contains("Estimated Arrival Time")).isEqualTo(true);
 
         log.info("--- End of partialMatchMinibus3() ---");
     }
 
-    // partial match staff keyword case 1: at the middle + exact staff name
+    // partial match staff keyword case 1: at the middle + exact staff name <lastName> <firstName>
     // heroku SQL database    -- pass
     // local static database  -- pass
     @Test
     public void partialMatchStaff1() throws Exception {
         log.info("--- partialMatchStaff1() ---");
 
-        String answer = null;
+        Object answer = null;
 
         answer = this.searchEngine.search("Could you tell where the office of Prof. Li Bo is?");
 
         assertThat(answer).isNotNull();
-        log.info("reply: {}", answer);
-        assertThat(answer.contains("Results:") && answer.contains("LI Bo") && 
-                   !answer.contains("LI Xin")).isEqualTo(true);
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", (String) answer);
+        assertThat(((String) answer).contains("Results:") && ((String) answer).contains("LI Bo") && 
+                   !((String) answer).contains("LI Xin")).isEqualTo(true);
 
         log.info("--- End of partialMatchStaff1() ---");
     }
@@ -153,16 +153,36 @@ public class KitchenSinkTester {
     public void partialMatchStaff2() throws Exception {
         log.info("--- partialMatchStaff2() ---");
 
-        String answer = null;
+        Object answer = null;
 
         answer = this.searchEngine.search("Where is the office of Professor Li?");
 
         assertThat(answer).isNotNull();
-        log.info("reply: {}", answer);
-        assertThat(answer.contains("Results:") && answer.contains("LI Bo") && 
-                   answer.contains("LI Xin")).isEqualTo(true);
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", (String) answer);
+        assertThat(((String) answer).contains("Results:") && ((String) answer).contains("LI Bo") && 
+                   ((String) answer).contains("LI Xin")).isEqualTo(true);
 
         log.info("--- End of partialMatchStaff2() ---");
+    }
+
+    // partial match staff keyword case 3: multiple matches + exact staff name <firstName> <lastName>
+    // heroku SQL database    -- pass
+    // local static database  -- pass
+    @Test
+    public void partialMatchStaff3() throws Exception {
+        log.info("--- partialMatchStaff3() ---");
+
+        Object answer = null;
+
+        answer = this.searchEngine.search("Where is the office of Prof. Sunghun Kim?");
+
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", (String) answer);
+        assertThat(((String) answer).contains("Results:") && ((String) answer).contains("KIM Sunghun")).isEqualTo(true);
+
+        log.info("--- End of partialMatchStaff3() ---");
     }
 
     // partial match bus keyword case 1: middle + 2 matches (route + location) + different case
@@ -171,14 +191,16 @@ public class KitchenSinkTester {
     public void partialMatchBus1() throws Exception {
         log.info("--- partialMatchBus1() ---");
 
-        String answer = null;
+        Object answer = null;
 
         answer = this.searchEngine.search("Arrival time of 91M please. I am currently at UST North gate.");
 
         assertThat(answer).isNotNull();
-        log.info("reply: {}", answer);
-        assertThat((answer.contains("91M") && answer.contains("arrival time")) ||
-                    answer.contains("Unexpected error")).isEqualTo(true);
+        log.info("reply: {}", (String) answer);
+        assertThat(answer instanceof String).isEqualTo(true);
+        assertThat((((String) answer).contains("91M") && ((String) answer).contains("arrival time")) ||
+                    ((String) answer).contains("no available") ||
+                    ((String) answer).contains("missed")).isEqualTo(true);
         // assertThat(answer.equals("here")).isEqualTo(true);
 
         log.info("--- End of partialMatchBus1() ---");
@@ -191,14 +213,16 @@ public class KitchenSinkTester {
     public void partialMatchBus1_1() throws Exception {
         log.info("--- partialMatchBus1_1() ---");
 
-        String answer = null;
+        Object answer = null;
 
-        answer = this.searchEngine.search("What is the arrival time of 91M route? I am at south gate");
+        answer = this.searchEngine.search("What is the arrival time of 91 route? I am at south gate");
 
         assertThat(answer).isNotNull();
-        log.info("reply: {}", answer);
-        assertThat((answer.contains("91M") && answer.contains("arrival time")) ||
-                   answer.contains("Unexpected error")).isEqualTo(true);
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", (String) answer);
+        assertThat((((String) answer).contains("91") && ((String) answer).contains("arrival time")) ||
+                   ((String) answer).contains("no available") ||
+                   ((String) answer).contains("missed")).isEqualTo(true);
         // assertThat(answer.equals("here")).isEqualTo(true);
 
         log.info("--- End of partialMatchBus1_1() ---");
@@ -210,13 +234,14 @@ public class KitchenSinkTester {
     public void partialMatchBus2() throws Exception {
         log.info("--- partialMatchBus2() ---");
 
-        String answer = null;
+        Object answer = null;
 
         answer = this.searchEngine.search("What is the arrival time of 91?");
 
         assertThat(answer).isNotNull();
-        log.info("reply: {}", answer);
-        assertThat(answer.contains("Sorry") && answer.contains("query again")).isEqualTo(true);
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", (String) answer);
+        assertThat(((String) answer).contains("Sorry") && ((String) answer).contains("query again")).isEqualTo(true);
 
         log.info("--- End of partialMatchBus2() ---");
     }
@@ -228,13 +253,14 @@ public class KitchenSinkTester {
     public void partialMatchSocieties1() throws Exception {
         log.info("--- partialMatchSocieties1() ---");
 
-        String answer = null;
+        Object answer = null;
 
         answer = this.searchEngine.search("Where is the webpage of film society?");
 
         assertThat(answer).isNotNull();
-        log.info("reply: {}", answer);
-        assertThat(answer.contains("Results:")).isEqualTo(true);
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", (String) answer);
+        assertThat(((String) answer).contains("Results:")).isEqualTo(true);
 
         log.info("--- End of partialMatchSocieties1() ---");
     }
@@ -246,14 +272,15 @@ public class KitchenSinkTester {
     public void partialMatchSocieties2() throws Exception {
         log.info("--- partialMatchSocieties2() ---");
 
-        String answer = null;
+        Object answer = null;
 
         answer = this.searchEngine.search("Nature Club, Cricket Club where could I get info on them?");
 
         assertThat(answer).isNotNull();
-        log.info("reply: {}", answer);
-        assertThat(answer.contains("Results:") && answer.contains("Nature Club") && 
-                   answer.contains("Cricket Club")).isEqualTo(true);
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", (String) answer);
+        assertThat(((String) answer).contains("Results:") && ((String) answer).contains("Nature Club") && 
+                   ((String) answer).contains("Cricket Club")).isEqualTo(true);
 
         log.info("--- End of partialMatchSocieties2() ---");
     }
@@ -266,13 +293,14 @@ public class KitchenSinkTester {
     public void partialMatchSocieties3() throws Exception {
         log.info("--- partialMatchSocieties3() ---");
 
-        String answer = null;
+        Object answer = null;
 
         answer = this.searchEngine.search("Where could I get info on UST Soc?");
 
         assertThat(answer).isNotNull();
-        log.info("reply: {}", answer);
-        assertThat(answer.contains("There are a variety of UST societies")).isEqualTo(true);
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", (String) answer);
+        assertThat(((String) answer).contains("There are a variety of UST societies")).isEqualTo(true);
 
         log.info("--- End of partialMatchSocieties3() ---");
     }
@@ -284,13 +312,14 @@ public class KitchenSinkTester {
     public void partialMatchRecreation1() throws Exception {
         log.info("--- partialMatchRecreation1() ---");
 
-        String answer = null;
+        Object answer = null;
 
         answer = this.searchEngine.search("Where could I book music room in UST?");
 
         assertThat(answer).isNotNull();
-        log.info("reply: {}", answer);
-        assertThat(answer.contains("Results:") && answer.contains("Music Room")).isEqualTo(true);
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", (String) answer);
+        assertThat(((String) answer).contains("Results:") && ((String) answer).contains("Music Room")).isEqualTo(true);
 
         log.info("--- End of partialMatchRecreation1() ---");
     }
@@ -303,17 +332,150 @@ public class KitchenSinkTester {
     public void partialMatchRecreation2() throws Exception {
         log.info("--- partialMatchRecreation2() ---");
 
-        String answer = null;
+        Object answer = null;
 
         // Lecture Room doesn't exist in SQL / static database
         // but it would be transformed to the keyword that they appear: Classroom
         answer = this.searchEngine.search("Where to book Lecture Room, and also study room?");
 
         assertThat(answer).isNotNull();
-        log.info("reply: {}", answer);
-        assertThat(answer.contains("Results:") && answer.contains("Classroom") && 
-                   answer.contains("Study Room")).isEqualTo(true);
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", (String) answer);
+        assertThat(((String) answer).contains("Results:") && ((String) answer).contains("Classroom") && 
+                   ((String) answer).contains("Study Room")).isEqualTo(true);
 
         log.info("--- End of partialMatchRecreation2() ---");
+    }
+
+    // partial match timetable keyword case 1: end + merged with other char + different case
+    @Test
+    public void partialMatchTimeTable1() throws Exception {
+        log.info("--- partialMatchTimeTable1() ---");
+
+        Object answer = null;
+
+        // would match timetable and TA ....
+        // ==> resolved in ~~Category.analyze()~~
+        // ====> resolved using SearchEngine.editDistance()
+        answer = this.searchEngine.search("I would like to use the Timetable function.");
+
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof TimeTable).isEqualTo(true);
+        // assertThat(((TimeTable) answer).getController().getFunctionEvent() instanceof TimeTable);
+
+        log.info("--- End of partialMatchTimeTable1() ---");
+    }
+
+    // partial match campus keyword case 1: end + merged with other char
+    @Test
+    public void partialMatchCampus1() throws Exception {
+        log.info("--- partialMatchCampus1() ---");
+        Object answer = this.searchEngine.search("Can I know eta from 4619 to 2407?");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("It takes")).isEqualTo(true);
+        log.info("--- End of partialMatchCampus1() ---");
+    }
+
+    // partial match campus keyword case 2: end + merged with other char + 
+    //                                      starting point string consisting of multiple words 
+    //                                      (to test HTML encoding) + different case
+    @Test
+    public void partialMatchCampus2() throws Exception {
+        log.info("--- partialMatchCampus2() ---");
+        Object answer = this.searchEngine.search("Can I know eta from LTA back entrance to 2504?");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("It takes")).isEqualTo(true);
+        log.info("--- End of partialMatchCampus2() ---");
+    }
+
+    // partial match campus keyword case 3: end + merged with other char + 
+    //                                      only providing starting point without ending point
+    @Test
+    public void partialMatchCampus3() throws Exception {
+        log.info("--- partialMatchCampus3() ---");
+        Object answer = this.searchEngine.search("Can I know eta from 4619?");
+        assertThat(answer).isNull();
+        log.info("--- End of partialMatchCampus3() ---");
+    }
+    
+    @Test
+    public void userHelpTest1() throws Exception {
+        log.info("--- userHelpTest1() ---");
+        Object answer = this.searchEngine.search("/help");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("Commands")).isEqualTo(true);
+        log.info("--- End of userHelpTest1() ---");
+    }
+    
+    @Test
+    public void userHelpTest2() throws Exception {
+        log.info("--- userHelpTest2() ---");
+        Object answer = this.searchEngine.search("/dir");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("Kim")).isEqualTo(true);
+        log.info("--- End of userHelpTest2() ---");
+    }
+    
+    @Test
+    public void userHelpTest3() throws Exception {
+        log.info("--- userHelpTest3() ---");
+        Object answer = this.searchEngine.search("/kmb");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("ETA of 91m")).isEqualTo(true);
+        log.info("--- End of userHelpTest3() ---");
+    }
+    
+    @Test
+    public void userHelpTest4() throws Exception {
+        log.info("--- userHelpTest4() ---");
+        Object answer = this.searchEngine.search("/minibus");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("by our bot!")).isEqualTo(true);
+        log.info("--- End of userHelpTest4() ---");
+    }
+    
+    @Test
+    public void userHelpTest5() throws Exception {
+        log.info("--- userHelpTest5() ---");
+        Object answer = this.searchEngine.search("/society");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("search all")).isEqualTo(true);
+        log.info("--- End of userHelpTest5() ---");
+    }
+    
+    @Test
+    public void userHelpTest6() throws Exception {
+        log.info("--- userHelpTest6() ---");
+        Object answer = this.searchEngine.search("/campus");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("takes from one")).isEqualTo(true);
+        log.info("--- End of userHelpTest6() ---");
+    }
+    
+    @Test
+    public void userHelpTest7() throws Exception {
+        log.info("--- userHelpTest7() ---");
+        Object answer = this.searchEngine.search("/facb");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("I want to")).isEqualTo(true);
+        log.info("--- End of userHelpTest7() ---");
     }
 }

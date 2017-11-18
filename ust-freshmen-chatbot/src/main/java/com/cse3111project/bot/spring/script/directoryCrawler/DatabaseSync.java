@@ -1,6 +1,6 @@
-package com.cse3111project.bot.spring.directoryEnquiry;
+package com.cse3111project.bot.spring.directoryCrawler;
 
-import com.cse3111project.bot.spring.SQLDatabaseEngine;
+import com.cse3111project.bot.spring.model.engine.SQLDatabaseEngine;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -34,7 +34,7 @@ public class DatabaseSync {
 	
 	// this insert function can only be run once as it is an insert SQL
 	private void insertToDatabase() throws URISyntaxException, SQLException {
-		SQLDatabaseEngine de = new SQLDatabaseEngine(); // creating this object will get connection to db
+		SQLDatabaseEngine de = new SQLDatabaseEngine(this, "hkust_directories"); // creating this object will get connection to db
 		
 		// check if the table exists, it will create it if it does not exist
 		String createTableSQL = "CREATE TABLE IF NOT EXISTS public.hkust_directories"
@@ -65,6 +65,7 @@ public class DatabaseSync {
 		}
 		insertData.close();
 		de.closeConnection();
+
 	}
 
 	// for testing

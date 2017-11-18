@@ -1,6 +1,8 @@
 package com.cse3111project.bot.spring.script.creditTransferCrawler;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import java.net.URL;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
@@ -152,7 +154,9 @@ public class CreditTransfer
 						String code = details.get(1).text();
 						String USTCode = details.get(2).text();
 						String restrict = details.get(4).text();
+
 						String refNo = details.get(6).text();
+
 						if (restrict.equals("EXP"))
 							restrict = "Expired";
 						else if (restrict.equals("--"))
@@ -247,12 +251,14 @@ public class CreditTransfer
 							String code = details.get(1).text();
 							String USTCode = details.get(2).text();
 							String restrict = details.get(4).text();
+
 							String refNo = details.get(6).text();
+
 							if (restrict.equals("EXP"))
 								restrict = "Expired";
 							else if (restrict.equals("--"))
 								restrict = "No Restriction";
-							
+
 							country.add(location);
 							institution.add(school);
 							courseCode.add(code);
@@ -323,4 +329,5 @@ public class CreditTransfer
 //	{
 //		new CreditTransfer();
 //	}
+
 }
