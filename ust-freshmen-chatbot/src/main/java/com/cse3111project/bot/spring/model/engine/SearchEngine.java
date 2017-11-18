@@ -8,13 +8,11 @@ import com.cse3111project.bot.spring.category.function.Function;
 import com.cse3111project.bot.spring.category.function.timetable.TimeTable;
 import com.cse3111project.bot.spring.category.campus.*;
 import com.cse3111project.bot.spring.category.instruction.*;
-// import com.cse3111project.bot.spring.SQLDatabaseEngine;
 
 import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
 import com.cse3111project.bot.spring.model.engine.marker.StaticAccessible;
 
 import java.sql.Connection;
-// import javax.sql.DataSource;
 import java.sql.DriverManager;
 import java.sql.SQLTimeoutException;
 import java.sql.SQLException;
@@ -32,17 +30,27 @@ import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
 import com.cse3111project.bot.spring.exception.StaffNotFoundException;
 import com.cse3111project.bot.spring.exception.RoomNotFoundException;
 import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
-// import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
 
-public class SearchEngine {
-    // conducting search based on userQuery
-    // if matched certain QUERY_KEYWORD, reply accordingly 
-    // Possible response:
-    // - general query e.g. finding the office location of staff => return String
-    //   query result would be searched on SQL database first
-    //   if SQLDatabase is failed to load => use the backup static database
-    // - application e.g. TimeTable function => return the application object
-	public Object search(String userQuery){
+/**
+ * SearchEngine class handles the actual communication between chatbot and user, which search for matched response
+ * from various category.
+ * @version 1.0
+ */
+public class SearchEngine 
+{
+	/**
+	 * This method will conduct search based on userQuery, and reply accordingly upon matched query keyword.
+	 * @param userQuery
+	 * @return Object
+	 */
+	public Object search(String userQuery)
+	{
+	    // Possible response:
+	    // - general query e.g. finding the office location of staff => return String
+	    //   query result would be searched on SQL database first
+	    //   if SQLDatabase is failed to load => use the backup static database
+	    // - application e.g. TimeTable function => return the application object
+		
         String reply = null;  // chatbot reply according to userQuery
 
         Category categoryResult = null;  // storing search result of user query
@@ -143,7 +151,14 @@ public class SearchEngine {
     // may add Unicode / emojis later **
     public static final String OMITTED_SYMBOLS = "!@#$%^&*()_=+[]{}\\|:;\'\",<>?";
 
-    private ArrayList<String> parse(String userQuery){
+    /**
+     * This method will process the original sentence from user, remove the useless symbols and detect
+     * useful keywords.
+     * @param userQuery
+     * @return ArrayList
+     */
+    private ArrayList<String> parse(String userQuery)
+    {
         StringBuilder queryBuilder = new StringBuilder(userQuery);
 
         // remove all unneccessary symbols
