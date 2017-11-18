@@ -1,6 +1,5 @@
 package com.cse3111project.bot.spring.category.academic;
 
-// import com.cse3111project.bot.spring.model.engine.DatabaseEngine;
 import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
 import com.cse3111project.bot.spring.model.engine.SQLDatabaseEngine;
 import com.cse3111project.bot.spring.model.engine.marker.StaticAccessible;
@@ -22,10 +21,14 @@ import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundExcepti
 
 import lombok.extern.slf4j.Slf4j;
 
-// Staff Category
-// SQL database, static database are available
+/**
+ * The Staff class inherits Academic category, which handles all user-query on finding details
+ * about specificc valid staff in UST.
+ * @version 1.0
+ */
 @Slf4j
-public class Staff extends Academic implements SQLAccessible, StaticAccessible {
+public class Staff extends Academic implements SQLAccessible, StaticAccessible 
+{
     public static final String STAFF_NAME_KEYWORD[];
 
     public static final String STAFF_POSITION_KEYWORD[] = { "Professor", "Prof.", "Prof",
@@ -42,7 +45,12 @@ public class Staff extends Academic implements SQLAccessible, StaticAccessible {
     private ArrayList<String> userQuery;
     private ArrayList<StaffInfo> results;
 
-    Staff(final ArrayList<String> userQuery) {
+    /**
+     * Constructor of Staff Class.
+     * @param userQuery This is the only parameter taken by constructor, which is a list of keywords extracted from user-query.
+     */
+    Staff(final ArrayList<String> userQuery) 
+    {
         this.userQuery = this.transform(userQuery);
     }
 
@@ -3971,9 +3979,14 @@ public class Staff extends Academic implements SQLAccessible, StaticAccessible {
                                           };
     }
 
-    // check whether user is REALLY querying staff and providing staff position
-    // especially "TA" which is a common subset from other Category.QUERY_KEYWORD
-    // e.g. "TA" vs "timetable", "TA" vs "LTA"
+    /**
+     * This method is used to check whether user is really querying staff and providing corresponding
+     * staff position since the positions are common subset from other category's query keyword. Example
+     * like "TA" vs "timetable", "TA" vs "LTA".
+     * @param userQuery
+     * @param keyword
+     * @return boolean 
+     */
     public static boolean isExactPosition(String userQuery, String keyword){
         // all staff positions consist of one word except "Teaching Assistant" 
         // which should be .transform()-ed to "TA" already
@@ -3985,10 +3998,13 @@ public class Staff extends Academic implements SQLAccessible, StaticAccessible {
         return queryWord.equals(keyword);
     }
 
-    // check whether contains last name if specified staff position, e.g. Professor, Instructor, ...
-    // if so, append to matchedResults
-    // NOTE that full name should be found by partial match method in SearchEngine.parse()
-    // @param userQuery: omitted symbols (!@#$%...) + toLowerCase()
+    /**
+     * This method checks whether there will be valid last name if specify the staff positions like Professor and Instructor.
+     * If that is the case, the method will append it to matchedResults.
+     * Note that full name should be found by partial match method in SearchEngine.parse().
+     * @param userQuery user-query without omitted symbols (!@#$%...) and with toLowerCase() applied.
+     * @param matchedResults the processed list of keywords extracted from user-query.
+     */
     public static void containsLastName(String userQuery, ArrayList<String> matchedResults){
         for (String staffName : STAFF_NAME_KEYWORD)
             if (matchedResults.contains(staffName))  // already found full name in .parse()
@@ -4047,20 +4063,35 @@ public class Staff extends Academic implements SQLAccessible, StaticAccessible {
             matchedResults.add(newResult);
     } 
 
-    // used to wrap staff object
+    /**
+     * StaffInfo class is the inner class of Staff class, which is used to wrap details of any staff, such as their 
+     * name and email.
+     * @version 1.0
+     */
     class StaffInfo {
         private String name;
         private String position;
         private String officeLocation;
         private String email;
 
-        private StaffInfo(String name, String position, String officeLocation, String email){
+        /**
+         * Constructor of StaffInfo Class.
+         * @param name Name of the staff.
+         * @param position Position of the staff.
+         * @param officeLocation Office Location of the staff.
+         * @param email Email of the staff.
+         */
+        private StaffInfo(String name, String position, String officeLocation, String email)
+        {
             this.name = name;
             this.position = position;
             this.officeLocation = officeLocation;
             this.email = email;
         }
 
+        /**
+         * Override the toString() method
+         */
         @Override
         public String toString(){
             return "Office of " + name + ", " + position + ", is located at " + officeLocation + '\n' + 
@@ -4068,7 +4099,11 @@ public class Staff extends Academic implements SQLAccessible, StaticAccessible {
         }
     }
 
-    // transform the query as <lastName> <firstName> so that it could be searched in SQL / static database
+    /**
+     * This method is used to transform the query as <lastName> <firstName> so that it could be searched in SQL / static database
+     * @param userQuery
+     * @return ArrayList
+     */
     private ArrayList<String> transform(final ArrayList<String> userQuery){
         ArrayList<String> transformedUserQuery = new ArrayList<>();
 
@@ -4091,8 +4126,13 @@ public class Staff extends Academic implements SQLAccessible, StaticAccessible {
         return transformedUserQuery;
     }
 
-    // search by staff name(s)
-    // return staff contact(s) using SQL database
+    /**
+     * This method will connect to the SQL database and search for staff details by their names.
+     * @return String
+     * @throws NotSQLAccessibleError
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     @Override
     public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
         try (SQLDatabaseEngine database = new SQLDatabaseEngine(this, SQL_TABLE)) {
@@ -4125,8 +4165,13 @@ public class Staff extends Academic implements SQLAccessible, StaticAccessible {
         }
     }
 
-    // return staff contact(s) using static database
-    // only used when fail to connect SQL database
+    /**
+     * This method will connect to the static database and search for staff details. It is used when there is connection 
+     * problem to SQL database.
+     * @return String
+     * @throws NotStaticAccessibleError
+     * @throws StaticDatabaseFileNotFoundException
+     */
     @Override
     public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
         try (StaticDatabaseEngine database = new StaticDatabaseEngine(this, STATIC_TABLE)) {
