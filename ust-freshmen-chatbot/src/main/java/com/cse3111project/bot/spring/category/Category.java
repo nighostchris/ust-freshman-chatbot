@@ -21,6 +21,7 @@ import com.cse3111project.bot.spring.utility.Utilities;
 
 import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
 import com.cse3111project.bot.spring.exception.StaffNotFoundException;
+import com.cse3111project.bot.spring.exception.CourseNotFoundException;
 import com.cse3111project.bot.spring.exception.RoomNotFoundException;
 
 /**
@@ -60,7 +61,7 @@ public class Category
      * @throws IOException
      */
     public static Category analyze(final List<String> matchedResults) 
-           throws AmbiguousQueryException, StaffNotFoundException, RoomNotFoundException,
+           throws AmbiguousQueryException, StaffNotFoundException, CourseNotFoundException, RoomNotFoundException,
                   MalformedURLException, FileNotFoundException, IOException 
     {
         ArrayList<String> transportResults = new ArrayList<>();
