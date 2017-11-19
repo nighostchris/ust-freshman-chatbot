@@ -186,7 +186,7 @@ public class SearchEngine {
         // detect last name (full name) after STAFF_POSITION_KEYWORD, e.g. Lecturer, Professor, Prof., ...
         Staff.containsLastName(userQuery.toLowerCase(), matchedResults);
         
-//        Course.containsCourseCode(userQuery.toLowerCase(), matchedResults);
+        Course.containsCourseCode(userQuery.toLowerCase(), matchedResults);
 
         // detect location name if provided
         // pass userQuery to preserve casing

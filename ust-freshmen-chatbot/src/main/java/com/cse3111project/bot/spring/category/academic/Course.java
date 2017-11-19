@@ -1353,12 +1353,12 @@ public class Course extends Academic implements SQLAccessible, StaticAccessible{
             Utilities.arrayLog("query course", userQuery);
             for (int i = 0; i < userQuery.size(); i++) {
             	StringBuilder SQLStatement = new StringBuilder("SELECT course_code, course_title, course_credit, prerequisite, exclusion, corequisite FROM ")
-            			.append(SQL_TABLE).append(" WHERE prerequisite LIKE '%?%'");
+            			.append(SQL_TABLE).append(" WHERE prerequisite LIKE ? OR corequisite LIKE ?");
 
             	PreparedStatement SQLQuery = database.prepare(SQLStatement.toString());
-
-            	SQLQuery.setString(1, userQuery.get(i));
-//            	SQLQuery.setString(2, userQuery.get(i));
+            	String courseCode = "%" + userQuery.get(i) + "%";
+            	SQLQuery.setString(1, courseCode);
+            	SQLQuery.setString(2, courseCode);
 
             	ResultSet reader = database.executeQuery();
             	while (reader.next()){
