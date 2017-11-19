@@ -1307,7 +1307,7 @@ public class Course extends Academic implements SQLAccessible, StaticAccessible{
 
         ArrayList<String> newResults = new ArrayList<>();
         for (String courseCodeKeyword : COURSE_CODE_KEYWORD) {
-            if (userQuery.replaceAll(" ", "").contains(courseCodeKeyword.toLowerCase().replace(" ", ""))){
+            if (userQuery.replace(" ", "").contains(courseCodeKeyword.toLowerCase().replace(" ", ""))){
             	newResults.add(courseCodeKeyword);
             }
         }
