@@ -29,6 +29,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
@@ -237,7 +238,10 @@ public class KitchenSinkController {
             this.replyText(replyToken, "I don\'t understand what you are saying. Could you be more clearer?");
         else if (response instanceof String) {
         	String[] array = ((String) response).split("\\r?\\n\\n");
-        	List<Message> messageList = Arrays.asList(new TextMessage(array[0]),new TextMessage(array[1]),new TextMessage(array[2]),new TextMessage(array[3]),new TextMessage(array[4]));
+        	List<Message> messageList = new ArrayList<Message>();
+        	for (String message : array) {
+        		messageList.add(new TextMessage(message));
+        	}
         	this.reply(replyToken, messageList);
         }
         else if (response instanceof Function){
