@@ -1,4 +1,4 @@
-package bot.spring.category.academic;
+package com.cse3111project.bot.spring.category.academic;
 
 //import com.cse3111project.bot.spring.model.engine.DatabaseEngine;
 import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
@@ -1359,7 +1359,7 @@ public class Course extends Academic implements SQLAccessible, StaticAccessible{
         }
     }
 
-    // return staff contact(s) using static database
+    // return course detail(s) using static database
     // only used when fail to connect SQL database
     @Override
     public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {

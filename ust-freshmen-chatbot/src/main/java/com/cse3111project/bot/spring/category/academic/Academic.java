@@ -20,7 +20,7 @@ public abstract class Academic extends Category {
                                                                         Course.COURSE_CODE_KEYWORD);
 
     // find out which academic category the user is searching for from partially matched results
-    public static Category analyze(final ArrayList<String> extractedResults) throws StaffNotFoundException, CourseNotFoundException {
+    public static Category analyze(final ArrayList<String> extractedResults) throws StaffNotFoundException, CourseNotFoundException, AmbiguousQueryException {
         // extract staff names and course codes from extractedResults
         ArrayList<String> queryStaffNameKeywords = new ArrayList<>();
         ArrayList<String> queryCourseCodeKeywords = new ArrayList<>();
