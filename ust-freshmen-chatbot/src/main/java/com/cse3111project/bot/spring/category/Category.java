@@ -157,10 +157,14 @@ public class Category
      */
     protected String replyResults(final List<?> results){
         StringBuilder replyBuilder = new StringBuilder("Results:\n");
+        int divider = (int)Math.ceil((double)results.size()/5);
         for (int i = 0; i < results.size(); i++){
             replyBuilder.append(results.get(i).toString());
             if (i != results.size() - 1)
                 replyBuilder.append("\n");
+            if (i+1%divider==0) {
+            	replyBuilder.append("\n");
+            }
         }
 
         return replyBuilder.toString();
