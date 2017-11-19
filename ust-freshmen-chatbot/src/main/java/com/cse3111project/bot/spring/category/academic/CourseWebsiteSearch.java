@@ -18,7 +18,7 @@ public class CourseWebsiteSearch extends Academic
 	private String parentURL[] = { "https://www.google.com/search?q=", "+hkust&num=4" };
 	private ArrayList<Website> searchList;
 	
-	public static final String WEBSITE_SEARCH_KEYWORD[] = Utilities.concatArrays(new String[] { "website", "search" },
+	public static final String WEBSITE_SEARCH_KEYWORD[] = Utilities.concatArrays(new String[] { "course website", "website", "search" },
 																				 Course.COURSE_CODE_KEYWORD);
 
 	public CourseWebsiteSearch(final ArrayList<String> userQuery)
