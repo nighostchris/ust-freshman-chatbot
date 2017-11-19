@@ -234,7 +234,8 @@ public class KitchenSinkController {
         response = searchEngine.search(query);  // start analyzing what user is querying for
 
         if (response == null)
-            this.replyText(replyToken, "I don\'t understand what you are saying. Could you be more clearer?");
+            this.replyText(replyToken, "I don\'t understand what you are saying. Could you be more clearer?\n You may want to get"
+            						 + " some help by typing /help");
         else if (response instanceof String)
             this.replyText(replyToken, (String) response);
         else if (response instanceof Function){

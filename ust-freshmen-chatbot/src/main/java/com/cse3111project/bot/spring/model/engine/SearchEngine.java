@@ -93,6 +93,16 @@ public class SearchEngine {
             return e.getMessage();
         }
 
+        try {
+        	if (categoryResult instanceof Academic)
+        		if (categoryResult instanceof CourseWebsiteSearch)
+        			return ((CourseWebsiteSearch) categoryResult).getCourseWebsite();
+        }
+        catch (IOException e)
+        {
+        	return e.getMessage();
+        }
+        
         // --- KMB database ---
         try {
             if (categoryResult instanceof Transport)
