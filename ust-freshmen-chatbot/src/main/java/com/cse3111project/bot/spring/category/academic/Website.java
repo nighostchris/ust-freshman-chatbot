@@ -20,4 +20,10 @@ public class Website
 	public String getTitle() { return title; }
 	
 	public String getWebsiteLink() { return websiteLink; }
+	
+	@Override
+	public String toString()
+	{
+		return "Title: " + title + "\nWebsite: " + websiteLink;
+	}
 }

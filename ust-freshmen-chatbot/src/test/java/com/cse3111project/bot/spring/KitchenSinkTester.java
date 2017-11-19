@@ -478,4 +478,15 @@ public class KitchenSinkTester {
         assertThat(((String) answer).contains("I want to")).isEqualTo(true);
         log.info("--- End of userHelpTest7() ---");
     }
+    
+    @Test
+    public void partialMatchCourseWebsiteSearch1() throws Exception {
+        log.info("--- partialMatchCourseWebsiteSearch1 ---");
+        Object answer = this.searchEngine.search("Please search course website of COMP 2611 for me");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("I want to")).isEqualTo(true);
+        log.info("--- End of partialMatchCourseWebsiteSearch1 ---");
+    }
 }

@@ -1,8 +1,9 @@
 package com.cse3111project.bot.spring.category.academic;
 import com.cse3111project.bot.spring.utility.Utilities;
 
-import java.util.ArrayList;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
@@ -30,7 +31,7 @@ public class CourseWebsiteSearch extends Academic
 	{
 		try
 		{
-			URL url = new URL(parentURL[0] + userQuery.get(0) + parentURL[1]);
+			URL url = new URL(parentURL[0] + URLEncoder.encode(userQuery.get(0), "UTF-8") + parentURL[1]);
 			Document doc = Jsoup.parse(url, 3000);
 			Elements rows = doc.select("h3.r > a");
 			for (Element result : rows)
