@@ -1301,10 +1301,13 @@ public class Course extends Academic implements SQLAccessible, StaticAccessible{
     // NOTE that course code should be found by partial match method in SearchEngine.parse()
     // @param userQuery: omitted symbols (!@#$%...) + toLowerCase()
     public static void containsCourseCode(String userQuery, ArrayList<String> matchedResults){
-        
+        for (String courseCodeKeyword : COURSE_CODE_KEYWORD)
+            if (matchedResults.contains(courseCodeKeyword))  // already found course code in .parse()
+                return;
+
         ArrayList<String> newResults = new ArrayList<>();
         for (String courseCodeKeyword : COURSE_CODE_KEYWORD) {
-            if (courseCodeKeyword.toLowerCase().contains(userQuery)){
+            if (userQuery.replace(" ", "").contains(courseCodeKeyword.toLowerCase().replace(" ", ""))){
             	newResults.add(courseCodeKeyword);
             }
         }
