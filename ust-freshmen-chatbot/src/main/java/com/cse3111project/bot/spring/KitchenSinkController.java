@@ -238,9 +238,11 @@ public class KitchenSinkController {
         else if (response instanceof String) {
         	String[] messages = ((String) response).split("\\r?\\n\\n");
         	
+        	List<Message> messageList= Collections.singletonList(new TextMessage(messages[0]));
         	for (String message : messages) {
-        		reply(replyToken, Collections.singletonList(new TextMessage(message)));
+        		messageList.add(new TextMessage(message));
         	}
+        	reply(replyToken, messageList);
         }
         else if (response instanceof Function){
             // retrieve current reply token first
