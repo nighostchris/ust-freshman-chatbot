@@ -215,8 +215,8 @@ public class KitchenSinkController {
 		if (replyToken.isEmpty()) {
 			throw new IllegalArgumentException("replyToken must not be empty");
 		}
-		if (message.length() > 1000) {
-			message = message.substring(0, 1000 - 2) + "..";
+		if (message.length() > 2000) {
+			message = message.substring(0, 2000 - 2) + "..";
 		}
 		this.reply(replyToken, new TextMessage(message));
 	}
@@ -235,15 +235,8 @@ public class KitchenSinkController {
 
         if (response == null)
             this.replyText(replyToken, "I don\'t understand what you are saying. Could you be more clearer?");
-        else if (response instanceof String) {
-        	String[] messages = ((String) response).split("\\r?\\n\\n");
-        	
-        	List<Message> messageList= Collections.singletonList(new TextMessage(messages[0]));
-        	for (String message : messages) {
-        		messageList.add(new TextMessage(message));
-        	}
-        	reply(replyToken, messageList);
-        }
+        else if (response instanceof String)
+            this.replyText(replyToken, (String) response);
         else if (response instanceof Function){
             // retrieve current reply token first
             ((Function) response).retrieveReplyToken(replyToken);
