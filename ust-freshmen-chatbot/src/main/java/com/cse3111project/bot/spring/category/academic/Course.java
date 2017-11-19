@@ -1295,6 +1295,27 @@ public class Course extends Academic implements SQLAccessible, StaticAccessible{
 							        		"WBBA 4010"
         };
     }
+    
+    // check whether userQuery contains course code, i.e. wrong format 
+    // if so, append to matchedResults
+    // NOTE that course code should be found by partial match method in SearchEngine.parse()
+    // @param userQuery: omitted symbols (!@#$%...) + toLowerCase()
+    public static void containsCourseCode(String userQuery, ArrayList<String> matchedResults){
+        for (String courseCodeKeyword : COURSE_CODE_KEYWORD)
+            if (matchedResults.contains(courseCodeKeyword))  // already found course code in .parse()
+                return;
+
+        ArrayList<String> newResults = new ArrayList<>();
+        for (String courseCodeKeyword : COURSE_CODE_KEYWORD) {
+            if (userQuery.replaceAll(" ", "").contains(courseCodeKeyword.toLowerCase().replace(" ", ""))){
+            	newResults.add(courseCodeKeyword);
+            }
+        }
+        // finally append new results
+        for (String newResult : newResults)
+            matchedResults.add(newResult);
+    } 
+    
  // used to wrap course object
     class CourseInfo {
         private String code;
@@ -1333,22 +1354,21 @@ public class Course extends Academic implements SQLAccessible, StaticAccessible{
             results = new ArrayList<>();
 
             Utilities.arrayLog("query course", userQuery);
+            for (int i = 0; i < userQuery.size(); i++) {
+            	StringBuilder SQLStatement = new StringBuilder("SELECT course_code, course_title, course_credit, prerequisite, exclusion, corequisite FROM ")
+            			.append(SQL_TABLE).append(" WHERE prerequisite LIKE '%?%' OR corequisite LIKE '%?%'");
 
-            StringBuilder SQLStatement = new StringBuilder("SELECT course_code, course_title, course_credit, prerequisite, exclusion, corequisite FROM ")
-                                             .append(SQL_TABLE).append(" WHERE course_code = ?");
+            	PreparedStatement SQLQuery = database.prepare(SQLStatement.toString());
 
-            for (int i = 1; i < userQuery.size(); i++)
-                SQLStatement.append(" OR course_code = ?");
+            	SQLQuery.setString(1, userQuery.get(i));
+            	SQLQuery.setString(2, userQuery.get(i));
 
-            PreparedStatement SQLQuery = database.prepare(SQLStatement.toString());
-            for (int i = 0; i < userQuery.size(); i++)
-                SQLQuery.setString(i + 1, userQuery.get(i));
-
-            ResultSet reader = database.executeQuery();
-            while (reader.next()){
-                results.add(new CourseInfo(reader.getString(1), reader.getString(2), 
-                                          reader.getString(3), reader.getString(4),
-                                          reader.getString(5), reader.getString(6)));
+            	ResultSet reader = database.executeQuery();
+            	while (reader.next()){
+            		results.add(new CourseInfo(reader.getString(1), reader.getString(2), 
+            									reader.getString(3), reader.getString(4),
+            									reader.getString(5), reader.getString(6)));
+            	}
             }
 
             // ONLY happens when the SQL database and static database are NOT synchronized
