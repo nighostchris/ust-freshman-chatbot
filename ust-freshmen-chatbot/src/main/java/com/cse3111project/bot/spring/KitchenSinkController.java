@@ -235,8 +235,12 @@ public class KitchenSinkController {
 
         if (response == null)
             this.replyText(replyToken, "I don\'t understand what you are saying. Could you be more clearer?");
-        else if (response instanceof String)
-            this.replyText(replyToken, (String) response);
+        else if (response instanceof String) {
+        	String[] messages = ((String) response).split("\n\n");
+        	for (String message : messages) {
+        		this.replyText(replyToken, message);
+        	}
+        }
         else if (response instanceof Function){
             // retrieve current reply token first
             ((Function) response).retrieveReplyToken(replyToken);
