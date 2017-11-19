@@ -44,6 +44,8 @@ public abstract class Academic extends Category {
         else if (querycourseWebsiteSearchKeywords.size() > queryStaffNameKeywords.size()&&
         		querycourseWebsiteSearchKeywords.size() > queryCourseCodeKeywords.size())
         	return new CourseWebsiteSearch(querycourseWebsiteSearchKeywords);
+        else
+        	return new Course(queryCourseCodeKeywords);
         
         throw new AmbiguousQueryException("I am not sure what you are asking for, " + 
                 "could you be more clearer?");

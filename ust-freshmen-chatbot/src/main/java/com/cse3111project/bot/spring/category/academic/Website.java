@@ -24,6 +24,6 @@ public class Website
 	@Override
 	public String toString()
 	{
-		return "Title: " + title + "\nWebsite: " + websiteLink;
+		return "Title: " + title + "\nWebsite: " + websiteLink + "\n";
 	}
 }

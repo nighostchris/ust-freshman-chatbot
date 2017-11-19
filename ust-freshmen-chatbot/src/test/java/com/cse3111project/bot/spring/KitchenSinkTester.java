@@ -486,7 +486,7 @@ public class KitchenSinkTester {
         assertThat(answer).isNotNull();
         assertThat(answer instanceof String).isEqualTo(true);
         log.info("reply: {}", answer);
-        assertThat(((String) answer).contains("I want to")).isEqualTo(true);
+        assertThat(((String) answer).contains("Review")).isEqualTo(true);
         log.info("--- End of partialMatchCourseWebsiteSearch1 ---");
     }
 }
