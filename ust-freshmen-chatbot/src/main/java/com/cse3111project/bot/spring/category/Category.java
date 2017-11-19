@@ -162,7 +162,7 @@ public class Category
             replyBuilder.append(results.get(i).toString());
             if (i != results.size() - 1)
                 replyBuilder.append("\n");
-            if ((i+1)%divider==0) {
+            if ((i+1)%divider==0 && i != results.size() - 1) {
             	replyBuilder.append("\n");
             }
         }
