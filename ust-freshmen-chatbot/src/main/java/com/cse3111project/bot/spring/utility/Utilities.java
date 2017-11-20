@@ -5,9 +5,14 @@ import java.io.ByteArrayOutputStream;
 
 import java.util.List;
 
-import lombok.extern.slf4j.Slf4j;  // logging
+import lombok.extern.slf4j.Slf4j;
 
 // offer general utilities for classes
+/**
+ * 
+ * @author climbz21268
+ *
+ */
 @Slf4j
 public final class Utilities {
     // make sure no one could instantiate Utilities object since all methods here would be static
