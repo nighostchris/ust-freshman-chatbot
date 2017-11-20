@@ -64,8 +64,6 @@ public class DatabaseSync {
 			}
 		}
 		insertData.close();
-		de.closeConnection();
-
 	}
 
 	// for testing

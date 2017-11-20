@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * The CampusMapping¡@Class store all floor and building details of UST Campus and handle time estimation adjustment
+ * The CampusMapping Class store all floor and building details of UST Campus and handle time estimation adjustment
  * for the first draft. It is included in CampusETA Class as instance variable.
  * @version 1.0
  */

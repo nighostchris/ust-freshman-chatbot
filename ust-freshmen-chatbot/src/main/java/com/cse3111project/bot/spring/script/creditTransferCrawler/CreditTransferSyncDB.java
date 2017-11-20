@@ -57,10 +57,9 @@ public class CreditTransferSyncDB {
 					insertExamData.executeUpdate();
 				}
 				insertExamData.close();
-				de.closeConnection();
 				break;
 			case 2:
-				SQLDatabaseEngine de = new SQLDatabaseEngine(this, "local_institutions_credits"); // creating this object will get connection to db
+				de = new SQLDatabaseEngine(this, "local_institutions_credits"); // creating this object will get connection to db
 				// check if the table exists, it will create it if it does not exist
 				String createLocalTableSQL = "CREATE TABLE IF NOT EXISTS public.local_institutions_credits"
 						+ "(id SERIAL PRIMARY KEY, institution varchar(255),"
@@ -83,10 +82,9 @@ public class CreditTransferSyncDB {
 					insertLocalData.executeUpdate();
 				}
 				insertLocalData.close();
-				de.closeConnection();
 				break;
 			case 3:
-				SQLDatabaseEngine de = new SQLDatabaseEngine(this, "non_local_institutions_credits"); // creating this object will get connection to db
+				de = new SQLDatabaseEngine(this, "non_local_institutions_credits"); // creating this object will get connection to db
 				// check if the table exists, it will create it if it does not exist
 				String createNonLocalTableSQL = "CREATE TABLE IF NOT EXISTS public.non_local_institutions_credits"
 						+ "(id SERIAL PRIMARY KEY, country varchar (255), institution varchar(255),"
@@ -110,15 +108,14 @@ public class CreditTransferSyncDB {
 					insertNonLocalData.executeUpdate();
 				}
 				insertNonLocalData.close();
-				de.closeConnection();
 				break;
 		}
 	}
 
 //	 for testing
-	public static void main(String[] args) throws URISyntaxException, SQLException {
-		CreditTransferSyncDB test = new CreditTransferSyncDB();
-		test.insertToDatabase();
-		System.out.println("FINISHED");
-	}
+//	public static void main(String[] args) throws URISyntaxException, SQLException {
+//		CreditTransferSyncDB test = new CreditTransferSyncDB();
+//		test.insertToDatabase();
+//		System.out.println("FINISHED");
+//	}
 }

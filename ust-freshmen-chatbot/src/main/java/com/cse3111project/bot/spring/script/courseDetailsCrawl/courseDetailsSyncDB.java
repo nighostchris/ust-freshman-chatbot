@@ -47,15 +47,14 @@ public class courseDetailsSyncDB implements SQLAccessible{
 			insertData.executeUpdate();
 		}
 		insertData.close();
-		de.close();
 	}
 
 	// for local testing
-	public static void main(String[] args) throws URISyntaxException, SQLException {
-		courseDetailsSyncDB test = new courseDetailsSyncDB();
-		test.insertToDatabase();
-		System.out.println("FINISHED");
-	}
+//	public static void main(String[] args) throws URISyntaxException, SQLException {
+//		courseDetailsSyncDB test = new courseDetailsSyncDB();
+//		test.insertToDatabase();
+//		System.out.println("FINISHED");
+//	}
 
 	@Override
 	public String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
