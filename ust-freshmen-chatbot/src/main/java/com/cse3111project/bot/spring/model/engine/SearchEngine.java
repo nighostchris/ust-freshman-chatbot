@@ -28,8 +28,10 @@ import com.cse3111project.bot.spring.utility.Utilities;
 import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
 import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
 import com.cse3111project.bot.spring.exception.StaffNotFoundException;
+import com.cse3111project.bot.spring.exception.CourseNotFoundException;
 import com.cse3111project.bot.spring.exception.RoomNotFoundException;
 import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
+// import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
 
 /**
  * SearchEngine class handles the actual communication between chatbot and user, which search for matched response
@@ -39,18 +41,18 @@ import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
 public class SearchEngine 
 {
 	/**
-	 * This method will conduct search based on userQuery, and reply accordingly upon matched query keyword.
+	 * This method will conduct search based on userQuery, and reply accordingly 
+	 * upon matched certain QUERY_KEYWORD.
 	 * @param userQuery
 	 * @return Object
+	 * Possible response:
+	 * - general query e.g. finding the office location of staff => return String
+	 * - query result would be searched on SQL database first
+	 *   if SQLDatabase is failed to load => use the backup static database
+	 * - application e.g. TimeTable function => return the application object
 	 */
 	public Object search(String userQuery)
 	{
-	    // Possible response:
-	    // - general query e.g. finding the office location of staff => return String
-	    //   query result would be searched on SQL database first
-	    //   if SQLDatabase is failed to load => use the backup static database
-	    // - application e.g. TimeTable function => return the application object
-		
         String reply = null;  // chatbot reply according to userQuery
 
         Category categoryResult = null;  // storing search result of user query
@@ -71,7 +73,8 @@ public class SearchEngine
         }
         // if results are found, but specified staff is not found on database or 
         // the entire query is ambiguous => reply corresponding message
-        catch (StaffNotFoundException | RoomNotFoundException | AmbiguousQueryException e) {
+
+        catch (StaffNotFoundException | CourseNotFoundException | RoomNotFoundException | AmbiguousQueryException e) {
             return e.getMessage();
         }
         catch (MalformedURLException e) {
@@ -100,6 +103,16 @@ public class SearchEngine
             return e.getMessage();
         }
 
+        try {
+        	if (categoryResult instanceof Academic)
+        		if (categoryResult instanceof CourseWebsiteSearch)
+        			return ((CourseWebsiteSearch) categoryResult).getCourseWebsite();
+        }
+        catch (IOException e)
+        {
+        	return e.getMessage();
+        }
+        
         // --- KMB database ---
         try {
             if (categoryResult instanceof Transport)
@@ -199,6 +212,8 @@ public class SearchEngine
 
         // detect last name (full name) after STAFF_POSITION_KEYWORD, e.g. Lecturer, Professor, Prof., ...
         Staff.containsLastName(userQuery.toLowerCase(), matchedResults);
+        
+        Course.containsCourseCode(userQuery.toLowerCase(), matchedResults);
 
         // detect location name if provided
         // pass userQuery to preserve casing

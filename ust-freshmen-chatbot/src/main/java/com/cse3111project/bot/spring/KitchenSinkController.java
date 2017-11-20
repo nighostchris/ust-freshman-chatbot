@@ -29,6 +29,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
@@ -215,8 +216,8 @@ public class KitchenSinkController {
 		if (replyToken.isEmpty()) {
 			throw new IllegalArgumentException("replyToken must not be empty");
 		}
-		if (message.length() > 1000) {
-			message = message.substring(0, 1000 - 2) + "..";
+		if (message.length() > 2000) {
+			message = message.substring(0, 2000 - 2) + "..";
 		}
 		this.reply(replyToken, new TextMessage(message));
 	}
@@ -235,8 +236,14 @@ public class KitchenSinkController {
 
         if (response == null)
             this.replyText(replyToken, "I don\'t understand what you are saying. Could you be more clearer?");
-        else if (response instanceof String)
-            this.replyText(replyToken, (String) response);
+        else if (response instanceof String) {
+        	String[] array = ((String) response).split("\\r?\\n\\n\\n");
+        	List<Message> messageList = new ArrayList<Message>();
+        	for (String message : array) {
+        		messageList.add(new TextMessage(message));
+        	}
+        	this.reply(replyToken, messageList);
+        }
         else if (response instanceof Function){
             // retrieve current reply token first
             ((Function) response).retrieveReplyToken(replyToken);
