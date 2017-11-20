@@ -19,7 +19,7 @@ public class StoreData {
 	}
 	
 	public void insertToDatabase() throws URISyntaxException, SQLException {
-		SQLDatabaseEngine de = new SQLDatabaseEngine(this, "hkust_societies"); // creating this object will get connection to db
+		SQLDatabaseEngine de = new SQLDatabaseEngine(this.getClass(), "hkust_societies"); // creating this object will get connection to db
 		
 		// check if the table exists, it will create it if it does not exist
 		String createTableSQL = "CREATE TABLE IF NOT EXISTS public.hkust_societies"

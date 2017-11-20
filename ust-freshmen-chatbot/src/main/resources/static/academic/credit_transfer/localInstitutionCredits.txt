@@ -1,0 +1,918 @@
+# id,institution,course_code,transfer_course_code,restriction,db_reference_no
+
+1,Centennial College,CHI4001,OTHR FREE: Free Credits,No Restriction,B00277a
+2,Centennial College,SCI4001,"ISOM 1000OM: 1000-level Course in Information Systems, Business Statistics and Operations Management",Expired,B00279c
+3,Centennial College,ACC4001,ACCT 2010: Principles of Accounting I,GD:B+,B00276a
+4,Centennial College,BUS4001,MARK 2120: Marketing Management,Expired,B00270b
+5,Centennial College,POL4001,SOSC 1000LEVEL: 1000-level Course in Social Science,No Restriction,B00278
+6,Centennial College,HUM4001,HUMA 1720: Logic,No Restriction,B00274
+7,Centennial College,HUM4002,HUMA 1100: Music of the World,No Restriction,B00273
+8,Chu Hai College of Higher Education,ABA101A+ ABA101B,ACCT 2010: Principles of Accounting I,GD:B+,B14532
+9,City University of Hong Kong,BST 22317,CIVL 1130: Monumental Structures from Ancient to Modern Times,No Restriction,B14711
+10,City University of Hong Kong,BST12345,CIVL 2110: Statics,GD:B,B02497b
+11,City University of Hong Kong,GE1125,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B02551
+12,City University of Hong Kong,GE2305,STCC UCORE: Common Core Course in Science and Technology,No Restriction,B12160a
+13,City University of Hong Kong,MA0101,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B06564a
+14,City University of Hong Kong,GE1105,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B02608
+15,City University of Hong Kong,BST12359,COMP 1022Q: Introduction to Computing with Excel VBA,GD:B+,B02499
+16,City University of Hong Kong,BST11959,COMP 1022Q: Introduction to Computing with Excel VBA,GD:B+,B02544
+17,City University of Hong Kong,GE2314,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B02610
+18,City University of Hong Kong,BST22326 + BST22353 + BST12350,CIVL 3210: Introduction to Construction Management,GD:B,B06565
+19,City University of Hong Kong,BST22326 + BST22353 + BST12350 + BST22325,CIVL 3210: Introduction to Construction Management,GD:B,B06614
+20,City University of Hong Kong,CGE12303,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B+,B06721
+21,City University of Hong Kong,CB2400,ECON 2103: Principles of Microeconomics,GD:B+,B02138b
+22,City University of Hong Kong,GE2306,PHYS 1003: Energy and Related Environmental Issues,No Restriction,B06617
+23,City University of Hong Kong,CGE13204,LIFS 1000LEVEL: 1000-level Course in Life Science,No Restriction,B06722
+24,City University of Hong Kong,BST22347,CIVL 3740: Geotechnical Analysis and Design (Previous code: CIVL4720),No Restriction,B02547b
+25,City University of Hong Kong,BUS20119,COMP 1001: Exploring Multimedia and Internet Computing,GD:B+,B03482a
+26,City University of Hong Kong,CB2300,MGMT 2110: Organizational Behavior,GD:B+,B02137a
+27,City University of Hong Kong,CTL2956,LANG 1120: Chinese for Non-Chinese Language Background Students I,No Restriction,B02143
+28,City University of Hong Kong,BST12331,CIVL 2810: Construction Materials,GD:B,B02498a
+29,City University of Hong Kong,CB2201,ISOM 2700: Operations Management,GD:B+,B02136b
+30,City University of Hong Kong,GE2227,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B02609
+31,City University of Hong Kong,GE2303,ENVR 1000LEVEL: 1000-level Course in Environment,No Restriction,B07159
+32,City University of Hong Kong,BST12624 + BST12315 + BST22611,MECH 1905: Buildings for Contemporary Living,No Restriction,B14092
+33,City University of Hong Kong,BST12511,MECH 2310: Thermodynamics,GD:B+,B02583
+34,City University of Hong Kong,CHIN1001,LANG CCOM: Chinese Language Proficiency Achieved,No Restriction,B02500
+35,City University of Hong Kong,GE1114,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B07158
+36,"College of International Education, Hong Kong Baptist University",LFSC 1401,LIFS 2000LEVEL: 2000-level Course in Life Science,No Restriction,B06388a
+37,"College of International Education, Hong Kong Baptist University",ELSS3010,MGMT 2010: Business Ethics and the Individual,GD:B+,B10329
+38,"College of International Education, Hong Kong Baptist University",LFSC 1402,LIFS 2000LEVEL: 2000-level Course in Life Science,No Restriction,B06389a
+39,"College of International Education, Hong Kong Baptist University",GEBS3003,MGMT 1120: Developing the Leader in You,GD:B+,B01168
+40,"College of International Education, Hong Kong Baptist University",ENCS1105,LIFS 3160: Ecology,No Restriction,B00653a
+41,"College of International Education, Hong Kong Baptist University",FSEH1203,ENVS 2000LEVEL: 2000-level Course in Environmental Science,No Restriction,B02840c
+42,"College of International Education, Hong Kong Baptist University",GESC1109 / GESS1109,ENVR 1000LEVEL: 1000-level Course in Environment,No Restriction,B10324
+43,"College of International Education, Hong Kong Baptist University",NUFM 1501,LIFS 4550: Biochemistry of Nutrition,No Restriction,B00698
+44,"College of International Education, Hong Kong Baptist University",NUFM1501,LIFS 4550: Biochemistry of Nutrition,No Restriction,B14090
+45,"College of International Education, Hong Kong Baptist University",GECR1001,COMP 1001: Exploring Multimedia and Internet Computing,GD:B+,B02701
+46,"College of International Education, Hong Kong Baptist University",GESS5301,SOSC 1960: Discovering Mind and Behavior,GD:B,B02839b
+47,"College of International Education, Hong Kong Baptist University",GECR5201,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B02860a
+48,"College of International Education, Hong Kong Baptist University",GESC1202,LIFS 1090: Food and Medicine,No Restriction,B02835
+49,"College of International Education, Hong Kong Baptist University",FSEH1204,CENG 4630: Food Processing Technology,No Restriction,B02838a
+50,"College of International Education, Hong Kong Baptist University",GESC1208,SOSC 1000LEVEL: 1000-level Course in Social Science,GD:B,B10325a
+51,"College of International Education, Hong Kong Baptist University",GESC1208 / GESS1208,LIFS 3000LEVEL: 3000-level Course in Life Science,No Restriction,B10325
+52,"College of International Education, Hong Kong Baptist University",ENCS1106,LIFS 1901: General Biology I,No Restriction,B00650b
+53,"College of International Education, Hong Kong Baptist University",FSEH1206,CHEM 1010: General Chemistry IA,No Restriction,B00649b
+54,"College of International Education, Hong Kong Baptist University",LFSC 1403,LIFS 2000LEVEL: 2000-level Course in Life Science,No Restriction,B06390a
+55,"College of International Education, Hong Kong Baptist University",GESC1102,CENG 1700: Introduction to Environmental Engineering,No Restriction,B02577
+56,"College of International Education, Hong Kong Baptist University",GESC1102,LIFS 1030: Environmental Science,No Restriction,B00654a
+57,"College of International Education, Hong Kong Baptist University",LFSC 1404,LIFS 1902: General Biology II,No Restriction,B06387a
+58,"College of International Education, Hong Kong Baptist University",GECV4002,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B02570a
+59,"College of International Education, Hong Kong Baptist University",GECR5202,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B13099a
+60,"College of International Education, Hong Kong Baptist University",GEAS2103,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B02861a
+61,"College of International Education, Hong Kong Baptist University",BUAD1002,ISOM 2010: Introduction to Information Systems,GD:B+,B10334
+62,"College of International Education, Hong Kong Baptist University",MRTG3103,MARK 2120: Marketing Management,GD:B+,B10326
+63,"College of International Education, Hong Kong Baptist University",ENCS1107,LIFS 3060: Microbiology,No Restriction,B02857
+64,"College of International Education, Hong Kong Baptist University",NUFM1504 + NUFM1505,LIFS 4000LEVEL: 4000-level Course in Life Science,No Restriction,B11034a
+65,"College of International Education, Hong Kong Baptist University",MRTG3004,MGMT 2110: Organizational Behavior,GD:B+,B11328
+66,"College of International Education, Hong Kong Baptist University",GESS5101 / GESS5101C,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B02569a
+67,"College of International Education, Hong Kong Baptist University",GECR5001 / GECR5001C,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B+,B06391a
+68,"College of International Education, Hong Kong Baptist University",ELSS3007,ACCT 2010: Principles of Accounting I,GD:B+,B10230
+69,"College of International Education, Hong Kong Baptist University",BUAD3005 ,ACCT 2200: Principles of Accounting II,GD:B+,B10231
+70,"College of International Education, Hong Kong Baptist University",BUAD3006,ECON 2123: Macroeconomics,GD:B+,B10328
+71,"College of International Education, Hong Kong Baptist University",BUAD3008,ECON 2103: Principles of Microeconomics,GD:B+,B10327
+72,"College of International Education, Hong Kong Baptist University",GECR4001,LANG CCOM: Chinese Language Proficiency Achieved,No Restriction,B02837a
+73,"College of International Education, Hong Kong Baptist University",GEAS 2112,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B13103
+74,"College of International Education, Hong Kong Baptist University",GECR5002,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B+,B02574b
+75,"College of International Education, Hong Kong Baptist University",GECR1302,ISOM 2500: Business Statistics,GD:B+,B02859b
+76,"College of International Education, Hong Kong Baptist University",GECR1302,MATH 2411: Applied Statistics,No Restriction,B02859
+77,"College of International Education, Hong Kong Baptist University",GECR1302,SOSC 1100: Elementary Statistics for Social Research,GD:B-,B02859a
+78,Community College of City University,AST21117,MATH 2111: Matrix Algebra and Applications,No Restriction,B06292
+79,Community College of City University,DCO20207 / AST20207,COMP S&D: Computer Science Track Course,GD:B+,B00180a
+80,Community College of City University,DCO10111 / AST10111,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B00052
+81,Community College of City University,(DCO10111 / AST10111) + (DCO10112 / AST21112),MATH 1020: Accelerated Calculus,No Restriction,B00250
+82,Community College of City University,MA0101,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B00587
+83,Community College of City University,DCO10211 /AST10211,LIFS 1901: General Biology I,No Restriction,B00499b
+84,Community College of City University,DCO10211 /AST10211,LIFS 1901: General Biology I,No Restriction,B00499a
+85,Community College of City University,DCO22113 / AST22113,COMP 4331: Data Mining,GD:B+,B00124a
+86,Community College of City University,BUS20112 + BUS20180,IELM 3450: Logistics Planning and Service Management,No Restriction,B07047
+87,Community College of City University,CM10331,MGMT 2110: Organizational Behavior,GD:B+,B00446c
+88,Community College of City University,AST21115,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B14014
+89,Community College of City University,AST21115+AST11117,MATH 1020: Accelerated Calculus,No Restriction,B14195
+90,Community College of City University,AST10210 / DCO10210,CHEM 1010: General Chemistry IA,No Restriction,B02752
+91,Community College of City University,DCO10210,CHEM 1020: General Chemistry IB,No Restriction,B00496
+92,Community College of City University,GE1501,HUMA 1811: History of Chinese Philosophy,GD:B,B00591a
+93,Community College of City University,CGE26503,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B02462
+94,Community College of City University,CGE 13208 / CGE 23208,"CIVL 1170: Climate Change, Sustainability and Big History (Aka: Climate Change Risk, Mitigation and Adaptations)",GD:B,B06280
+95,Community College of City University,DCO20116,COMP G&M: Computer Science Track Course,GD:B+,B00112a
+96,Community College of City University,AST10201,COMP 2611: Computer Organization,GD:B+,B02248
+97,Community College of City University,AST20613,COMP S&D: Computer Science Track Course,GD:B+,B02346
+98,Community College of City University,CGE26504,SOSC 1000LEVEL: 1000-level Course in Social Science,GD:B,B02444d
+99,Community College of City University,CGE26504,SOSC 1350: Contemporary China: Continuity and Change,Expired,B00497
+100,Community College of City University,AST 21204,ENVR 1050: The Sustainable Citizen,No Restriction,B02645b
+101,Community College of City University,AST21204,ENVR 1050: The Sustainable Citizen,No Restriction,B02645a
+102,Community College of City University,DSS11104,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B13105a
+103,Community College of City University,CGE14401,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B+,B06776a
+104,Community College of City University,DSS20325,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B07000a
+105,Community College of City University,CGE12301,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B02444a
+106,Community College of City University,DCO20114 / AST20114,COMP A&T: Computer Science Track Course,GD:B+,B00110b
+107,Community College of City University,AST20105,COMP A&T: Computer Science Track Course,GD:B+,B02464
+108,Community College of City University,DCO20403,COMP S&D: Computer Science Track Course,GD:B+,B00122a
+109,Community College of City University,AST21401,ISOM 3260: Database Design and Administration,GD:B+,B13169
+110,Community College of City University,AST21401,IELM 3300: Industrial Data Systems,No Restriction,B00449a
+111,Community College of City University,DCO20401 / AST20401,COMP 3311: Database Management Systems,GD:B+,B00120a
+112,Community College of City University,DSS10621,SOSC 2000LEVEL: 2000-level Course in Social Science,GD:B,B06995a
+113,Community College of City University,DCO10114 / AST21114,ELEC 1100: Introduction to Electro-Robot Design,No Restriction,B00044
+114,Community College of City University,DCO10114 / AST21114,COMP S&N: Computer Science Track Course,GD:B+,B00044b
+115,Community College of City University,BCH1200,LIFS 1901: General Biology I,No Restriction,B03183
+116,Community College of City University,AST21111,COMP A&T: Computer Science Track Course,GD:B+,B02772e
+117,Community College of City University,AST20210,LIFS 3160: Ecology,No Restriction,B02643
+118,Community College of City University,BUS10407,ECON 2103: Principles of Microeconomics,GD:B+,B03479
+119,Community College of City University,BUS10408,ECON 2123: Macroeconomics,GD:B+,B03480
+120,Community College of City University,BST11513+ BST21551+ BST21552+ BST21553,MECH 3630: Electrical Technology,Expired,B00589
+121,Community College of City University,DCO20112 /AST20112 + DCO10401 / AST10401,ELEC 2400: Electronic Circuits,GD:A-,B00254a
+122,Community College of City University,DCO20112+ DCO20113,ELEC 2400: Electronic Circuits,GD:A-,B00254
+123,Community College of City University,DCO20112 / AST20112,COMP S&N: Computer Science Track Course,GD:B+,B00045b
+124,Community College of City University,CGE13201,ENVR 1040: The Environment and Society - A Comprehensive Perspective,No Restriction,B06998a
+125,Community College of City University,AST21203,PHYS 1003: Energy and Related Environmental Issues,No Restriction,B11219a
+126,Community College of City University,AST21203,ENVR 3220: Energy Resources and Usage,No Restriction,B11219
+127,Community College of City University,AST20211,ENVR 1030: Environment and Health,No Restriction,B11220
+128,Community College of City University,CGE13206/ CEG23206,ENVR 1040: The Environment and Society - A Comprehensive Perspective,No Restriction,B06998
+129,Community College of City University,AST21213,ENVR 1050: The Sustainable Citizen,No Restriction,B02644a
+130,Community College of City University,DCO21211 / AST21211,CHEM 1050: Laboratory for General Chemistry I,No Restriction,B02723
+131,Community College of City University,CGE24401,MGMT 2010: Business Ethics and the Individual,GD:B+,B13170
+132,Community College of City University,BUS10250,ACCT 2010: Principles of Accounting I,GD:B+,B03477
+133,Community College of City University,BUS20269,FINA 2303: Financial Management,GD:B+,B03481
+134,Community College of City University,BUS20402,FINA 1303: Introduction to Financial Markets,GD:B+,B05460
+135,Community College of City University,BST11512,MECH 2210: Fluid Mechanics (Previous code MECH3210 ),Expired,B00588
+136,Community College of City University,BST12512,MECH 2210: Fluid Mechanics (Previous code MECH3210 ),GD:B+,B00588a
+137,Community College of City University,BST12512,MECH 2210: Fluid Mechanics (Previous code MECH3210 ),GD:B+,B00588b
+138,Community College of City University,DCO10113,"ISOM 1000OM: 1000-level Course in Information Systems, Business Statistics and Operations Management",GD:B+,B00628b
+139,Community College of City University,DCO10113 / AST10113,MATH 2411: Applied Statistics,No Restriction,B00054
+140,Community College of City University,DCO10113 / AST10113,IELM 2510: Engineering Probability and Statistics,No Restriction,B00046
+141,Community College of City University,DCO10113 / AST10113,SOSC 1100: Elementary Statistics for Social Research,GD:B,B00046b
+142,Community College of City University,DCO11202 /AST11202,ENVR 1000LEVEL: 1000-level Course in Environment,No Restriction,B02748a
+143,Community College of City University,AST11202,ENVS 2000LEVEL: 2000-level Course in Environmental Science,GD:A-,B02748d
+144,Community College of City University,BST21531+ BST21532,MECH 4340: Air Conditioning Systems,Expired,B00590
+145,Community College of City University,BST22531+ BST22532,MECH 4340: Air Conditioning Systems,GD:B+,B00590a
+146,Community College of City University,BUS20322,MGMT 3110: Human Resources Management,GD:B+,B06275
+147,Community College of City University,BUS20323,MGMT 2000LEVEL: 2000-level Course in Management,GD:B+,B06764
+148,Community College of City University,BUS20119,ISOM 2010: Introduction to Information Systems,GD:B+,B03482
+149,Community College of City University,DCO20404 / AST20404,COMP S&D: Computer Science Track Course,GD:B+,B00123a
+150,Community College of City University,BUS20136 + BUS20180,IELM 4410: Global Supply Chain Management,No Restriction,B07048
+151,Community College of City University,CGE13203,COMP 1001: Exploring Multimedia and Internet Computing,GD:B+,B00498b
+152,Community College of City University,BUS20302,MGMT 2000LEVEL: 2000-level Course in Management,GD:B+,B06763a
+153,Community College of City University,DCO20203 / AST20203,COMP 4631: Computer and Communication Security,GD:B+,B00116a
+154,Community College of City University,BUS10112,ISOM 3760: Logistics Management,GD:B+,B13162
+155,Community College of City University,BUS10112,IELM 3450: Logistics Planning and Service Management,GD:B+,B13162a
+156,Community College of City University,CS1102,COMP 1001: Exploring Multimedia and Internet Computing,GD:B+,B03029
+157,Community College of City University,DCO10102,COMP S&N: Computer Science Track Course,GD:B+,B00105a
+158,Community College of City University,DCO20113 / DCO10401 / AST10401,COMP S&N: Computer Science Track Course,GD:B+,B00109b
+159,Community College of City University,AST11201,ENVS 2001: Environmental Conservation and Sustainability in Practice,Expired,B06557
+160,Community College of City University,DCO10106 / AST10106,COMP 1022P: Introduction to Computing with Java,GD:B+,B02224
+161,Community College of City University,AST10962,COMP 1001: Exploring Multimedia and Internet Computing,GD:B+,B06684
+162,Community College of City University,DCO21160 / AST21160 + AST21616,IELM 2410: Logistics and Freight Transportation Operations,No Restriction,B00447a
+163,Community College of City University,DCO20303+ DCO20304,COMP S&N: Computer Science Track Course,GD:B+,B00118a
+164,Community College of City University,BUS10306,MGMT 2110: Organizational Behavior,GD:B+,B03486
+165,Community College of City University,BUS20251,ACCT 2200: Principles of Accounting II,GD:B+,B03478
+166,Community College of City University,BUS10311,MARK 2120: Marketing Management,GD:B+,B03484
+167,Community College of City University,DSS22302,MARK 2120: Marketing Management,GD:B+,B13109b
+168,Community College of City University,BUS20372,MARK 2120: Marketing Management,GD:B+,B03485
+169,Community College of City University,AST21112,MATH 1020: Accelerated Calculus,No Restriction,B00250b
+170,Community College of City University,DSS10643,SOSC 1000LEVEL: 1000-level Course in Social Science,GD:B,B13101
+171,Community College of City University,CGE17301,SOSC 1000LEVEL: 1000-level Course in Social Science,GD:B,B13097
+172,Community College of City University,CGE17301,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B13097a
+173,Community College of City University,DCO20117,COMP 2611: Computer Organization,GD:B+,B00113a
+174,Community College of City University,AST21962,COMP 4431: Multimedia Computing,GD:B+,B02250
+175,Community College of City University,AST20307,COMP S&N: Computer Science Track Course,GD:B+,B02251
+176,Community College of City University,DCO10301,COMP S&N: Computer Science Track Course,GD:B+,B00108a
+177,Community College of City University,DCO10105 / DCO21105 / AST21105,COMP 1022P: Introduction to Computing with Java,GD:B+,B00107a
+178,Community College of City University,BUS10160,ISOM 2700: Operations Management,GD:B+,B03483b
+179,Community College of City University,BUS20165,ISOM 2700: Operations Management,GD:B+,B03483
+180,Community College of City University,AST21020,IELM 3330: Introduction to Financial Engineering,No Restriction,B00448a
+181,Community College of City University,AST21600,IELM 2200: Engineering Management,No Restriction,B02674a
+182,Community College of City University,AST21600,"ISOM 3000OM: 3000-level Course in Information Systems, Business Statistics and Operations Management",GD:B+,B13161
+183,Community College of City University,BUS 20305,MGMT 2000LEVEL: 2000-level Course in Management,GD:B+,B06277
+184,Community College of City University,BUS20404,MGMT 2010: Business Ethics and the Individual,GD:B+,B05461
+185,Community College of City University,CGE17105,FINA 1203: Personal Finance,GD:B+,B05472
+186,Community College of City University,BUS20486,FINA 1203: Personal Finance,GD:B+,B05456
+187,Community College of City University,CGE14402 / DSS10103,SOSC 1000LEVEL: 1000-level Course in Social Science,GD:B,B02451b
+188,Community College of City University,AST21212 / DCO21212,CHEM 4310: Environmental Chemistry,GD:B+,B02646a
+189,Community College of City University,AST11103,COMP 1022P: Introduction to Computing with Java,GD:B+,B02599
+190,Community College of City University,DCO10103,COMP 1022P: Introduction to Computing with Java,GD:B+,B00106a
+191,Community College of City University,GE2203,SOSC 1980: Psychology and Everyday Life,Expired,B00470
+192,Community College of City University,DCO20115 / AST20115,COMP S&D: Computer Science Track Course,GD:B+,B00111a
+193,Community College of City University,BUS10188,"ISOM 1000OM: 1000-level Course in Information Systems, Business Statistics and Operations Management",GD:B+,B05455a
+194,Community College of City University,BUS20326,MGMT 2000LEVEL: 2000-level Course in Management,GD:B+,B06279
+195,Community College of City University,AST20302 / DCO20302,COMP S&N: Computer Science Track Course,GD:B+,B00117a
+196,Community College of City University,DSS20401,SOSC 1100: Elementary Statistics for Social Research,GD:B+,B06997
+197,Community College of City University,AST22112,ENVR 2000LEVEL: 2000-level Course in Environment,No Restriction,B11222a
+198,Community College of City University,DCO20306 / AST20306,COMP 2021: Unix and Script Programming,GD:B+,B00119a
+199,Community College of City University,BUS20324,MGMT 2000LEVEL: 2000-level Course in Management,GD:B+,B06278
+200,Community College of City University,CGE22402,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B+,B06276
+201,Community College of City University,CGE22402,SOSC 1662: Contemporary Hong Kong: Society,GD:B+,B06276a
+202,Community College of City University,CGE25401,SOSC 1850: Understanding Society,GD:B,B02452
+203,Community College of City University,CGE13101,SOSC 1100: Elementary Statistics for Social Research,GD:B,B05469c
+204,Community College of City University,CGE13101,"ISOM 1000OM: 1000-level Course in Information Systems, Business Statistics and Operations Management",GD:B+,B05469a
+205,Community College of City University,DCO10303 / AST10303,COMP S&N: Computer Science Track Course,GD:B+,B02249
+206,Community College of City University,AST21205,ENVR 2000LEVEL: 2000-level Course in Environment,No Restriction,B11221a
+207,Community College of City University,AST21104,COMP G&M: Computer Science Track Course,GD:B+,B06685
+208,Community College of City University,AST21104 / DCO21104,COMP G&M: Computer Science Track Course,GD:B+,B02345
+209,Community College of City University,DCO20201 / AST20201,COMP 4021: Internet Computing,GD:B+,B00114a
+210,Community College of City University,DCO20202,COMP 4431: Multimedia Computing,GD:B+,B00115a
+211,Hang Seng Management College,ECO1001,ECON 2103: Principles of Microeconomics,GD:B+,B03102a
+212,Hang Seng Management College,ECO1002,ECON 2123: Macroeconomics,GD:B+,B03096b
+213,Hang Seng Management College,CHN1002,HUMA 1000HMCC: 1000-level Course in Humanities / HUMA Common Core (not = HUMA 1000),No Restriction,B03095c
+214,Hang Seng Management College,GEN1001,HUMA 1000HMCC: 1000-level Course in Humanities / HUMA Common Core (not = HUMA 1000),No Restriction,B03098c
+215,Hang Seng Management College,GEN1011,SOSC 1300: The World of Politics,No Restriction,B07682
+216,Hang Seng Management College,BUS1001,MGMT 1110: Introduction to Management,GD:B+,B03100a
+217,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1041,ACCT 2020: Introduction to Accounting for Non-Business Majors,GD:B+,B07429
+218,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2236,MATH 2111: Matrix Algebra and Applications,No Restriction,B02326
+219,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3728 CCN2261,CHEM 2310: Fundamentals of Analytical Chemistry CHEM 2350: Analytical Chemistry Laboratory,GD:B+,B00486a
+220,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3401,COMP S&D: Computer Science Track Course,GD:B+,B00092a
+221,"Hong Kong Community College, The Hong Kong Polytechnic University",CC2005 / CCN2041,COMP 1022P: Introduction to Computing with Java,GD:B+,B00068a
+222,"Hong Kong Community College, The Hong Kong Polytechnic University",CC2404,COMP S&N: Computer Science Track Course,GD:B+,B00079a
+223,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3403 / CCN2237,MATH 3424: Regression Analysis,No Restriction,B00269
+224,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN3125 + CCN3144,IELM 3150: Manufacturing Processes,No Restriction,B11368
+225,"Hong Kong Community College, The Hong Kong Polytechnic University",CC2305 / CCN2246,ELEC 1100: Introduction to Electro-Robot Design,No Restriction,B00030
+226,"Hong Kong Community College, The Hong Kong Polytechnic University",CC2F01P,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B02947
+227,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2105,ECON 2103: Principles of Microeconomics,GD:B+,B03488
+228,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3409,COMP A&T: Computer Science Track Course,GD:B+,B00093a
+229,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2107,ISOM 2010: Introduction to Information Systems,GD:B+,B03491
+230,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3143,COMP A&T: Computer Science Track Course,GD:B+,B00081a
+231,"Hong Kong Community College, The Hong Kong Polytechnic University",CC2406 / CCN1045,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B00038
+232,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1045 + CCN2250,MATH 1020: Accelerated Calculus,No Restriction,B01457
+233,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3745 / CCN2254,LIFS 2040: Cell Biology,No Restriction,B00445
+234,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2008,CHEM 1004: Chemistry in Everyday Life,No Restriction,B02460
+235,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2049,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B11021
+236,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3301,COMP S&N: Computer Science Track Course,GD:B+,B00086a
+237,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2109,MGMT 1000LEVEL: 1000-level Course in Management,GD:B+,B11017
+238,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2263,COMP A&T: Computer Science Track Course,GD:B+,B02226
+239,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3729,COMP G&M: Computer Science Track Course,GD:B+,B00100a
+240,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2238,COMP 4621: Computer Communication Networks I,GD:B+,B02222
+241,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2264,COMP 2611: Computer Organization,GD:B+,B02215
+242,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2042,COMP 1022P: Introduction to Computing with Java,GD:B+,B02214
+243,"Hong Kong Community College, The Hong Kong Polytechnic University",CC2202,COMP 2611: Computer Organization,GD:B+,B00070a
+244,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN3133,COMP S&N: Computer Science Track Course,No Restriction,B02582a
+245,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN3133,COMP S&N: Computer Science Track Course,GD:B+,B00087c
+246,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3302,COMP 2611: Computer Organization,GD:B+,B00087a
+247,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2111,ACCT 2200: Principles of Accounting II,GD:B+,B03487
+248,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1004 / CC2002,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B00300c
+249,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3204,COMP S&N: Computer Science Track Course,GD:B+,B00083a
+250,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2239,COMP A&T: Computer Science Track Course,GD:B+,B02218
+251,"Hong Kong Community College, The Hong Kong Polytechnic University",CC2203,COMP A&T: Computer Science Track Course,GD:B+,B00077a
+252,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3210,COMP S&D: Computer Science Track Course,GD:B+,B00085a
+253,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2240,COMP 3311: Database Management Systems,GD:B+,B02216
+254,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3303,COMP S&D: Computer Science Track Course,GD:B+,B00188b
+255,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3304,COMP S&N: Computer Science Track Course,GD:B+,B00088b
+256,"Hong Kong Community College, The Hong Kong Polytechnic University",CC2204,COMP A&T: Computer Science Track Course,GD:B+,B00078a
+257,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2241,COMP A&T: Computer Science Track Course,GD:B+,B02219
+258,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2241,MATH 2343: Discrete Structures,No Restriction,B02219a
+259,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2265,COMP S&D: Computer Science Track Course,GD:B+,B02227
+260,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3423 / CCN2266,COMP A&T: Computer Science Track Course,GD:B+,B00094a
+261,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1042,SOSC 1000LEVEL: 1000-level Course in Social Science,GD:B,B06824a
+262,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3731,COMP S&N: Computer Science Track Course,GD:B+,B00101a
+263,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2248 + CCN3144,MECH 2520: Design and Manufacturing I,No Restriction,B06621a
+264,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2248 + CCN2269,MECH 2520: Design and Manufacturing I,GD:B+,B06621
+265,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2248 + CCN3128,IELM 2150: Product Design (Aka: Product Design and Communication ),No Restriction,B11388
+266,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN3134,ECON 2152: Engineering Economics and Finance,GD:B+,B02601b
+267,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3732 / CCN2269,COMP G&M: Computer Science Track Course,GD:B+,B00102a
+268,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3305,COMP S&D: Computer Science Track Course,GD:B+,B00089a
+269,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3311 / CCN2249,CENG 1500: A First Course on Materials Science and Applications,No Restriction,B00227
+270,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2249,MECH 2410: Engineering Materials I,GD:B+,B02585
+271,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2251,MECH 2020: Statics and Dynamics,GD:B+,B02584
+272,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN3135,MECH 2310: Thermodynamics,GD:B+,B01455
+273,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2252,CENG 1700: Introduction to Environmental Engineering,No Restriction,B06766a
+274,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2101,ACCT 2010: Principles of Accounting I,GD:B+,B01095b
+275,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2113,FINA 2303: Financial Management,GD:B+,B03490
+276,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2114,FINA 1303: Introduction to Financial Markets,GD:B+,B05540
+277,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3430,COMP A&T: Computer Science Track Course,GD:B+,B00095a
+278,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN3136,CHEM 3000LEVEL: 3000-level Course in Chemistry,No Restriction,B02746
+279,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2014,LIFS 1020: Biology of Human Health,GD:C,B02845c
+280,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1106 + CCN1109,LIFS 1901: General Biology I,No Restriction,B00637c
+281,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1012,LIFS 1000LEVEL: 1000-level Course in Life Science,GD:C,B05543a
+282,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3201,COMP 3311: Database Management Systems,GD:B+,B00071a
+283,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1101,MGMT 3110: Human Resources Management,GD:B+,B11014
+284,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2117,ISOM 3760: Logistics Management,GD:B+,B02221a
+285,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2117,COMP A&T: Computer Science Track Course,GD:B+,B02221
+286,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2283,ISOM 2700: Operations Management,GD:B+,B03493
+287,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2015,SOSC 2740: Gender and Society,GD:B-,B02844
+288,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2231,LIFS 2210: Biochemistry I,No Restriction,B02565
+289,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1109,LIFS 1901: General Biology I,No Restriction,B00637b
+290,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1110,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,No Restriction,B00636b
+291,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1111,CHEM 1030: General Chemistry II CHEM 1055: Laboratory for General Chemistry II,No Restriction,B02745
+292,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2232 / CC3434,LIFS 3060: Microbiology,No Restriction,B02566
+293,"Hong Kong Community College, The Hong Kong Polytechnic University",CC2205,PHYS 1112: General Physics I with Calculus,GD:B,B00043c
+294,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1015,LIFS 1000LEVEL: 1000-level Course in Life Science,No Restriction,B02843
+295,"Hong Kong Community College, The Hong Kong Polytechnic University",CC2417 + CC2418,LIFS 1902: General Biology II,No Restriction,B00492a
+296,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2233 + CCN2234,LIFS 3040: Animal Physiology,No Restriction,B02776
+297,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3203,COMP S&D: Computer Science Track Course,GD:B+,B00082a
+298,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3735 / CCN3138,LIFS 1030: Environmental Science,No Restriction,B00432
+299,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3208,COMP 4021: Internet Computing,GD:B+,B00074a
+300,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3209,COMP S&N: Computer Science Track Course,GD:B+,B00084a
+301,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2017,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B+,B05541b
+302,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2002,SOSC 1440: Introduction to Economics,GD:B,B01098f
+303,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2270,COMP S&N: Computer Science Track Course,GD:B+,B02228
+304,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2271,COMP G&M: Computer Science Track Course,GD:B+,B02229
+305,"Hong Kong Community College, The Hong Kong Polytechnic University",CC2004,COMP 1001: Exploring Multimedia and Internet Computing,GD:B+,B02871
+306,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1016,COMP 1001: Exploring Multimedia and Internet Computing,GD:B+,B06676
+307,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2127,COMP A&T: Computer Science Track Course,GD:B+,B02220
+308,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1048 + CCN2250 + CCN2269,MATH 2350: Applied Linear Algebra and Differential Equations,No Restriction,B01458c
+309,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2129,ECON 2123: Macroeconomics,GD:B+,B03489
+310,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2003,MARK 2120: Marketing Management,GD:B+,B01099b
+311,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3487,"LIFS 1080: Disease, Culture and Technology",No Restriction,B02872
+312,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2021,SOSC 1000LEVEL: 1000-level Course in Social Science,GD:B,B14095
+313,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1050,IELM 2510: Engineering Probability and Statistics,No Restriction,B00067a
+314,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1050,SOSC 1100: Elementary Statistics for Social Research,GD:B+,B02678a
+315,"Hong Kong Community College, The Hong Kong Polytechnic University",CC2019 / CCN1017,SOSC 1960: Discovering Mind and Behavior,GD:B,B00281c
+316,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1018,SOSC 1850: Understanding Society,GD:B+,B05539
+317,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3135,COMP A&T: Computer Science Track Course,GD:B+,B00080a
+318,"Hong Kong Community College, The Hong Kong Polytechnic University",CC2011/ CCN1019,LANG 1210: Japanese Language and Related Culture (Aka: Japanese Language and Related Culture I ),No Restriction,B00271
+319,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2023,CIVL 4000LEVEL: 4000-level Course in Civil and Environmental Engineering,No Restriction,B06832a
+320,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3313,COMP A&T: Computer Science Track Course,GD:B+,B00091a
+321,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2272,COMP S&N: Computer Science Track Course,GD:B+,B02223
+322,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3456,COMP S&D: Computer Science Track Course,GD:B+,B00096a
+323,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2004,MGMT 1110: Introduction to Management,GD:B+,B01094b
+324,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2026,SOSC 1000LEVEL: 1000-level Course in Social Science,GD:B,B00228a
+325,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3736,COMP 4431: Multimedia Computing,GD:B+,B00075a
+326,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2046,HUMA 1103: Understanding Music,GD:B+,B06711
+327,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2160,MGMT 3140: Negotiation,GD:B+,B05533
+328,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2242,COMP 1022P: Introduction to Computing with Java,GD:B+,B06683
+329,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3458 / CCN3139,COMP A&T: Computer Science Track Course,GD:B+,B00097a
+330,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3319 / CCN2274,CHEM 2110: Organic Chemistry I CHEM 2150: Organic Chemistry Laboratory,GD:B+,B00441b
+331,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2005,MGMT 2110: Organizational Behavior,GD:B+,B03494
+332,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1021,FINA 1203: Personal Finance,GD:B+,B02602a
+333,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3318 / CCN2275,CHEM 2450: Physical Chemistry Laboratory,GD:B,B00485
+334,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1049,PHYS 1112: General Physics I with Calculus,GD:B,B00043d
+335,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1051,PHYS 1114: General Physics II,GD:B,B00043b
+336,"Hong Kong Community College, The Hong Kong Polytechnic University",CC2201,COMP 1022P: Introduction to Computing with Java,GD:B+,B00069a
+337,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2286+CCN2287,MATH 2411: Applied Statistics,No Restriction,B11004
+338,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2029,IELM 4110: Engineers in Society,No Restriction,B00237a
+339,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3206 / CCN3140,COMP S&D: Computer Science Track Course,GD:B+,B00442a
+340,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3308 / CCN3141,IELM 3270: Quality Engineering,No Restriction,B00090a
+341,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3308 / CCN3141,COMP S&D: Computer Science Track Course,GD:B+,B00090b
+342,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN3142,COMP A&T: Computer Science Track Course,GD:B+,B02225
+343,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2030,SOSC 2000LEVEL: 2000-level Course in Social Science,GD:B+,B06712a
+344,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2133,MGMT 1000LEVEL: 1000-level Course in Management,GD:B+,B11015
+345,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3475 / CCN2276,COMP A&T: Computer Science Track Course,GD:B+,B00098a
+346,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2031,ISOM 2500: Business Statistics,GD:B+,B03492
+347,"Hong Kong Community College, The Hong Kong Polytechnic University",CC2425+ CC3476 / CCN2243 + CCN2244,MATH 2411: Applied Statistics,No Restriction,B00040a
+348,"Hong Kong Community College, The Hong Kong Polytechnic University",CC3477 / CCN2277,COMP S&D: Computer Science Track Course,GD:B+,B00099a
+349,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN1025,SOSC 1000LEVEL: 1000-level Course in Social Science,GD:B+,B06619a
+350,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2048,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B11020
+351,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2033,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B+,B05542b
+352,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN3129,MECH 2310: Thermodynamics,GD:B+,B02698a
+353,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN3129,CENG 2210: Chemical Engineering Thermodynamics,No Restriction,B02698c
+354,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2134,"ISOM 2000OM: 2000-level Course in Information Systems, Business Statistics and Operations Management",GD:B+,B06437
+355,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2135,MGMT 1000LEVEL: 1000-level Course in Management,GD:B+,B11016
+356,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2006,SOSC 2290: Understanding Globalization,GD:B+,B06660
+357,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2035,HUMA 2921: Ethical Theories and Contemporary Issues,GD:B+,B06623
+358,"Hong Kong Community College, The Hong Kong Polytechnic University",CCN2279,COMP G&M: Computer Science Track Course,GD:B+,B02217
+359,Hong Kong Institute of Vocational Education,ENG4200+MEC3125+MEC4103,MATH 1020: Accelerated Calculus,No Restriction,B02504c
+360,Hong Kong Institute of Vocational Education,MEC4407,MECH 1907: Introduction to Aerospace Engineering,GD:B+,B02705a
+361,Hong Kong Institute of Vocational Education,CON4411,CIVL 4470: Air Quality Control and Management,No Restriction,B07443
+362,Hong Kong Institute of Vocational Education,MEC4400,ELEC 1100: Introduction to Electro-Robot Design,No Restriction,B02633
+363,Hong Kong Institute of Vocational Education,MEC4400+MEC4403,ELEC 2420: Basic Electronics,No Restriction,B11351
+364,Hong Kong Institute of Vocational Education,ENG3734,ELEC 1100: Introduction to Electro-Robot Design,No Restriction,B00372b
+365,Hong Kong Institute of Vocational Education,MEC3400,MECH 3000LEVEL: 3000-level Course in Mechanical Engineering,GD:B+,B07004a
+366,Hong Kong Institute of Vocational Education,MEC3400+MEC4406,PHYS 1112: General Physics I with Calculus,No Restriction,B11737
+367,Hong Kong Institute of Vocational Education,MEC3400 + MEC4407,MECH 3640: Aerodynamics (Previous Code: MECH4610),GD:B+,B11352
+368,Hong Kong Institute of Vocational Education,MEC3400 + ITE4901,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B07650
+369,Hong Kong Institute of Vocational Education,ASC3443,CHEM 2310: Fundamentals of Analytical Chemistry CHEM 2350: Analytical Chemistry Laboratory,GD:75,B00559d
+370,Hong Kong Institute of Vocational Education,CEH3401,CHEM 2310: Fundamentals of Analytical Chemistry CHEM 2350: Analytical Chemistry Laboratory,GD:75,B00658a
+371,Hong Kong Institute of Vocational Education,SAS4305,CHEM 2310: Fundamentals of Analytical Chemistry CHEM 2350: Analytical Chemistry Laboratory,GD:75,B00559c
+372,Hong Kong Institute of Vocational Education,SAS4101,CHEM 3000LEVEL: 3000-level Course in Chemistry,GD:B-,B11211
+373,Hong Kong Institute of Vocational Education,SAS4210+SAS4203,LIFS 2070: Introduction to Biotechnology,No Restriction,B06982b
+374,Hong Kong Institute of Vocational Education,MEC4163 + MEC4122,MECH 2310: Thermodynamics,GD:B+,B06691a
+375,Hong Kong Institute of Vocational Education,AEC3845,MECH 2410: Engineering Materials I,GD:85,B00730
+376,Hong Kong Institute of Vocational Education,ENG3104 + ENG3105 + EIE4106,ELEC 2200: Digital Circuits and Systems,GD:A-,B03156
+377,Hong Kong Institute of Vocational Education,ENG3104M + ENG3105 +EIE4106,ELEC 2200: Digital Circuits and Systems,GD:A-,B03156b
+378,Hong Kong Institute of Vocational Education,SAS4204+SAS4205+SAS4202+SAS4203+SAS4206,LIFS 1904: Laboratory for General Biology II,No Restriction,B06983
+379,Hong Kong Institute of Vocational Education,ASD4012,LIFS 1000LEVEL: 1000-level Course in Life Science,No Restriction,B02917a
+380,Hong Kong Institute of Vocational Education,ASD4012+SAS4204,LIFS 2720: Biochemistry Laboratory LIFS 2820: Biochemical Laboratory Techniques,No Restriction,B13985
+381,Hong Kong Institute of Vocational Education,ASD4012+SAS4204+SAS4209,LIFS 2210: Biochemistry I,No Restriction,B06985
+382,Hong Kong Institute of Vocational Education,CON3402,CHEM 1004: Chemistry in Everyday Life,GD:B+,B14099a
+383,Hong Kong Institute of Vocational Education,ITP4308,COMP S&N: Computer Science Track Course,GD:67,B02281
+384,Hong Kong Institute of Vocational Education,ITP4318,COMP S&N: Computer Science Track Course,GD:B+,B02281a
+385,Hong Kong Institute of Vocational Education,BUS3001,MGMT 2010: Business Ethics and the Individual,GD:B+,B13171
+386,Hong Kong Institute of Vocational Education,SAS 4211,PHYS 1003: Energy and Related Environmental Issues,No Restriction,B11156
+387,Hong Kong Institute of Vocational Education,SAS4206,LIFS 2240: Cell Biology Laboratory,No Restriction,B13984
+388,Hong Kong Institute of Vocational Education,SAS4206+SAS4203,LIFS 2070: Introduction to Biotechnology,No Restriction,B06984a
+389,Hong Kong Institute of Vocational Education,CEH1302+ CEH1308+ CEH1305,CHEM 1010: General Chemistry IA CHEM 1030: General Chemistry II CHEM 1050: Laboratory for General Chemistry I CHEM 1055: Laboratory for General Chemistry II,GD:60,B00551c
+390,Hong Kong Institute of Vocational Education,CEH1302+ CEH3514+ CEH3527,CHEM 1010: General Chemistry IA CHEM 1030: General Chemistry II CHEM 1050: Laboratory for General Chemistry I CHEM 1055: Laboratory for General Chemistry II,GD:60,B00551d
+391,Hong Kong Institute of Vocational Education,ASC1303+ ASC1310,CHEM 1010: General Chemistry IA CHEM 1030: General Chemistry II CHEM 1050: Laboratory for General Chemistry I CHEM 1055: Laboratory for General Chemistry II,GD:60,B00556b
+392,Hong Kong Institute of Vocational Education,ASD3002 + ASD3006,CHEM 1010: General Chemistry IA CHEM 1030: General Chemistry II CHEM 1050: Laboratory for General Chemistry I CHEM 1055: Laboratory for General Chemistry II,GD:60,B00556a
+393,Hong Kong Institute of Vocational Education,BUS3008,MGMT 2000LEVEL: 2000-level Course in Management,GD:B+,B13172
+394,Hong Kong Institute of Vocational Education,SAS4106 + SAS4107,CHEM 2310: Fundamentals of Analytical Chemistry CHEM 2350: Analytical Chemistry Laboratory,GD:A-,B06964
+395,Hong Kong Institute of Vocational Education,E&I3410 +E&I4414,ELEC 1010: Electronic and Information Technology,No Restriction,B02622
+396,Hong Kong Institute of Vocational Education,ITP4306,COMP S&N: Computer Science Track Course,GD:67,B02279
+397,Hong Kong Institute of Vocational Education,ENS3401,COMP 1001: Exploring Multimedia and Internet Computing,GD:67,B00286b
+398,Hong Kong Institute of Vocational Education,E&I3612+ E&I4611,COMP S&N: Computer Science Track Course,GD:67,B00315d
+399,Hong Kong Institute of Vocational Education,EIE3402S,COMP 1022P: Introduction to Computing with Java,GD:67,B02812a
+400,Hong Kong Institute of Vocational Education,CON4371,CIVL 3210: Introduction to Construction Management,GD:B,B06412
+401,Hong Kong Institute of Vocational Education,SAS4307,CHEM 1002: Introduction to Chemistry of Cosmetics,GD:A-,B06972
+402,Hong Kong Institute of Vocational Education,E&I3613,COMP S&N: Computer Science Track Course,GD:67,B00315e
+403,Hong Kong Institute of Vocational Education,EIE4101,ELEC 4120: Computer Communication Networks,GD:B+,B02815a
+404,Hong Kong Institute of Vocational Education,EIE4400S,ELEC 4120: Computer Communication Networks,GD:B+,B02815
+405,Hong Kong Institute of Vocational Education,ITP4903,COMP 3311: Database Management Systems,GD:B+,B02283
+406,Hong Kong Institute of Vocational Education,ENG3105,ELEC 1100: Introduction to Electro-Robot Design,No Restriction,B02699
+407,Hong Kong Institute of Vocational Education,SAS 3411+ SAS 3402,LIFS 2060: Biodiversity,No Restriction,B11155a
+408,Hong Kong Institute of Vocational Education,SAS 3411+ SAS 3402,LIFS 3160: Ecology,No Restriction,B11155
+409,Hong Kong Institute of Vocational Education,BUS3003,SOSC 1440: Introduction to Economics,GD:B,B13094
+410,Hong Kong Institute of Vocational Education,MEC3055,ELEC 1100: Introduction to Electro-Robot Design,No Restriction,B02639b
+411,Hong Kong Institute of Vocational Education,BSE4301,MECH 3630: Electrical Technology,GD:B+,B14087
+412,Hong Kong Institute of Vocational Education,BAN4102,"ISOM 3000IS: 3000-level Course in Information Systems, Business Statistics and Operations Management",GD:B+,B13178
+413,Hong Kong Institute of Vocational Education,ENG3107 + ENG3110,ELEC 2400: Electronic Circuits,GD:A-,B02398
+414,Hong Kong Institute of Vocational Education,MEC3121,ELEC 1100: Introduction to Electro-Robot Design,No Restriction,B06628
+415,Hong Kong Institute of Vocational Education,MEC3121 + MEC3122 + MEC4109 + MEC4107 + MEC4122,PHYS 1112: General Physics I with Calculus,No Restriction,B06626
+416,Hong Kong Institute of Vocational Education,MET3401+ MET3405+ MET3409,PHYS 1111: General Physics I,GD:63,B00239c
+417,Hong Kong Institute of Vocational Education,ENG3108 + MEC4701,CENG 1500: A First Course on Materials Science and Applications,No Restriction,B06584
+418,Hong Kong Institute of Vocational Education,ENG3108 + MEC4104 + MEC4110,CENG 1500: A First Course on Materials Science and Applications,No Restriction,B02637
+419,Hong Kong Institute of Vocational Education,ENG3401S + ENG4401S,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B02810
+420,Hong Kong Institute of Vocational Education,ENG3200 + MEC4103,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B02659a
+421,Hong Kong Institute of Vocational Education,ENG3200 + CON4303 + CON4304,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B02744
+422,Hong Kong Institute of Vocational Education,CON3303 + CON4305,MATH 1013: Calculus IB (Aka: Calculus I),AD,B13445
+423,Hong Kong Institute of Vocational Education,ENG3200 + ENG4200,MATH 1020: Accelerated Calculus,No Restriction,B02722
+424,Hong Kong Institute of Vocational Education,ENG3200 + MEC4706,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B06581
+425,Hong Kong Institute of Vocational Education,ENG3200 + ENG4202,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B02394
+426,Hong Kong Institute of Vocational Education,ENG3200 + CON4305,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B02394d
+427,Hong Kong Institute of Vocational Education,ENG3109 + MEC3055,MECH 2020: Statics and Dynamics,GD:B+,B06582
+428,Hong Kong Institute of Vocational Education,ENG3732,PHYS 1112: General Physics I with Calculus,GD:63,B00373b
+429,Hong Kong Institute of Vocational Education,ENG3102 + ENG3103 +ENG3109,PHYS 1111: General Physics I,No Restriction,B02553c
+430,Hong Kong Institute of Vocational Education,ENG3102 + ENG3103 + MEC4101,PHYS 1111: General Physics I,GD:B,B02553a
+431,Hong Kong Institute of Vocational Education,ENG3102 + MEC4101 + MEC4109,PHYS 1111: General Physics I,GD:B,B02424a
+432,Hong Kong Institute of Vocational Education,ASC3878,ENVR 2000LEVEL: 2000-level Course in Environment,No Restriction,B02592a
+433,Hong Kong Institute of Vocational Education,CEH3523,CHEM 2310: Fundamentals of Analytical Chemistry,No Restriction,B00632c
+434,Hong Kong Institute of Vocational Education,SAS4416,CHEM 2310: Fundamentals of Analytical Chemistry,No Restriction,B00632b
+435,Hong Kong Institute of Vocational Education,CON4451,CENG 4720: Environmental Impact Assessment and Management Systems,No Restriction,B07442
+436,Hong Kong Institute of Vocational Education,CON4451,CIVL 4000LEVEL: 4000-level Course in Civil and Environmental Engineering,No Restriction,B07442b
+437,Hong Kong Institute of Vocational Education,CON4403+CON4433,LIFS 1030: Environmental Science,GD:B,B14359
+438,Hong Kong Institute of Vocational Education,CON4403+CON4411+CON4412+CON4413+CON4433,LIFS 1030: Environmental Science,No Restriction,B07439
+439,Hong Kong Institute of Vocational Education,SAS 4442+ SAS 4458,ENVS 3001: Pollution Monitoring and Measurement,Expired,B11154
+440,Hong Kong Institute of Vocational Education,SAS4442+ SAS4459,ENVS 4001: Environmental Impact and Risk Assessment,Expired,B11144a
+441,Hong Kong Institute of Vocational Education,CON4432,ENVR 2000LEVEL: 2000-level Course in Environment,No Restriction,B08307a
+442,Hong Kong Institute of Vocational Education,ASC3876 + ASC3881,ENVR 2010: Environmental Science Fundamentals,No Restriction,B02593
+443,Hong Kong Institute of Vocational Education,ASD3001+ASD3002,CHEM 1010: General Chemistry IA,GD:A-,B02784c
+444,Hong Kong Institute of Vocational Education,ASD3001,CHEM 1010: General Chemistry IA,No Restriction,B02784a
+445,Hong Kong Institute of Vocational Education,MEC4102,MECH 2210: Fluid Mechanics (Previous code MECH3210 ),No Restriction,B02657a
+446,Hong Kong Institute of Vocational Education,ASD3008,CHEM 2310: Fundamentals of Analytical Chemistry CHEM 2350: Analytical Chemistry Laboratory,GD:75,B00559b
+447,Hong Kong Institute of Vocational Education,ASD3008+SAS4018,CHEM 2310: Fundamentals of Analytical Chemistry,GD:A-,B06994a
+448,Hong Kong Institute of Vocational Education,MEC3123,ELEC 2420: Basic Electronics,GD:A-,B11374a
+449,Hong Kong Institute of Vocational Education,MEC3123 + MEC3122 + MEC4109 + MEC4107 + MEC4122,PHYS 1112: General Physics I with Calculus,No Restriction,B06626b
+450,Hong Kong Institute of Vocational Education,MEC3122 + MEC4109 + MEC4107 + MEC4122,PHYS 1112: General Physics I with Calculus,No Restriction,B06626a
+451,Hong Kong Institute of Vocational Education,MEC3122 + MEC4122 + MEC4109 + MEC4163,PHYS 1111: General Physics I,No Restriction,B06715
+452,Hong Kong Institute of Vocational Education,MEC3122 + MEC4122 + MEC4109 + MEC4163+MEC3123,PHYS 1112: General Physics I with Calculus,No Restriction,B06626c
+453,Hong Kong Institute of Vocational Education,MEC4406 + MEC4411,MECH 3660: Gas Turbines and Jet Propulsion (Aka: Propulsion and Energy),GD:B+,B11436
+454,Hong Kong Institute of Vocational Education,SAS3404,ENVR 2000LEVEL: 2000-level Course in Environment,No Restriction,B11146a
+455,Hong Kong Institute of Vocational Education,SAS4311,CENG 1700: Introduction to Environmental Engineering,No Restriction,B02919
+456,Hong Kong Institute of Vocational Education,ASD3003,LIFS 1902: General Biology II,No Restriction,B02785
+457,Hong Kong Institute of Vocational Education,MGT4207,MGMT 3110: Human Resources Management,GD:B+,B13185
+458,Hong Kong Institute of Vocational Education,BSE4202 + BSE4403,MECH 4340: Air Conditioning Systems,GD:B+,B14088
+459,Hong Kong Institute of Vocational Education,CEH3513,COMP 1001: Exploring Multimedia and Internet Computing,GD:67,B00634a
+460,Hong Kong Institute of Vocational Education,ITE3004,COMP 1022Q: Introduction to Computing with Excel VBA,GD:B+,B02914
+461,Hong Kong Institute of Vocational Education,ITE3001,COMP 1001: Exploring Multimedia and Internet Computing,GD:B+,B02396a
+462,Hong Kong Institute of Vocational Education,ITE3001,ISOM 2010: Introduction to Information Systems,GD:B+,B13174
+463,Hong Kong Institute of Vocational Education,ITE3002,COMP 1001: Exploring Multimedia and Internet Computing,GD:B+,B02271
+464,Hong Kong Institute of Vocational Education,ENG3738,COMP 1002: Computer and Programming Fundamentals I,GD:67,B00366b
+465,Hong Kong Institute of Vocational Education,MET3407,COMP 1002: Computer and Programming Fundamentals I,GD:67,B00235a
+466,Hong Kong Institute of Vocational Education,CON4414,MECH 3000LEVEL: 3000-level Course in Mechanical Engineering,No Restriction,B07444b
+467,Hong Kong Institute of Vocational Education,CON4414+ CON4472,ENVR 2000LEVEL: 2000-level Course in Environment,No Restriction,B07444a
+468,Hong Kong Institute of Vocational Education,ASC3442,CHEM 2210: Inorganic Chemistry I CHEM 2250: Inorganic Chemistry Laboratory,GD:75,B00557a
+469,Hong Kong Institute of Vocational Education,SAS3015,CHEM 2210: Inorganic Chemistry I CHEM 2250: Inorganic Chemistry Laboratory,GD:A-,B06454
+470,Hong Kong Institute of Vocational Education,SAS4306,CHEM 2310: Fundamentals of Analytical Chemistry CHEM 2350: Analytical Chemistry Laboratory,GD:A-,B06975
+471,Hong Kong Institute of Vocational Education,CEH3407,COMP 1001: Exploring Multimedia and Internet Computing,GD:67,B00547a
+472,Hong Kong Institute of Vocational Education,EIE4206,COMP 4631: Computer and Communication Security,GD:B+,B10992
+473,Hong Kong Institute of Vocational Education,CON4351 + CON4433 + CON4381 + CON2391,CIVL 1100: Discovering Civil and Environmental Engineering,GD:B/P,B02973a
+474,Hong Kong Institute of Vocational Education,CON4351+ CON4433,LIFS 1030: Environmental Science,No Restriction,B06414a
+475,Hong Kong Institute of Vocational Education,EMT1300,COMP 1021: Introduction to Computer Science,GD:67,B00747a
+476,Hong Kong Institute of Vocational Education,ITP4906,COMP S&N: Computer Science Track Course,GD:67,B02285
+477,Hong Kong Institute of Vocational Education,ITE3101,COMP 1022P: Introduction to Computing with Java,GD:67,B02272
+478,Hong Kong Institute of Vocational Education,ITP4907,COMP S&N: Computer Science Track Course,GD:67,B02286
+479,Hong Kong Institute of Vocational Education,EIE4205 + EIE4210,COMP S&N: Computer Science Track Course,GD:B+,B00315g
+480,Hong Kong Institute of Vocational Education,E&I3664+ E&I4664,COMP S&N: Computer Science Track Course,GD:67,B00315f
+481,Hong Kong Institute of Vocational Education,BUS3004,MGMT 1110: Introduction to Management,GD:B+,B13175
+482,Hong Kong Institute of Vocational Education,BAN4109,MGMT 2000LEVEL: 2000-level Course in Management,GD:B+,B13179
+483,Hong Kong Institute of Vocational Education,BUS4005,MARK 2120: Marketing Management,GD:B+,B13173
+484,Hong Kong Institute of Vocational Education,SAS4108,CHEM 4110: Structural Elucidation in Organic Chemistry,GD:A,B06963
+485,Hong Kong Institute of Vocational Education,MEC4401 + MEC4402,CENG 1500: A First Course on Materials Science and Applications,No Restriction,B02702
+486,Hong Kong Institute of Vocational Education,MEC4121,MECH 2410: Engineering Materials I,GD:B+,B06627a
+487,Hong Kong Institute of Vocational Education,MEC4121+MEC4110,CENG 1500: A First Course on Materials Science and Applications,No Restriction,B06627
+488,Hong Kong Institute of Vocational Education,CON3406,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B14101
+489,Hong Kong Institute of Vocational Education,MEC3125 + ENG4200,MATH 1020: Accelerated Calculus,No Restriction,B11194a
+490,Hong Kong Institute of Vocational Education,MEC3125 + MEC4103,MATH 1020: Accelerated Calculus,No Restriction,B11194b
+491,Hong Kong Institute of Vocational Education,MEC4111,MECH 2520: Design and Manufacturing I,GD:B+,B03194a
+492,Hong Kong Institute of Vocational Education,ENG3455,PHYS 1111: General Physics I,GD:63,B00304b
+493,Hong Kong Institute of Vocational Education,SAS4205,LIFS 3260: Microbiology Laboratory,No Restriction,B00642a
+494,Hong Kong Institute of Vocational Education,ASD3007,LIFS 2040: Cell Biology,No Restriction,B02916
+495,Hong Kong Institute of Vocational Education,ASD3007+ SAS4205+ SAS4209,LIFS 3060: Microbiology,No Restriction,B06986
+496,Hong Kong Institute of Vocational Education,ITP4305,COMP S&N: Computer Science Track Course,GD:67,B02278
+497,Hong Kong Institute of Vocational Education,ITP4315,COMP S&N: Computer Science Track Course,GD:B+,B02278a
+498,Hong Kong Institute of Vocational Education,SAS4203+ASD4017,LIFS 3110: Biotechnological Application of Recombinant DNA Techniques LIFS 3210: Principles of Recombinant DNA Technology,No Restriction,B06987
+499,Hong Kong Institute of Vocational Education,SAS4435,ENVS 4301: Environmental Conservation,Expired,B11147a
+500,Hong Kong Institute of Vocational Education,ITE3102,COMP 4621: Computer Communication Networks I,GD:67,B02273
+501,Hong Kong Institute of Vocational Education,ITP4304 / ITP4314,COMP 4631: Computer and Communication Security,GD:67,B02277
+502,Hong Kong Institute of Vocational Education,EIE3401S+EIE4402S,ELEC 2400: Electronic Circuits,GD:A-,B02814
+503,Hong Kong Institute of Vocational Education,E&I3604,COMP 1022P: Introduction to Computing with Java,GD:67,B06405
+504,Hong Kong Institute of Vocational Education,EIE4202,COMP 1022P: Introduction to Computing with Java,GD:67,B02558
+505,Hong Kong Institute of Vocational Education,ITP4905,COMP 1022P: Introduction to Computing with Java,GD:67,B02284
+506,Hong Kong Institute of Vocational Education,ASC3441,CHEM 2110: Organic Chemistry I CHEM 2150: Organic Chemistry Laboratory,GD:75,B00558a
+507,Hong Kong Institute of Vocational Education,CEH3361,CHEM 2110: Organic Chemistry I CHEM 2150: Organic Chemistry Laboratory,GD:75,B00552c
+508,Hong Kong Institute of Vocational Education,SAS3013,CHEM 2110: Organic Chemistry I CHEM 2150: Organic Chemistry Laboratory,GD:70,B00552b
+509,Hong Kong Institute of Vocational Education,SAS4310,CHEM 4130: Medicinal Chemistry,GD:A,B06973
+510,Hong Kong Institute of Vocational Education,CEH3362,CHEM 2410: Physical Chemistry I: Equilibrium Thermodynamics and Statistical Mechanics CHEM 2450: Physical Chemistry Laboratory,GD:75,B00555b
+829,The Hong Kong Polytechnic University,CC2C13P,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B11808a
+511,Hong Kong Institute of Vocational Education,SAS3014,CHEM 2410: Physical Chemistry I: Equilibrium Thermodynamics and Statistical Mechanics CHEM 2450: Physical Chemistry Laboratory,GD:75,B00555a
+512,Hong Kong Institute of Vocational Education,ELE3011,COMP 1021: Introduction to Computer Science,GD:B+,B02395a
+513,Hong Kong Institute of Vocational Education,ITP3301,COMP S&N: Computer Science Track Course,GD:67,B02274
+514,Hong Kong Institute of Vocational Education,ASD3005,MATH 2411: Applied Statistics,No Restriction,B11142
+515,Hong Kong Institute of Vocational Education,ASD3005 + ITE4901,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B06974
+516,Hong Kong Institute of Vocational Education,CBE2027+ CBE3027,CIVL 2120: Mechanics of Materials,GD:70,B00411
+517,Hong Kong Institute of Vocational Education,CON4331 + CON4333,CIVL 2110: Statics,GD:B,B00411e
+518,Hong Kong Institute of Vocational Education,GBS4116,ISOM 3760: Logistics Management,GD:B+,B13183
+519,Hong Kong Institute of Vocational Education,ITP4307/ITP4317,COMP S&N: Computer Science Track Course,GD:67,B02280
+520,Hong Kong Institute of Vocational Education,ITP4309,COMP S&N: Computer Science Track Course,GD:67,B02282
+521,Hong Kong Institute of Vocational Education,ITP4303,COMP S&N: Computer Science Track Course,GD:67,B02276
+522,Hong Kong Institute of Vocational Education,ITP4313,COMP S&N: Computer Science Track Course,GD:B+,B02276a
+523,Hong Kong Institute of Vocational Education,MEC4101,MECH 2210: Fluid Mechanics (Previous code MECH3210 ),GD:B+,B02656a
+524,Hong Kong Institute of Vocational Education,LAN3003 + LAN4002,LANG CCOM: Chinese Language Proficiency Achieved,AD,B13095
+525,Hong Kong Institute of Vocational Education,ITP4912,COMP S&D: Computer Science Track Course,GD:67,B02287
+526,Hong Kong Institute of Vocational Education,ITP4312,COMP S&N: Computer Science Track Course,GD:B+,B02275a
+527,Hong Kong Institute of Vocational Education,ITP4302,COMP S&N: Computer Science Track Course,GD:67,B02275
+528,Hong Kong Shue Yan University,ECON103,ECON 2103: Principles of Microeconomics,GD:B+,B03188a
+529,Hong Kong Shue Yan University,SOC150,HUMA 1000HMCC: 1000-level Course in Humanities / HUMA Common Core (not = HUMA 1000),No Restriction,B06934c
+530,Hong Kong Shue Yan University,CHI101 + CHI102 + CHI131 + CHI132,LANG CCOM: Chinese Language Proficiency Achieved,No Restriction,B07498
+531,Hong Kong Shue Yan University,BUS100,MGMT 2000LEVEL: 2000-level Course in Management,GD:B+,B03190a
+532,Hong Kong Shue Yan University,LAW110,SACC UCORE: Common Core Course in Social Analysis,No Restriction,B07325a
+533,Hong Kong Shue Yan University,ACCT 101 + ACCT 102,ACCT 2010: Principles of Accounting I,No Restriction,B06936
+534,Hong Kong Shue Yan University,ECON 101,ECON 2103: Principles of Microeconomics,No Restriction,B06931
+535,Hong Kong Shue Yan University,BUS 112,ISOM 2500: Business Statistics,No Restriction,B06930a
+536,Lingnan University,PHI399S,HUMA 3000HMCC: 3000-level Course in Humanities / HUMA Common Core,Expired,B02003b
+537,Lingnan University,GEC335,HUMA 1000HMCC: 1000-level Course in Humanities / HUMA Common Core (not = HUMA 1000),Expired,B02932b
+538,Lingnan University,CLA9012,"ISOM 2000IS: 2000-level Course in Information Systems, Business Statistics and Operations Management",No Restriction,B07830a
+539,Lingnan University,LCE1010 + LCE1020 -,LANG ECOM: English Language Proficiency Achieved,No Restriction,B07832
+540,Lingnan University,ENG1373/ENG3388,HMCC UCORE: Common Core Course in Humanities,No Restriction,B07831a
+541,Lingnan University,HST1194,HUMA 1000HMCC: 1000-level Course in Humanities / HUMA Common Core (not = HUMA 1000),No Restriction,B13654c
+542,Lingnan University,TRA4306,HUMA 2000HMCC: 2000-level Course in Humanities / HUMA Common Core,No Restriction,B06611b
+543,Lingnan University,CCC8001,HUMA 1720: Logic,No Restriction,B07834a
+544,Lingnan University,VIS399T (/VIS3399T),HMCC UCORE: Common Core Course in Humanities,No Restriction,B06180a
+545,Lingnan University,VIS399V,HUMA 1000HMCC: 1000-level Course in Humanities / HUMA Common Core (not = HUMA 1000),No Restriction,B07423c
+546,Lingnan University,CLD9006/GED122/CDS122,COMP 4631: Computer and Communication Security,No Restriction,B07835a
+547,Lingnan University,PHI375,HUMA 1000HMCC: 1000-level Course in Humanities / HUMA Common Core (not = HUMA 1000),Expired,B03120b
+548,Lingnan University,PHI3105,HMCC UCORE: Common Core Course in Humanities,No Restriction,B07687a
+549,Lingnan University,LCC1010,LANG 1113: Effective Chinese Communication,No Restriction,B07836
+550,Lingnan University,SOC3001,SOSC 2000SACC: 2000-level Course in Social Science / SA Common Core,No Restriction,B13874b
+551,Lingnan University,CUS329C,HUMA 1000SACC: 1000-level Course in Humanities / SA Common Core,Expired,B02933b
+552,Lingnan University,CCC8002,SOSC 3130: Hong Kong Culture,No Restriction,B07829
+553,Lingnan University,CLC9012,MARK 4000LEVEL: 4000-level Course in Marketing,No Restriction,B13562
+554,Lingnan University,TRA3211,HUMA 1000HMCC: 1000-level Course in Humanities / HUMA Common Core (not = HUMA 1000),No Restriction,B07422c
+555,Lingnan University,CLA9015,HUMA 1000HMCC: 1000-level Course in Humanities / HUMA Common Core (not = HUMA 1000),Expired,B02834b
+556,Lingnan University,VIS2104,HUMA 1000HMCC: 1000-level Course in Humanities / HUMA Common Core (not = HUMA 1000),No Restriction,B07838b
+557,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",BM1208,FINA 1303: Introduction to Financial Markets,GD:B+,B06591
+558,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",LM1105,IELM 2410: Logistics and Freight Transportation Operations,No Restriction,B07039
+559,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",CH1130,LANG CCOM: Chinese Language Proficiency Achieved,AD,B02591a
+560,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",AC1115,ACCT 2200: Principles of Accounting II,GD:B+,B06588
+561,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",CS1225,COMP G&M: Computer Science Track Course,GD:B+,B02467
+562,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",LS2110,COMP 3311: Database Management Systems,GD:B+,B02469
+563,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",CS1230,COMP S&D: Computer Science Track Course,GD:B+,B02468
+564,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",AC1105,ACCT 2010: Principles of Accounting I,GD:B+,B06585a
+565,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",AC1105,ACCT 2020: Introduction to Accounting for Non-Business Majors,GD:B+,B06585
+566,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",LM2105,IELM 4410: Global Supply Chain Management,No Restriction,B07041
+567,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",CS1210,COMP 1001: Exploring Multimedia and Internet Computing,GD:B+,B02466
+568,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",LS2040,COMP S&D: Computer Science Track Course,GD:B+,B02471
+569,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",LS1100,COMP 1021: Introduction to Computer Science,GD:B+,B02465
+570,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",BM1410,COMP S&D: Computer Science Track Course,GD:B+,B02461
+571,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",BM1415,COMP S&D: Computer Science Track Course,GD:B+,B02461a
+572,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",BM1301,MGMT 1110: Introduction to Management,GD:B+,B02821a
+573,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",MK1003,MARK 2120: Marketing Management,GD:B+,B06590
+574,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",QA1110,IELM 2510: Engineering Probability and Statistics,No Restriction,B07038
+575,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",LS2120,COMP S&D: Computer Science Track Course,GD:B+,B02470
+576,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",LM1035,IELM 3901: Transportation Systems,No Restriction,B07042
+577,"School of Continuing and Professional Studies, The Chinese University of Hong Kong",LM1025,IELM 3450: Logistics Planning and Service Management,No Restriction,B07043
+578,"School of Continuing Education, Hong Kong Baptist University",HDMT1307,ECON 2103: Principles of Microeconomics,GD:B+,B10177
+579,"School of Continuing Education, Hong Kong Baptist University",HDMT1305,MGMT 3110: Human Resources Management,GD:B+,B10176
+580,"School of Continuing Education, Hong Kong Baptist University",HDMT1309,MGMT 2110: Organizational Behavior,GD:B+,B10175
+581,"School of Continuing Education, Hong Kong Baptist University",HDGS0305C,SOSC 1000LEVEL: 1000-level Course in Social Science,GD:B,B10247
+582,"School of Continuing Education, Hong Kong Baptist University",HDMT1306,MGMT 1110: Introduction to Management,GD:B+,B10174
+583,"School of Continuing Education, Hong Kong Baptist University",HDMT1302,MARK 2120: Marketing Management,GD:B+,B10335
+584,"School of Continuing Education, Hong Kong Baptist University",HDMT1303,ISOM 2700: Operations Management,GD:B+,B10305
+585,"School of Continuing Education, Hong Kong Baptist University",HDMT1308,SOSC 1000LEVEL: 1000-level Course in Social Science,GD:B,B10248
+586,"School of Professional and Continuing Education, The University of Hong Kong",CC88-769 /CCIT4060,COMP S&N: Computer Science Track Course,GD:B+,B02255
+587,"School of Professional and Continuing Education, The University of Hong Kong",CCIM4027,COMP A&T: Computer Science Track Course,GD:B+,B13441a
+588,"School of Professional and Continuing Education, The University of Hong Kong",CC88-773 /CCIT4063,ELEC 2200: Digital Circuits and Systems,GD:A-,B05328
+589,"School of Professional and Continuing Education, The University of Hong Kong",CCST4030,CHEM 2310: Fundamentals of Analytical Chemistry CHEM 2350: Analytical Chemistry Laboratory,GD:B+,B14011a
+590,"School of Professional and Continuing Education, The University of Hong Kong",(HP83-277 / HPHS4001) + (HP83-280 / HPHS4004) + (HP83-279 / HPHS4003) + (HP83-377 / HPHS4008),LIFS 1902: General Biology II,No Restriction,B03056a
+591,"School of Professional and Continuing Education, The University of Hong Kong",CC88-257 / CCPH4002,MGMT 2010: Business Ethics and the Individual,GD:B+,B00396b
+592,"School of Professional and Continuing Education, The University of Hong Kong",CC66-290 / CCIM4029,COMP S&D: Computer Science Track Course,GD:B+,B02256
+593,"School of Professional and Continuing Education, The University of Hong Kong",CC88-125 / CC88-649 / CCAH3004 / CCAH4001,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B00395b
+594,"School of Professional and Continuing Education, The University of Hong Kong",HP83-897,CHEM 1010: General Chemistry IA,No Restriction,B02720a
+595,"School of Professional and Continuing Education, The University of Hong Kong",CC88-283 / CCMA4005,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B02324
+596,"School of Professional and Continuing Education, The University of Hong Kong",CC88-233 / CCST 4011,LIFS 2000LEVEL: 2000-level Course in Life Science,No Restriction,B02830a
+597,"School of Professional and Continuing Education, The University of Hong Kong",CC88-744 / CCST4091,LIFS 3210: Principles of Recombinant DNA Technology,No Restriction,B02868
+598,"School of Professional and Continuing Education, The University of Hong Kong",CC88-664 + CC88-422 + CC88-663 / CCST4082 + CCST4025 + CCST4081,LIFS 3060: Microbiology,No Restriction,B03118
+599,"School of Professional and Continuing Education, The University of Hong Kong",CCST4085,LIFS 3150: Biostatistics,No Restriction,B11136
+600,"School of Professional and Continuing Education, The University of Hong Kong",CCST 4081 + CCST4025 + CCST4017,LIFS 3010: Molecular and Cellular Biology I,No Restriction,B07942
+601,"School of Professional and Continuing Education, The University of Hong Kong",CC88-663 /CCST4081,LIFS 2000LEVEL: 2000-level Course in Life Science,No Restriction,B02831
+602,"School of Professional and Continuing Education, The University of Hong Kong",CC 66-388 / CCMK4002,"ECON 1503: Big Problems in Economics: Issues, Ideas, and Principles",GD:B+,B10676
+603,"School of Professional and Continuing Education, The University of Hong Kong",CCBS 4001,SOSC 2000LEVEL: 2000-level Course in Social Science,GD:B,B10332
+604,"School of Professional and Continuing Education, The University of Hong Kong",CC 66-460 / CCAC4019,ISOM 2010: Introduction to Information Systems,GD:B+,B11321
+605,"School of Professional and Continuing Education, The University of Hong Kong",CC88-266 / CCST4018,LIFS 1902: General Biology II,No Restriction,B02829b
+606,"School of Professional and Continuing Education, The University of Hong Kong",CC88-667 / CCST4084,LIFS 2000LEVEL: 2000-level Course in Life Science,No Restriction,B03200b
+607,"School of Professional and Continuing Education, The University of Hong Kong",CCST4084+CCST4017+ CCST4048,LIFS 3010: Molecular and Cellular Biology I,No Restriction,B07941b
+608,"School of Professional and Continuing Education, The University of Hong Kong",CCST4084+CCST4017+ CCST4048,LIFS 2040: Cell Biology,No Restriction,B07941a
+609,"School of Professional and Continuing Education, The University of Hong Kong",CC88-667/CCST4084 + CC88-265/CCST4017 + CC88-663/CCST4081,LIFS 2040: Cell Biology,No Restriction,B07988
+610,"School of Professional and Continuing Education, The University of Hong Kong",HP83-278 / HPHS4002+ HP83-283 /HPHS4007 + CC88-157 / CCST3002,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,No Restriction,B07198
+611,"School of Professional and Continuing Education, The University of Hong Kong",CCMA4003,MATH 1020: Accelerated Calculus,GD:B+,B00334a
+612,"School of Professional and Continuing Education, The University of Hong Kong",CC66-293 / CCIM4030,COMP G&M: Computer Science Track Course,GD:B+,B00181a
+613,"School of Professional and Continuing Education, The University of Hong Kong",CC88-319 / CCIT4018,COMP S&N: Computer Science Track Course,GD:B+,B13443a
+614,"School of Professional and Continuing Education, The University of Hong Kong",CC66-317 / CCIM4031,COMP 2611: Computer Organization,GD:B+,B02257
+615,"School of Professional and Continuing Education, The University of Hong Kong",CD85-233-23 / CCIM4031,COMP 2611: Computer Organization,GD:B+,B00186b
+616,"School of Professional and Continuing Education, The University of Hong Kong",CD85-215-22 / CCIT4067,COMP 1022P: Introduction to Computing with Java,GD:B+,B00131a
+617,"School of Professional and Continuing Education, The University of Hong Kong",CD85-233-14,COMP 1022P: Introduction to Computing with Java,GD:B+,B00184a
+618,"School of Professional and Continuing Education, The University of Hong Kong",CC88-646 / CCIT4053,COMP S&N: Computer Science Track Course,GD:B+,B02258
+619,"School of Professional and Continuing Education, The University of Hong Kong",CC66-294 /CCIM4033,COMP S&N: Computer Science Track Course,GD:B+,B00182b
+620,"School of Professional and Continuing Education, The University of Hong Kong",CC 66-213/CCAC4006 + CC66-214,ACCT 2200: Principles of Accounting II,GD:B+,B11311
+621,"School of Professional and Continuing Education, The University of Hong Kong",HP 83-576 / HPAC4004,ACCT 2200: Principles of Accounting II,GD:B+,B05854
+622,"School of Professional and Continuing Education, The University of Hong Kong",CC66-312 / CCIM4034,COMP 4621: Computer Communication Networks I,GD:B+,B02259
+623,"School of Professional and Continuing Education, The University of Hong Kong",CC66-292 /CCIM4035,IELM 3150: Manufacturing Processes,No Restriction,B02773
+624,"School of Professional and Continuing Education, The University of Hong Kong",CCAH4003,ARTC UCORE: Common Core Course in Arts,No Restriction,B00455a
+625,"School of Professional and Continuing Education, The University of Hong Kong",CC66-318 / CCIM4036,ELEC 2200: Digital Circuits and Systems,GD:A-,B02775
+626,"School of Professional and Continuing Education, The University of Hong Kong",CC66-318 / CCIM4036,COMP S&N: Computer Science Track Course,GD:B+,B02260
+627,"School of Professional and Continuing Education, The University of Hong Kong",CD85-233-26,COMP S&N: Computer Science Track Course,GD:B+,B00187c
+628,"School of Professional and Continuing Education, The University of Hong Kong",CC88-637 / CCIT4049,COMP G&M: Computer Science Track Course,GD:B+,B00128b
+629,"School of Professional and Continuing Education, The University of Hong Kong",CD85-215-15 / CCIT4068,COMP G&M: Computer Science Track Course,GD:B+,B00130a
+630,"School of Professional and Continuing Education, The University of Hong Kong",HP 83-580 / HPMS4003,SOSC 1440: Introduction to Economics,GD:B+,B05853a
+631,"School of Professional and Continuing Education, The University of Hong Kong",CCIM4037,ELEC 1100: Introduction to Electro-Robot Design,No Restriction,B00185c
+632,"School of Professional and Continuing Education, The University of Hong Kong",CD85-233-21,COMP S&N: Computer Science Track Course,GD:B+,B00185b
+633,"School of Professional and Continuing Education, The University of Hong Kong",CD85-233-21+ CD85-233-26,ELEC 1100: Introduction to Electro-Robot Design,No Restriction,B00828c
+634,"School of Professional and Continuing Education, The University of Hong Kong",CC88-456 /CCIT4029,ELEC 3600: Electromagnetics: From Wireless to Photonic Applications,GD:A-,B05330
+635,"School of Professional and Continuing Education, The University of Hong Kong",CCST4064 + CCMA4001,MATH 2411: Applied Statistics,No Restriction,B11421
+636,"School of Professional and Continuing Education, The University of Hong Kong",CC88-285 / CCPH4003,HUMA 1720: Logic,GD:B,B00340a
+637,"School of Professional and Continuing Education, The University of Hong Kong",HPHR4004,MGMT 1000LEVEL: 1000-level Course in Management,GD:B+,B14150
+638,"School of Professional and Continuing Education, The University of Hong Kong",CC88-167 / CCST4009,CENG 1700: Introduction to Environmental Engineering,No Restriction,B02410a
+639,"School of Professional and Continuing Education, The University of Hong Kong",CC88-167 / CCST4009,LIFS 1030: Environmental Science,No Restriction,B02410
+640,"School of Professional and Continuing Education, The University of Hong Kong",CCIM4069 /CC66-478 + CCIM4072 / CC66-481,IELM 2150: Product Design (Aka: Product Design and Communication ),No Restriction,B07006
+641,"School of Professional and Continuing Education, The University of Hong Kong",CCIM4040 /CC66-321,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B14221
+642,"School of Professional and Continuing Education, The University of Hong Kong",CCIM4111 + CCIM41112,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B00244c
+643,"School of Professional and Continuing Education, The University of Hong Kong",CC88-624 / CCIT4037,COMP S&N: Computer Science Track Course,GD:B+,B02261
+644,"School of Professional and Continuing Education, The University of Hong Kong",CCST4060,LIFS 2060: Biodiversity,No Restriction,B11137
+645,"School of Professional and Continuing Education, The University of Hong Kong",CC 66-215/ CCAC4008 + CC66-216,ACCT 2010: Principles of Accounting I,GD:B+,B11313
+646,"School of Professional and Continuing Education, The University of Hong Kong",CC88-823 / CCBS5004 / CCBS4018,FINA 1303: Introduction to Financial Markets,GD:B+,B05895
+647,"School of Professional and Continuing Education, The University of Hong Kong",CCBS4018,FINA 1303: Introduction to Financial Markets,GD:B+,B05895a
+648,"School of Professional and Continuing Education, The University of Hong Kong",HPCS4004,SOSC 1000LEVEL: 1000-level Course in Social Science,GD:B,B11216a
+649,"School of Professional and Continuing Education, The University of Hong Kong",CC88-157,CHEM 1004: Chemistry in Everyday Life,GD:B,B02869b
+650,"School of Professional and Continuing Education, The University of Hong Kong",CC88-157 /CCST3002,CHEM 1004: Chemistry in Everyday Life,GD:B,B02458a
+651,"School of Professional and Continuing Education, The University of Hong Kong",CC88-157 + CC88-786 / CCST3002 + CCST4101,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,GD:B,B02869
+652,"School of Professional and Continuing Education, The University of Hong Kong",CCST4023,LIFS 1901: General Biology I,No Restriction,B11138b
+653,"School of Professional and Continuing Education, The University of Hong Kong",CCAH4004,HUMA 3000LEVEL: 3000-level Course in Humanities,GD:B,B14473a
+654,"School of Professional and Continuing Education, The University of Hong Kong",CCIM4073/CC66-482 + CCIM4076/CC66-534 + CCIM4077/CC66-535 + CCIM4075/CC66-533,IELM 4170: Product Design and Lifecycle Management,No Restriction,B07008
+655,"School of Professional and Continuing Education, The University of Hong Kong",CCST4097 + CCST4098,PHYS 1111: General Physics I,GD:C,B10892b
+656,"School of Professional and Continuing Education, The University of Hong Kong",HP83-590,LIFS 1901: General Biology I,No Restriction,B02721a
+657,"School of Professional and Continuing Education, The University of Hong Kong",HPMS4005,FINA 2303: Financial Management,GD:B+,B05861a
+658,"School of Professional and Continuing Education, The University of Hong Kong",CCST4047,LIFS 1902: General Biology II,No Restriction,B10883a
+659,"School of Professional and Continuing Education, The University of Hong Kong",CCIT4022,COMP S&D: Computer Science Track Course,GD:B+,B07604
+660,"School of Professional and Continuing Education, The University of Hong Kong",CCST4015+CCST4097+CCST4098,PHYS 1111: General Physics I,No Restriction,B14281a
+661,"School of Professional and Continuing Education, The University of Hong Kong",CC88-580 /CCST4069,PHYS 1112: General Physics I with Calculus,GD:B,B00565a
+662,"School of Professional and Continuing Education, The University of Hong Kong",CC88-581 /CCST4070,PHYS 1114: General Physics II,GD:B,B00567a
+663,"School of Professional and Continuing Education, The University of Hong Kong",CCTP4011,IELM 4410: Global Supply Chain Management,ONCE,B07012a
+664,"School of Professional and Continuing Education, The University of Hong Kong",CCTP4011 + CCTP4006 / CC66-369 + CC66-377,IELM 3450: Logistics Planning and Service Management,ONCE,B07012
+665,"School of Professional and Continuing Education, The University of Hong Kong",CCST4036 + CCST4040,PHYS 1114: General Physics II,No Restriction,B10893
+666,"School of Professional and Continuing Education, The University of Hong Kong",CCCU4005,SOSC 2000LEVEL: 2000-level Course in Social Science,GD:B+,B07605
+667,"School of Professional and Continuing Education, The University of Hong Kong",HP 83-581 / HPMS4004,ECON 1000LEVEL: 1000-level Course in Economics,GD:B+,B05855
+668,"School of Professional and Continuing Education, The University of Hong Kong",HP 83-577 / HPMS4001,ACCT 3610: Functions of Law in Society and Business,GD:A-,B05850a
+669,"School of Professional and Continuing Education, The University of Hong Kong",CC88-665 + CC88-421 /CCST4083 + CCST4024,LIFS 3040: Animal Physiology,No Restriction,B02875
+670,"School of Professional and Continuing Education, The University of Hong Kong",CCST4083 + (CCST4048 / CC88-461) + CCST4026,LIFS 1902: General Biology II LIFS 3040: Animal Physiology,No Restriction,B06528a
+671,"School of Professional and Continuing Education, The University of Hong Kong",CC88-665 + CC88-421 + CC88-423 / CCST4083 + CCST4024 + CCST4026,LIFS 1902: General Biology II LIFS 3040: Animal Physiology,No Restriction,B02874a
+672,"School of Professional and Continuing Education, The University of Hong Kong",CC88-822 / CCBS5003,MGMT 3110: Human Resources Management,GD:B+,B05897
+673,"School of Professional and Continuing Education, The University of Hong Kong",HP 83-690 / HPMS4010,MGMT 3110: Human Resources Management,GD:B+,B05864
+674,"School of Professional and Continuing Education, The University of Hong Kong",HPTH4026,MGMT 3110: Human Resources Management,GD:B+,B11055
+675,"School of Professional and Continuing Education, The University of Hong Kong",CC66-816 / CCMK5005,MGMT 3110: Human Resources Management,GD:B+,B11018
+676,"School of Professional and Continuing Education, The University of Hong Kong",CCPH4004,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B10884a
+677,"School of Professional and Continuing Education, The University of Hong Kong",CC88-759 / CCIT4057,ISOM 2010: Introduction to Information Systems,GD:B+,B05332a
+678,"School of Professional and Continuing Education, The University of Hong Kong",CC88-759 / CCIT4057,COMP S&D: Computer Science Track Course,GD:B+,B05332
+679,"School of Professional and Continuing Education, The University of Hong Kong",CC88-299 / CCIT4014,COMP 4631: Computer and Communication Security,GD:B+,B00125a
+680,"School of Professional and Continuing Education, The University of Hong Kong",CCIT4073,COMP 1001: Exploring Multimedia and Internet Computing,GD:B+,B11217
+681,"School of Professional and Continuing Education, The University of Hong Kong",HP 83-217 / HPAC4001,ISOM 2010: Introduction to Information Systems,GD:B+,B11320
+682,"School of Professional and Continuing Education, The University of Hong Kong",CC88-281 / CCCU4006,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B+,B05638
+683,"School of Professional and Continuing Education, The University of Hong Kong",HPAC4007,ACCT 3010: Financial Accounting I,GD:A-,B10446
+684,"School of Professional and Continuing Education, The University of Hong Kong",HPAC4008,ACCT 3020: Financial Accounting II,GD:A-,B10447
+685,"School of Professional and Continuing Education, The University of Hong Kong",HP 83-688 / HPMS4008,ECON 4374: International Macroeconomics and Finance,GD:B+,B05863
+686,"School of Professional and Continuing Education, The University of Hong Kong",CC88-760 / CCIT4058,COMP 4021: Internet Computing,GD:B+,B05333
+687,"School of Professional and Continuing Education, The University of Hong Kong",CC88-298 /CCIT4013,COMP S&N: Computer Science Track Course,GD:B+,B02262
+688,"School of Professional and Continuing Education, The University of Hong Kong",CC88-259 / CCSS4004,SOSC 1000LEVEL: 1000-level Course in Social Science,GD:B+,B05860
+689,"School of Professional and Continuing Education, The University of Hong Kong",CCIT4061,COMP G&M: Computer Science Track Course,GD:B+,B06688
+690,"School of Professional and Continuing Education, The University of Hong Kong",CCST4095 + CCST4065,ENVS 3004: Global Climate Change,Expired,B11420a
+691,"School of Professional and Continuing Education, The University of Hong Kong",CCIT4031,COMP S&N: Computer Science Track Course,GD:B+,B06682
+692,"School of Professional and Continuing Education, The University of Hong Kong",CC88-447 / CCIT4026,ELEC 2300: Computer Organization,GD:A-,B05334
+693,"School of Professional and Continuing Education, The University of Hong Kong",CC88-321 / CCIT4020,COMP 1022P: Introduction to Computing with Java,GD:B+,B02263
+694,"School of Professional and Continuing Education, The University of Hong Kong",CCIT4016,COMP A&T: Computer Science Track Course,GD:B+,B06686
+695,"School of Professional and Continuing Education, The University of Hong Kong",CCIT4033 / CC88-620,IELM 3300: Industrial Data Systems,No Restriction,B07009
+696,"School of Professional and Continuing Education, The University of Hong Kong",CC88-620 /CCIT4033,COMP 3311: Database Management Systems,GD:B+,B02264
+697,"School of Professional and Continuing Education, The University of Hong Kong",CC88-670 / CCIT4054,ELEC 1010: Electronic and Information Technology,No Restriction,B05336
+698,"School of Professional and Continuing Education, The University of Hong Kong",CC88-341 / CCBS4005,ACCT 2010: Principles of Accounting I,GD:B+,B00570b
+699,"School of Professional and Continuing Education, The University of Hong Kong",CC88-341 / CCBS4005,ACCT 2020: Introduction to Accounting for Non-Business Majors,GD:B+,B00570a
+700,"School of Professional and Continuing Education, The University of Hong Kong",CCBS4006,FINA 2303: Financial Management,GD:B+,B05893a
+701,"School of Professional and Continuing Education, The University of Hong Kong",CC88-249 / CCST4012,CHEM 1010: General Chemistry IA,GD:B,B02680
+702,"School of Professional and Continuing Education, The University of Hong Kong",CCST4012+CCST4111,CHEM 1010: General Chemistry IA CHEM 1030: General Chemistry II CHEM 1050: Laboratory for General Chemistry I CHEM 1055: Laboratory for General Chemistry II,GD: C+,B11187a
+703,"School of Professional and Continuing Education, The University of Hong Kong",CCST4012+CCST4029,CHEM 1010: General Chemistry IA CHEM 1030: General Chemistry II CHEM 1050: Laboratory for General Chemistry I CHEM 1055: Laboratory for General Chemistry II,GD:B,B11187
+704,"School of Professional and Continuing Education, The University of Hong Kong",CC88-349 / CCIT4024,COMP 1001: Exploring Multimedia and Internet Computing,GD:B+,B00339a
+705,"School of Professional and Continuing Education, The University of Hong Kong",HP83-231,COMP 1001: Exploring Multimedia and Internet Computing,GD:B+,B00487a
+706,"School of Professional and Continuing Education, The University of Hong Kong",CC88-340 / CCBS4007,MGMT 1110: Introduction to Management,GD:B+,B00835a
+707,"School of Professional and Continuing Education, The University of Hong Kong",HP 83-896 / HPMS4012,ISOM 2010: Introduction to Information Systems,GD:B+,B05856
+708,"School of Professional and Continuing Education, The University of Hong Kong",CC88-342 / CCBS4008,MARK 2120: Marketing Management,GD:B+,B00568b
+709,"School of Professional and Continuing Education, The University of Hong Kong",CC88-246 / CD85-215-78 / CCIT4009,COMP 1001: Exploring Multimedia and Internet Computing,No Restriction,B00134b
+710,"School of Professional and Continuing Education, The University of Hong Kong",CCIT4019,COMP S&D: Computer Science Track Course,GD:B+,B13444a
+711,"School of Professional and Continuing Education, The University of Hong Kong",CCSS4007,SOSC 1000LEVEL: 1000-level Course in Social Science,GD:B,B14013
+712,"School of Professional and Continuing Education, The University of Hong Kong",HP 83-691 / HPMS4011,ISOM 4750: Business Project Management,GD:B+,B05859a
+713,"School of Professional and Continuing Education, The University of Hong Kong",CCSS4009,SOSC 1960: Discovering Mind and Behavior,No Restriction,B02459b
+714,"School of Professional and Continuing Education, The University of Hong Kong",CCSS4006,SOSC 1850: Understanding Society,GD:B,B10333
+715,"School of Professional and Continuing Education, The University of Hong Kong",CCST3005,LIFS 1901: General Biology I,No Restriction,B14152
+716,"School of Professional and Continuing Education, The University of Hong Kong",CCST3006,CHEM 1010: General Chemistry IA,GD:B,B11191
+717,"School of Professional and Continuing Education, The University of Hong Kong",HP 83-579 / HPAC4005,ACCT 2010: Principles of Accounting I,GD:B+,B05852
+718,"School of Professional and Continuing Education, The University of Hong Kong",CC88-250 / CCST4013,CHEM 2110: Organic Chemistry I CHEM 2150: Organic Chemistry Laboratory,GD:B,B02828
+719,"School of Professional and Continuing Education, The University of Hong Kong",CC88-621 +CC88-297,COMP S&N: Computer Science Track Course,GD:B+,B02265
+720,"School of Professional and Continuing Education, The University of Hong Kong",CC 66-221/ CCAC4012A,ACCT 3610: Functions of Law in Society and Business,GD:A-,B11315
+721,"School of Professional and Continuing Education, The University of Hong Kong",CCAC4012A + CCAC4012B,ACCT 3610: Functions of Law in Society and Business,GD:A-,B12311
+722,"School of Professional and Continuing Education, The University of Hong Kong",CCBS4010,ECON 2123: Macroeconomics,GD:B+,B00834b
+723,"School of Professional and Continuing Education, The University of Hong Kong",CC88-820 / CCBS5001 + CC88-825,ACCT 2200: Principles of Accounting II,GD:B+,B05891
+724,"School of Professional and Continuing Education, The University of Hong Kong",CC88-314 /CCIT4015,COMP S&D: Computer Science Track Course,GD:B+,B05338
+725,"School of Professional and Continuing Education, The University of Hong Kong",CCMK5007,MGMT 1110: Introduction to Management,GD:B+,B10677
+726,"School of Professional and Continuing Education, The University of Hong Kong",CCBS5008,ACCT 2200: Principles of Accounting II,GD:B+,B10663
+727,"School of Professional and Continuing Education, The University of Hong Kong",HPTH4003,MARK 2120: Marketing Management,GD:B+,B11053
+728,"School of Professional and Continuing Education, The University of Hong Kong",CC-66-390 / CCMK4006,MARK 2120: Marketing Management,GD:B+,B10834
+729,"School of Professional and Continuing Education, The University of Hong Kong",CCTP4013,MARK 2120: Marketing Management,GD:B+,B11129
+730,"School of Professional and Continuing Education, The University of Hong Kong",HP 83-992 / HPAC 4002,MARK 2120: Marketing Management,GD:B+,B11318
+731,"School of Professional and Continuing Education, The University of Hong Kong",CCIM4071,CENG 1500: A First Course on Materials Science and Applications,No Restriction,B11078
+732,"School of Professional and Continuing Education, The University of Hong Kong",CC88-166 / CCMA3001,IELM 2510: Engineering Probability and Statistics,No Restriction,B02325a
+733,"School of Professional and Continuing Education, The University of Hong Kong",CC88-452 / CCMA4008,ISOM 2500: Business Statistics,GD:B+,B03108c
+734,"School of Professional and Continuing Education, The University of Hong Kong",CC88-452 / CCMA4008,IELM 2510: Engineering Probability and Statistics,No Restriction,B03108a
+735,"School of Professional and Continuing Education, The University of Hong Kong",CC88-452 / CCMA4008,SOSC 1100: Elementary Statistics for Social Research,GD:B-,B03108
+736,"School of Professional and Continuing Education, The University of Hong Kong",CCMA4008,IELM 2510: Engineering Probability and Statistics,No Restriction,B14081
+737,"School of Professional and Continuing Education, The University of Hong Kong",CC88-322 / CCIT 4021,COMP A&T: Computer Science Track Course,GD:B+,B05339a
+738,"School of Professional and Continuing Education, The University of Hong Kong",CC88-322 / CCIT4021,MATH 2343: Discrete Structures,No Restriction,B05339
+739,"School of Professional and Continuing Education, The University of Hong Kong",CMA4003,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B00334b
+740,"School of Professional and Continuing Education, The University of Hong Kong",CC66-323 /CCIM4047,MECH 2020: Statics and Dynamics,GD:B+,B03109
+741,"School of Professional and Continuing Education, The University of Hong Kong",CC88-422/CCST4025 + CC88-461/CCST4048,LIFS 3060: Microbiology,No Restriction,B07987
+742,"School of Professional and Continuing Education, The University of Hong Kong",CC66-298 / CCIM4048,COMP S&D: Computer Science Track Course,GD:B+,B00183b
+743,"School of Professional and Continuing Education, The University of Hong Kong",CC88-774 / CCIT4064,ELEC 3300: Introduction to Embedded Systems,GD:A-,B05340
+744,"School of Professional and Continuing Education, The University of Hong Kong",CC88-277 / CCBS4009,ECON 2103: Principles of Microeconomics,GD:B+,B05892
+745,"School of Professional and Continuing Education, The University of Hong Kong",CC88-761 /CCIT4059,COMP 4521: Mobile Application Development (Aka: Embedded Systems Software),GD:B+,B05341a
+746,"School of Professional and Continuing Education, The University of Hong Kong",CC88-423 / CCST4026,LIFS 4060: Immunobiology,No Restriction,B03199
+747,"School of Professional and Continuing Education, The University of Hong Kong",CC88-265 / CCST4017,LIFS 2210: Biochemistry I,No Restriction,B02867
+748,"School of Professional and Continuing Education, The University of Hong Kong",CC88-265/CCST4017 + CC88-167/CCST4009 + CC88-667/CCST4084,LIFS 1901: General Biology I,No Restriction,B07986
+749,"School of Professional and Continuing Education, The University of Hong Kong",CC88-671 /CCIT4055,COMP S&N: Computer Science Track Course,GD:B+,B02266
+750,"School of Professional and Continuing Education, The University of Hong Kong",CCST4086,PHYS 1002: Introduction to Astrophysics and Astronomy,No Restriction,B10894
+751,"School of Professional and Continuing Education, The University of Hong Kong",CC88-642 / CCIT4051,COMP S&N: Computer Science Track Course,GD:B+,B02267
+752,"School of Professional and Continuing Education, The University of Hong Kong",CC88-627 / CCIT4040,COMP 4631: Computer and Communication Security,GD:B+,B02268
+753,"School of Professional and Continuing Education, The University of Hong Kong",CC88-324 / CCIT4023,COMP 1022P: Introduction to Computing with Java,GD:B+,B00126a
+754,"School of Professional and Continuing Education, The University of Hong Kong",CC 66-222 / CCAC4013,MGMT 1110: Introduction to Management,GD:B+,B11317
+755,"School of Professional and Continuing Education, The University of Hong Kong",HP 83-689 / HPMS4009,MGMT 2110: Organizational Behavior,GD:B+,B05858
+756,"School of Professional and Continuing Education, The University of Hong Kong",HPTH4025,MGMT 2110: Organizational Behavior,GD:B+,B11054
+757,"School of Professional and Continuing Education, The University of Hong Kong",HP 83-687 / HPMS4007,SOSC 1000CS: 1000-level Course in Social Science / CS Minor Program,GD:B+,B05857a
+758,"School of Professional and Continuing Education, The University of Hong Kong",HP 83-578 / HPMS4002,MGMT 1110: Introduction to Management,GD:B+,B05851
+759,"School of Professional and Continuing Education, The University of Hong Kong",CC 66-391 / CCMK4008,MGMT 1110: Introduction to Management,GD:B+,B10678
+760,"School of Professional and Continuing Education, The University of Hong Kong",HP 83-686 / HPMS4006,MARK 2120: Marketing Management,GD:B+,B05862
+761,"School of Professional and Continuing Education, The University of Hong Kong",CC88-824 / CCBS5005,MGMT 2110: Organizational Behavior,GD:B+,B05894
+762,"School of Professional and Continuing Education, The University of Hong Kong",CC66-324 /CCIM4050,CENG 1700: Introduction to Environmental Engineering,No Restriction,B02808
+763,"School of Professional and Continuing Education, The University of Hong Kong",CC66-324 + CC66-310 / CCIM4050 + CCIM4051,CENG 1700: Introduction to Environmental Engineering,No Restriction,B02819
+764,"School of Professional and Continuing Education, The University of Hong Kong",CC88-593,MATH 2421: Probability,No Restriction,B02681
+765,"School of Professional and Continuing Education, The University of Hong Kong",CC88-746 / CCST4093,MATH 3423: Statistical Inference,No Restriction,B03137
+766,"School of Professional and Continuing Education, The University of Hong Kong",CC66-314 / CCIM4053,MECH 2410: Engineering Materials I,GD:B+,B02732a
+767,"School of Professional and Continuing Education, The University of Hong Kong",CC66-314 /CCIM4053,CENG 1500: A First Course on Materials Science and Applications,No Restriction,B02732
+768,"School of Professional and Continuing Education, The University of Hong Kong",CCCU4015,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B10331
+769,"School of Professional and Continuing Education, The University of Hong Kong",HPTH4004,ISOM 3740: Service Management,GD:B+,B11057
+770,"School of Professional and Continuing Education, The University of Hong Kong",CC88-645 /CCIT4052,COMP 2021: Unix and Script Programming,GD:B+,B02269
+771,"School of Professional and Continuing Education, The University of Hong Kong",CC88-468 /CCIT4030,ELEC 2100: Signals and Systems,GD:A-,B05343
+772,"School of Professional and Continuing Education, The University of Hong Kong",CCMK4010,MGMT 2000LEVEL: 2000-level Course in Management,GD:B+,B11019
+773,"School of Professional and Continuing Education, The University of Hong Kong",CCSS4033,SOSC 1000LEVEL: 1000-level Course in Social Science,GD:B,B13096
+774,"School of Professional and Continuing Education, The University of Hong Kong",CCIM4054,COMP S&D: Computer Science Track Course,GD:B+,B13442a
+775,"School of Professional and Continuing Education, The University of Hong Kong",CC88-764 / CCMA4009,ISOM 2500: Business Statistics,GD:B+,B00625a
+776,"School of Professional and Continuing Education, The University of Hong Kong",CCMA4009,IELM 2510: Engineering Probability and Statistics,No Restriction,B00625b
+777,"School of Professional and Continuing Education, The University of Hong Kong",CC88-622 /CCIT4035,COMP S&N: Computer Science Track Course,GD:B+,B02270
+778,"School of Professional and Continuing Education, The University of Hong Kong",CD85-215-80 / CCIT4025,COMP S&N: Computer Science Track Course,GD:B+,B00135a
+779,"School of Professional and Continuing Education, The University of Hong Kong",CCTP4007,MGMT 1110: Introduction to Management,GD:B+,B07013a
+780,"School of Professional and Continuing Education, The University of Hong Kong",CC66-315 / CCIM4057,MECH 2310: Thermodynamics,GD:B+,B02733
+781,"School of Professional and Continuing Education, The University of Hong Kong",CC88-638 / CCIT4004,COMP G&M: Computer Science Track Course,GD:B+,B00129a
+782,"School of Professional and Continuing Education, The University of Hong Kong",CCTP4008 + CCTP4009 + CCTP4010 / CC66-379 + CC66-380 + CC66-381,IELM 2410: Logistics and Freight Transportation Operations,No Restriction,B07011
+783,"School of Professional and Continuing Education, The University of Hong Kong",CC88-784 / CCST4099,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B02679a
+784,"School of Professional and Continuing Education, The University of Hong Kong",CD85-215-59 / CCIT4011,COMP S&D: Computer Science Track Course,GD:B+,B00133a
+785,"School of Professional and Continuing Education, The University of Hong Kong",CCAH4009,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B00341b
+786,"School of Professional and Continuing Education, The University of Hong Kong",CCIT3002,COMP 1001: Exploring Multimedia and Internet Computing,GD:B+,B06687
+787,"School of Professional and Continuing Education, The University of Hong Kong",CC88-636 / CCIT4048,COMP S&D: Computer Science Track Course,GD:B+,B00127a
+788,The Chinese University of Hong Kong,UGEB-1307,ENVS2000STCC: 2000-level Course in Environmental Science/ STCC UCORE,No Restriction,B12668b
+789,The Chinese University of Hong Kong,SEEM3450,"SOSC 1130: Science, Technology and Business",GD:B-,B02820b
+790,The Chinese University of Hong Kong,SEEM3450,ISOM 4020: Innovation Management and Technology Entrepreneurship,GD:B+,B02820e
+791,The Chinese University of Hong Kong,SEEM3450,ELEC 3710: Hi-Tech Entrepreneurship,No Restriction,B02820c
+792,The Chinese University of Hong Kong,ELTU1002,LANG 1002: English for University Studies I,No Restriction,B08733
+793,The Chinese University of Hong Kong,FREN1000,LANG 1310: French: World Language and Culture,No Restriction,B02517
+794,The Chinese University of Hong Kong,FREN2000,LANG 1000LEVEL: 1000-level Course in Language,No Restriction,B02587
+795,The Chinese University of Hong Kong,FREN3050,LANG 1000LEVEL: 1000-level Course in Language,No Restriction,B02588
+796,The Chinese University of Hong Kong,FINA-3020,"FINA 4403: International Finance (AKA: FINA 3404: International Finance, 4 credits)",No Restriction,B12667
+797,The Chinese University of Hong Kong,ENGG1000,COMP 1000LEVEL: 1000-level Course in Computer Science and Engineering,No Restriction,B02516b
+798,The Chinese University of Hong Kong,UGEA2160,HUMA 1000HMCC: 1000-level Course in Humanities / HUMA Common Core (not = HUMA 1000),No Restriction,B07428c
+799,The Chinese University of Hong Kong,SAYT1114,OTHR FREE: Free Credits,No Restriction,B03123c
+800,The Chinese University of Hong Kong,PHYS1712,PHYS 1113: Laboratory for General Physics I,No Restriction,B02522
+801,The Chinese University of Hong Kong,CHEM1070,CHEM 1010: General Chemistry IA,No Restriction,B02514
+802,The Chinese University of Hong Kong,SAYT1134,OTHR FREE: Free Credits,No Restriction,B07554c
+803,The Chinese University of Hong Kong,GECW1010,SOSC 1000LEVEL: 1000-level Course in Social Science,No Restriction,B08731
+804,The Chinese University of Hong Kong,MATH1010,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B02519
+805,The Chinese University of Hong Kong,PHYS1111,PHYS 1112: General Physics I with Calculus,No Restriction,B02520
+806,The Chinese University of Hong Kong,PHYS1122,PHYS 2022: Modern Physics,No Restriction,B02521
+807,The Hong Kong Institute of Education,SCI2074,CHEM 1004: Chemistry in Everyday Life,No Restriction,B03282
+808,The Hong Kong Institute of Education,TLS3003,OTHR FREE: Free Credits,No Restriction,B03339a
+809,The Hong Kong Institute of Education,GEH1014,CHEM 1004: Chemistry in Everyday Life,No Restriction,B03283
+810,The Hong Kong Institute of Education,COC1014,SOSC 1662: Contemporary Hong Kong: Society,No Restriction,B03281
+811,The Hong Kong Institute of Education,SCI2076,OTHR FREE: Free Credits,No Restriction,B03338
+812,The Hong Kong Institute of Education,GEG1001/ GEA1003,SOSC 2290: Understanding Globalization,No Restriction,B03280
+813,The Hong Kong Institute of Education,IIT1082,COMP 1022P: Introduction to Computing with Java,No Restriction,B03278
+814,The Hong Kong Polytechnic University,ABCT2741,CHEM 2310: Fundamentals of Analytical Chemistry,No Restriction,B06402
+815,The Hong Kong Polytechnic University,ABCT359 / ABCT3759,CHEM 2350: Analytical Chemistry Laboratory,GD:B,B00477
+816,The Hong Kong Polytechnic University,AP10007,PHYS 1113: Laboratory for General Physics I,No Restriction,B02682
+817,The Hong Kong Polytechnic University,EIE2101,ELEC 1100: Introduction to Electro-Robot Design,No Restriction,B06674
+818,The Hong Kong Polytechnic University,AMA1100,MATH 1013: Calculus IB (Aka: Calculus I),No Restriction,B02387
+819,The Hong Kong Polytechnic University,AMA1100 + AMA1102,MATH 1020: Accelerated Calculus,No Restriction,B02388a
+820,The Hong Kong Polytechnic University,AMA1110 + AMA1120,MATH 1020: Accelerated Calculus,No Restriction,B07067
+821,The Hong Kong Polytechnic University,AMA1006,MATH 2411: Applied Statistics,No Restriction,B00001a
+822,The Hong Kong Polytechnic University,CC2C10P,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B03157a
+823,The Hong Kong Polytechnic University,CC2C10,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B03157
+824,The Hong Kong Polytechnic University,AMA1007 + AMA2882,MATH 1020: Accelerated Calculus,No Restriction,B02949b
+825,The Hong Kong Polytechnic University,LGT3524,"ISOM 3000OM: 3000-level Course in Information Systems, Business Statistics and Operations Management",GD:B+,B10318
+826,The Hong Kong Polytechnic University,ABCT2775,CHEM 2150: Organic Chemistry Laboratory,GD:B,B00478a
+827,The Hong Kong Polytechnic University,CC1C07,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B+,B06706
+828,The Hong Kong Polytechnic University,CC2C12P,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B11275a
+830,The Hong Kong Polytechnic University,LSGI1B02,"CIVL 1170: Climate Change, Sustainability and Big History (Aka: Climate Change Risk, Mitigation and Adaptations)",No Restriction,B02846
+831,The Hong Kong Polytechnic University,COMP250,COMP 1001: Exploring Multimedia and Internet Computing,GD:B+,B00482a
+832,The Hong Kong Polytechnic University,EIE2264,COMP 1021: Introduction to Computer Science,GD:B+,B00669a
+833,The Hong Kong Polytechnic University,EIE264 / EIE2264,COMP 1021: Introduction to Computer Science,GD:B+,B00519b
+834,The Hong Kong Polytechnic University,ENG2002,COMP 2011: Introduction to Object-oriented Programming,No Restriction,B11809a
+835,The Hong Kong Polytechnic University,ENG236,COMP 1021: Introduction to Computer Science,GD:B+,B00506a
+836,The Hong Kong Polytechnic University,EIE3361,ELEC 2300: Computer Organization,GD:A-,B00513c
+837,The Hong Kong Polytechnic University,EIE361 / EIE3361,COMP 2611: Computer Organization,GD:B+,B00513a
+838,The Hong Kong Polytechnic University,APSS2910 / APSS1B17,HUMA 1620: Human Culture and Society,GD:B,B00507a
+839,The Hong Kong Polytechnic University,IC2122,IELM 2100E: Computing in Industrial Applications,No Restriction,B11010
+840,The Hong Kong Polytechnic University,EIE399 / EIE3399,ELEC 4120: Computer Communication Networks,GD:B+,B00518a
+841,The Hong Kong Polytechnic University,EIE3114,COMP 3311: Database Management Systems,GD:B+,B02380
+842,The Hong Kong Polytechnic University,EIE2302,ELEC 1100: Introduction to Electro-Robot Design,No Restriction,B11007
+843,The Hong Kong Polytechnic University,EIE251,ELEC 2400: Electronic Circuits,GD:A,B00510b
+844,The Hong Kong Polytechnic University,CSE10252,MECH 1101: Fundamentals of Aeronautical Engineering - Fluid Mechanics,No Restriction,B02476a
+845,The Hong Kong Polytechnic University,CBS1100P,LANG CCOM: Chinese Language Proficiency Achieved,AD,B02824
+846,The Hong Kong Polytechnic University,ENG2001,CENG 1500: A First Course on Materials Science and Applications,No Restriction,B11008
+847,The Hong Kong Polytechnic University,ABCT1102,LIFS 1010: Appreciation of Biological Sciences,No Restriction,B00318a
+848,The Hong Kong Polytechnic University,ABCT1103,CHEM 1050: Laboratory for General Chemistry I LIFS 1904: Laboratory for General Biology II,No Restriction,B03160b
+849,The Hong Kong Polytechnic University,ABCT1103+ABCT1741+ABCT1742+ABCT2774,CHEM 1010: General Chemistry IA CHEM 1030: General Chemistry II CHEM 1050: Laboratory for General Chemistry I CHEM 1055: Laboratory for General Chemistry II,No Restriction,B11086
+850,The Hong Kong Polytechnic University,LGT2516 + LGT3505,IELM 2410: Logistics and Freight Transportation Operations,No Restriction,B10310a
+851,The Hong Kong Polytechnic University,CSE10254,CIVL 4700: Engineering Geology (Previous code: CIVL3700),No Restriction,B03081
+852,The Hong Kong Polytechnic University,GEC1H16C,SOSC 1000LEVEL: 1000-level Course in Social Science,No Restriction,B10245
+853,The Hong Kong Polytechnic University,ABCT226,LIFS 3040: Animal Physiology,No Restriction,B00802a
+854,The Hong Kong Polytechnic University,EIE282 / EIE2282,COMP S&N: Computer Science Track Course,GD:B+,B00520b
+855,The Hong Kong Polytechnic University,ENG2003,COMP 1001: Exploring Multimedia and Internet Computing,GD:B+,B07238
+856,The Hong Kong Polytechnic University,LGT3505,"ISOM 3000OM: 3000-level Course in Information Systems, Business Statistics and Operations Management",GD:B+,B10313
+857,The Hong Kong Polytechnic University,ABCT247 / ABCT3747,CENG 1000: Introduction to Chemical and Biomolecular Engineering,No Restriction,B00481
+858,The Hong Kong Polytechnic University,ABCT1700,CHEM 1004: Chemistry in Everyday Life,No Restriction,B14063a
+859,The Hong Kong Polytechnic University,ISE246,IELM 2410: Logistics and Freight Transportation Operations,No Restriction,B11009
+860,The Hong Kong Polytechnic University,APSS111/APSS1A07,SOSC 1000LEVEL: 1000-level Course in Social Science,GD:B,B07066
+861,The Hong Kong Polytechnic University,APSS1A08,SOSC 1850: Understanding Society,GD:B,B11074
+862,The Hong Kong Polytechnic University,ABCT1D04 / ABCT1101,LIFS 1010: Appreciation of Biological Sciences,No Restriction,B02391
+863,The Hong Kong Polytechnic University,AMA1103,MATH 1003: Calculus and Linear Algebra,No Restriction,B02392
+864,The Hong Kong Polytechnic University,AMA1104,MATH 2411: Applied Statistics,No Restriction,B02393a
+865,The Hong Kong Polytechnic University,HTM1A01,SOSC 1000LEVEL: 1000-level Course in Social Science,GD:B+,B06705
+866,The Hong Kong Polytechnic University,GEC1A03,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B11806a
+867,The Hong Kong Polytechnic University,EIE362 / EIE3362,ELEC 2100: Signals and Systems,GD:A,B00523a
+868,The Hong Kong Polytechnic University,GEC1C25,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B00219c
+869,The Hong Kong Polytechnic University,CCN2024,HUMA 1720: Logic,GD:B,B00219b
+870,The Hong Kong Polytechnic University,EIE2261,ELEC 2200: Digital Circuits and Systems,GD:A-,B02383
+871,The Hong Kong Polytechnic University,HTM1005,MGMT 1110: Introduction to Management,GD:B+,B11415
+872,The Hong Kong Polytechnic University,AP20002,PHYS 3040: Introduction to Materials Science,No Restriction,B14067
+873,The Hong Kong Polytechnic University,CSE19251,CIVL 2810: Construction Materials,No Restriction,B02477
+874,The Hong Kong Polytechnic University,AMA2111,MATH 1020: Accelerated Calculus,No Restriction,B02377c
+875,The Hong Kong Polytechnic University,CSE19100,CIVL 2120: Mechanics of Materials,No Restriction,B02473
+876,The Hong Kong Polytechnic University,EIE373 / EIE3373,COMP S&D: Computer Science Track Course,GD:B+,B00521b
+877,The Hong Kong Polytechnic University,EIE3373,ELEC 3300: Introduction to Embedded Systems,No Restriction,B00521c
+878,The Hong Kong Polytechnic University,CC2C08,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B11751
+879,The Hong Kong Polytechnic University,EIE375 / EIE3375,COMP 2011: Introduction to Object-oriented Programming,GD:B+,B00509b
+880,The Hong Kong Polytechnic University,HTM2310,ACCT 2020: Introduction to Accounting for Non-Business Majors,GD:B+,B11417
+881,The Hong Kong Polytechnic University,ABCT242 / ABCT2742,CHEM 2110: Organic Chemistry I,GD:B,B00475
+882,The Hong Kong Polytechnic University,ELC2012,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B03159
+883,The Hong Kong Polytechnic University,AP10006,PHYS 1114: General Physics II,No Restriction,B11804
+884,The Hong Kong Polytechnic University,AMA2104,ELEC 2600: Probability and Random Processes in Engineering,No Restriction,B11807a
+885,The Hong Kong Polytechnic University,AMA2104,MATH 3000LEVEL: 3000-level Course in Mathematics,No Restriction,B11807b
+886,The Hong Kong Polytechnic University,AP20005,COMP 1022P: Introduction to Computing with Java,GD:B+,B02948a
+887,The Hong Kong Polytechnic University,ISE369,IELM 3270: Quality Engineering,No Restriction,B11006
+888,The Hong Kong Polytechnic University,LGT2510,ISOM 2500: Business Statistics,GD:B+,B10308
+889,The Hong Kong Polytechnic University,LGT2510,IELM 2510: Engineering Probability and Statistics,No Restriction,B10308a
+890,The Hong Kong Polytechnic University,LGT3501,MARK 2120: Marketing Management,GD:B+,B10311a
+891,The Hong Kong Polytechnic University,LGT3508,"ISOM 3000OM: 3000-level Course in Information Systems, Business Statistics and Operations Management",GD:B+,B10314
+892,The Hong Kong Polytechnic University,AP10008,PHYS 1111: General Physics I,No Restriction,B02683
+893,The Hong Kong Polytechnic University,AP10009,PHYS 1114: General Physics II,GD:B,B00317a
+894,The Hong Kong Polytechnic University,AP20008,PHYS 3038: Optics,No Restriction,B07065
+895,The Hong Kong Polytechnic University,EIE380,COMP G&M: Computer Science Track Course,GD:B+,B00524b
+896,The Hong Kong Polytechnic University,HTM1B05,HUMA 1000LEVEL: 1000-level Course in Humanities,GD:B,B02848a
+897,The Open University of Hong Kong,TC S350F,CHEM 2310: Fundamentals of Analytical Chemistry,No Restriction,B06854
+898,The Open University of Hong Kong,TC S356 F,LIFS 3110: Biotechnological Application of Recombinant DNA Techniques,GD:B+,B06855
+899,The Open University of Hong Kong,TC S351F,LIFS 3060: Microbiology,GD:B+,B06856
+900,The University of Hong Kong,BPHM 1116,LIFS 2210: Biochemistry I,No Restriction,B11240
+901,The University of Hong Kong,CAES1000,LANG ECOM: English Language Proficiency Achieved,No Restriction,B11237
+902,The University of Hong Kong,FINA1003,FINA 2303: Financial Management,No Restriction,B00676b
+903,The University of Hong Kong,FINA0301,"FINA 3203: Derivative Securities (AKA: FINA 3204: Derivative Securities, 4 credits)",No Restriction,B14253
+904,The University of Hong Kong,CCGL 9040,MECH 1902: Energy Systems in a Sustainable World,No Restriction,B11239
+905,The University of Hong Kong,CCCH 9024,HUMA 1000HMCC: 1000-level Course in Humanities / HUMA Common Core (not = HUMA 1000),No Restriction,B11238c
+906,The University of Hong Kong,BUSI1002,ACCT 2010: Principles of Accounting I,No Restriction,B00671b
+907,The University of Hong Kong,ACCT1101,ACCT 2010: Principles of Accounting I,No Restriction,B11738
+908,The University of Hong Kong,ECON1002/ ECON1220,ECON 2123: Macroeconomics,No Restriction,B14299
+909,The University of Hong Kong,ECON1001 / 1210,ECON 2113: Microeconomics,No Restriction,B00673b
+910,The University of Hong Kong,STAT1603,ISOM 2500: Business Statistics,No Restriction,B14250
+911,The University of Hong Kong,FINA2802,"FINA 3103: Intermediate Investments (AKA: FINA 3104: Investment Analysis and Portfolio Management, 4 credits)",No Restriction,B14252
+912,The University of Hong Kong,MATH2101,MATH 2111: Matrix Algebra and Applications,No Restriction,B02976a
+913,The University of Hong Kong,FINA2331,"FINA 4503: Banking and Financial Intermediation (AKA: FINA 3504: Management of Financial Institutions, 4 credits)",No Restriction,B14533
+914,The University of Hong Kong,BUSI1007,MGMT 1110: Introduction to Management,No Restriction,B00672b
+915,Yale-China Chinese Language Centre,172-PP2105-01,LANG 1122: Chinese for Non-Chinese Language Background Students III,No Restriction,B12939
+916,Yale-China Chinese Language Centre,166-PP2104-01,LANG 1121: Chinese for Non-Chinese Language Background Students II,No Restriction,B12938

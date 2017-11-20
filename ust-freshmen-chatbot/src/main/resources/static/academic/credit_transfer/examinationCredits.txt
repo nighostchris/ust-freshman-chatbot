@@ -1,0 +1,148 @@
+# id,examination,subject,min_grade,transfer_course_code,db_reference_no
+
+1,Hong Kong Advanced Level Examination (HKALE),Biology (A-level),D or above,LIFS 1901: General Biology I LIFS 1903: Laboratory for General Biology I,A00101
+2,Hong Kong Advanced Level Examination (HKALE),Chemistry (A-level),D or above,CHEM 1010: General Chemistry IA CHEM 1030: General Chemistry II CHEM 1050: Laboratory for General Chemistry I CHEM 1055: Laboratory for General Chemistry II,A00102
+3,Hong Kong Advanced Level Examination (HKALE),Chinese History (A-level),C or above,HUMA 1440: Modern China,A00124
+4,Hong Kong Advanced Level Examination (HKALE),Chinese History (A-level),C or above,HUMA 1410: General Chinese History: Pre-modern,A00104
+5,Hong Kong Advanced Level Examination (HKALE),Chinese History (AS-level),B or above,HUMA 1440: Modern China,A00123
+6,Hong Kong Advanced Level Examination (HKALE),Chinese History (AS-level),B or above,HUMA 1410: General Chinese History: Pre-modern,A00103
+7,Hong Kong Advanced Level Examination (HKALE),Computer Studies (A-level),C or above,COMP 1001: Exploring Multimedia and Internet Computing,A00105
+8,Hong Kong Advanced Level Examination (HKALE),Economics (A-level),C or above,SOSC 1440: Introduction to Economics,A00107
+9,Hong Kong Advanced Level Examination (HKALE),Economics (AS-level),B or above,SOSC 1440: Introduction to Economics,A00106
+10,Hong Kong Advanced Level Examination (HKALE),Government and Public Affairs (A-level),C or above,SOSC 1661: Contemporary Hong Kong: Government & Politics,A00109
+11,Hong Kong Advanced Level Examination (HKALE),Government and Public Affairs (AS-level),B or above,SOSC 1661: Contemporary Hong Kong: Government & Politics,A00108
+12,Hong Kong Advanced Level Examination (HKALE),Physics (A-level),D or above,PHYS 1111: General Physics I PHYS 1113: Laboratory for General Physics I,A00110
+13,Hong Kong Advanced Level Examination (HKALE),Psychology (A-level),C or above,SOSC 1960: Discovering Mind and Behavior,A00112a
+14,Hong Kong Advanced Level Examination (HKALE),Psychology (AS-level),B or above,SOSC 1960: Discovering Mind and Behavior,A00111a
+15,General Certificate of Education Advanced Level (GCEAL),Anthropology (A-level),A or above,HUMA 1620: Human Culture and Society,A00201
+16,General Certificate of Education Advanced Level (GCEAL),Applied Information and Communications Technology (A-level),B or above,COMP 1001: Exploring Multimedia and Internet Computing,A00210a
+17,General Certificate of Education Advanced Level (GCEAL),Biology (A-level),B or above,LIFS 1901: General Biology I LIFS 1903: Laboratory for General Biology I,A00202
+18,General Certificate of Education Advanced Level (GCEAL),Chemistry (A-level),B or above,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,A00203
+19,General Certificate of Education Advanced Level (GCEAL),Chemistry A (A-level),B or above,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,A00220
+20,General Certificate of Education Advanced Level (GCEAL),Chemistry B (A Level) (Salters),B or above,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,A00221
+21,General Certificate of Education Advanced Level (GCEAL),Computing (A-level),B or above,COMP 1001: Exploring Multimedia and Internet Computing,A00204
+22,General Certificate of Education Advanced Level (GCEAL),Critical Thinking (A-level),A or above,HUMA 1720: Logic,A00216
+23,General Certificate of Education Advanced Level (GCEAL),Economics (A-level),A or above,SOSC 1440: Introduction to Economics,A00205
+24,General Certificate of Education Advanced Level (GCEAL),Electronics (A Level),E or above,ELEC 1100: Introduction to Electro-Robot Design,A00219
+25,General Certificate of Education Advanced Level (GCEAL),Further Mathematics (A-level),A*,MATH 1020: Accelerated Calculus,A00206
+26,General Certificate of Education Advanced Level (GCEAL),Further Mathematics (A-level),A or B,MATH 1013: Calculus IB (Aka: Calculus I),A00207
+27,General Certificate of Education Advanced Level (GCEAL),Government and Politics (A-level),A or above,SOSC 1661: Contemporary Hong Kong: Government & Politics,A00208
+28,General Certificate of Education Advanced Level (GCEAL),Human Biology (A-level),B or above,LIFS 1901: General Biology I,A00217
+29,General Certificate of Education Advanced Level (GCEAL),Humanities (A-level),A or above,HUMA 1001: Foundational Texts in the Humanities,A00209
+30,General Certificate of Education Advanced Level (GCEAL),Information and Communications Technology (A-level),B or above,COMP 1001: Exploring Multimedia and Internet Computing,A00210
+31,General Certificate of Education Advanced Level (GCEAL),Mathematics (A-level),A or above,MATH 1013: Calculus IB (Aka: Calculus I),A00211
+32,General Certificate of Education Advanced Level (GCEAL),Physics (A-level),B or above,PHYS 1111: General Physics I PHYS 1113: Laboratory for General Physics I,A00212
+33,General Certificate of Education Advanced Level (GCEAL),Psychology (A-level),A or above,SOSC 1960: Discovering Mind and Behavior,A00213a
+34,General Certificate of Education Advanced Level (GCEAL),Pure Mathematics (A-level),A*,MATH 1020: Accelerated Calculus,A00214
+35,General Certificate of Education Advanced Level (GCEAL),Pure Mathematics (A-level),A or B,MATH 1013: Calculus IB (Aka: Calculus I),A00215
+36,General Certificate of Education Advanced Level (GCEAL),Sociology (A-level),A or above,SOSC 1850: Understanding Society,A00218
+37,International Advanced Level (IAL),Biology (A-level),B or above,LIFS 1901: General Biology I LIFS 1903: Laboratory for General Biology I,A02206
+38,International Advanced Level (IAL),Chemistry (A-level),B or above,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,A02204
+39,International Advanced Level (IAL),Further Mathematics (A-level),A*,MATH 1020: Accelerated Calculus,A02201
+40,International Advanced Level (IAL),Further Mathematics (A-level),A or B,MATH 1013: Calculus IB (Aka: Calculus I),A02202
+41,International Advanced Level (IAL),Mathematics (A-level),A or above,MATH 1013: Calculus IB (Aka: Calculus I),A02203
+42,International Advanced Level (IAL),Physics (A-level),B or above,PHYS 1111: General Physics I PHYS 1113: Laboratory for General Physics I,A02205
+43,International Advanced Level (IAL),Pure Mathematics,A*,MATH 1020: Accelerated Calculus,A02207
+44,International Advanced Level (IAL),Pure Mathematics,A or B,MATH 1013: Calculus IB (Aka: Calculus I),A02208
+45,International Baccalaureate (IB) Diploma,Biology (Higher level),5 or above,LIFS 1901: General Biology I LIFS 1903: Laboratory for General Biology I,A00301
+46,International Baccalaureate (IB) Diploma,Biology (Standard level),5 or above,LIFS 1901: General Biology I,A00320
+47,International Baccalaureate (IB) Diploma,Chemistry (Higher level),6 or above,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,A00302
+48,International Baccalaureate (IB) Diploma,Computer Science (Higher level),5 or above,COMP 1001: Exploring Multimedia and Internet Computing,A00303
+49,International Baccalaureate (IB) Diploma,Computer Science (Standard level),5 or above,COMP 1001: Exploring Multimedia and Internet Computing,A00304
+50,International Baccalaureate (IB) Diploma,Economics (Higher level),5 or above,SOSC 1440: Introduction to Economics,A00305
+51,International Baccalaureate (IB) Diploma,Economics (Higher level),7,ECON 2113: Microeconomics,A00319
+52,International Baccalaureate (IB) Diploma,Economics (Standard level),6 or above,SOSC 1440: Introduction to Economics,A00306
+53,International Baccalaureate (IB) Diploma,Further Mathematics (Higher level),5 or above,MATH 1020: Accelerated Calculus,A00307
+54,International Baccalaureate (IB) Diploma,Information Technology in a Global Society (Higher level),5 or above,COMP 1001: Exploring Multimedia and Internet Computing,A00308
+55,International Baccalaureate (IB) Diploma,Information Technology in a Global Society (Standard level),5 or above,COMP 1001: Exploring Multimedia and Internet Computing,A00309
+56,International Baccalaureate (IB) Diploma,Mathematics (Higher level),6 or above,MATH 1020: Accelerated Calculus,A00310
+57,International Baccalaureate (IB) Diploma,Mathematics (Higher level),5,MATH 1013: Calculus IB (Aka: Calculus I),A00311
+58,International Baccalaureate (IB) Diploma,Physics (Higher level),6 or above,PHYS 1111: General Physics I PHYS 1113: Laboratory for General Physics I,A00312
+59,International Baccalaureate (IB) Diploma,Psychology (Higher level),5 or above,SOSC 1960: Discovering Mind and Behavior,A00313a
+60,International Baccalaureate (IB) Diploma,Psychology (Standard level),6 or above,SOSC 1960: Discovering Mind and Behavior,A00314a
+61,International Baccalaureate (IB) Diploma,Social and Cultural Anthropology (Higher level),5 or above,HUMA 1620: Human Culture and Society,A00315
+62,International Baccalaureate (IB) Diploma,Social and Cultural Anthropology (Standard level),6 or above,HUMA 1620: Human Culture and Society,A00316
+63,College Board Advanced Placement (AP),Biology,4 or above,LIFS 1901: General Biology I LIFS 1903: Laboratory for General Biology I,A00401
+64,College Board Advanced Placement (AP),Calculus (AB),4 or above,MATH 1013: Calculus IB (Aka: Calculus I),A00402
+65,College Board Advanced Placement (AP),Calculus (BC),5,MATH 1020: Accelerated Calculus,A00403
+66,College Board Advanced Placement (AP),Calculus (BC),4,MATH 1013: Calculus IB (Aka: Calculus I),A00404
+67,College Board Advanced Placement (AP),Chemistry,5,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I CHEM 1030: General Chemistry II CHEM 1055: Laboratory for General Chemistry II,A00405a
+68,College Board Advanced Placement (AP),Chemistry,4,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,A00405b
+69,College Board Advanced Placement (AP),Computer Science A,5,COMP 1022P: Introduction to Computing with Java,A00406
+70,College Board Advanced Placement (AP),Environmental Science,5,LIFS 1030: Environmental Science,A00423
+71,College Board Advanced Placement (AP),Macroeconomics,5,SOSC 1440: Introduction to Economics,A00407
+72,College Board Advanced Placement (AP),Macroeconomics,5,ECON 2123: Macroeconomics,A00416
+73,College Board Advanced Placement (AP),Microeconomics,5,SOSC 1440: Introduction to Economics,A00408
+74,College Board Advanced Placement (AP),Microeconomics,5,ECON 2113: Microeconomics,A00417
+75,College Board Advanced Placement (AP),Physics 1 + Physics 2,4 or above,PHYS 1111: General Physics I PHYS 1113: Laboratory for General Physics I,A00421
+76,College Board Advanced Placement (AP),Physics B,4 or above,PHYS 1111: General Physics I PHYS 1113: Laboratory for General Physics I,A00409
+77,College Board Advanced Placement (AP),Physics C (Electricity and Magnetism),4 or above,PHYS 1114: General Physics II PHYS 1115: Laboratory for General Physics II,A00410
+78,College Board Advanced Placement (AP),Physics C (Mechanics),4 or above,PHYS 1112: General Physics I with Calculus PHYS 1113: Laboratory for General Physics I,A00411
+79,College Board Advanced Placement (AP),Psychology,5,SOSC 1960: Discovering Mind and Behavior,A00412a
+80,College Board Advanced Placement (AP),Statistics,5,MATH 2411: Applied Statistics,A00424
+81,"Australia, Higher School Certificate Examination (NSW)",Mathematics Extension 2,Band E4 (90 or above),MATH 1020: Accelerated Calculus,A00601
+82,Bangladesh Higher Secondary Certificate (BDHSC),Chemistry 40S,70-79 (A),CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,A3301
+83,"Canada, High School Diploma (Manitoba)",Calculus 42S,85 or above,MATH 1013: Calculus IB (Aka: Calculus I),A01308
+84,"Canada, High School Diploma (British Columbia)",Calculus 12,A or 86%,MATH 1003: Calculus and Linear Algebra,A01312
+85,"Canada, High School Diploma (British Columbia)",Calculus 12 AP (AB),A or 86%,MATH 1013: Calculus IB (Aka: Calculus I),A01311
+86,"Canada, High School Diploma (British Columbia)",Calculus 12 AP (BC),5,MATH 1020: Accelerated Calculus,A01303
+87,"Canada, High School Diploma (British Columbia)",Calculus 12 AP (BC),4,MATH 1013: Calculus IB (Aka: Calculus I),A01304
+88,"Jamaica, Caribbean Advanced Proficiency Examination (CAPE)",Biology Unit 1 + Unit 2,I or II,LIFS 1901: General Biology I,A02005
+89,"Jamaica, Caribbean Advanced Proficiency Examination (CAPE)",Chemistry Unit 1,I or II,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,A02001
+90,"Jamaica, Caribbean Advanced Proficiency Examination (CAPE)",Computer Science Unit 1 + Unit 2,I or II,COMP 1001: Exploring Multimedia and Internet Computing,A02004
+91,"Jamaica, Caribbean Advanced Proficiency Examination (CAPE)",Physics Unit 1 + Unit 2,I or II,PHYS 1111: General Physics I PHYS 1113: Laboratory for General Physics I,A02003
+92,European Baccalaureate,Mathematics,80 or above,MATH 1020: Accelerated Calculus,A00901
+93,European Baccalaureate,Mathematics,75 to 79,MATH 1013: Calculus IB (Aka: Calculus I),A00902
+94,"Ecuador, Titulo de Bachiller de la Republica del Ecuador",Biology 3,8.0 or above,LIFS 1901: General Biology I,A02501
+95,Finnish Matriculation Examination,"Mathematics (Advanced) Matematiikassa, Pitkä Oppimäärä",L or E,MATH 1013: Calculus IB (Aka: Calculus I),A02801
+96,French Baccalaureate,Biologie-Ecologie (Coef. 5),10 or above,LIFS 1901: General Biology I LIFS 1903: Laboratory for General Biology I,A01005
+97,French Baccalaureate,Earth and Life Sciences / Sc. vie Terre (Coef. 6),15 or above,LIFS 1901: General Biology I,A01006
+98,French Baccalaureate,"Mathematics (Science Stream, Coef. 7 or 9)",14 or above,MATH 1020: Accelerated Calculus,A01001
+99,French Baccalaureate,"Mathematics (Science Stream, Coef. 7 or 9)",12 or 13,MATH 1013: Calculus IB (Aka: Calculus I),A01002
+100,French Baccalaureate,Physics & Chemistry (Coef. 6 or 8),12 or above,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,A01004
+101,German Abitur,Mathematics,13 or above,MATH 1020: Accelerated Calculus,A01101
+102,German Abitur,Mathematics,10 to 12,MATH 1013: Calculus IB (Aka: Calculus I),A01102
+103,Iceland Matriculation Examination,"Accounting + Cash Flow + Tax Statements (BOK 113, 201, 213, 313)",8,ACCT 2010: Principles of Accounting I,A03101
+104,Iceland Matriculation Examination,Business Management STJ103,8,MGMT 1110: Introduction to Management,A03102
+105,Iceland Matriculation Examination,"History (SAG103, 203, 303)",8,HUMA 1000LEVEL: 1000-level Course in Humanities,A03103
+106,Iceland Matriculation Examination,"Marketing (MAR103, 203)",8,MARK 2120: Marketing Management,A03105
+107,Iceland Matriculation Examination,"Microeconomics (REK103, 203, 323)",8,ECON 2113: Microeconomics,A03108
+108,Iceland Matriculation Examination,"Natural Science (Biology, Geology, Physics and Chemistry NAT103, 113, 123)",8,LIFS 1901: General Biology I,A03109
+109,Iceland Matriculation Examination,"Psychology (SAL103, 203, 303, 403)",8,SOSC 1960: Discovering Mind and Behavior,A03104
+110,"India, All India Senior School Certificate Examination (AISSCE)",Chemistry,A1 or A2,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,A00505
+111,"India, All India Senior School Certificate Examination (AISSCE)",Mathematics,A1,MATH 1020: Accelerated Calculus,A00501
+112,"India, All India Senior School Certificate Examination (AISSCE)",Mathematics,B2 to A2,MATH 1013: Calculus IB (Aka: Calculus I),A00502
+113,"India, Indian School Certificate Examination (ISCE)",Chemistry,Rank 2 or above (≥80 marks),CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,A00506
+114,"India, Indian School Certificate Examination (ISCE)",Mathematics,Rank 3 or above (≥70 marks),MATH 1020: Accelerated Calculus,A00503
+115,"India, Indian School Certificate Examination (ISCE)",Mathematics,Rank 4 to 6 (40 - 69 marks),MATH 1013: Calculus IB (Aka: Calculus I),A00504
+116,"India, Indian School Certificate Examination (ISCE)",Physics,"",PHYS 1111: General Physics I,A00509
+117,"India, Maharashtra State Higher Secondary Certificate Examination (INMHHSCE)",Chemistry,80 or above,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,A02302
+118,"India, Maharashtra State Higher Secondary Certificate Examination (INMHHSCE)",Mathematics and Statistics,95 or above,MATH 1020: Accelerated Calculus,A02301
+119,"India, Maharashtra State Higher Secondary Certificate Examination (INMHHSCE)",Mathematics and Statistics,80 - 94,MATH 1013: Calculus IB (Aka: Calculus I),A02301b
+120,"India, Telangana State Board of Intermediate Education: Hyderabad",Chemistry,60% (90/150) or above,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,A02304
+121,Tajikistan Certificate of General Secondary School Education,Biology,5 / Excellent,LIFS 1901: General Biology I LIFS 1903: Laboratory for General Biology I,A03001
+122,Tajikistan Certificate of General Secondary School Education,Chemistry,4 or above / Good or above,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,A03002
+123,"Indonesia, Ujian Nasional (IDUN)",Chemistry (Kimia),9.0/10.0 or above (in National Exam),CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,A01502
+124,"Indonesia, Ujian Nasional (IDUN)",Chemistry (Kimia),90/100 above (in National Exam) from 2015,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,A01502a
+125,International Mathematical Olympiad,Mathematics,Bronze / Silver / Gold Award,MATH 2731: Mathematical Problem Solving,A03201
+126,"Malaysia, Higher School Certificate (Sijil Tinggi Persekolahan MY)",Chemistry,B or above,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,A00708
+127,"Malaysia, Higher School Certificate (Sijil Tinggi Persekolahan MY)",Further Mathematics,A- or above,MATH 1020: Accelerated Calculus,A00701
+128,"Malaysia, Higher School Certificate (Sijil Tinggi Persekolahan MY)",Further Mathematics,B- to B+,MATH 1013: Calculus IB (Aka: Calculus I),A00702
+129,"Malaysia, Higher School Certificate (Sijil Tinggi Persekolahan MY)",Mathematics T (Technology),A- or above,MATH 1020: Accelerated Calculus,A00703
+130,"Malaysia, Higher School Certificate (Sijil Tinggi Persekolahan MY)",Mathematics T (Technology),B- to B+,MATH 1013: Calculus IB (Aka: Calculus I),A00704
+131,"Malaysia, Unified Examination Certificate (Senior)",Advanced Mathematics II,A2 or above,MATH 1020: Accelerated Calculus,A00705
+132,"Malaysia, Unified Examination Certificate (Senior)",Advanced Mathematics II,B6 to B3,MATH 1013: Calculus IB (Aka: Calculus I),A00706
+133,"Netherlands, Pre-University Education VWO Examination","Wiskunde (Mathematics) B 1, 2",9 or above,MATH 1020: Accelerated Calculus,A01201
+134,"Netherlands, Pre-University Education VWO Examination","Wiskunde (Mathematics) B 1, 2",7 or 8,MATH 1013: Calculus IB (Aka: Calculus I),A01202
+135,Norway National Examination,84 SAF1001 Social Studies,3,SOSC 1000SACC: 1000-level Course in Social Science / SA Common Core,A02909b
+136,Norway National Examination,Natural science,5,LIFS 1901: General Biology I,A02907a
+137,Singapore-Cambridge GCE Advanced Level,Biology (H2),B or above,LIFS 1901: General Biology I LIFS 1903: Laboratory for General Biology I,A00804
+138,Singapore-Cambridge GCE Advanced Level,Chemistry (H2),B or above,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,A00803
+139,Singapore-Cambridge GCE Advanced Level,Mathematics (H2),A or above,MATH 1020: Accelerated Calculus,A00801
+140,Singapore-Cambridge GCE Advanced Level,Mathematics (H2),B,MATH 1013: Calculus IB (Aka: Calculus I),A00802
+141,Singapore-Cambridge GCE Advanced Level,Physics (H2),B or above,PHYS 1111: General Physics I PHYS 1113: Laboratory for General Physics I,A00805
+142,Scottish National Qualification (SNQ),Advanced Higher Chemistry,B,CHEM 1010: General Chemistry IA CHEM 1050: Laboratory for General Chemistry I,A02108
+143,Scottish National Qualification (SNQ),Advanced Higher Mathematics,A,MATH 1013: Calculus IB (Aka: Calculus I),A02105
+144,Scottish National Qualification (SNQ),Advanced Higher Physics,B or above,PHYS 1111: General Physics I PHYS 1113: Laboratory for General Physics I,A02107
+145,Tunisia Baccalaureate,Mathematics (Mathematics Section / Coeff. 4),14 or above,MATH 1020: Accelerated Calculus,A01801
+146,Tunisia Baccalaureate,Mathematics (Mathematics Section / Coeff. 4),12 or 13,MATH 1013: Calculus IB (Aka: Calculus I),A01802

@@ -15,7 +15,7 @@ public final class Utilities {
 
     // concatenate two arrays, might be expanded as generics if necessary
     // Time Complexity: O(sum of arrays length)
-    public static String[] concatArrays(String[]... arrays){
+    public static synchronized String[] concatArrays(String[]... arrays){
         int newArrSize = 0;
         for (int i = 0; i < arrays.length; i++)
             newArrSize += arrays[i].length;
@@ -52,6 +52,31 @@ public final class Utilities {
                 minimum = args[i];
 
         return minimum;
+    }
+
+    // check whether the String array contains result, case-sensitive
+    // Time complexity: O(arr.length)
+    public static boolean contains(String[] arr, String result){
+        for (String element : arr)
+            if (element.equals(result))
+                return true;
+
+        return false;
+    }
+
+    // check whether all args are all equal to each other
+    @SafeVarargs
+    public static <T> boolean allEquals(T... args){
+        // empty set or singleton
+        if (args.length == 0 || args.length == 1)
+            return true;
+
+        T arg = args[0];
+        for (int i = 1; i < args.length; i++)
+            if (!arg.equals(args[i]))
+                return false;
+
+        return true;
     }
 
     // error log format:

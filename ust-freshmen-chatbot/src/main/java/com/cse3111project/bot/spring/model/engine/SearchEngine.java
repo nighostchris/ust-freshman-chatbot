@@ -8,6 +8,7 @@ import com.cse3111project.bot.spring.category.function.Function;
 import com.cse3111project.bot.spring.category.function.timetable.TimeTable;
 import com.cse3111project.bot.spring.category.campus.*;
 import com.cse3111project.bot.spring.category.instruction.*;
+import com.cse3111project.bot.spring.category.academic.credit_transfer.NonLocalInstitutionCreditTransfer;
 
 import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
 import com.cse3111project.bot.spring.model.engine.marker.StaticAccessible;
@@ -22,6 +23,7 @@ import java.net.URISyntaxException;
 
 import java.io.IOException;
 
+import java.util.Collections;
 import java.util.ArrayList;
 import com.cse3111project.bot.spring.utility.Utilities;
 
@@ -31,13 +33,16 @@ import com.cse3111project.bot.spring.exception.StaffNotFoundException;
 import com.cse3111project.bot.spring.exception.CourseNotFoundException;
 import com.cse3111project.bot.spring.exception.RoomNotFoundException;
 import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
-// import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
+import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * SearchEngine class handles the actual communication between chatbot and user, which search for matched response
  * from various category.
  * @version 1.0
  */
+@Slf4j
 public class SearchEngine 
 {
 	/**
@@ -57,18 +62,18 @@ public class SearchEngine
 
         Category categoryResult = null;  // storing search result of user query
 
-        // parse and manipulate the query
-        ArrayList<String> matchedResults = this.parse(userQuery);
-
-        Utilities.arrayLog("matchedResults", matchedResults);
-
-        // if doesn't match any result from the QUERY_KEYWORD list
-        if (matchedResults == null || matchedResults.isEmpty())
-            return null;
-
         // --- Analyzing ---
         // if found matched results, find out what category the user is asking for
         try {
+            // parse and manipulate the query
+            ArrayList<String> matchedResults = this.parse(userQuery);
+
+            Utilities.arrayLog("matchedResults", matchedResults);
+
+            // if doesn't match any result from the QUERY_KEYWORD list
+            if (matchedResults.isEmpty())
+                return null;
+
             categoryResult = Category.analyze(matchedResults);
         }
         // if results are found, but specified staff is not found on database or 
@@ -77,7 +82,8 @@ public class SearchEngine
         catch (StaffNotFoundException | CourseNotFoundException | RoomNotFoundException | AmbiguousQueryException e) {
             return e.getMessage();
         }
-        catch (MalformedURLException e) {
+        catch (MalformedURLException | StaticDatabaseFileNotFoundException | NotStaticAccessibleError e) {
+            Utilities.errorLog(e.getMessage(), e);
             return "Internal Error occurred. Sorry";
         }
         catch (IOException e) {
@@ -167,10 +173,12 @@ public class SearchEngine
     /**
      * This method will process the original sentence from user, remove the useless symbols and detect
      * useful keywords.
-     * @param userQuery
-     * @return ArrayList
+     * @param userQuery user query sentence
+     * @return matched results
+     * @throws StaticDatabaseFileNotFoundException
+     * @throws NotStaticAccessibleError
      */
-    private ArrayList<String> parse(String userQuery)
+    private ArrayList<String> parse(String userQuery) throws StaticDatabaseFileNotFoundException, NotStaticAccessibleError
     {
         StringBuilder queryBuilder = new StringBuilder(userQuery);
 
@@ -189,20 +197,35 @@ public class SearchEngine
 
         ArrayList<String> matchedResults = new ArrayList<>();
 
-        // ** use editDistance() to handle user typos later if have time **
         for (String keyword : Category.QUERY_KEYWORD){
             String userQueryLowerCase = userQuery.toLowerCase();
             String keywordLowerCase = keyword.toLowerCase();
             if (userQueryLowerCase.contains(keywordLowerCase)){  // partial match (match exact substring)
-                for (int i = 0; i < Staff.STAFF_POSITION_KEYWORD.length; i++){
-                    if (keyword.equals(Staff.STAFF_POSITION_KEYWORD[i])){
-                        // if really querying staff (providing staff position)
-                        // partial match may match some strange results, e.g. "TA" and "time table"
-                        if (Staff.isExactPosition(userQueryLowerCase, keywordLowerCase))
+                String alikeKeywordLowerCase = locateKeyword(userQueryLowerCase, keywordLowerCase);
+                log.info("keyword: {}", keyword);
+                log.info("alikeKeyword: {}", alikeKeywordLowerCase);
+                // most of broad keywords (abbreviations) have at most 3 letters
+                if (keywordLowerCase.length() <= 3){
+                    if (alikeKeywordLowerCase.equals(keywordLowerCase))  // restricted to be equal
+                        matchedResults.add(keyword);
+                }
+                // only tolerate at most 2 typos
+                else if (editDistance(alikeKeywordLowerCase, keywordLowerCase) <= 2)
+                    matchedResults.add(keyword);
+            }
+            else if (keywordLowerCase.contains("(")){
+                String keywordLowerCaseWithoutBrackets = keywordLowerCase.substring(0, keywordLowerCase.indexOf('(')).trim();
+                if (keywordLowerCaseWithoutBrackets.length() != 0 && userQueryLowerCase.contains(keywordLowerCaseWithoutBrackets)){
+                    String alikeKeywordLowerCase = locateKeyword(userQueryLowerCase, keywordLowerCaseWithoutBrackets);
+                    log.info("keywordLowerCaseWithoutBrackets: {}", keywordLowerCaseWithoutBrackets);
+                    log.info("alikeKeyword: {}", alikeKeywordLowerCase);
+                    // most of broad keywords (abbreviations) have at most 3 letters
+                    if (keywordLowerCase.length() <= 3){
+                        if (alikeKeywordLowerCase.equals(keywordLowerCaseWithoutBrackets))  // restricted to be equal
                             matchedResults.add(keyword);
-                        break;
                     }
-                    else if (i == Staff.STAFF_POSITION_KEYWORD.length - 1)
+                    // only tolerate at most 2 typos
+                    else if (editDistance(alikeKeywordLowerCase, keywordLowerCaseWithoutBrackets) <= 2)
                         matchedResults.add(keyword);
                 }
             }
@@ -215,6 +238,8 @@ public class SearchEngine
         
         Course.containsCourseCode(userQuery.toLowerCase(), matchedResults);
 
+        NonLocalInstitutionCreditTransfer.detectSubject(userQuery, matchedResults);
+
         // detect location name if provided
         // pass userQuery to preserve casing
         CampusETA.detectLocationName(userQuery, matchedResults);
@@ -222,38 +247,49 @@ public class SearchEngine
         return matchedResults;
     }
 
+    // locate userQuery keyword if partial matched, then compute edit distance to improve the search accuracy
+    private String locateKeyword(String userQueryLowerCase, String keywordLowerCase){
+        int i = userQueryLowerCase.indexOf(keywordLowerCase);
+        for (; i >= 0 && userQueryLowerCase.charAt(i) != ' '; i--);
+
+        int j = userQueryLowerCase.indexOf(' ', i + 1);
+        for (int k = 1; j != -1 && k < keywordLowerCase.split(" ").length; k++)
+            j = userQueryLowerCase.indexOf(' ', j + 1);
+
+        return (j == -1 ? userQueryLowerCase.substring(i + 1) : userQueryLowerCase.substring(i + 1, j));
+    }
+
     // find the minimum edit distance between str1 and str2 
     // (able to handle user typos / resolve partial match strange problem, see partialMatchTimeTable1())
     // using dynamic programming
-    // but not applied yet
-    // private static int editDistance(String str1, String str2){
-    //     // 2D matrix of size (str1.length() + 1) x (str2.length() + 1)
-    //     int dp[][] = new int[str2.length() + 1][str1.length() + 1];
+    private int editDistance(String str1, String str2){
+        // 2D matrix of size (str1.length() + 1) x (str2.length() + 1)
+        int dp[][] = new int[str2.length() + 1][str1.length() + 1];
 
-    //     // base case
-    //     // from str1.substring(0, i) to str2.substring(0, 0) ("")
-    //     // => i deletions
-    //     for (int i = 0; i <= str1.length(); i++)
-    //         dp[0][i] = i;
-    //     // from str1.substring(0, 0) ("") to str2.substring(0, j)
-    //     // => j insertions
-    //     for (int j = 1; j <= str2.length(); j++)
-    //         dp[j][0] = j;
+        // base case
+        // from str1.substring(0, i) to str2.substring(0, 0) ("")
+        // => i deletions
+        for (int i = 0; i <= str1.length(); i++)
+            dp[0][i] = i;
+        // from str1.substring(0, 0) ("") to str2.substring(0, j)
+        // => j insertions
+        for (int j = 1; j <= str2.length(); j++)
+            dp[j][0] = j;
 
-    //     for (int j = 1; j <= str2.length(); j++){
-    //         for (int i = 1; i <= str1.length(); i++){
-    //             // find the minimum edit distance between str1.substring(0, i - 1) and str2.substring(0, j - 1)
-    //             // if the last character of str1 and str2 are equal
-    //             if (str1.charAt(i - 1) == str2.charAt(j - 1))
-    //                 dp[j][i] = dp[j - 1][i - 1];
-    //             else
-    //                 dp[j][i] = Utilities.min(dp[j - 1][i - 1] + 1,  // replacement cost
-    //                                          dp[j - 1][i] + 1,      // deletion cost
-    //                                          dp[j][i - 1] + 1       // insertion cost
-    //                                         );
-    //         }
-    //     }
+        for (int j = 1; j <= str2.length(); j++){
+            for (int i = 1; i <= str1.length(); i++){
+                // find the minimum edit distance between str1.substring(0, i - 1) and str2.substring(0, j - 1)
+                // if the last character of str1 and str2 are equal
+                if (str1.charAt(i - 1) == str2.charAt(j - 1))
+                    dp[j][i] = dp[j - 1][i - 1];
+                else
+                    dp[j][i] = Utilities.min(dp[j - 1][i - 1] + 1,  // replacement cost
+                                             dp[j - 1][i] + 1,      // deletion cost
+                                             dp[j][i - 1] + 1       // insertion cost
+                                            );
+            }
+        }
 
-    //     return dp[str2.length()][str1.length()];
-    // }
+        return dp[str2.length()][str1.length()];
+    }
 }

@@ -209,7 +209,7 @@ public class Societies extends Social implements SQLAccessible, StaticAccessible
      */
     @Override
     public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
-        try (SQLDatabaseEngine database = new SQLDatabaseEngine(this, SQL_TABLE)) {
+        try (SQLDatabaseEngine database = new SQLDatabaseEngine(this.getClass(), SQL_TABLE)) {
             results = new ArrayList<>();
 
             // user query MUST NOT be empty
@@ -243,7 +243,7 @@ public class Societies extends Social implements SQLAccessible, StaticAccessible
      */
     @Override
     public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
-        try (StaticDatabaseEngine database = new StaticDatabaseEngine(this, STATIC_TABLE)) {
+        try (StaticDatabaseEngine database = new StaticDatabaseEngine(this.getClass(), STATIC_TABLE)) {
             results = new ArrayList<>();
 
             Scanner reader = database.executeQuery();

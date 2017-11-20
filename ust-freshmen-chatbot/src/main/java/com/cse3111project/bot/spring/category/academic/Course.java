@@ -1349,7 +1349,7 @@ public class Course extends Academic implements SQLAccessible, StaticAccessible{
     // return course detail(s) using SQL database
     @Override
     public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
-        try (SQLDatabaseEngine database = new SQLDatabaseEngine(this, SQL_TABLE)) {
+        try (SQLDatabaseEngine database = new SQLDatabaseEngine(this.getClass(), SQL_TABLE)) {
             results = new ArrayList<>();
 
             Utilities.arrayLog("query course", userQuery);
@@ -1382,7 +1382,7 @@ public class Course extends Academic implements SQLAccessible, StaticAccessible{
     // only used when fail to connect SQL database
     @Override
     public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
-        try (StaticDatabaseEngine database = new StaticDatabaseEngine(this, STATIC_TABLE)) {
+        try (StaticDatabaseEngine database = new StaticDatabaseEngine(this.getClass(), STATIC_TABLE)) {
             results = new ArrayList<>();
 
             Scanner reader = database.executeQuery();

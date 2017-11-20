@@ -3984,25 +3984,23 @@ public class Staff extends Academic implements SQLAccessible, StaticAccessible
      * staff position since the positions are common subset from other category's query keyword. Example
      * like "TA" vs "timetable", "TA" vs "LTA".
      * @param userQuery
-     * @param keyword
+     * @param staffPositionKeyword
      * @return boolean 
      */
-    public static boolean isExactPosition(String userQuery, String keyword){
-        // all staff positions consist of one word except "Teaching Assistant" 
-        // which should be .transform()-ed to "TA" already
-        int i = userQuery.indexOf(keyword);
+    private static boolean isExactPosition(String userQuery, String staffPositionKeyword){
+        int i = userQuery.indexOf(staffPositionKeyword);
         int j = userQuery.indexOf(' ', i);  // locate the end of word + " "
         for (; i >= 0 && userQuery.charAt(i) != ' '; i--);  // locate " " + the beginning of word
         String queryWord = userQuery.substring(i + 1, j);
 
-        return queryWord.equals(keyword);
+        return queryWord.equals(staffPositionKeyword);
     }
 
     /**
      * This method checks whether there will be valid last name if specify the staff positions like Professor and Instructor.
      * If that is the case, the method will append it to matchedResults.
      * Note that full name should be found by partial match method in SearchEngine.parse().
-     * @param userQuery user-query without omitted symbols (!@#$%...) and with toLowerCase() applied.
+     * @param userQuery user-query with omitted symbols (!@#$%...) and with toLowerCase() applied.
      * @param matchedResults the processed list of keywords extracted from user-query.
      */
     public static void containsLastName(String userQuery, ArrayList<String> matchedResults){
@@ -4022,7 +4020,9 @@ public class Staff extends Academic implements SQLAccessible, StaticAccessible
                         i = userQuery.indexOf(staffPositionKeyword.toLowerCase(), j);
                         if (i == -1) break;  // not found
                         // if user is not querying for staff but matched (broad) staff positions, e.g. TA
-                        // if (!this.isExactPosition(userQuery, staffPositionKeyword, i)) break;
+                        if (!Staff.isExactPosition(userQuery, staffPositionKeyword.toLowerCase())){
+                            i++; j = i; continue;
+                        }
 
                         // find <Space> after that word
                         i = userQuery.indexOf(' ', i);
@@ -4135,7 +4135,7 @@ public class Staff extends Academic implements SQLAccessible, StaticAccessible
      */
     @Override
     public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
-        try (SQLDatabaseEngine database = new SQLDatabaseEngine(this, SQL_TABLE)) {
+        try (SQLDatabaseEngine database = new SQLDatabaseEngine(this.getClass(), SQL_TABLE)) {
             // transform staff name as <lastName> <firstName> before querying on SQL database
             results = new ArrayList<>();
 
@@ -4174,7 +4174,7 @@ public class Staff extends Academic implements SQLAccessible, StaticAccessible
      */
     @Override
     public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
-        try (StaticDatabaseEngine database = new StaticDatabaseEngine(this, STATIC_TABLE)) {
+        try (StaticDatabaseEngine database = new StaticDatabaseEngine(this.getClass(), STATIC_TABLE)) {
             results = new ArrayList<>();
 
             Scanner reader = database.executeQuery();
