@@ -482,11 +482,66 @@ public class KitchenSinkTester {
     @Test
     public void partialMatchCourseWebsiteSearch1() throws Exception {
         log.info("--- partialMatchCourseWebsiteSearch1 ---");
-        Object answer = this.searchEngine.search("Please search course website of COMP 2611 for me");
+        Object answer = this.searchEngine.search("Can you find the course website of COMP 3111 for me?");
         assertThat(answer).isNotNull();
         assertThat(answer instanceof String).isEqualTo(true);
         log.info("reply: {}", answer);
         assertThat(((String) answer).contains("Review")).isEqualTo(true);
         log.info("--- End of partialMatchCourseWebsiteSearch1 ---");
+    }
+    
+    @Test
+    public void partialMatchCourseWebsiteSearch2() throws Exception {
+        log.info("--- partialMatchCourseWebsiteSearch2 ---");
+        Object answer = this.searchEngine.search("Can you find details of course COMP4641 for me?");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("Review")).isEqualTo(true);
+        log.info("--- End of partialMatchCourseWebsiteSearch2 ---");
+    }
+    
+    @Test
+    public void partialMatchCourseWebsiteSearch3() throws Exception {
+        log.info("--- partialMatchCourseWebsiteSearch3 ---");
+        Object answer = this.searchEngine.search("Can you find 2012?");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("Review")).isEqualTo(true);
+        log.info("--- End of partialMatchCourseWebsiteSearch3 ---");
+    }
+    
+    @Test
+    public void StudyPathSearchTest1() throws Exception {
+        log.info("--- StudyPathSearchTest1 ---");
+        Object answer = this.searchEngine.search("Can you suggest some course after I have taken COMP 2012?");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("Review")).isEqualTo(true);
+        log.info("--- End of StudyPathSearchTest1 ---");
+    }
+    
+    @Test
+    public void StudyPathSearchTest2() throws Exception {
+        log.info("--- StudyPathSearchTest2 ---");
+        Object answer = this.searchEngine.search("What can I study if I have finished COMP 3111?");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("Review")).isEqualTo(true);
+        log.info("--- End of StudyPathSearchTest2 ---");
+    }
+    
+    @Test
+    public void StudyPathSearchTest3() throws Exception {
+        log.info("--- StudyPathSearchTest3 ---");
+        Object answer = this.searchEngine.search("Suggest some path for me after COMP3511");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("Review")).isEqualTo(true);
+        log.info("--- End of StudyPathSearchTest3 ---");
     }
 }
