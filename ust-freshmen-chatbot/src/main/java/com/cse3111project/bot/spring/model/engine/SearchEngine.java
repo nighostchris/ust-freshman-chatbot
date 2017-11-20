@@ -30,6 +30,7 @@ import com.cse3111project.bot.spring.utility.Utilities;
 import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
 import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
 import com.cse3111project.bot.spring.exception.StaffNotFoundException;
+import com.cse3111project.bot.spring.exception.CourseNotFoundException;
 import com.cse3111project.bot.spring.exception.RoomNotFoundException;
 import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
 import com.cse3111project.bot.spring.exception.CourseNotFoundException;
@@ -64,7 +65,8 @@ public class SearchEngine {
         }
         // if results are found, but specified staff is not found on database or 
         // the entire query is ambiguous => reply corresponding message
-        catch (StaffNotFoundException | RoomNotFoundException | AmbiguousQueryException | CourseNotFoundException e) {
+
+        catch (StaffNotFoundException | CourseNotFoundException | RoomNotFoundException | AmbiguousQueryException e) {
             return e.getMessage();
         }
         catch (MalformedURLException e) {
@@ -195,6 +197,8 @@ public class SearchEngine {
 
         // detect last name (full name) after STAFF_POSITION_KEYWORD, e.g. Lecturer, Professor, Prof., ...
         Staff.containsLastName(userQuery.toLowerCase(), matchedResults);
+        
+        Course.containsCourseCode(userQuery.toLowerCase(), matchedResults);
 
         // detect location name if provided
         // pass userQuery to preserve casing
