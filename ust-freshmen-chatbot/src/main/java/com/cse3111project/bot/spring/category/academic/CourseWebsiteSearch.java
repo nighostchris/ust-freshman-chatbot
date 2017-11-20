@@ -45,8 +45,13 @@ public class CourseWebsiteSearch extends Academic
 			String finalURL = parentURL[0];
 			for (int i = 0; i < userQuery.size(); i++)
 			{
-				finalURL += URLEncoder.encode(userQuery.get(i), "UTF-8");
-				finalURL += "+";
+				if (userQuery.get(i) != "course website")
+					if (userQuery.get(i) != "website")
+						if (userQuery.get(i) != "search")
+						{
+							finalURL += URLEncoder.encode(userQuery.get(i), "UTF-8");
+							finalURL += "+";
+						}
 			}
 			URL url = new URL(finalURL + parentURL[1]);
 			Document doc = Jsoup.parse(url, 3000);
