@@ -1,0 +1,17 @@
+com.cse3111project.bot.spring
+com.cse3111project.bot.spring.category
+com.cse3111project.bot.spring.category.academic
+com.cse3111project.bot.spring.category.campus
+com.cse3111project.bot.spring.category.function
+com.cse3111project.bot.spring.category.function.timetable
+com.cse3111project.bot.spring.category.instruction
+com.cse3111project.bot.spring.category.social
+com.cse3111project.bot.spring.category.transport
+com.cse3111project.bot.spring.directoryCrawler
+com.cse3111project.bot.spring.exception
+com.cse3111project.bot.spring.model.engine
+com.cse3111project.bot.spring.model.engine.marker
+com.cse3111project.bot.spring.script.courseDetailsCrawl
+com.cse3111project.bot.spring.script.creditTransferCrawler
+com.cse3111project.bot.spring.societyCrawler
+com.cse3111project.bot.spring.utility
