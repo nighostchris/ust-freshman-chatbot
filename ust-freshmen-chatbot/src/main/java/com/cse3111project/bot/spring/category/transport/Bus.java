@@ -99,9 +99,9 @@ public class Bus extends Transport
             return "Currently there is no available arrival time from KMB database. Sorry";
 
      // temporarily hide out these sentences to compile javadoc
-        /*if (results.contains("������甇蕭嚙踝蕭"))
+        if (results.contains("\u5C3E\u73ED\u8ECA\u5DF2\u904E"))
             return "You have missed the last " + (userQuery.busRoute == ROUTE_91 ? "91" : "91M") + " bus." + 
-                   " Try to take minibus instead.";*/
+                   " Try to take minibus instead.";
 
         return "The next " + results.size() + " route " + (userQuery.busRoute == ROUTE_91 ? "91" : "91M") + 
                " bus arrival time:\n" + results.toString();
