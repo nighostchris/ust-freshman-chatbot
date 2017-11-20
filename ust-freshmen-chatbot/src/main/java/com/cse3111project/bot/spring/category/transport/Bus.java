@@ -97,7 +97,7 @@ public class Bus extends Transport
     public String toString(){
         if (results.isEmpty())
             return "Currently there is no available arrival time from KMB database. Sorry";
-
+        
         if (results.contains("\u5C3E\u73ED\u8ECA\u5DF2\u904E"))
             return "You have missed the last " + (userQuery.busRoute == ROUTE_91 ? "91" : "91M") + " bus." + 
                    " Try to take minibus instead.";
