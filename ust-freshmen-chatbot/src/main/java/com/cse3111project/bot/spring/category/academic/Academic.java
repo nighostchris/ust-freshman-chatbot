@@ -19,7 +19,6 @@ public abstract class Academic extends Category
 {
     public static final String QUERY_KEYWORD[] = Utilities.concatArrays(Staff.STAFF_NAME_KEYWORD,
                                                                         Staff.STAFF_POSITION_KEYWORD,
-                                                                        Course.COURSE_CODE_KEYWORD,
                                                                         CourseWebsiteSearch.WEBSITE_SEARCH_KEYWORD);
 
     /**
