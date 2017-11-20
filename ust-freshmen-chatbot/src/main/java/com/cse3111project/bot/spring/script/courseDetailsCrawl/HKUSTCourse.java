@@ -76,6 +76,8 @@ public class HKUSTCourse
 		}
 	}
 	
+	public ArrayList<Course> getCourseList() { return courseList; }
+	
 	// local testing for web crawling function only
 	//public static void main(String[] args)
 	//{
