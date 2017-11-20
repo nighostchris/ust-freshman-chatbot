@@ -21,11 +21,14 @@ import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundExcepti
 
 import lombok.extern.slf4j.Slf4j;
 
-//Course Category
-//SQL database, static database are available
+/**
+ * Course Class inherits the Academic class, which handles all the user-query about their possible
+ * study pathway by inputting their currently taking course code.
+ * @version 1.0
+ */
 @Slf4j
-
-public class Course extends Academic implements SQLAccessible, StaticAccessible{
+public class Course extends Academic implements SQLAccessible, StaticAccessible
+{
 	public static final String COURSE_CODE_KEYWORD[];
 
     // format:
@@ -37,7 +40,8 @@ public class Course extends Academic implements SQLAccessible, StaticAccessible{
     private ArrayList<String> userQuery;
     private ArrayList<CourseInfo> results;
 
-    Course(final ArrayList<String> userQuery) {
+    Course(final ArrayList<String> userQuery) 
+    {
         this.userQuery = userQuery;
     }
 
@@ -1294,11 +1298,14 @@ public class Course extends Academic implements SQLAccessible, StaticAccessible{
 							        		"WBBA 4010"
         };
     }
-    
-    // check whether userQuery contains course code, i.e. wrong format 
-    // if so, append to matchedResults
-    // NOTE that course code should be found by partial match method in SearchEngine.parse()
-    // @param userQuery: omitted symbols (!@#$%...) + toLowerCase()
+
+    /**
+     * This method is used to check whether userQuery contains course code, i.e. wrong format. If so, the query
+     * will be appended to the list for further processing. NOTE that course code should be found by partial match 
+     * method in SearchEngine.parse()
+     * @param userQuery First parameter taken by this method, representing the sentence of user query.
+     * @param matchedResults Last parameter taken by this method, representing the list of detected keyword of user query.
+     */
     public static void containsCourseCode(String userQuery, ArrayList<String> matchedResults)
     {
         for (String courseCodeKeyword : COURSE_CODE_KEYWORD)
@@ -1316,7 +1323,9 @@ public class Course extends Academic implements SQLAccessible, StaticAccessible{
             matchedResults.add(newResult);
     } 
     
- // used to wrap course object
+    /**
+     * Inner class of Course class. It is used to wrap details of each course.
+     */
     class CourseInfo {
         private String code;
         private String title;
@@ -1325,7 +1334,8 @@ public class Course extends Academic implements SQLAccessible, StaticAccessible{
         private String exclusion;
         private String corequisite;
 
-        private CourseInfo(String code, String title, String credit, String prerequisite, String exclusion, String corequisite){
+        private CourseInfo(String code, String title, String credit, String prerequisite, String exclusion, String corequisite)
+        {
             this.code = code;
             this.title = title;
             this.credit = credit;
@@ -1346,8 +1356,14 @@ public class Course extends Academic implements SQLAccessible, StaticAccessible{
         }
     }
 
-    // search by course code(s)
-    // return course detail(s) using SQL database
+    /**
+     * This method will connect to the SQL database and retrieve data on details of the expected courses with search
+     * on course codes.
+     * @return String 
+     * @throws NotSQLAccessibleError
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     @Override
     public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
         try (SQLDatabaseEngine database = new SQLDatabaseEngine(this, SQL_TABLE)) {
@@ -1379,8 +1395,13 @@ public class Course extends Academic implements SQLAccessible, StaticAccessible{
         }
     }
 
-    // return course detail(s) using static database
-    // only used when fail to connect SQL database
+    /**
+     * This method will connect to the static database and retrieve data on details of expected courses.
+     * It is used when the SQL database has run into some trouble of connection.
+     * @return String
+     * @throws NotStaticAccessibleError Throws error when the class is not SQLAccessible.
+     * @throws StaticDatabaseFileNotFoundException Throws error when static database can't be found / connected.
+     */
     @Override
     public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
         try (StaticDatabaseEngine database = new StaticDatabaseEngine(this, STATIC_TABLE)) {

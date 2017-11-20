@@ -12,6 +12,11 @@ import org.jsoup.select.*;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
+/**
+ * CourseWebsiteSearch class inherits from Academic class, which handles all user query on helping them to find
+ * relevant course websites according to the given course code.
+ * @version 1.0
+ */
 public class CourseWebsiteSearch extends Academic
 {
 	private ArrayList<String> userQuery;
@@ -27,6 +32,12 @@ public class CourseWebsiteSearch extends Academic
 		searchList = new ArrayList<Website>();
 	}
 	
+	/**
+	 * This method will perform web crawling on the search engine and try to get the results of searching relevant course
+	 * websites according to the given course code.
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
 	public void webCrawling() throws MalformedURLException, IOException
 	{
 		try
@@ -35,7 +46,7 @@ public class CourseWebsiteSearch extends Academic
 			for (int i = 0; i < userQuery.size(); i++)
 			{
 				finalURL += URLEncoder.encode(userQuery.get(i), "UTF-8");
-				finalURL += " ";
+				finalURL += "+";
 			}
 			URL url = new URL(finalURL + parentURL[1]);
 			Document doc = Jsoup.parse(url, 3000);
@@ -59,8 +70,19 @@ public class CourseWebsiteSearch extends Academic
         }
 	}
 	
+	/**
+	 * Getter method of the instance variable searchList, which is the list containing the search engine result.
+	 * @return ArrayList
+	 */
 	public ArrayList<Website> getSearchList() { return searchList; }
 	
+	/**
+	 * This method will help the SearchEngine class to get the search results on this class and write them in a nicer way
+	 * in a single string.
+	 * @return String
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
 	public String getCourseWebsite() throws MalformedURLException, IOException
 	{ 
 		webCrawling();
