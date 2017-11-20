@@ -237,7 +237,7 @@ public class KitchenSinkController {
         if (response == null)
             this.replyText(replyToken, "I don\'t understand what you are saying. Could you be more clearer?");
         else if (response instanceof String) {
-        	String[] array = ((String) response).split("\\n\\n");
+        	String[] array = ((String) response).split("\\r?\\n\\n");
         	List<Message> messageList = new ArrayList<Message>();
         	for (String message : array) {
         		messageList.add(new TextMessage(message));
