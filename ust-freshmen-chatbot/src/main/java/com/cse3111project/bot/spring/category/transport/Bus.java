@@ -3,7 +3,6 @@ package com.cse3111project.bot.spring.category.transport;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
-import java.net.URLEncoder;
 import com.cse3111project.bot.spring.utility.Utilities;
 
 /**
@@ -99,7 +98,7 @@ public class Bus extends Transport
         if (results.isEmpty())
             return "Currently there is no available arrival time from KMB database. Sorry";
 
-        if (URLEncoder.encode(results, "UTF-8").contains("§À¯Z¨®¤w¹L"))
+        if (results.contains("ï¿½ï¿½îºŸï¿½ï„›î…ï¿½ï¿½îº¨ï¿½ç”‡ï‹³è•­åš™è¸è•­"))
             return "You have missed the last " + (userQuery.busRoute == ROUTE_91 ? "91" : "91M") + " bus." + 
                    " Try to take minibus instead.";
 
