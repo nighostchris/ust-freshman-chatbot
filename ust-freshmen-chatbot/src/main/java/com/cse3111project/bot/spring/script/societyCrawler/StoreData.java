@@ -44,6 +44,7 @@ public class StoreData {
 			insertData.executeUpdate();
 		}
 		insertData.close();
+		de.closeConnection();
 	}
 	
 	// for testing
