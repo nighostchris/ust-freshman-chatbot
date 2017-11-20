@@ -33,6 +33,7 @@ import com.cse3111project.bot.spring.exception.StaffNotFoundException;
 import com.cse3111project.bot.spring.exception.CourseNotFoundException;
 import com.cse3111project.bot.spring.exception.RoomNotFoundException;
 import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
+import com.cse3111project.bot.spring.exception.CourseNotFoundException;
 // import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
 
 public class SearchEngine {
@@ -64,6 +65,7 @@ public class SearchEngine {
         }
         // if results are found, but specified staff is not found on database or 
         // the entire query is ambiguous => reply corresponding message
+
         catch (StaffNotFoundException | CourseNotFoundException | RoomNotFoundException | AmbiguousQueryException e) {
             return e.getMessage();
         }
@@ -93,6 +95,16 @@ public class SearchEngine {
             return e.getMessage();
         }
 
+        try {
+        	if (categoryResult instanceof Academic)
+        		if (categoryResult instanceof CourseWebsiteSearch)
+        			return ((CourseWebsiteSearch) categoryResult).getCourseWebsite();
+        }
+        catch (IOException e)
+        {
+        	return e.getMessage();
+        }
+        
         // --- KMB database ---
         try {
             if (categoryResult instanceof Transport)

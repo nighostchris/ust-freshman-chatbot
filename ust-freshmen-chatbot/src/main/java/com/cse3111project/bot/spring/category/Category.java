@@ -23,6 +23,7 @@ import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
 import com.cse3111project.bot.spring.exception.StaffNotFoundException;
 import com.cse3111project.bot.spring.exception.CourseNotFoundException;
 import com.cse3111project.bot.spring.exception.RoomNotFoundException;
+import com.cse3111project.bot.spring.exception.CourseNotFoundException;
 
 /**
  * The Category Class classify different features of the chatbot into different categories, act
@@ -61,8 +62,9 @@ public class Category
      * @throws IOException
      */
     public static Category analyze(final List<String> matchedResults) 
-           throws AmbiguousQueryException, StaffNotFoundException, CourseNotFoundException, RoomNotFoundException,
-                  MalformedURLException, FileNotFoundException, IOException 
+           throws AmbiguousQueryException, StaffNotFoundException, CourseNotFoundException,
+           		  RoomNotFoundException, MalformedURLException, FileNotFoundException,
+           		  IOException 
     {
         ArrayList<String> transportResults = new ArrayList<>();
         ArrayList<String> academicResults = new ArrayList<>();
