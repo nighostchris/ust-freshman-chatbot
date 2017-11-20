@@ -31,7 +31,13 @@ public class CourseWebsiteSearch extends Academic
 	{
 		try
 		{
-			URL url = new URL(parentURL[0] + URLEncoder.encode(userQuery.get(0), "UTF-8") + parentURL[1]);
+			String finalURL = parentURL[0];
+			for (int i = 0; i < userQuery.size(); i++)
+			{
+				finalURL += URLEncoder.encode(userQuery.get(i), "UTF-8");
+				finalURL += " ";
+			}
+			URL url = new URL(finalURL + parentURL[1]);
 			Document doc = Jsoup.parse(url, 3000);
 			Elements rows = doc.select("h3.r > a");
 			for (Element result : rows)
