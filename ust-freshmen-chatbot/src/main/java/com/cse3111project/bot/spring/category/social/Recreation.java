@@ -1,6 +1,5 @@
 package com.cse3111project.bot.spring.category.social;
 
-// import com.cse3111project.bot.spring.model.engine.DatabaseEngine;
 import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
 import com.cse3111project.bot.spring.model.engine.SQLDatabaseEngine;
 import com.cse3111project.bot.spring.model.engine.marker.StaticAccessible;
@@ -20,7 +19,13 @@ import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
 import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
 import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
 
-public class Recreation extends Social implements SQLAccessible, StaticAccessible {
+/**
+ * The Recreation class inherits from Social category and handles all the user query about
+ * facilities booking in UST campus.
+ * @version 1.0
+ */
+public class Recreation extends Social implements SQLAccessible, StaticAccessible 
+{
     public static final String QUERY_KEYWORD[];
 
     public static final String AMENITIES_KEYWORD[];
@@ -61,7 +66,8 @@ public class Recreation extends Social implements SQLAccessible, StaticAccessibl
     // library room booking system link
     public static final String LRBS_LINK = "http://lbbooking.ust.hk";
 
-    static {
+    static 
+    {
         AMENITIES_KEYWORD = Utilities.concatArrays(new String[] { "amenity", "amenities", "SAO amenities", 
                                                                   "UST amenities", "HKUST amenities", 
                                                                   // matching "recreations"
@@ -85,13 +91,22 @@ public class Recreation extends Social implements SQLAccessible, StaticAccessibl
     private ArrayList<String> userQuery;
     private ArrayList<RecreationInfo> results;
 
-    Recreation(final ArrayList<String> userQuery){
+    /**
+     * This is the constructor of Recreation class, which will store the processed user-query as instance variable.
+     * @param userQuery This is the only parameter taken by constructor, which is a list of keywords extracted from user-query.
+     */
+    Recreation(final ArrayList<String> userQuery)
+    {
         this.userQuery = this.transform(userQuery);
     }
 
-    // transform the alias of amenities from user query
-    // e.g. Vertex Common Room == UG Hall 2 Common Room == UG Hall II Common Room
-    // so that it could match from SQL / static database
+    /**
+     * This method helps to transform the alias of amenities from user query, for example 
+     * Vertex Common Room, UG Hall 2 Common Room and UG Hall II Common Room are processed to be
+     * representing the same Room.
+     * @param userQuery Only parameter taken by this method, which is a list of keywords extracted from user-query.
+     * @return ArrayList<String> this method will return the processed keywords as a list.
+     */
     private ArrayList<String> transform(final ArrayList<String> userQuery){
         ArrayList<String> transformedUserQuery = new ArrayList<>();
 
@@ -115,14 +130,24 @@ public class Recreation extends Social implements SQLAccessible, StaticAccessibl
         return transformedUserQuery;
     }
 
-    // used to wrap the recreation object
+    /** 
+     * RecreationInfo is the inner class of Recreation class, which is used to wrap the details of every facilities
+     * available in campus, such as their website and relevant booking information.
+     * @version 1.0
+     */
     class RecreationInfo {
         private String name;
         private String application_link;  // link of application form
         private String instruction_link;  // link of instructions for booking
 
-        // only visible within this class
-        private RecreationInfo(String name, String application_link, String instruction_link){
+        /**
+         * Constructor of RecreationInfo class.
+         * @param name Name of facility.
+         * @param application_link Website URL for facility application form.
+         * @param instruction_link Website URL for instructions of booking facility.
+         */
+        private RecreationInfo(String name, String application_link, String instruction_link)
+        {
             this.name = name;
             this.application_link = application_link; this.instruction_link = instruction_link;
         }
@@ -135,6 +160,10 @@ public class Recreation extends Social implements SQLAccessible, StaticAccessibl
         // since some of recreations only need to walk-in => no need application form
         // while instructions are not provided by SAO website for some recreations 
         // (maybe already mentioned in application form)
+        
+        /**
+         * This method display all instance variable of a RecreationInfo object a single string. 
+         */
         @Override
         public String toString(){
             String recreationInfoBuilder = "for " + name + ",\n";
@@ -152,7 +181,13 @@ public class Recreation extends Social implements SQLAccessible, StaticAccessibl
         }
     }
 
-    // reply booking information and instructions from SQL database
+    /**
+     * This method will connect to the SQL database and retrieve data on booking information and instructions.
+     * @return String
+     * @throws NotSQLAccessibleError Throws error when the class is not SQLAccessible.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     @Override
     public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
         try (SQLDatabaseEngine database = new SQLDatabaseEngine(this, SQL_TABLE)) {
@@ -179,8 +214,13 @@ public class Recreation extends Social implements SQLAccessible, StaticAccessibl
         }
     }
 
-    // reply booking information and instructions from static database
-    // only used when the SQL databsae is not accessible
+    /**
+     * This method will connect to the static database and retrieve data on booking information and instructions.
+     * It is used when the SQL database has run into some trouble of connection.
+     * @return String
+     * @throws NotStaticAccessibleError Throws error upon non-exist static database.
+     * @throws StaticDatabaseFileNotFoundException Throws error when static database can't be found / connected.
+     */
     @Override
     public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
         try (StaticDatabaseEngine database = new StaticDatabaseEngine(this, STATIC_TABLE)) {

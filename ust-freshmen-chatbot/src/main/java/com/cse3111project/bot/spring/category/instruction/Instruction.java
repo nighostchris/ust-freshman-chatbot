@@ -3,6 +3,11 @@ package com.cse3111project.bot.spring.category.instruction;
 import java.util.ArrayList;
 import com.cse3111project.bot.spring.category.Category;
 
+/**
+ * Instruction class inherits from Category class and acts as the main controller for providing various hints to user
+ * about how to use the chatbot.
+ * @version 1.0
+ */
 public class Instruction extends Category
 {
 	private String reply;
@@ -55,13 +60,27 @@ public class Instruction extends Category
 		reply = "";
 	}
 	
+	/**
+	 * Constructor of Innstruction class, which set the reply to LINE client as the input parameter.
+	 * @param reply the hints for helping users to use this chatbot as a String.
+	 */
 	public Instruction(String reply)
 	{
 		this.reply = reply;
 	}
 	
+	/**
+	 * Getter method of the instance variable reply in Instruction class.
+	 * @return String 
+	 */
 	public String getReply() { return reply; }
 	
+	/**
+	 * This method will analyze the user-query and determine what hints the user is asking for, and return
+	 * the corresponding reply.
+	 * @param extractedResults Only parameter of the method, which is the processed user-query keywords.
+	 * @return Category
+	 */
 	public static Category analyze(final ArrayList<String> extractedResults)
     {
 		String reply = "";

@@ -11,11 +11,24 @@ import com.cse3111project.bot.spring.utility.Utilities;
 import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
 import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
 
-public class StaticDatabaseEngine extends DatabaseEngine implements AutoCloseable {
+/**
+ * StaticDatabaseEngine inherits from DatabaseEngine class, which handles the actual communication between client and 
+ * static database, and retrieve the corresponding data.
+ * @version 1.0
+ */
+public class StaticDatabaseEngine extends DatabaseEngine implements AutoCloseable 
+{
     private InputStream buffer;  // storing static database buffer
     private Scanner reader;
 
-    public StaticDatabaseEngine(Object classObj, final String STATIC_TABLE) throws NotStaticAccessibleError {
+    /**
+     * Constructor for StaticDatabaseEngine
+     * @param classObj First parameter taken by this method, which is the Category object.
+     * @param STATIC_TABLE Second parameter taken by this method, which is the name of static database.
+     * @throws NotStaticAccessibleError
+     */
+    public StaticDatabaseEngine(Object classObj, final String STATIC_TABLE) throws NotStaticAccessibleError
+    {
         super(STATIC_TABLE);
 
         // force to implement StaticAccessible interface in order to use StaticDatabaseEngine
@@ -23,7 +36,11 @@ public class StaticDatabaseEngine extends DatabaseEngine implements AutoCloseabl
             throw new NotStaticAccessibleError(classObj + " is not StaticAccessible");
     }
 
-    // load static database file
+    /**
+     * This method will perform query on static database.
+     * @return Scanner
+     * @throws StaticDatabaseFileNotFoundException
+     */
     @Override
     public final synchronized Scanner executeQuery() throws StaticDatabaseFileNotFoundException {
         this.buffer = this.getClass().getResourceAsStream(TABLE);
@@ -35,7 +52,9 @@ public class StaticDatabaseEngine extends DatabaseEngine implements AutoCloseabl
         return this.reader;
     }
 
-    // close the internal buffer
+    /**
+     * This method will close the internal buffer.
+     */
     @Override
     public void close(){
         try {

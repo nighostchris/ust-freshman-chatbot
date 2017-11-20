@@ -7,15 +7,26 @@ import com.cse3111project.bot.spring.utility.Utilities;
 
 import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
 
-// Social category
-// Social
-//        -> Societies
-//        -> Recreation
-public abstract class Social extends Category {
+/**
+ * The Social abstract class acts as the main controller for coordinating all the user-query
+ * on societies and failities' details.
+ * @version 1.0
+ */
+public abstract class Social extends Category 
+{
     public static final String QUERY_KEYWORD[] = Utilities.concatArrays(Societies.QUERY_KEYWORD,
                                                                         Recreation.QUERY_KEYWORD);
 
-    public static Category analyze(final ArrayList<String> extractedResults) throws AmbiguousQueryException {
+    /**
+     * This method will take in useful keywords from user-query and analyze about
+     * what sub-category the user is querying on Social category.
+     * @param extractedResults This is the only parameter of the function, which is a 
+     * 						   list of processed keyword from the user-query.
+     * @return Category This returns the sub-category of which the user-query belongs to
+     * @throws AmbiguousQueryException Throws exception upon unclear user-query.
+     */
+    public static Category analyze(final ArrayList<String> extractedResults) throws AmbiguousQueryException 
+    {
         // will be expanded later
         ArrayList<String> societiesKeywords = new ArrayList<>();
         ArrayList<String> recreationKeywords = new ArrayList<>();

@@ -10,15 +10,28 @@ import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
 import com.cse3111project.bot.spring.exception.StaffNotFoundException;
 import com.cse3111project.bot.spring.exception.CourseNotFoundException;
 
-public abstract class Academic extends Category {
+/**
+ * The Academic abstract class acts as the main controller for coordinating all the user-query on 
+ * directory enquiry.
+ * @version 1.0
+ */
+public abstract class Academic extends Category 
+{
     public static final String QUERY_KEYWORD[] = Utilities.concatArrays(Staff.STAFF_NAME_KEYWORD,
                                                                         Staff.STAFF_POSITION_KEYWORD,
                                                                         Course.COURSE_CODE_KEYWORD,
                                                                         CourseWebsiteSearch.WEBSITE_SEARCH_KEYWORD);
 
-    // find out which academic category the user is searching for from partially matched results
+    /**
+     * This method will take in useful keywords from user-query and analyze about
+     * what sub-category the user is querying on Academic category.
+     * @param extractedResults This is the only parameter of the function, which is a 
+     * 						   list of processed keyword from the user-query.
+     * @return Category This returns the sub-category of which the user-query belongs to
+     * @throws StaffNotFoundException Throws when the specific staff is invalid.
+     */
     public static Category analyze(final ArrayList<String> extractedResults) throws StaffNotFoundException, CourseNotFoundException, AmbiguousQueryException {
-        // extract staff names and course codes from extractedResults
+        // extract staff names, course codes, or course website keywords from extractedResults
         ArrayList<String> queryStaffNameKeywords = new ArrayList<>();
         ArrayList<String> queryCourseCodeKeywords = new ArrayList<>();
         ArrayList<String> querycourseWebsiteSearchKeywords = new ArrayList<>();
