@@ -46,10 +46,10 @@ public class SearchEngine
 	 * @param userQuery
 	 * @return Object
 	 * Possible response:
-	 * - general query e.g. finding the office location of staff => return String
+	 * - general query e.g. finding the office location of staff and return String
 	 * - query result would be searched on SQL database first
-	 *   if SQLDatabase is failed to load => use the backup static database
-	 * - application e.g. TimeTable function => return the application object
+	 *   if SQLDatabase is failed to load, use the backup static database
+	 * - application e.g. TimeTable function, return the application object
 	 */
 	public Object search(String userQuery)
 	{
@@ -72,7 +72,7 @@ public class SearchEngine
             categoryResult = Category.analyze(matchedResults);
         }
         // if results are found, but specified staff is not found on database or 
-        // the entire query is ambiguous => reply corresponding message
+        // the entire query is ambiguous then reply corresponding message
 
         catch (StaffNotFoundException | CourseNotFoundException | RoomNotFoundException | AmbiguousQueryException e) {
             return e.getMessage();
@@ -132,7 +132,7 @@ public class SearchEngine
             if (categoryResult instanceof SQLAccessible)
                 return categoryResult.getDataFromSQL();
         }
-        // when one of exceptions occurs => load static database
+        // when one of exceptions occurs then load static database
         catch (URISyntaxException e) {
             Utilities.errorLog("Invalid URI", e);
         }
