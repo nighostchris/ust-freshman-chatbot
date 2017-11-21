@@ -21,7 +21,13 @@ import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
 import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
 import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
 
-public class LocalInstitutionCreditTransfer extends CreditTransfer implements SQLAccessible, StaticAccessible {
+/**
+ * The LocalInstitutionCreditTransfer class acts as the main controller for coordinating all the user-query
+ * on local institution credit transfer related issues.
+ * @version 1.0
+ */
+public class LocalInstitutionCreditTransfer extends CreditTransfer implements SQLAccessible, StaticAccessible 
+{
     public static final String INSTITUTION_KEYWORD[] = { "Centennial College",
                                                          "Chu Hai College of Higher Education",
                                                          "City University of Hong Kong",
@@ -159,7 +165,7 @@ public class LocalInstitutionCreditTransfer extends CreditTransfer implements SQ
                                                      "BST22347",
                                                      "BST22531+ BST22532",
                                                      "BUAD1002",
-                                                     "BUAD3005 ",
+                                                     "BUAD3005��",
                                                      "BUAD3006",
                                                      "BUAD3008",
                                                      "BUS 112",
@@ -934,6 +940,13 @@ public class LocalInstitutionCreditTransfer extends CreditTransfer implements SQ
         this.localInstitutionQuery = localInstitutionQuery;
     }
 
+    /**
+     * This method will connect to the SQL database and retrieve data on details of credit transfer.
+     * @return String Return the data retrieved from SQL database
+     * @throws NotSQLAccessibleError
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     @Override
     public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
         try (SQLDatabaseEngine database = new SQLDatabaseEngine(this.getClass(), SQL_TABLE)) {
@@ -960,6 +973,13 @@ public class LocalInstitutionCreditTransfer extends CreditTransfer implements SQ
         }
     }
 
+    /**
+     * This method will connect to the static database and retrieve data on details of credit transfer.
+     * It is used when the SQL database has run into some trouble of connection.
+     * @return String Return the data retrieved from database
+     * @throws NotStaticAccessibleError
+     * @throws StaticDatabaseFileNotFoundException
+     */
     @Override
     public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
         try (StaticDatabaseEngine database = new StaticDatabaseEngine(this.getClass(), STATIC_TABLE)) {
