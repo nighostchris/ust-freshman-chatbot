@@ -12,7 +12,7 @@ public class Instruction extends Category
 {
 	private String reply;
 	
-	public static final String QUERY_KEYWORD[] = { "/help", "/dir", "/kmb", "/minibus", "/society", "/campus", "/facb"
+	public static final String QUERY_KEYWORD[] = { "/help", "/dir", "/kmb", "/minibus", "/society", "/campus", "/facb",
 												   "/studypath", "find", "cretrans", "/t" };
 	
 	private static final String HELP_QUERY = "Commands available for checking guidelines on\n"
