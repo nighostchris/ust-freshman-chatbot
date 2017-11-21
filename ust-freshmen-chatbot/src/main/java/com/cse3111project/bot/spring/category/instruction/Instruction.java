@@ -73,9 +73,9 @@ public class Instruction extends Category
 	
 	private static final String CREDIT_TRANSFER_QUERY = "Tips on Credit Transfer Database Query\n"
 													  + "This chatbot can help you to check whether you can have credit\n"
-													  + "transfer on your exam results or courses taken before!/n"
-													  + "e.g.1     Wait To Fill in"
-													  + "e.g.2     Wait To Fill in";
+													  + "transfer on your exam results or courses taken before!\n"
+													  + "e.g.1  Can I transfer HKALE Chemistry (A-level) to UST?\n"
+													  + "e.g.2  Can I transfer HKALE grades to UST?";
 	
 	private static final String TIME_MANAGER = "Tips on Time Manager Function\n"
 											 + "This chatbot can act as your schedule book!\n"
