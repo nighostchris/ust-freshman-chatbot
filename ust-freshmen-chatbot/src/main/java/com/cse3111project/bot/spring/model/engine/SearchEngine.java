@@ -163,7 +163,8 @@ public class SearchEngine
             Utilities.errorLog(e.getMessage(), e);
             reply = "***\n1001010100\nOh It seEms I aM bRokEn\n0101010001\n***";
         }
-
+        // --- thanks giving ---
+        new Thanksgiving().invitation();
         return reply;
 	}
 
