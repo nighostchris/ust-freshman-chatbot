@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Instruction.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.instruction</a> &gt; <span class="el_source">Instruction.java</span></div><h1>Instruction.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.instruction;
+
+import java.util.ArrayList;
+import com.cse3111project.bot.spring.category.Category;
+
+/**
+ * Instruction class inherits from Category class and acts as the main controller for providing various hints to user
+ * about how to use the chatbot.
+ * @version 1.0
+ */
+public class Instruction extends Category
+{
+	private String reply;
+	
+<span class="fc" id="L15">	public static final String QUERY_KEYWORD[] = { &quot;/help&quot;, &quot;/dir&quot;, &quot;/kmb&quot;, &quot;/minibus&quot;, &quot;/society&quot;, &quot;/campus&quot;, &quot;/facb&quot;,</span>
+												   &quot;/studypath&quot;, &quot;/f&quot;, &quot;/cretrans&quot;, &quot;/t&quot; };
+	
+	private static final String HELP_QUERY = &quot;Commands available for checking guidelines on\n&quot;
+										   + &quot;different features of this chatbot:\n&quot;
+										   + &quot;/dir  Directory Enquiry\n&quot;
+										   + &quot;/kmb  KMB ETA Enquiry\n&quot;
+										   + &quot;/minibus  Minibus ETA Enquiry\n&quot;
+										   + &quot;/society  Societies Enquiry\n&quot;
+										   + &quot;/campus  Campus ETA Enquiry\n&quot;
+										   + &quot;/facb	 Facilities Booking Enquiry\n&quot;
+										   + &quot;/studypath Course Suggestion\n&quot;
+										   + &quot;/f  Course Website Enquiry\n&quot;
+										   + &quot;/cretrans Credit Transfer Enquiry\n&quot;
+										   + &quot;/t Time Manager Function&quot;;
+	
+	private static final String DIRECTORY_QUERY = &quot;Tips on HKUST Staff Directory Enquiry\n&quot;
+												+ &quot;You can search details of any valid staff available in UST!\n&quot;
+												+ &quot;e.g.1 Can I know where is the office of Professor Li?\n&quot;
+												+ &quot;e.g.2 Professor Kim Sunghun&quot;;
+	
+	private static final String KMB_QUERY = &quot;Tips on KMB ETA Enquiry\n&quot;
+										  + &quot;You can get ETA of 91 and 91m in UST by our bot!\n&quot;
+										  + &quot;e.g.1 Can I know ETA of 91m at south gate?\n&quot;
+										  + &quot;e.g.2 When will 91 arrive at north gate?&quot;;
+	
+	private static final String MINIBUS_QUERY = &quot;Tips on Minibus ETA Enquiry\n&quot;
+											  + &quot;You can get ETA of minibus in UST by our bot!\n&quot;
+											  + &quot;e.g.1 What is the arrival time of minibus 11?\n&quot;
+											  + &quot;e.g.2 11 Minibus arrival time please?&quot;;
+	
+	private static final String SOCIETY_QUERY = &quot;Tips on HKUST Societies Enquiry\n&quot;
+											  + &quot;You can search all the available societies in UST!\n&quot;
+											  + &quot;e.g.1 Where is the webpage of film society?\n&quot;
+											  + &quot;e.g.2 Where could I get info on UST Soc?&quot;;
+	
+	private static final String CAMPUS_QUERY = &quot;Tips on UST Campus ETA Enquiry\n&quot;
+											 + &quot;You can search how long it takes from one place to\n&quot;
+											 + &quot;another within UST campus by our bot!\n&quot;
+											 + &quot;e.g.1 Can I know eta from 4619 to 2407?\n&quot;
+											 + &quot;e.g.2 Can I know eta from LTA back entrance to 2504?&quot;;
+	
+	private static final String BOOKING_QUERY = &quot;Tips on Booking facilities in UST\n&quot;
+											  + &quot;You can get links to all facilities booking instructions\n&quot;
+											  + &quot;available online from our bot!\n&quot;
+											  + &quot;e.g.1 Can I know how to book LC?\n&quot;
+											  + &quot;e.g.2 I want to book Hall 6 common room&quot;;
+	
+	private static final String STUDY_PATH_QUERY = &quot;Tips on Study Path Suggestion\n&quot;
+												 + &quot;You can input your current courses and see what \n&quot;
+												 + &quot;to study next!\n&quot;
+												 + &quot;e.g.1 What can I study if I have finished COMP 3111?\n&quot;
+												 + &quot;e.g.2 Suggest some path for me after COMP3511&quot;;
+	
+	private static final String COURSE_WEBSITE_QUERY = &quot;Tips on Searching Course Website\n&quot;
+													 + &quot;This chatbot will try to search the course website for you!\n&quot;
+													 + &quot;e.g.1 Can you find the course website of COMP 3111 for me?\n&quot;
+													 + &quot;e.g.2 Can you search details of course COMP4641 for me?&quot;;
+	
+	private static final String CREDIT_TRANSFER_QUERY = &quot;Tips on Credit Transfer Database Query\n&quot;
+													  + &quot;This chatbot can help you to check whether you can have credit\n&quot;
+													  + &quot;transfer on your exam results or courses taken before!\n&quot;
+													  + &quot;e.g.1  Can I transfer HKALE Chemistry (A-level) to UST?\n&quot;
+													  + &quot;e.g.2  Can I transfer HKALE grades to UST?&quot;;
+	
+	private static final String TIME_MANAGER = &quot;Tips on Time Manager Function\n&quot;
+											 + &quot;This chatbot can act as your schedule book!\n&quot;
+											 + &quot;e.g.1 &quot;
+											 + &quot;e.g.2 &quot;
+											 + &quot;e.g.3 &quot;
+											 + &quot;e.g.4 &quot;;
+	
+	public Instruction()
+<span class="nc" id="L88">	{</span>
+<span class="nc" id="L89">		reply = &quot;&quot;;</span>
+<span class="nc" id="L90">	}</span>
+	
+	/**
+	 * Constructor of Innstruction class, which set the reply to LINE client as the input parameter.
+	 * @param reply the hints for helping users to use this chatbot as a String.
+	 */
+	public Instruction(String reply)
+<span class="fc" id="L97">	{</span>
+<span class="fc" id="L98">		this.reply = reply;</span>
+<span class="fc" id="L99">	}</span>
+	
+	/**
+	 * Getter method of the instance variable reply in Instruction class.
+	 * @return String 
+	 */
+<span class="fc" id="L105">	public String getReply() { return reply; }</span>
+	
+	/**
+	 * This method will analyze the user-query and determine what hints the user is asking for, and return
+	 * the corresponding reply.
+	 * @param extractedResults Only parameter of the method, which is the processed user-query keywords.
+	 * @return Category
+	 */
+	public static Category analyze(final ArrayList&lt;String&gt; extractedResults)
+    {
+<span class="fc" id="L115">		String reply = &quot;&quot;;</span>
+<span class="fc bfc" id="L116" title="All 2 branches covered.">        for (String result : extractedResults)</span>
+        {
+<span class="fc bfc" id="L118" title="All 2 branches covered.">            if (result.equals(QUERY_KEYWORD[0]))</span>
+<span class="fc" id="L119">                reply = HELP_QUERY;</span>
+<span class="fc bfc" id="L120" title="All 2 branches covered.">            else if (result.equals(QUERY_KEYWORD[1]))</span>
+<span class="fc" id="L121">            	reply = DIRECTORY_QUERY;</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">            else if (result.equals(QUERY_KEYWORD[2]))</span>
+<span class="fc" id="L123">            	reply = KMB_QUERY;</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">            else if (result.equals(QUERY_KEYWORD[3]))</span>
+<span class="fc" id="L125">                reply = MINIBUS_QUERY;</span>
+<span class="fc bfc" id="L126" title="All 2 branches covered.">            else if (result.equals(QUERY_KEYWORD[4]))</span>
+<span class="fc" id="L127">            	reply = SOCIETY_QUERY;</span>
+<span class="fc bfc" id="L128" title="All 2 branches covered.">            else if (result.equals(QUERY_KEYWORD[5]))</span>
+<span class="fc" id="L129">            	reply = CAMPUS_QUERY;</span>
+<span class="pc bpc" id="L130" title="1 of 2 branches missed.">            else if (result.equals(QUERY_KEYWORD[6]))</span>
+<span class="fc" id="L131">            	reply = BOOKING_QUERY;</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">            else if (result.equals(QUERY_KEYWORD[7]))</span>
+<span class="nc" id="L133">            	reply = STUDY_PATH_QUERY;</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">            else if (result.equals(QUERY_KEYWORD[8]))</span>
+<span class="nc" id="L135">            	reply = COURSE_WEBSITE_QUERY;</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">            else if (result.equals(QUERY_KEYWORD[9]))</span>
+<span class="nc" id="L137">            	reply = CREDIT_TRANSFER_QUERY;</span>
+            else
+<span class="nc" id="L139">            	reply = TIME_MANAGER;</span>
+<span class="fc" id="L140">        }</span>
+<span class="fc" id="L141">        return new Instruction(reply);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

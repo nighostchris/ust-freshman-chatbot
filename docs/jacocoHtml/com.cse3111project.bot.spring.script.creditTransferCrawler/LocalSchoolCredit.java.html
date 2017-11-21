@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LocalSchoolCredit.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.script.creditTransferCrawler</a> &gt; <span class="el_source">LocalSchoolCredit.java</span></div><h1>LocalSchoolCredit.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.script.creditTransferCrawler;
+
+public class LocalSchoolCredit 
+{
+	private String courseCode;
+	private String transferCourseCode;
+	private String restriction;
+	
+	public LocalSchoolCredit()
+<span class="nc" id="L10">	{</span>
+<span class="nc" id="L11">		this.courseCode = &quot;&quot;;</span>
+<span class="nc" id="L12">		this.transferCourseCode = &quot;&quot;;</span>
+<span class="nc" id="L13">		this.restriction = &quot;&quot;;</span>
+<span class="nc" id="L14">	}</span>
+	
+	public LocalSchoolCredit(String courseCode, String transferCourseCode, String restriction)
+<span class="nc" id="L17">	{</span>
+<span class="nc" id="L18">		this.courseCode = courseCode;</span>
+<span class="nc" id="L19">		this.transferCourseCode = transferCourseCode;</span>
+<span class="nc" id="L20">		this.restriction = restriction;</span>
+<span class="nc" id="L21">	}</span>
+	
+<span class="nc" id="L23">	public String getCourseCode() { return courseCode; }</span>
+	
+<span class="nc" id="L25">	public String getTransferCourseCode() { return transferCourseCode; }</span>
+	
+<span class="nc" id="L27">	public String getRestriction() { return restriction; }</span>
+	
+	@Override
+	public String toString()
+	{
+<span class="nc" id="L32">		return courseCode + &quot; &quot; + transferCourseCode + &quot; &quot; + restriction;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

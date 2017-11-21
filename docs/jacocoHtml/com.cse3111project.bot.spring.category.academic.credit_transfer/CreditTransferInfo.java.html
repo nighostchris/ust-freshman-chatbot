@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CreditTransferInfo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.academic.credit_transfer</a> &gt; <span class="el_source">CreditTransferInfo.java</span></div><h1>CreditTransferInfo.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.academic.credit_transfer;
+
+/**
+ * CreditTransferInfo abstract class defines the basic structure of any kind of credit transfer
+ * class. It is used for inheritance of ExamCreditTransfer, LocalInstitutionCreditTransfer etc.
+ * @version 1.0
+ */
+abstract class CreditTransferInfo 
+{
+    protected String subject;
+    protected String restriction;
+    protected String transferCourseCode;
+
+    /**
+     * This is constructor of CreditTransferInfo class.
+     * @param subject The subject name of the course
+     * @param transferCourseCode The course code of the transferred course
+     * @param restriction The restriction of applying the transfer
+     */
+    CreditTransferInfo(String subject, String transferCourseCode, String restriction) 
+<span class="fc" id="L21">    {</span>
+<span class="fc" id="L22">        this.subject = subject;</span>
+<span class="fc" id="L23">        this.transferCourseCode = transferCourseCode;</span>
+<span class="fc" id="L24">        this.restriction = restriction;</span>
+<span class="fc" id="L25">    }</span>
+
+    /**
+     * Overriden the original toString() method given by Java. It handles how the details
+     * of this class to be displayed in String format.
+     */
+    @Override
+    public String toString(){
+<span class="fc" id="L33">        StringBuilder sb = new StringBuilder(subject).append(&quot; is equivalent as &quot;)</span>
+<span class="fc" id="L34">                               .append(transferCourseCode).append(&quot; in UST, &quot;);</span>
+<span class="pc bpc" id="L35" title="25 of 30 branches missed.">        switch (restriction) {</span>
+            case &quot;GD&quot;:
+<span class="nc" id="L37">                sb.append(&quot;yet your grade point must be at least &quot;).append(restriction.split(&quot;:&quot;)[1].trim());</span>
+<span class="nc" id="L38">                break;</span>
+            case &quot;AD&quot;:
+<span class="nc" id="L40">                sb.append(&quot;but this mapping is only applicable for student who has local Associate Degree / Higher Diploma&quot;);</span>
+<span class="nc" id="L41">                break;</span>
+            case &quot;ONCE&quot;:
+<span class="nc" id="L43">                sb.append(&quot;but this course cannot be double-counted&quot;);</span>
+<span class="nc" id="L44">                break;</span>
+            case &quot;Expired&quot;:
+<span class="nc" id="L46">                sb.append(&quot;but this mapping will be expiring soon. Be careful&quot;);</span>
+<span class="nc" id="L47">                break;</span>
+            case &quot;ASSESS&quot;:
+<span class="nc" id="L49">                sb.append(&quot;yet this mapping requires individual assessment to check whether you are eligible to do credit transfer. You should provide detailed course information if you want to apply&quot;);</span>
+<span class="nc" id="L50">                break;</span>
+            case &quot;TRIP&quot;:
+<span class="nc" id="L52">                sb.append(&quot;but this mapping is solely considered for SBM students going for a short business trip. You could not double-count this course with others&quot;);</span>
+<span class="nc" id="L53">                break;</span>
+            case &quot;No Restriction&quot;:
+<span class="fc" id="L55">                sb.append(&quot;without any restriction at all&quot;);</span>
+<span class="fc" id="L56">                break;</span>
+            default:  // for ExamCreditTransfer
+<span class="fc" id="L58">                sb.append(&quot;yet your grade point should be at least &quot;).append(restriction);</span>
+                break;
+        }
+
+<span class="fc" id="L62">        return sb.toString() + '\n';</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

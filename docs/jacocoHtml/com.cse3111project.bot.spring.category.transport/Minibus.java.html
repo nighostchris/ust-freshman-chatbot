@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Minibus.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.transport</a> &gt; <span class="el_source">Minibus.java</span></div><h1>Minibus.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.transport;
+
+import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
+import com.cse3111project.bot.spring.model.engine.SQLDatabaseEngine;
+import com.cse3111project.bot.spring.model.engine.marker.StaticAccessible;
+import com.cse3111project.bot.spring.model.engine.StaticDatabaseEngine;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Time;
+import java.sql.SQLException;
+
+import java.net.URISyntaxException;
+
+import java.util.Calendar;
+import java.util.TimeZone;
+import java.util.Scanner;
+import java.util.ArrayList;
+import com.cse3111project.bot.spring.utility.Utilities;
+
+import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
+import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
+import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
+
+/**
+ * The Minibus class inherits from the Transport category and handle all user query about
+ * estimaed arrival time of minibus in the campus.
+ * @version 1.0
+ */
+<span class="fc" id="L30">public class Minibus extends Transport implements SQLAccessible, StaticAccessible </span>
+{
+<span class="fc" id="L32">    public static final String QUERY_KEYWORD[] = { &quot;minibus 11&quot;, &quot;minibus route 11&quot;, </span>
+                                                   &quot;11 minibus&quot;, &quot;route 11 minibus&quot; };
+
+    // format:
+    // travelDate isRushHour ChoiHung2UST minWaitingTime maxWaitingTime aboardTime arrivalTime
+    private static final String SQL_TABLE = &quot;minibus11record&quot;;
+    private static final String STATIC_TABLE = &quot;/static/transport/minibusDatabase.txt&quot;;
+
+    // get current time in Hong Kong
+    private Calendar currentTime;
+
+    private int minAboardHrDiff;
+    private int avgMinWaitingTime; private int avgMaxWaitingTime;
+
+    private ArrayList&lt;ArrivalTime&gt; arrivalTime;
+
+    class ArrivalTime {
+        private int minWaitingTime;
+        private int maxWaitingTime;
+        private int aboardHrDiff;  // difference between currentHr and aboardHr |currentHr - aboardHr|
+                                   // currently only consider aboard hour because of the lack of data
+
+        // only be used in Minibus class
+<span class="fc" id="L55">        private ArrivalTime(int minWaitingTime, int maxWaitingTime, int aboardHrDiff){</span>
+<span class="fc" id="L56">            this.minWaitingTime = minWaitingTime;</span>
+<span class="fc" id="L57">            this.maxWaitingTime = maxWaitingTime;</span>
+<span class="fc" id="L58">            this.aboardHrDiff = aboardHrDiff;</span>
+<span class="fc" id="L59">        }</span>
+    }
+
+    private void init(){
+<span class="fc" id="L63">        currentTime = Calendar.getInstance(TimeZone.getTimeZone(&quot;GMT+8:00&quot;));</span>
+        // reset as the largest diff |aboardHr - currentHr| so that it would be easier to find min
+<span class="fc" id="L65">        this.minAboardHrDiff = 24;</span>
+<span class="fc" id="L66">    }</span>
+
+    /**
+     * This method requires no parameter, which returns the estimated arrival time of minibus
+     * from database.
+     * @return String This method will return a string which contains the next available
+     * 				  estimated arrival time of minibus.
+     * @throws NotSQLAccessibleError
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
+    @Override
+    public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
+        // *** executing multiple queries on SQL is too slow ***
+        // enlarge the hour range if timeslot not found
+        // for (int hrRange = 1; numOfData == 0 &amp;&amp; hrRange &lt;= 24; hrRange++) { ... }
+
+<span class="pc" id="L83">        try (SQLDatabaseEngine database = new SQLDatabaseEngine(this.getClass(), SQL_TABLE)) {</span>
+<span class="fc" id="L84">            this.init();</span>
+<span class="fc" id="L85">            int currentHr = currentTime.get(Calendar.HOUR_OF_DAY);  // get current hr in 24-hr format</span>
+<span class="fc" id="L86">            arrivalTime = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L88">            StringBuilder SQLStatement = new StringBuilder(&quot;SELECT minWaitingTime, maxWaitingTime, aboardTime FROM &quot;)</span>
+<span class="fc" id="L89">                                             .append(SQL_TABLE);</span>
+
+<span class="fc" id="L91">            database.prepare(SQLStatement.toString());</span>
+
+<span class="fc" id="L93">            ResultSet reader = database.executeQuery();</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">            while (reader.next()){</span>
+<span class="fc" id="L95">                int minWaitingTime = reader.getInt(1);</span>
+<span class="fc" id="L96">                int maxWaitingTime = reader.getInt(2);</span>
+<span class="fc" id="L97">                int aboardHrDiff = Math.abs(new Integer(reader.getTime(3).toString().split(&quot;:&quot;)[0]) - currentHr);</span>
+<span class="fc" id="L98">                arrivalTime.add(new ArrivalTime(minWaitingTime, maxWaitingTime, aboardHrDiff));</span>
+
+<span class="fc bfc" id="L100" title="All 2 branches covered.">                if (aboardHrDiff &lt; this.minAboardHrDiff)  // find minimum aboard hour difference</span>
+<span class="fc" id="L101">                    this.minAboardHrDiff = aboardHrDiff;</span>
+<span class="fc" id="L102">            }</span>
+
+<span class="fc" id="L104">            this.computeAvgArrivalTime();</span>
+
+<span class="fc" id="L106">            return super.replyResults();</span>
+<span class="pc bpc" id="L107" title="6 of 8 branches missed.">        }</span>
+    }
+
+    /**
+     * This method requires no parameter, which returns the estimated arrival time of minibus 
+     * from static database when we encounter trouble in connecting SQL database.
+     * @return String This method will return a string which contains the next available
+     * 				  estimated arrival time of minibus.
+     * @throws NotStaticAccessibleError
+     * @throws StaticDatabaseFileNotFoundException
+     */
+    @Override
+    public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
+<span class="nc" id="L120">        try (StaticDatabaseEngine database = new StaticDatabaseEngine(this.getClass(), STATIC_TABLE)) {</span>
+<span class="nc" id="L121">            this.init();</span>
+<span class="nc" id="L122">            int currentHr = currentTime.get(Calendar.HOUR_OF_DAY);  // get current hr in 24-hr format</span>
+<span class="nc" id="L123">            arrivalTime = new ArrayList&lt;&gt;();</span>
+
+<span class="nc" id="L125">            Scanner reader = database.executeQuery();</span>
+
+<span class="nc bnc" id="L127" title="All 2 branches missed.">            while (reader.hasNextLine()){</span>
+<span class="nc" id="L128">                String line = reader.nextLine();</span>
+                // starting with # is considered as comment
+<span class="nc bnc" id="L130" title="All 4 branches missed.">                if (line.startsWith(&quot;#&quot;) || line.length() == 0)</span>
+<span class="nc" id="L131">                    continue;</span>
+
+<span class="nc" id="L133">                String parts[] = line.split(&quot;,&quot;);</span>
+<span class="nc" id="L134">                int aboardHrDiff = Math.abs(new Integer(parts[5].split(&quot;:&quot;)[0]) - currentHr);</span>
+<span class="nc" id="L135">                arrivalTime.add(new ArrivalTime(new Integer(parts[3]), new Integer(parts[4]), </span>
+                                                aboardHrDiff));
+
+<span class="nc bnc" id="L138" title="All 2 branches missed.">                if (aboardHrDiff &lt; this.minAboardHrDiff)  // find minimum aboard hour difference</span>
+<span class="nc" id="L139">                    this.minAboardHrDiff = aboardHrDiff;</span>
+<span class="nc" id="L140">            }</span>
+
+<span class="nc" id="L142">            this.computeAvgArrivalTime();</span>
+            
+<span class="nc" id="L144">            return super.replyResults();</span>
+<span class="nc bnc" id="L145" title="All 8 branches missed.">        }</span>
+    }
+
+    /**
+     * This method takes no parameter, which will compute the average arrival time of minibus
+     * and store the result to instance variables, not producing any return value.
+     */
+    private void computeAvgArrivalTime(){
+<span class="fc" id="L153">        double totalMinWaitingTime = 0;</span>
+<span class="fc" id="L154">        double totalMaxWaitingTime = 0;</span>
+<span class="fc" id="L155">        int numOfData = 0;</span>
+
+<span class="fc bfc" id="L157" title="All 2 branches covered.">        for (ArrivalTime arrival : arrivalTime){</span>
+<span class="fc bfc" id="L158" title="All 2 branches covered.">            if (arrival.aboardHrDiff == this.minAboardHrDiff){</span>
+<span class="fc" id="L159">                totalMinWaitingTime += arrival.minWaitingTime;</span>
+<span class="fc" id="L160">                totalMaxWaitingTime += arrival.maxWaitingTime;</span>
+<span class="fc" id="L161">                numOfData++;</span>
+            }
+<span class="fc" id="L163">        }</span>
+
+<span class="fc" id="L165">        this.avgMinWaitingTime = new Long(Math.round(totalMinWaitingTime / numOfData)).intValue();</span>
+<span class="fc" id="L166">        this.avgMaxWaitingTime = new Long(Math.round(totalMaxWaitingTime / numOfData)).intValue();</span>
+<span class="fc" id="L167">    }</span>
+
+    /**
+     * This method will further process the data retrieved from database and make it to
+     * be more clear to the user about the minibus arrival time.
+     * @return String This method will return a String representation of Minibus class with all 
+     * 		   the details embedded.
+     */
+    @Override
+    public String toString(){
+<span class="fc" id="L177">        return &quot;Estimated Arrival Time: &quot; + avgMinWaitingTime + '-' + avgMaxWaitingTime + &quot; min&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

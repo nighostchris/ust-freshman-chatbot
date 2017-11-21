@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Societies.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.social</a> &gt; <span class="el_source">Societies.java</span></div><h1>Societies.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.social;
+
+import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
+import com.cse3111project.bot.spring.model.engine.SQLDatabaseEngine;
+import com.cse3111project.bot.spring.model.engine.marker.StaticAccessible;
+import com.cse3111project.bot.spring.model.engine.StaticDatabaseEngine;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import java.net.URISyntaxException;
+
+import java.util.Scanner;
+import java.util.ArrayList;
+import com.cse3111project.bot.spring.utility.Utilities;
+
+import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
+import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
+import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
+
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * The Societies class inherits from Social category and handles all the user query about
+ * societies and clubs available in UST.
+ * @version 1.0
+ */
+<span class="fc" id="L29">@Slf4j</span>
+public class Societies extends Social implements SQLAccessible, StaticAccessible 
+{
+    public static final String QUERY_KEYWORD[];
+
+<span class="fc" id="L34">    public static final String SOCIETY_KEYWORD[] = { &quot;Chinese Folk Art Society&quot;,</span>
+                                                     &quot;Chinese Orchestra&quot;,
+                                                     &quot;Comics and Animation Society&quot;,
+                                                     &quot;Culinary Art and Culture Society&quot;,
+                                                     &quot;Drama Society&quot;,
+                                                     &quot;Film Society&quot;,
+                                                     &quot;International Cuisine Society&quot;,
+                                                     &quot;Korean Students' Association&quot;,
+                                                     &quot;Magic Club&quot;,
+                                                     &quot;South Asian Students' Society&quot;,
+                                                     &quot;Southeast Asian Students' Society&quot;,
+                                                     &quot;Taiwanese Students'Association&quot;,
+                                                     &quot;The Band Society&quot;,
+                                                     &quot;The Photographic Society&quot;,
+                                                     &quot;The University Choir&quot;,
+                                                     &quot;University Philharmonic Orchestra&quot;,
+                                                     &quot;Independent Clubs Association&quot;,
+                                                     &quot;AIESEC-LC-HKUST&quot;,
+                                                     &quot;Campus Crusade for Christ&quot;,
+                                                     &quot;China Entrepreneur Network&quot;,
+                                                     &quot;China Study Society&quot;,
+                                                     &quot;Chinese Culture Society&quot;,
+                                                     &quot;Christian Choir&quot;,
+                                                     &quot;Christian Fellowship&quot;,
+                                                     &quot;Contract Bridge Club&quot;,
+                                                     &quot;Debating Society&quot;,
+                                                     &quot;Games Society&quot;,
+                                                     &quot;Golden Z Club&quot;,
+                                                     &quot;Greater China Vision&quot;,
+                                                     &quot;Hong Kong Career Match Association&quot;,
+                                                     &quot;Model United Nations Club&quot;,
+                                                     &quot;Nature Club&quot;,
+                                                     &quot;People's Campus Radio&quot;,
+                                                     &quot;Progressust&quot;,
+                                                     &quot;Rotaract Club of HKUST&quot;,
+                                                     &quot;Student Air Cadet Society&quot;,
+                                                     &quot;Student Astronomy Club&quot;,
+                                                     &quot;Student Social Service Society&quot;,
+                                                     &quot;The Catholic Society&quot;,
+                                                     &quot;The Hong Kong Award for Young People User Unit&quot;,
+                                                     &quot;The Linguistics Society&quot;,
+                                                     &quot;University YMCA - HKUST&quot;,
+                                                     &quot;Yo-hoo Club&quot;,
+                                                     &quot;Sports Association&quot;,
+                                                     &quot;Archery Club&quot;,
+                                                     &quot;Cricket Club&quot;,
+                                                     &quot;Dance Society&quot;,
+                                                     &quot;Distance Runner's Club&quot;,
+                                                     &quot;Dodgeball Club&quot;,
+                                                     &quot;Dragon Boat Club&quot;,
+                                                     &quot;Fencing Club&quot;,
+                                                     &quot;Handball Club&quot;,
+                                                     &quot;Hockey Club&quot;,
+                                                     &quot;Judo Club&quot;,
+                                                     &quot;Kendo Club&quot;,
+                                                     &quot;Korfball Club&quot;,
+                                                     &quot;Rope Skipping Club&quot;,
+                                                     &quot;Rowing Club&quot;,
+                                                     &quot;Rugby Club&quot;,
+                                                     &quot;Shaolin Martial Arts Society&quot;,
+                                                     &quot;Social Dance Society&quot;,
+                                                     &quot;Softball Club&quot;,
+                                                     &quot;Sport Climbing Students' Society&quot;,
+                                                     &quot;Squash Club&quot;,
+                                                     &quot;Student Basketball Club&quot;,
+                                                     &quot;Students' Badminton Club&quot;,
+                                                     &quot;Students' Football Club&quot;,
+                                                     &quot;Students' Karate Club&quot;,
+                                                     &quot;Students' Swimming Club&quot;,
+                                                     &quot;Table Tennis Club&quot;,
+                                                     &quot;Tae Kwon Do Club&quot;,
+                                                     &quot;Tai Chi Society&quot;,
+                                                     &quot;Tchoukball Club&quot;,
+                                                     &quot;The Netball Club&quot;,
+                                                     &quot;Track and Field Club&quot;,
+                                                     &quot;Volleyball Club&quot;,
+                                                     &quot;Wing Chun Martial Arts Society&quot;,
+                                                     &quot;The Undergraduate House One Students' Association&quot;,
+                                                     &quot;VERTEX, House II Students' Association&quot;,
+                                                     &quot;Glacier, HOUSE III Students' Association&quot;,
+                                                     &quot;Vista, House IV Students' Association&quot;,
+                                                     &quot;Endeavour, House V Students' Association&quot;,
+                                                     &quot;The Business Students' Union&quot;,
+                                                     &quot;The Engineering Students' Union&quot;,
+                                                     &quot;The Humanities and Social Science Students' Union&quot;,
+                                                     &quot;Science Students' Union&quot;,
+                                                     &quot;Art Club&quot;,
+                                                     &quot;Chemistry Students' Society&quot;,
+                                                     &quot;Mathematics Students' Society&quot;,
+                                                     &quot;International Research Enrichment Students' Society&quot;,
+                                                     &quot;The Biology Students' Society&quot;,
+                                                     &quot;The Physics Students' Society&quot;,
+                                                     &quot;Environment Students' Society&quot;,
+                                                     &quot;Risk Management and Business Intelligence Students' Association&quot;,
+                                                     &quot;Artiste and Show Production Association&quot;,
+                                                     &quot;Current Affairs Research Enlightenment&quot;,
+                                                     &quot;Gym and Fitness Society&quot;,
+                                                     &quot;The Student Tennis Club&quot;,
+                                                     &quot;Interdisciplinary Programs Students' Union,HKUSTSU&quot;,
+                                                     &quot;Accounting Students' Society&quot;,
+                                                     &quot;Information Systems, Business Statistics and Operations Management Students' Society&quot;,
+                                                     &quot;Management Students' Association&quot;,
+                                                     &quot;The Economics Students' Society&quot;,
+                                                     &quot;The Finance Students' Society&quot;,
+                                                     &quot;The Marketing Students' Society&quot;,
+                                                     &quot;Computer Engineering Students' Society&quot;,
+                                                     &quot;Industrial Engineering and Logistics Management Students' Society&quot;,
+                                                     &quot;Mechanical Engineering Students' Association&quot;,
+                                                     &quot;The Chemical and Biomolecular Engineering Students' Society&quot;,
+                                                     &quot;The Civil and Environmental Engineering Students' Society&quot;,
+                                                     &quot;The Computer Science and Engineering Students' Society&quot;,
+                                                     &quot;The Electronic and Computer Engineering Students' Society&quot;,
+                                                     &quot;Biochemistry Students' Society&quot;
+                                                 };
+
+    static 
+    {
+<span class="fc" id="L151">        QUERY_KEYWORD = Utilities.concatArrays(new String[] { &quot;HKUST society&quot;, &quot;HKUST soc&quot;, &quot;HKUST societies&quot;,</span>
+                                                              &quot;UST society&quot;, &quot;UST soc&quot;, &quot;UST societies&quot; },
+                                               SOCIETY_KEYWORD);
+<span class="fc" id="L154">    }</span>
+
+    public static final String SOCIETIES_LINK = &quot;https://hkustsucouncil.wordpress.com/standing-committees/the-affiliated-societies-committee/list-of-affiliated-societies/&quot;;
+
+    // format:
+    // id name website_link
+    private static final String SQL_TABLE = &quot;hkust_societies&quot;;
+    private static final String STATIC_TABLE = &quot;/static/social/societiesDatabase.txt&quot;;
+
+    // user may query more than 1 societies
+    private ArrayList&lt;String&gt; userQuery;
+    private ArrayList&lt;SocietyInfo&gt; results;
+
+    /**
+     * Constructor of Societies class, which will store the processed user-query as instance variable.
+     * @param userQuery The only parameter taken by constructor, which is a list of keywords extracted from user-query.
+     */
+    Societies(final ArrayList&lt;String&gt; userQuery)
+<span class="fc" id="L172">    {</span>
+<span class="fc" id="L173">        this.userQuery = userQuery;  // MUST NOT BE EMPTY</span>
+<span class="fc" id="L174">    }</span>
+
+    /**
+     * The SocietyInfo class is the inner class of Societies, which is used to wrap society info.
+     */
+    class SocietyInfo
+    {
+        private String name;
+        private String link;
+
+        /**
+         * Constructor of SocietyInfo.
+         * @param name Name of society / club.
+         * @param link Website of society / club if available.
+         */
+        private SocietyInfo(String name, String link)
+<span class="fc" id="L190">        {</span>
+<span class="fc" id="L191">            this.name = name; this.link = link;</span>
+<span class="fc" id="L192">        }</span>
+
+        /**
+         * This method converts all instance variable of a SocietyInfo object as a single String.
+         */
+        @Override
+        public String toString(){
+<span class="fc" id="L199">            return name + &quot;: &quot; + link + '\n';</span>
+        }
+    }
+
+    /**
+     * This method will connect to the SQL database and retrieve data on details of societies and clubs.
+     * @return String
+     * @throws NotSQLAccessibleError Throws error when the class is not SQLAccessible.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
+    @Override
+    public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
+<span class="pc" id="L212">        try (SQLDatabaseEngine database = new SQLDatabaseEngine(this.getClass(), SQL_TABLE)) {</span>
+<span class="fc" id="L213">            results = new ArrayList&lt;&gt;();</span>
+
+            // user query MUST NOT be empty
+<span class="fc" id="L216">            StringBuilder SQLStatement = new StringBuilder(&quot;SELECT name, website_link FROM &quot;)</span>
+<span class="fc" id="L217">                                             .append(SQL_TABLE)</span>
+<span class="fc" id="L218">                                             .append(&quot; WHERE name ILIKE concat(\'%\', ?, \'%\')&quot;);</span>
+
+<span class="fc bfc" id="L220" title="All 2 branches covered.">            for (int i = 1; i &lt; userQuery.size(); i++)</span>
+<span class="fc" id="L221">                SQLStatement.append(&quot; OR name ILIKE concat(\'%\', ?, \'%\')&quot;);</span>
+
+<span class="fc" id="L223">            log.info(&quot;SQLStatement: {}&quot;, SQLStatement.toString());</span>
+
+<span class="fc" id="L225">            PreparedStatement SQLQuery = database.prepare(SQLStatement.toString());</span>
+<span class="fc bfc" id="L226" title="All 2 branches covered.">            for (int i = 0; i &lt; userQuery.size(); i++)</span>
+<span class="fc" id="L227">                SQLQuery.setString(i + 1, userQuery.get(i));</span>
+
+<span class="fc" id="L229">            ResultSet reader = database.executeQuery();</span>
+<span class="fc bfc" id="L230" title="All 2 branches covered.">            while (reader.next())</span>
+<span class="fc" id="L231">                results.add(new SocietyInfo(reader.getString(1), reader.getString(2)));</span>
+
+<span class="fc" id="L233">            return super.replyResults(results);</span>
+<span class="pc bpc" id="L234" title="6 of 8 branches missed.">        }</span>
+    }
+
+    /**
+     * This method will connect to the static database and retrieve data on details of societies and clubs.
+     * It is used when the SQL database has run into some trouble of connection.
+     * @return String
+     * @throws NotStaticAccessibleError Throws error when the class is not SQLAccessible.
+     * @throws StaticDatabaseFileNotFoundException Throws error when static database can't be found / connected.
+     */
+    @Override
+    public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
+<span class="nc" id="L246">        try (StaticDatabaseEngine database = new StaticDatabaseEngine(this.getClass(), STATIC_TABLE)) {</span>
+<span class="nc" id="L247">            results = new ArrayList&lt;&gt;();</span>
+
+<span class="nc" id="L249">            Scanner reader = database.executeQuery();</span>
+<span class="nc bnc" id="L250" title="All 2 branches missed.">            while (reader.hasNextLine()){</span>
+<span class="nc" id="L251">                String line = reader.nextLine();</span>
+                // starting with # is considered as an comment
+<span class="nc bnc" id="L253" title="All 4 branches missed.">                if (line.startsWith(&quot;#&quot;) || line.length() == 0)</span>
+<span class="nc" id="L254">                    continue;</span>
+
+<span class="nc" id="L256">                String societyName = line.split(&quot;,&quot;)[1];</span>
+<span class="nc bnc" id="L257" title="All 2 branches missed.">                if (userQuery.contains(societyName))</span>
+<span class="nc" id="L258">                    results.add(new SocietyInfo(societyName, line.split(&quot;,&quot;)[2]));</span>
+<span class="nc" id="L259">            }</span>
+
+<span class="nc" id="L261">            return super.replyResults(results);</span>
+<span class="nc bnc" id="L262" title="All 8 branches missed.">        }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

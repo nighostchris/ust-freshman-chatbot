@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TimeManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.function.timetable</a> &gt; <span class="el_source">TimeManager.java</span></div><h1>TimeManager.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.function.timetable;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+@Deprecated
+/**
+  @deprecated
+  user data would be saved in their own local disk (Phones)
+  If use SQL database, it would be hard to identify which is which
+  since username may &lt;b&gt;NOT&lt;/b&gt; be unique
+  Even if giving them a unique ID, it would be still hard to identify
+  &lt;i&gt;(might be changed if there exists a better solution)&lt;/i&gt;
+  */
+class TimeManager extends TimeTable
+{
+	private ArrayList&lt;People&gt; peopleList;
+	
+<span class="nc" id="L19">	TimeManager() { peopleList = new ArrayList&lt;People&gt;(); }</span>
+	
+	boolean addNewPeople(String name) {
+<span class="nc" id="L22">		People target = searchPeople(name);</span>
+<span class="nc bnc" id="L23" title="All 2 branches missed.">		if (target == null)</span>
+		{
+<span class="nc" id="L25">			peopleList.add(new People(name));</span>
+<span class="nc" id="L26">			return true;</span>
+		}
+<span class="nc" id="L28">		return false;</span>
+	}
+	
+	boolean removePeople(String name) {
+<span class="nc" id="L32">		People target = searchPeople(name);</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">		if (target != null)</span>
+		{
+<span class="nc" id="L35">			peopleList.remove(target);</span>
+<span class="nc" id="L36">			return true;</span>
+		}
+<span class="nc" id="L38">		return false;</span>
+	}
+	
+	People searchPeople(String name) {
+<span class="nc bnc" id="L42" title="All 2 branches missed.">		for (People add : peopleList)</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">			if (add.getUsername().equals(name))</span>
+<span class="nc" id="L44">				return add;</span>
+<span class="nc" id="L45">		return null;</span>
+	}
+	
+<span class="nc" id="L48">	ArrayList&lt;People&gt; getPeopleList() { return peopleList; }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

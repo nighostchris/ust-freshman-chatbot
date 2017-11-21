@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Social.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.social</a> &gt; <span class="el_source">Social.java</span></div><h1>Social.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.social;
+
+import com.cse3111project.bot.spring.category.Category;
+
+import java.util.ArrayList;
+import com.cse3111project.bot.spring.utility.Utilities;
+
+import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
+
+/**
+ * The Social abstract class acts as the main controller for coordinating all the user-query
+ * on societies and failities' details.
+ * @version 1.0
+ */
+<span class="fc" id="L15">public abstract class Social extends Category </span>
+{
+<span class="fc" id="L17">    public static final String QUERY_KEYWORD[] = Utilities.concatArrays(Societies.QUERY_KEYWORD,</span>
+                                                                        Recreation.QUERY_KEYWORD);
+
+    /**
+     * This method will take in useful keywords from user-query and analyze about
+     * what sub-category the user is querying on Social category.
+     * @param extractedResults This is the only parameter of the function, which is a 
+     * 						   list of processed keyword from the user-query.
+     * @return Category This returns the sub-category of which the user-query belongs to
+     * @throws AmbiguousQueryException Throws exception upon unclear user-query.
+     */
+    public static Category analyze(final ArrayList&lt;String&gt; extractedResults) throws AmbiguousQueryException 
+    {
+        // will be expanded later
+<span class="fc" id="L31">        ArrayList&lt;String&gt; societiesKeywords = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L32">        ArrayList&lt;String&gt; recreationKeywords = new ArrayList&lt;&gt;();</span>
+
+        // categorize results
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        for (String result : extractedResults){</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">            for (String societiesKeyword : Societies.SOCIETY_KEYWORD)</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">                if (result.equals(societiesKeyword))</span>
+<span class="fc" id="L38">                    societiesKeywords.add(societiesKeyword);</span>
+
+<span class="fc bfc" id="L40" title="All 2 branches covered.">            for (String recreationKeyword : Recreation.AMENITIES_CATEGORY)</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">                if (result.equals(recreationKeyword))</span>
+<span class="fc" id="L42">                    recreationKeywords.add(recreationKeyword);</span>
+
+<span class="fc bfc" id="L44" title="All 2 branches covered.">            for (String recreationKeyword : Recreation.LIBRARY_KEYWORD)</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">                if (result.equals(recreationKeyword))</span>
+<span class="fc" id="L46">                    recreationKeywords.add(recreationKeyword);</span>
+<span class="fc" id="L47">        }</span>
+
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (societiesKeywords.size() &gt; recreationKeywords.size())</span>
+<span class="fc" id="L50">            return new Societies(societiesKeywords);</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        else if (recreationKeywords.size() &gt; societiesKeywords.size())</span>
+<span class="fc" id="L52">            return new Recreation(recreationKeywords);</span>
+<span class="pc bpc" id="L53" title="2 of 4 branches missed.">        else if (societiesKeywords.isEmpty() &amp;&amp; recreationKeywords.isEmpty()){</span>
+            // only mentioned UST society, HKUST societies, ... those broad keyword without 
+            // mentioning specific society(ies), e.g. Film Society
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">            for (String societiesBroadKeyword : Societies.QUERY_KEYWORD)</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">                if (extractedResults.contains(societiesBroadKeyword))</span>
+<span class="fc" id="L58">                    throw new AmbiguousQueryException(&quot;There are a variety of UST societies, &quot; + </span>
+                                                      &quot;you may check the following link:\n&quot; + 
+                                                      Societies.SOCIETIES_LINK);
+
+            // only mentioned UST amenities, booking, ... those broad keyword without
+            // mentioning specific amenity(ies), e.g. Reflection Room
+<span class="nc bnc" id="L64" title="All 2 branches missed.">            for (String recreationBroadKeyword : Recreation.QUERY_KEYWORD)</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">                if (extractedResults.contains(recreationBroadKeyword))</span>
+<span class="nc" id="L66">                    throw new AmbiguousQueryException(&quot;There are a variety of UST amenities, &quot; +</span>
+                                                      &quot;you may check the following links:\n&quot; +
+                                                      &quot;SAO amenities booking reference: &quot; + 
+                                                      Recreation.AMENITIES_BOOKING_REF + '\n' + 
+                                                      &quot;Facilities Booking System: &quot; + 
+                                                      Recreation.FBS_LINK + '\n' +
+                                                      &quot;Library Room Booking System: &quot; + 
+                                                      Recreation.LRBS_LINK);
+
+        }
+        // mentioned societiesKeyword, recreationKeyword within ONE sentence
+<span class="nc" id="L77">        throw new AmbiguousQueryException(&quot;I am not sure what you are asking for, &quot; + </span>
+                                          &quot;could you be more clearer?&quot;);
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

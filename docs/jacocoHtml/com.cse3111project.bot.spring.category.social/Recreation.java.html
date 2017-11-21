@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Recreation.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.social</a> &gt; <span class="el_source">Recreation.java</span></div><h1>Recreation.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.social;
+
+import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
+import com.cse3111project.bot.spring.model.engine.SQLDatabaseEngine;
+import com.cse3111project.bot.spring.model.engine.marker.StaticAccessible;
+import com.cse3111project.bot.spring.model.engine.StaticDatabaseEngine;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import java.net.URISyntaxException;
+
+import java.util.Scanner;
+import java.util.ArrayList;
+import com.cse3111project.bot.spring.utility.Utilities;
+
+import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
+import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
+import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
+
+/**
+ * The Recreation class inherits from Social category and handles all the user query about
+ * facilities booking in UST campus.
+ * @version 1.0
+ */
+public class Recreation extends Social implements SQLAccessible, StaticAccessible 
+{
+    public static final String QUERY_KEYWORD[];
+
+    public static final String AMENITIES_KEYWORD[];
+<span class="fc" id="L32">    public static final String LIBRARY_KEYWORD[] = { &quot;library study room&quot;, &quot;study room&quot; };</span>
+<span class="fc" id="L33">    public static final String AMENITIES_CATEGORY[] = { &quot;Student Amenities Room&quot;, &quot;Creativity Room&quot;, </span>
+                                                         &quot;Reflection Room&quot;, &quot;Mobile Stage&quot;, 
+                                                         &quot;Temporary Power Supply&quot;, &quot;Power Supply&quot;,
+                                                         &quot;BBQ Facilities&quot;, &quot;BBQ Stoves&quot;, &quot;BBQ Site&quot;, &quot;BBQ&quot;,
+                                                         &quot;Barbecue Facilities&quot;, &quot;Barbecue Stoves&quot;, 
+                                                         &quot;Barbecue Site&quot;, &quot;Barbecue&quot;,
+                                                         &quot;Darkroom&quot;, &quot;Dark Room&quot;,
+                                                         &quot;Music Room&quot;, &quot;Piano Room&quot;, 
+                                                         &quot;Band Room&quot;, &quot;Drum Room&quot;,
+                                                         &quot;Yangqin and Guzheng&quot;,
+                                                         &quot;Equipment&quot;,  //
+                                                         &quot;Promotion Counter&quot;, &quot;LG5 Promotion Counter&quot;,
+                                                         &quot;Tsang Shiu Tim Art Hall&quot;,
+                                                         &quot;Common Room&quot;, 
+                                                         &quot;UG Hall 2 Common Room&quot;, &quot;Hall 2 Common Room&quot;, 
+                                                         &quot;UG Hall II Common Room&quot;, &quot;Hall II Common Room&quot;,
+                                                         &quot;Vertex Common Room&quot;,
+                                                         &quot;UG Hall 6 Common Room&quot;, &quot;Hall 6 Common Room&quot;,
+                                                         &quot;UG Hall VI Common Room&quot;, &quot;Hall VI Common Room&quot;,
+                                                         &quot;LG4 Common Room&quot;, &quot;LG5 Common Room&quot;,
+                                                         &quot;Activity Room&quot;, &quot;Conference Room&quot;,
+                                                         &quot;Multi-function Room&quot;, &quot;Workshop&quot;,
+                                                         &quot;Commual Area&quot;, 
+                                                         &quot;Lecture Theatre&quot;, &quot;Lecture Theater&quot;, 
+                                                         &quot;Lecture Room&quot;, &quot;Classroom&quot;
+                                                      };
+
+    // providing general information of amenities booking
+    public static final String AMENITIES_BOOKING_REF = &quot;https://sao.ust.hk/facilities/amenities.html&quot;;
+
+    // facilities booking system link
+    public static final String FBS_LINK = &quot;https://w6.ab.ust.hk/fbs&quot;;
+
+    // library room booking system link
+    public static final String LRBS_LINK = &quot;http://lbbooking.ust.hk&quot;;
+
+    static 
+    {
+<span class="fc" id="L71">        AMENITIES_KEYWORD = Utilities.concatArrays(new String[] { &quot;amenity&quot;, &quot;amenities&quot;, &quot;SAO amenities&quot;, </span>
+                                                                  &quot;UST amenities&quot;, &quot;HKUST amenities&quot;, 
+                                                                  // matching &quot;recreations&quot;
+                                                                  &quot;recreation&quot;, 
+                                                                  &quot;UST recreation&quot;, &quot;HKUST recreation&quot;,
+                                                                  &quot;facility&quot;, &quot;facilities&quot;,
+                                                                  &quot;UST facilities&quot;, &quot;HKUST facilities&quot;,
+                                                                  &quot;equipment&quot;, &quot;UST equipment&quot;,
+                                                                  &quot;HKUST equipment&quot; },
+                                                 AMENITIES_CATEGORY);
+<span class="fc" id="L81">        QUERY_KEYWORD = Utilities.concatArrays(new String[] { &quot;booking&quot;, &quot;book&quot;, &quot;loan&quot; },</span>
+                                               LIBRARY_KEYWORD, AMENITIES_KEYWORD);
+<span class="fc" id="L83">    }</span>
+
+    // format:
+    // name application_link instruction_link
+    private static final String SQL_TABLE = &quot;amenities&quot;;
+    private static final String STATIC_TABLE = &quot;/static/social/amenitiesDatabase.txt&quot;;
+
+    // user may have searched multiple recreations
+    private ArrayList&lt;String&gt; userQuery;
+    private ArrayList&lt;RecreationInfo&gt; results;
+
+    /**
+     * This is the constructor of Recreation class, which will store the processed user-query as instance variable.
+     * @param userQuery This is the only parameter taken by constructor, which is a list of keywords extracted from user-query.
+     */
+    Recreation(final ArrayList&lt;String&gt; userQuery)
+<span class="fc" id="L99">    {</span>
+<span class="fc" id="L100">        this.userQuery = this.transform(userQuery);</span>
+<span class="fc" id="L101">    }</span>
+
+    /**
+     * This method helps to transform the alias of amenities from user query, for example 
+     * Vertex Common Room, UG Hall 2 Common Room and UG Hall II Common Room are processed to be
+     * representing the same Room.
+     * @param userQuery Only parameter taken by this method, which is a list of keywords extracted from user-query.
+     * @return ArrayList&lt;String&gt; this method will return the processed keywords as a list.
+     */
+    private ArrayList&lt;String&gt; transform(final ArrayList&lt;String&gt; userQuery){
+<span class="fc" id="L111">        ArrayList&lt;String&gt; transformedUserQuery = new ArrayList&lt;&gt;();</span>
+
+<span class="fc bfc" id="L113" title="All 2 branches covered.">        for (String query : userQuery){</span>
+<span class="pc bpc" id="L114" title="2 of 4 branches missed.">            if (query.equals(&quot;Vertex Common Room&quot;) || query.contains(&quot;Hall II Common Room&quot;))</span>
+<span class="nc" id="L115">                transformedUserQuery.add(&quot;UG Hall 2 Common Room&quot;);</span>
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">            else if (query.contains(&quot;Hall VI Common Room&quot;))</span>
+<span class="nc" id="L117">                transformedUserQuery.add(&quot;UG Hall 6 Common Room&quot;);</span>
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">            else if (query.contains(&quot;Barbecue&quot;))</span>
+<span class="nc" id="L119">                transformedUserQuery.add(&quot;BBQ&quot;);</span>
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">            else if (query.equals(&quot;Drum Room&quot;))</span>
+<span class="nc" id="L121">                transformedUserQuery.add(&quot;Band Room&quot;);</span>
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">            else if (query.equals(&quot;Lecture Theater&quot;))</span>
+<span class="nc" id="L123">                transformedUserQuery.add(&quot;Lecture Theatre&quot;);</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">            else if (query.equals(&quot;Lecture Room&quot;))</span>
+<span class="fc" id="L125">                transformedUserQuery.add(&quot;Classroom&quot;);</span>
+            else
+<span class="fc" id="L127">                transformedUserQuery.add(query);</span>
+<span class="fc" id="L128">        }</span>
+
+<span class="fc" id="L130">        return transformedUserQuery;</span>
+    }
+
+    /** 
+     * RecreationInfo is the inner class of Recreation class, which is used to wrap the details of every facilities
+     * available in campus, such as their website and relevant booking information.
+     * @version 1.0
+     */
+    class RecreationInfo {
+        private String name;
+        private String application_link;  // link of application form
+        private String instruction_link;  // link of instructions for booking
+
+        /**
+         * Constructor of RecreationInfo class.
+         * @param name Name of facility.
+         * @param application_link Website URL for facility application form.
+         * @param instruction_link Website URL for instructions of booking facility.
+         */
+        private RecreationInfo(String name, String application_link, String instruction_link)
+<span class="fc" id="L150">        {</span>
+<span class="fc" id="L151">            this.name = name;</span>
+<span class="fc" id="L152">            this.application_link = application_link; this.instruction_link = instruction_link;</span>
+<span class="fc" id="L153">        }</span>
+
+        // NOTE that EITHER application_link OR instruction_link MAY be null per recreation, i.e.
+        // name | application_link | instruction_link
+        //  ... |        ...       |       ...         -- all non-null
+        //  ... |       null       |       ...         -- only application_link null
+        //  ... |        ...       |       null        -- only instruction_link null
+        // since some of recreations only need to walk-in =&gt; no need application form
+        // while instructions are not provided by SAO website for some recreations 
+        // (maybe already mentioned in application form)
+        
+        /**
+         * This method display all instance variable of a RecreationInfo object a single string. 
+         */
+        @Override
+        public String toString(){
+<span class="fc" id="L169">            String recreationInfoBuilder = &quot;for &quot; + name + &quot;,\n&quot;;</span>
+<span class="fc bfc" id="L170" title="All 4 branches covered.">            if (application_link != null &amp;&amp; instruction_link != null)</span>
+<span class="fc" id="L171">                recreationInfoBuilder += &quot;You could find application form at &quot; + application_link + &quot; while &quot; +</span>
+                                         &quot;its booking instruction could be found at &quot; + instruction_link + '\n';
+<span class="pc bpc" id="L173" title="1 of 4 branches missed.">            else if (application_link == null &amp;&amp; instruction_link != null)</span>
+<span class="fc" id="L174">                recreationInfoBuilder += &quot;There is no application form but &quot; +</span>
+                                         &quot;its booking instruction could be found at &quot; + instruction_link + '\n';
+<span class="pc bpc" id="L176" title="2 of 4 branches missed.">            else if (application_link != null &amp;&amp; instruction_link == null)</span>
+<span class="fc" id="L177">                recreationInfoBuilder += &quot;You could find application form at &quot; + application_link + &quot; and &quot; +</span>
+                                         &quot;its booking instruction should be mentioned in it\n&quot;;
+
+<span class="fc" id="L180">            return recreationInfoBuilder;</span>
+        }
+    }
+
+    /**
+     * This method will connect to the SQL database and retrieve data on booking information and instructions.
+     * @return String
+     * @throws NotSQLAccessibleError Throws error when the class is not SQLAccessible.
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
+    @Override
+    public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
+<span class="pc" id="L193">        try (SQLDatabaseEngine database = new SQLDatabaseEngine(this.getClass(), SQL_TABLE)) {</span>
+<span class="fc" id="L194">            results = new ArrayList&lt;&gt;();</span>
+
+            // userQuery MUST NOT BE EMPTY
+<span class="fc" id="L197">            StringBuilder SQLStatement = new StringBuilder(&quot;SELECT * FROM &quot;).append(SQL_TABLE)</span>
+<span class="fc" id="L198">                                             .append(&quot; WHERE name ILIKE concat(\'%\', ?, \'%\')&quot;);</span>
+<span class="fc bfc" id="L199" title="All 2 branches covered.">            for (int i = 1; i &lt; userQuery.size(); i++)</span>
+<span class="fc" id="L200">                SQLStatement.append(&quot; OR name ILIKE concat(\'%\', ?, \'%\')&quot;);</span>
+
+<span class="fc" id="L202">            PreparedStatement SQLQuery = database.prepare(SQLStatement.toString());</span>
+<span class="fc bfc" id="L203" title="All 2 branches covered.">            for (int i = 0; i &lt; userQuery.size(); i++)</span>
+<span class="fc" id="L204">                SQLQuery.setString(i + 1, userQuery.get(i));</span>
+
+<span class="fc" id="L206">            ResultSet reader = database.executeQuery();</span>
+
+            // format:
+            // name application_link instruction_link
+<span class="fc bfc" id="L210" title="All 2 branches covered.">            while (reader.next())</span>
+<span class="fc" id="L211">                results.add(new RecreationInfo(reader.getString(1), reader.getString(2), reader.getString(3)));</span>
+
+<span class="fc" id="L213">            return super.replyResults(results);</span>
+<span class="pc bpc" id="L214" title="6 of 8 branches missed.">        }</span>
+    }
+
+    /**
+     * This method will connect to the static database and retrieve data on booking information and instructions.
+     * It is used when the SQL database has run into some trouble of connection.
+     * @return String
+     * @throws NotStaticAccessibleError Throws error upon non-exist static database.
+     * @throws StaticDatabaseFileNotFoundException Throws error when static database can't be found / connected.
+     */
+    @Override
+    public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
+<span class="nc" id="L226">        try (StaticDatabaseEngine database = new StaticDatabaseEngine(this.getClass(), STATIC_TABLE)) {</span>
+<span class="nc" id="L227">            results = new ArrayList&lt;&gt;();</span>
+
+<span class="nc" id="L229">            Scanner reader = database.executeQuery();</span>
+
+<span class="nc bnc" id="L231" title="All 2 branches missed.">            while (reader.hasNextLine()){</span>
+<span class="nc" id="L232">                String line = reader.nextLine();</span>
+                // line starting with # is considered as comment
+<span class="nc bnc" id="L234" title="All 4 branches missed.">                if (line.startsWith(&quot;#&quot;) || line.length() == 0)</span>
+<span class="nc" id="L235">                    continue;</span>
+
+<span class="nc" id="L237">                String recreationInfo[] = line.split(&quot;,&quot;, 3);  // split at most 2 commas (3 parts)</span>
+                                                               // and insert empty string if encountered
+<span class="nc bnc" id="L239" title="All 2 branches missed.">                for (String query : userQuery){</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">                    if (recreationInfo[0].toLowerCase().contains(query.toLowerCase())){</span>
+<span class="nc bnc" id="L241" title="All 2 branches missed.">                        for (int i = 0; i &lt; recreationInfo.length; i++)</span>
+<span class="nc bnc" id="L242" title="All 2 branches missed.">                            if (recreationInfo[i].length() == 0)</span>
+<span class="nc" id="L243">                                recreationInfo[i] = null;  // reassign to null for empty string</span>
+                            
+<span class="nc" id="L245">                            results.add(new RecreationInfo(recreationInfo[0], recreationInfo[1], </span>
+                                                           recreationInfo[2]));
+                    }
+<span class="nc" id="L248">                }</span>
+<span class="nc" id="L249">            }</span>
+
+<span class="nc" id="L251">            return super.replyResults(results);</span>
+<span class="nc bnc" id="L252" title="All 8 branches missed.">        }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

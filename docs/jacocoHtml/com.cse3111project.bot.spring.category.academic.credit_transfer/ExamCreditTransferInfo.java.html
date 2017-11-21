@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExamCreditTransferInfo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.academic.credit_transfer</a> &gt; <span class="el_source">ExamCreditTransferInfo.java</span></div><h1>ExamCreditTransferInfo.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.academic.credit_transfer;
+
+/**
+ * The ExamCreditTransferInfo class inherits the CreditTransferInfo class and wrap the details
+ * of the exam that could be used as credit transfer for user. 
+ * @version 1.0
+ */
+class ExamCreditTransferInfo extends CreditTransferInfo 
+{
+    private String exam;
+
+    /**
+     * Constructor of ExamCreditTransferInfo.
+     * @param exam Name of examination
+     * @param subject Subject of the examination
+     * @param transferCourseCode Course code of the transferred course
+     * @param restriction Restriction for the transfer to work
+     */
+    ExamCreditTransferInfo(String exam, String subject, String transferCourseCode, String restriction) {
+<span class="fc" id="L20">        super(subject, transferCourseCode, restriction);</span>
+<span class="fc" id="L21">        this.exam = exam;</span>
+<span class="fc" id="L22">    }</span>
+
+    @Override
+    public String toString(){
+<span class="fc" id="L26">        return &quot;For &quot; + exam + &quot;,\n&quot; + super.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

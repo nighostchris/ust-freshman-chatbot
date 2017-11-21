@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Academic.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.academic</a> &gt; <span class="el_source">Academic.java</span></div><h1>Academic.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.academic;
+
+import com.cse3111project.bot.spring.category.Category;
+import com.cse3111project.bot.spring.category.academic.credit_transfer.CreditTransfer;
+import com.cse3111project.bot.spring.category.academic.credit_transfer.ExamCreditTransfer;
+import com.cse3111project.bot.spring.category.academic.credit_transfer.NonLocalInstitutionCreditTransfer;
+import com.cse3111project.bot.spring.category.academic.credit_transfer.LocalInstitutionCreditTransfer;
+
+import java.util.ArrayList;
+import com.cse3111project.bot.spring.utility.Utilities;
+
+import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
+
+import com.cse3111project.bot.spring.exception.StaffNotFoundException;
+import com.cse3111project.bot.spring.exception.CourseNotFoundException;
+import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
+import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
+
+/**
+ * The Academic abstract class acts as the main controller for coordinating all the user-query on 
+ * directory enquiry.
+ * @version 1.0
+ */
+<span class="fc" id="L24">public abstract class Academic extends Category </span>
+{
+    public static final String QUERY_KEYWORD[]; 
+    static {
+<span class="fc" id="L28">        QUERY_KEYWORD = Utilities.concatArrays(Staff.STAFF_NAME_KEYWORD,</span>
+                                               Staff.STAFF_POSITION_KEYWORD,
+                                               CourseWebsiteSearch.WEBSITE_SEARCH_KEYWORD,
+                                               CreditTransfer.QUERY_KEYWORD,
+                                               ExamCreditTransfer.EXAM_KEYWORD,
+                                               NonLocalInstitutionCreditTransfer.INSTITUTION_KEYWORD,
+                                               LocalInstitutionCreditTransfer.INSTITUTION_KEYWORD,
+                                               ExamCreditTransfer.SUBJECT_KEYWORD,
+                                               LocalInstitutionCreditTransfer.SUBJECT_KEYWORD);
+        // NonLocalInstitutionCreditTransfer.SUBJECT_KEYWORD would be checked in static method
+        // instead of QUERY_KEYWORD since the array is too large
+<span class="fc" id="L39">    }</span>
+
+    /**
+     * This method will take in useful keywords from user-query and analyze about
+     * what sub-category the user is querying on Academic category.
+     * @param extractedResults This is the only parameter of the function, which is a 
+     * 						   list of processed keyword from the user-query.
+     * @return Category This returns the sub-category of which the user-query belongs to
+     * @throws StaffNotFoundException Throws when the specific staff is invalid.
+     */
+    public static Category analyze(final ArrayList&lt;String&gt; extractedResults) throws StaffNotFoundException, CourseNotFoundException, AmbiguousQueryException, StaticDatabaseFileNotFoundException, NotStaticAccessibleError {
+        // extract staff names, course codes, or course website keywords from extractedResults
+<span class="fc" id="L51">        ArrayList&lt;String&gt; queryStaffNameKeywords = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L52">        ArrayList&lt;String&gt; queryCourseCodeKeywords = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L53">        ArrayList&lt;String&gt; queryCourseWebsiteSearchKeywords = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L54">        ArrayList&lt;String&gt; queryExamCreditTransferKeywords = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L55">        ArrayList&lt;String&gt; queryNonLocalInstitutionCreditTransferKeywords = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L56">        ArrayList&lt;String&gt; queryLocalInstitutionCreditTransferKeywords = new ArrayList&lt;&gt;();</span>
+    
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        for (String result : extractedResults) </span>
+        {
+<span class="fc bfc" id="L60" title="All 2 branches covered.">            if (Utilities.contains(Staff.STAFF_NAME_KEYWORD, result))</span>
+<span class="fc" id="L61">                queryStaffNameKeywords.add(result);</span>
+
+<span class="fc bfc" id="L63" title="All 2 branches covered.">            if (Utilities.contains(Course.COURSE_CODE_KEYWORD, result))</span>
+<span class="fc" id="L64">                queryCourseCodeKeywords.add(result);</span>
+            
+<span class="fc bfc" id="L66" title="All 2 branches covered.">            if (Utilities.contains(CourseWebsiteSearch.WEBSITE_SEARCH_KEYWORD, result))</span>
+<span class="fc" id="L67">                queryCourseWebsiteSearchKeywords.add(result);</span>
+
+<span class="fc bfc" id="L69" title="All 2 branches covered.">            if (Utilities.contains(ExamCreditTransfer.SUBJECT_KEYWORD, result))</span>
+<span class="fc" id="L70">                queryExamCreditTransferKeywords.add(result);</span>
+            
+<span class="fc bfc" id="L72" title="All 2 branches covered.">            if (Utilities.contains(LocalInstitutionCreditTransfer.SUBJECT_KEYWORD, result))</span>
+<span class="fc" id="L73">                queryLocalInstitutionCreditTransferKeywords.add(result);</span>
+            
+<span class="fc" id="L75">            NonLocalInstitutionCreditTransfer.detectSubject(result, queryNonLocalInstitutionCreditTransferKeywords);</span>
+<span class="fc" id="L76">        }</span>
+
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        if (queryStaffNameKeywords.isEmpty() &amp;&amp;</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">            queryExamCreditTransferKeywords.isEmpty() &amp;&amp;</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">            queryLocalInstitutionCreditTransferKeywords.isEmpty() &amp;&amp;</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">            queryNonLocalInstitutionCreditTransferKeywords.isEmpty()) {</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">            for (String result : extractedResults){</span>
+                // querying staff but only given staff position
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">                if (Utilities.contains(Staff.STAFF_POSITION_KEYWORD, result))</span>
+<span class="nc" id="L85">                    throw new StaffNotFoundException(&quot;Which staff are you referring to?&quot;);</span>
+                // only given exam name without subject / course code
+<span class="fc bfc" id="L87" title="All 2 branches covered.">                if (Utilities.contains(ExamCreditTransfer.EXAM_KEYWORD, result))</span>
+<span class="fc" id="L88">                    throw new AmbiguousQueryException(&quot;What subjects have you taken?&quot;);</span>
+                // only given local / non-local institution name without subject / course code
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">                if (Utilities.contains(LocalInstitutionCreditTransfer.INSTITUTION_KEYWORD, result) ||</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">                    Utilities.contains(NonLocalInstitutionCreditTransfer.INSTITUTION_KEYWORD, result))</span>
+<span class="fc" id="L92">                    throw new AmbiguousQueryException(&quot;Which course would you like to transfer? (Please provide course code)&quot;);</span>
+<span class="fc" id="L93">            }</span>
+        }
+
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">        if (Utilities.allEquals(queryStaffNameKeywords.size(), </span>
+<span class="fc" id="L97">                                queryExamCreditTransferKeywords.size(),</span>
+<span class="fc" id="L98">                                queryLocalInstitutionCreditTransferKeywords.size(), </span>
+<span class="fc" id="L99">                                queryNonLocalInstitutionCreditTransferKeywords.size(),</span>
+<span class="fc" id="L100">                                queryCourseWebsiteSearchKeywords.size(),</span>
+<span class="fc" id="L101">                                queryCourseCodeKeywords.size()))</span>
+<span class="nc" id="L102">            throw new AmbiguousQueryException(&quot;I am not quite sure what you are asking for, could you be more clearer?&quot;);</span>
+
+<span class="fc" id="L104">        int maximum = Utilities.max(queryStaffNameKeywords.size(),</span>
+<span class="fc" id="L105">                                    queryCourseWebsiteSearchKeywords.size(),</span>
+<span class="fc" id="L106">                                    queryCourseCodeKeywords.size(),</span>
+<span class="fc" id="L107">                                    queryExamCreditTransferKeywords.size(),</span>
+<span class="fc" id="L108">                                    queryNonLocalInstitutionCreditTransferKeywords.size(), </span>
+<span class="fc" id="L109">                                    queryLocalInstitutionCreditTransferKeywords.size());</span>
+
+<span class="fc bfc" id="L111" title="All 2 branches covered.">        if (maximum == queryStaffNameKeywords.size())</span>
+<span class="fc" id="L112">            return new Staff(queryStaffNameKeywords);</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">        if (maximum == queryCourseCodeKeywords.size() &amp;&amp; </span>
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">            queryCourseCodeKeywords.size() == queryCourseWebsiteSearchKeywords.size())</span>
+<span class="fc" id="L115">            return new Course(queryCourseCodeKeywords);</span>
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">        if (maximum == queryCourseCodeKeywords.size())</span>
+<span class="nc" id="L117">            return new Course(queryCourseCodeKeywords);</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">        if (maximum == queryCourseWebsiteSearchKeywords.size())</span>
+<span class="fc" id="L119">            return new CourseWebsiteSearch(queryCourseWebsiteSearchKeywords);</span>
+
+<span class="fc" id="L121">        return new CreditTransfer(queryExamCreditTransferKeywords,</span>
+                                  queryLocalInstitutionCreditTransferKeywords,
+                                  queryNonLocalInstitutionCreditTransferKeywords);
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

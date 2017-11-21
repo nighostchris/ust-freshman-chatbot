@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NonLocalInstitutionCreditTransfer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.academic.credit_transfer</a> &gt; <span class="el_source">NonLocalInstitutionCreditTransfer.java</span></div><h1>NonLocalInstitutionCreditTransfer.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.academic.credit_transfer;
+
+import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
+import com.cse3111project.bot.spring.model.engine.SQLDatabaseEngine;
+import com.cse3111project.bot.spring.model.engine.marker.StaticAccessible;
+import com.cse3111project.bot.spring.model.engine.StaticDatabaseEngine;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import java.net.URISyntaxException;
+
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import com.cse3111project.bot.spring.utility.Utilities;
+
+import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
+import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
+import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
+
+/**
+ * The NonLocalInstitutionCreditTransfer class acts as the main controller for coordinating all the user-query
+ * on non local institution credit transfer related issues.
+ * @version 1.0
+ */
+public class NonLocalInstitutionCreditTransfer extends CreditTransfer implements SQLAccessible, StaticAccessible {
+<span class="fc" id="L30">    public static final String INSTITUTION_KEYWORD[] = { &quot;Aalto University&quot;,</span>
+                                                         &quot;Aarhus University&quot;,
+                                                         &quot;American University in Bulgaria&quot;,
+                                                         &quot;Arizona State University&quot;,
+                                                         &quot;BI Norwegian Business School&quot;,
+                                                         &quot;Bandung Institute of Technology&quot;,
+                                                         &quot;Beijing Institute of Technology&quot;,
+                                                         &quot;Boston College&quot;,
+                                                         &quot;Boston University&quot;,
+                                                         &quot;Bo嚙踐�i�� University&quot;,
+                                                         &quot;Briercrest College and Seminary&quot;,
+                                                         &quot;Brigham Young University&quot;,
+                                                         &quot;Cardiff University&quot;,
+                                                         &quot;Carnegie Mellon University&quot;,
+                                                         &quot;Chalmers University of Technology&quot;,
+                                                         &quot;City University London, Cass Business School&quot;,
+                                                         &quot;Columbia University In the City of New York&quot;,
+                                                         &quot;Commercial College of Iceland&quot;,
+                                                         &quot;Copenhagen Business School&quot;,
+                                                         &quot;Coquitlam College&quot;,
+                                                         &quot;Cornell University&quot;,
+                                                         &quot;Corvinus University of Budapest&quot;,
+                                                         &quot;Czech Technical University in Prague&quot;,
+                                                         &quot;Dankook University&quot;,
+                                                         &quot;Drexel University&quot;,
+                                                         &quot;Durham University&quot;,
+                                                         &quot;EBS Universit�t f蝢雹 Wirtschaft und Recht&quot;,
+                                                         &quot;ESSEC Business School&quot;,
+                                                         &quot;East China Normal University&quot;,
+                                                         &quot;Ecole Polytechnique Federale de Lausanne&quot;,
+                                                         &quot;Emory University&quot;,
+                                                         &quot;Erasmus University&quot;,
+                                                         &quot;European Business School - Germany&quot;,
+                                                         &quot;European Business School - Paris&quot;,
+                                                         &quot;European Innovation Academy&quot;,
+                                                         &quot;Ewha Womans Univeristy&quot;,
+                                                         &quot;Freie Universit�t Berlin&quot;,
+                                                         &quot;Fudan University&quot;,
+                                                         &quot;Grenoble Institute of Technology&quot;,
+                                                         &quot;HEC Montreal&quot;,
+                                                         &quot;Hamburg University of Applied Sciences&quot;,
+                                                         &quot;Handong Global University&quot;,
+                                                         &quot;Harbin Institute of Technology&quot;,
+                                                         &quot;Harvard College&quot;,
+                                                         &quot;Harvard University&quot;,
+                                                         &quot;Helsinki Metropolia University of Applied Science&quot;,
+                                                         &quot;Humboldt-Universit�t zu Berlin&quot;,
+                                                         &quot;ISCTE Business School&quot;,
+                                                         &quot;Imperial College London&quot;,
+                                                         &quot;Indiana University&quot;,
+                                                         &quot;Institut D'��udes Politiques de Paris&quot;,
+                                                         &quot;Institut Sup��ieur d'嚙踝�ctronique de Paris&quot;,
+                                                         &quot;Instituto De Empresa&quot;,
+                                                         &quot;Iowa State University&quot;,
+                                                         &quot;Jacobs University Bremen&quot;,
+                                                         &quot;KEDGE Business School&quot;,
+                                                         &quot;Katholieke Universiteit Leuven&quot;,
+                                                         &quot;Korea Advanced Institute of Science and Technology&quot;,
+                                                         &quot;Korea University&quot;,
+                                                         &quot;Kozminski University&quot;,
+                                                         &quot;Ko��� University&quot;,
+                                                         &quot;Kyoto University&quot;,
+                                                         &quot;Lancaster University&quot;,
+                                                         &quot;Lehigh University&quot;,
+                                                         &quot;Leiden University&quot;,
+                                                         &quot;Lille Catholic University&quot;,
+                                                         &quot;Lille Catholic University, EDHEC Business School&quot;,
+                                                         &quot;Lille Catholic University, IESEG School of Management&quot;,
+                                                         &quot;Linkopings University&quot;,
+                                                         &quot;Linnaeus University&quot;,
+                                                         &quot;Louisiana State University&quot;,
+                                                         &quot;Lund University&quot;,
+                                                         &quot;Maastricht University&quot;,
+                                                         &quot;Massachusetts Institute of Technology&quot;,
+                                                         &quot;Massey University&quot;,
+                                                         &quot;McGill University&quot;,
+                                                         &quot;Memorial University of Newfoundland&quot;,
+                                                         &quot;Miami University&quot;,
+                                                         &quot;Michigan State University&quot;,
+                                                         &quot;Mills College&quot;,
+                                                         &quot;Missouri University of Science and Technology&quot;,
+                                                         &quot;Monash University&quot;,
+                                                         &quot;Munich University of Applied Sciences&quot;,
+                                                         &quot;NEOMA Business School&quot;,
+                                                         &quot;NEOMA Business School, Institut de Formation Internationale&quot;,
+                                                         &quot;Nagoya University&quot;,
+                                                         &quot;Nanjing University&quot;,
+                                                         &quot;Nankai University&quot;,
+                                                         &quot;Nanyang Polytehcnic&quot;,
+                                                         &quot;Nanyang Technological University&quot;,
+                                                         &quot;National Central University&quot;,
+                                                         &quot;National Cheng Kung University&quot;,
+                                                         &quot;National Chengchi University&quot;,
+                                                         &quot;National Chiao Tung University&quot;,
+                                                         &quot;National Research University Higher School of Economics&quot;,
+                                                         &quot;National Taichung University of Education&quot;,
+                                                         &quot;National Taiwan University&quot;,
+                                                         &quot;National Tsing Hua University&quot;,
+                                                         &quot;National University of Ireland, Galway&quot;,
+                                                         &quot;National University of Singapore&quot;,
+                                                         &quot;New York University&quot;,
+                                                         &quot;Newcastle University&quot;,
+                                                         &quot;Ngee Ann Polytechnic&quot;,
+                                                         &quot;Northeastern University&quot;,
+                                                         &quot;Northumbria University&quot;,
+                                                         &quot;Northwestern University&quot;,
+                                                         &quot;Occidental College&quot;,
+                                                         &quot;Olympic College&quot;,
+                                                         &quot;Osaka University&quot;,
+                                                         &quot;Pasadena City College&quot;,
+                                                         &quot;Peking University&quot;,
+                                                         &quot;Pohang University of Science and Technology&quot;,
+                                                         &quot;Politecnico di Milano&quot;,
+                                                         &quot;Purdue University&quot;,
+                                                         &quot;Queen's University&quot;,
+                                                         &quot;RWTH Aachen University&quot;,
+                                                         &quot;Ramon Llull University&quot;,
+                                                         &quot;Renmin University of China&quot;,
+                                                         &quot;Rensselaer Polytechnic Institute&quot;,
+                                                         &quot;Rice University&quot;,
+                                                         &quot;Ritsumeikan Asia Pacific University&quot;,
+                                                         &quot;Royal Institute of Technology&quot;,
+                                                         &quot;Rutgers, The State University of New Jersey&quot;,
+                                                         &quot;Ryerson University&quot;,
+                                                         &quot;SKEMA Business School&quot;,
+                                                         &quot;Sabanci University&quot;,
+                                                         &quot;Saint Petersburg State University&quot;,
+                                                         &quot;Sciences Po&quot;,
+                                                         &quot;Seoul National University&quot;,
+                                                         &quot;Shandong University&quot;,
+                                                         &quot;Shanghai Jiao Tong University&quot;,
+                                                         &quot;Shanghai University of Finance and Economics&quot;,
+                                                         &quot;Simon Fraser University&quot;,
+                                                         &quot;Singapore Management University&quot;,
+                                                         &quot;Singapore Polytechnic&quot;,
+                                                         &quot;Smith College&quot;,
+                                                         &quot;Sophia University&quot;,
+                                                         &quot;Stanford University&quot;,
+                                                         &quot;State University of New York at Stony Brook&quot;,
+                                                         &quot;Stockholm School of Economics&quot;,
+                                                         &quot;Sun Yat-Sen University&quot;,
+                                                         &quot;Sungkyunkwan University&quot;,
+                                                         &quot;Swiss Federal Institute of Technology Zurich&quot;,
+                                                         &quot;Syracuse University&quot;,
+                                                         &quot;Tallinn University&quot;,
+                                                         &quot;Technical University of Denmark&quot;,
+                                                         &quot;Technische Universiteit Eindhoven&quot;,
+                                                         &quot;Technische Universit�t Darmstadt&quot;,
+                                                         &quot;Technische Universit�t Dortmund&quot;,
+                                                         &quot;Technische Universit�t M蝢雉chen&quot;,
+                                                         &quot;Tecnol蝐�gico de Monterrey&quot;,
+                                                         &quot;Texas A&amp;M University&quot;,
+                                                         &quot;The Australian National University&quot;,
+                                                         &quot;The Catholic University of America&quot;,
+                                                         &quot;The George Washington University&quot;,
+                                                         &quot;The Georgia Institute of Technology&quot;,
+                                                         &quot;The Hebrew University of Jerusalem&quot;,
+                                                         &quot;The Imperial College of Science, Technology and Medicine&quot;,
+                                                         &quot;The London School of Economics and Political Science&quot;,
+                                                         &quot;The Ohio State University&quot;,
+                                                         &quot;The University Center in Svalbard&quot;,
+                                                         &quot;The University of Auckland&quot;,
+                                                         &quot;The University of Birmingham&quot;,
+                                                         &quot;The University of British Columbia&quot;,
+                                                         &quot;The University of Cergy-Pontoise&quot;,
+                                                         &quot;The University of Chicago&quot;,
+                                                         &quot;The University of Innsbruck&quot;,
+                                                         &quot;The University of Manchester&quot;,
+                                                         &quot;The University of Melbourne&quot;,
+                                                         &quot;The University of New South Wales&quot;,
+                                                         &quot;The University of Sheffield&quot;,
+                                                         &quot;The University of Sydney&quot;,
+                                                         &quot;The University of Texas at Austin&quot;,
+                                                         &quot;The University of Tokyo&quot;,
+                                                         &quot;The University of Utah&quot;,
+                                                         &quot;The University of Warwick&quot;,
+                                                         &quot;The University of Western Ontario&quot;,
+                                                         &quot;Tilburg University&quot;,
+                                                         &quot;Tohoku University&quot;,
+                                                         &quot;Tsinghua University&quot;,
+                                                         &quot;Tulane University&quot;,
+                                                         &quot;Ulsan National Institute of Science and Technology&quot;,
+                                                         &quot;Universidade Nova de Lisboa, NOVA School of Business and Economics&quot;,
+                                                         &quot;Universitas Indonesia&quot;,
+                                                         &quot;Universitat Polit�cnica de Val�ncia&quot;,
+                                                         &quot;Universite Joseph Fourier&quot;,
+                                                         &quot;Universiti Brunei Darussalam&quot;,
+                                                         &quot;Universiti Putra Malaysia&quot;,
+                                                         &quot;University College Dublin&quot;,
+                                                         &quot;University College London&quot;,
+                                                         &quot;University Institute of Lisbon&quot;,
+                                                         &quot;University of Aberdeen&quot;,
+                                                         &quot;University of Alberta&quot;,
+                                                         &quot;University of Amsterdam&quot;,
+                                                         &quot;University of Bergen&quot;,
+                                                         &quot;University of Bern&quot;,
+                                                         &quot;University of Bristol&quot;,
+                                                         &quot;University of Calgary&quot;,
+                                                         &quot;University of California, Berkeley&quot;,
+                                                         &quot;University of California, Davis&quot;,
+                                                         &quot;University of California, Irvine&quot;,
+                                                         &quot;University of California, Los Angeles&quot;,
+                                                         &quot;University of California, Merced&quot;,
+                                                         &quot;University of California, San Diego&quot;,
+                                                         &quot;University of California, Santa Barbara&quot;,
+                                                         &quot;University of Cambridge&quot;,
+                                                         &quot;University of Connecticut&quot;,
+                                                         &quot;University of Copenhagen&quot;,
+                                                         &quot;University of Delhi&quot;,
+                                                         &quot;University of East Anglia&quot;,
+                                                         &quot;University of Economics, Prague&quot;,
+                                                         &quot;University of Exeter&quot;,
+                                                         &quot;University of Florida&quot;,
+                                                         &quot;University of Glasgow&quot;,
+                                                         &quot;University of Gothenburg&quot;,
+                                                         &quot;University of Groningen&quot;,
+                                                         &quot;University of Hawaii At Manoa&quot;,
+                                                         &quot;University of Illinois at Urbana - Champaign&quot;,
+                                                         &quot;University of Iowa&quot;,
+                                                         &quot;University of Leeds&quot;,
+                                                         &quot;University of London&quot;,
+                                                         &quot;University of Manitoba&quot;,
+                                                         &quot;University of Mannheim&quot;,
+                                                         &quot;University of Maryland&quot;,
+                                                         &quot;University of Michigan&quot;,
+                                                         &quot;University of Michigan, Stephen M Ross School of Business&quot;,
+                                                         &quot;University of Minnesota&quot;,
+                                                         &quot;University of Navarra&quot;,
+                                                         &quot;University of Oxford&quot;,
+                                                         &quot;University of Pennsylvania&quot;,
+                                                         &quot;University of Rochester&quot;,
+                                                         &quot;University of Southampton&quot;,
+                                                         &quot;University of Southern California&quot;,
+                                                         &quot;University of Southern California, Marshall School of Business&quot;,
+                                                         &quot;University of St. Gallen&quot;,
+                                                         &quot;University of Strathclyde&quot;,
+                                                         &quot;University of Sussex&quot;,
+                                                         &quot;University of Tarumanagara&quot;,
+                                                         &quot;University of Toronto&quot;,
+                                                         &quot;University of Virginia&quot;,
+                                                         &quot;University of Waterloo&quot;,
+                                                         &quot;University of Wisconsin - Madison&quot;,
+                                                         &quot;Universit嚙踝蕭 Commerciale Luigi Bocconi&quot;,
+                                                         &quot;Uppsala University&quot;,
+                                                         &quot;Utrecht University&quot;,
+                                                         &quot;Vanderbilt University&quot;,
+                                                         &quot;Vienna University of Economics and Business&quot;,
+                                                         &quot;WHU - Otto Beisheim School of Management&quot;,
+                                                         &quot;Waseda University&quot;,
+                                                         &quot;Washington University in St. Louis&quot;,
+                                                         &quot;Wilfrid Laurier University&quot;,
+                                                         &quot;Wroclaw University of Technology&quot;,
+                                                         &quot;Wuhan University&quot;,
+                                                         &quot;Xi'an Jiaotong University&quot;,
+                                                         &quot;Yale University&quot;,
+                                                         &quot;Yonsei University&quot;,
+                                                         &quot;York University&quot;,
+                                                         &quot;Zhejiang University&quot;
+                                                       };
+
+    // id country institution course_code transfer_course_code restriction db_reference_no
+    private static final String SQL_TABLE = &quot;non_local_institutions_credits&quot;;
+    private static final String STATIC_TABLE = &quot;/static/academic/credit_transfer/nonLocalInstitutionCredits.txt&quot;;
+
+    private List&lt;String&gt; nonLocalInstitutionQuery;
+    private List&lt;CreditTransferInfo&gt; results;
+
+    NonLocalInstitutionCreditTransfer(final List&lt;String&gt; nonLocalInstitutionQuery) {
+<span class="nc" id="L298">        super();</span>
+<span class="nc" id="L299">        this.nonLocalInstitutionQuery = nonLocalInstitutionQuery;</span>
+<span class="nc" id="L300">    }</span>
+
+    /**
+     * This method is used to detect non-local institution subjects (course code) 
+     * @param userQuery Original sentence of the user-query
+     * @param matchedResults Keywords detected from the user-query
+     * @throws NotStaticAccessibleError
+     * @throws StaticDatabaseFileNotFoundException
+     */
+    public static synchronized void detectSubject(final String userQuery, List&lt;String&gt; matchedResults)
+        throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
+<span class="pc" id="L311">        try (StaticDatabaseEngine database = new StaticDatabaseEngine(NonLocalInstitutionCreditTransfer.class, STATIC_TABLE)) {</span>
+<span class="fc" id="L312">            Scanner reader = database.executeQuery();</span>
+
+<span class="fc bfc" id="L314" title="All 2 branches covered.">            while (reader.hasNextLine()){</span>
+<span class="fc" id="L315">                String line = reader.nextLine();</span>
+<span class="fc bfc" id="L316" title="All 4 branches covered.">                if (line.startsWith(&quot;#&quot;) || line.length() == 0)</span>
+<span class="fc" id="L317">                    continue;</span>
+
+<span class="fc" id="L319">                List&lt;String&gt; row = reconstruct(line);</span>
+
+<span class="fc bfc" id="L321" title="All 2 branches covered.">                if (userQuery.contains(row.get(3)))</span>
+<span class="fc" id="L322">                    matchedResults.add(row.get(3));</span>
+<span class="fc" id="L323">            }</span>
+<span class="pc bpc" id="L324" title="6 of 8 branches missed.">        }</span>
+<span class="fc" id="L325">    }</span>
+
+    /**
+     * This method will connect to the SQL database and retrieve data on details of non local institution credit transfer.
+     * @return String
+     * @throws NotSQLAccessibleError
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
+    @Override
+    public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
+<span class="nc" id="L336">        try (SQLDatabaseEngine database = new SQLDatabaseEngine(this.getClass(), SQL_TABLE, System.getenv(&quot;NON_LOCAL_INSTITUTION_DATABASE_URL&quot;))) {</span>
+<span class="nc" id="L337">            results = Collections.synchronizedList(new ArrayList&lt;&gt;());</span>
+
+<span class="nc" id="L339">            StringBuilder SQLStatement = new StringBuilder(&quot;SELECT country, institution, course_code, transfer_course_code, restriction FROM &quot;)</span>
+<span class="nc" id="L340">                                             .append(SQL_TABLE)</span>
+<span class="nc" id="L341">                                             .append(&quot; WHERE course_code = ?&quot;);</span>
+<span class="nc bnc" id="L342" title="All 2 branches missed.">            for (int i = 1; i &lt; nonLocalInstitutionQuery.size(); i++)</span>
+<span class="nc" id="L343">                SQLStatement.append(&quot; OR course_code = ?&quot;);</span>
+
+<span class="nc" id="L345">            PreparedStatement SQLQuery = database.prepare(SQLStatement.toString());</span>
+<span class="nc bnc" id="L346" title="All 2 branches missed.">            for (int i = 0; i &lt; nonLocalInstitutionQuery.size(); i++)</span>
+<span class="nc" id="L347">                SQLQuery.setString(i + 1, nonLocalInstitutionQuery.get(i));</span>
+
+<span class="nc" id="L349">            ResultSet reader = database.executeQuery();</span>
+<span class="nc bnc" id="L350" title="All 2 branches missed.">            while (reader.next()){</span>
+<span class="nc" id="L351">                results.add(new InstitutionCreditTransferInfo(reader.getString(1), reader.getString(2),</span>
+<span class="nc" id="L352">                                                              reader.getString(3), reader.getString(4),</span>
+<span class="nc" id="L353">                                                              reader.getString(5)));</span>
+            }
+
+<span class="nc" id="L356">            return super.replyResults(results);</span>
+<span class="nc bnc" id="L357" title="All 8 branches missed.">        }</span>
+    }
+
+    /**
+     * This method will connect to the static database and retrieve data on details of credit transfer.
+     * It is used when the SQL database has run into some trouble of connection.
+     * @return String
+     * @throws NotStaticAccessibleError
+     * @throws StaticDatabaseFileNotFoundException
+     */
+    @Override
+    public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
+<span class="nc" id="L369">        try (StaticDatabaseEngine database = new StaticDatabaseEngine(this.getClass(), STATIC_TABLE)) {</span>
+<span class="nc" id="L370">            results = Collections.synchronizedList(new ArrayList&lt;&gt;());</span>
+
+<span class="nc" id="L372">            Scanner reader = database.executeQuery();</span>
+<span class="nc bnc" id="L373" title="All 2 branches missed.">            while (reader.hasNextLine()){</span>
+<span class="nc" id="L374">                String line = reader.nextLine();</span>
+                // starting with # is considered as comment
+<span class="nc bnc" id="L376" title="All 4 branches missed.">                if (line.startsWith(&quot;#&quot;) || line.length() == 0)</span>
+<span class="nc" id="L377">                    continue;</span>
+
+<span class="nc" id="L379">                List&lt;String&gt; row = reconstruct(line);</span>
+<span class="nc bnc" id="L380" title="All 2 branches missed.">                if (nonLocalInstitutionQuery.contains(row.get(3)))</span>
+<span class="nc" id="L381">                    results.add(new InstitutionCreditTransferInfo(row.get(1), row.get(2), row.get(3),</span>
+<span class="nc" id="L382">                                                                  row.get(4), row.get(5)));</span>
+<span class="nc" id="L383">            }</span>
+
+<span class="nc" id="L385">            return super.replyResults(results);</span>
+<span class="nc bnc" id="L386" title="All 8 branches missed.">        }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

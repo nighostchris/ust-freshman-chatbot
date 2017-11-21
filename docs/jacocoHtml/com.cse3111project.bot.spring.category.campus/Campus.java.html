@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Campus.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.campus</a> &gt; <span class="el_source">Campus.java</span></div><h1>Campus.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.campus;
+
+import com.cse3111project.bot.spring.category.Category;
+
+import java.net.MalformedURLException;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import java.util.Arrays;
+import java.util.ArrayList;
+
+import com.cse3111project.bot.spring.exception.RoomNotFoundException;
+
+/**
+ * The Campus abstract class acts as the main controller for coordinating all the
+ * user-query on estimated time for one to go from one place to another place within
+ * UST campus.
+ * @version 1.0
+ */
+<span class="fc" id="L21">public abstract class Campus extends Category </span>
+{
+    // public static final String QUERY_KEYWORD[] = CampusETA.CAMPUS_DIRECTION_KEYWORD;
+<span class="fc" id="L24">    public static final String QUERY_KEYWORD[] = { &quot;from&quot;, &quot;to&quot; };</span>
+
+    /**
+     * This method will take in useful keywords from user-query and analyze about
+     * what are the 2 locations that user is querying for estimated time to walk between.
+     * @param extractedResults This is the only parameter of the function, which is a 
+     * 						   list of processed keyword from the user-query.
+     * @return Category This returns a CampusETA object which contains algorithm for calculating the
+     * 				    estimated time to walk from 1 place to another place in campus.
+     * @throws RoomNotFoundException Throws exception when the room indicated by the user is invalid.
+     * @throws MalformedURLException 
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public static Category analyze(final ArrayList&lt;String&gt; extractedResults) 
+            throws RoomNotFoundException, MalformedURLException, FileNotFoundException, IOException
+    {
+        // extractedResults should merely consist of 
+        // &quot;from ...&quot;, &quot;to ...&quot;
+        // which are extracted in CampusETA.detectLocationName()
+<span class="fc" id="L44">        String startPoint = &quot;&quot;;</span>
+<span class="fc" id="L45">        String endPoint = &quot;&quot;;</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        for (String result : extractedResults)</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">            if (result.contains(CampusETA.CAMPUS_DIRECTION_KEYWORD[0]))  // &quot;from ...&quot;</span>
+<span class="fc" id="L48">                startPoint = result.split(&quot; &quot;, 2)[1];</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        for (String result : extractedResults)</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">            if (result.contains(CampusETA.CAMPUS_DIRECTION_KEYWORD[1]))  // &quot;to ...&quot;</span>
+<span class="fc" id="L51">                endPoint = result.split(&quot; &quot;, 2)[1];</span>
+
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">        if (!CampusETA.locationValid(startPoint, endPoint))</span>
+<span class="nc" id="L54">            throw new RoomNotFoundException(&quot;Room is invalid.&quot;);</span>
+        
+<span class="fc" id="L56">        return new CampusETA(startPoint, endPoint);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

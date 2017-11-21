@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExamCreditTransfer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.academic.credit_transfer</a> &gt; <span class="el_source">ExamCreditTransfer.java</span></div><h1>ExamCreditTransfer.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.academic.credit_transfer;
+
+import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
+import com.cse3111project.bot.spring.model.engine.SQLDatabaseEngine;
+import com.cse3111project.bot.spring.model.engine.marker.StaticAccessible;
+import com.cse3111project.bot.spring.model.engine.StaticDatabaseEngine;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import java.net.URISyntaxException;
+
+import java.util.Scanner;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import com.cse3111project.bot.spring.utility.Utilities;
+
+import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
+import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
+import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
+
+/**
+ * ExamCreditTransfer class acts as the main controller for handling all user-query about exam
+ * credit transfer.
+ * @version 1.0
+ */
+public class ExamCreditTransfer extends CreditTransfer implements SQLAccessible, StaticAccessible {
+<span class="fc" id="L30">    public static final String EXAM_KEYWORD[] = { &quot;Australia, Higher School Certificate Examination (NSW)&quot;,</span>
+                                                  &quot;Bangladesh Higher Secondary Certificate (BDHSC)&quot;,
+                                                  &quot;Canada, High School Diploma (British Columbia)&quot;,
+                                                  &quot;Canada, High School Diploma (Manitoba)&quot;,
+                                                  &quot;College Board Advanced Placement (AP)&quot;,
+                                                  &quot;Ecuador, Titulo de Bachiller de la Republica del Ecuador&quot;,
+                                                  &quot;European Baccalaureate&quot;,
+                                                  &quot;Finnish Matriculation Examination&quot;,
+                                                  &quot;French Baccalaureate&quot;,
+                                                  &quot;General Certificate of Education Advanced Level (GCEAL)&quot;,
+                                                  &quot;German Abitur&quot;,
+                                                  &quot;Hong Kong Advanced Level Examination (HKALE)&quot;,
+                                                  &quot;Iceland Matriculation Examination&quot;,
+                                                  &quot;India, All India Senior School Certificate Examination (AISSCE)&quot;,
+                                                  &quot;India, Indian School Certificate Examination (ISCE)&quot;,
+                                                  &quot;India, Maharashtra State Higher Secondary Certificate Examination (INMHHSCE)&quot;,
+                                                  &quot;India, Telangana State Board of Intermediate Education: Hyderabad&quot;,
+                                                  &quot;Indonesia, Ujian Nasional (IDUN)&quot;,
+                                                  &quot;International Advanced Level (IAL)&quot;,
+                                                  &quot;International Baccalaureate (IB) Diploma&quot;,
+                                                  &quot;International Mathematical Olympiad&quot;,
+                                                  &quot;Jamaica, Caribbean Advanced Proficiency Examination (CAPE)&quot;,
+                                                  &quot;Malaysia, Higher School Certificate (Sijil Tinggi Persekolahan MY)&quot;,
+                                                  &quot;Malaysia, Unified Examination Certificate (Senior)&quot;,
+                                                  &quot;Netherlands, Pre-University Education VWO Examination&quot;,
+                                                  &quot;Norway National Examination&quot;,
+                                                  &quot;Scottish National Qualification (SNQ)&quot;,
+                                                  &quot;Singapore-Cambridge GCE Advanced Level&quot;,
+                                                  &quot;Tajikistan Certificate of General Secondary School Education&quot;,
+                                                  &quot;Tunisia Baccalaureate&quot;,
+                                                  &quot;AISSCE&quot;,
+                                                  &quot;AP&quot;,
+                                                  &quot;BDHSC&quot;,
+                                                  &quot;CAPE&quot;,
+                                                  &quot;GCEAL&quot;,
+                                                  &quot;H2&quot;,
+                                                  &quot;HKALE&quot;,
+                                                  &quot;IAL&quot;,
+                                                  &quot;IB&quot;,
+                                                  &quot;IDUN&quot;,
+                                                  &quot;INMHHSCE&quot;,
+                                                  &quot;ISCE&quot;,
+                                                  &quot;NSW&quot;,
+                                                  &quot;SNQ&quot;
+                                                 };
+
+<span class="fc" id="L76">    public static final String SUBJECT_KEYWORD[] = { &quot;84 SAF1001 Social Studies&quot;,</span>
+                                                     &quot;Accounting + Cash Flow + Tax Statements (BOK 113, 201, 213, 313)&quot;,
+                                                     &quot;Advanced Higher Chemistry&quot;,
+                                                     &quot;Advanced Higher Mathematics&quot;,
+                                                     &quot;Advanced Higher Physics&quot;,
+                                                     &quot;Advanced Mathematics II&quot;,
+                                                     &quot;Anthropology (A-level)&quot;,
+                                                     &quot;Applied Information and Communications Technology (A-level)&quot;,
+                                                     &quot;Biologie-Ecologie (Coef. 5)&quot;,
+                                                     &quot;Biology&quot;,
+                                                     &quot;Biology (A-level)&quot;,
+                                                     &quot;Biology (H2)&quot;,
+                                                     &quot;Biology (Higher level)&quot;,
+                                                     &quot;Biology (Standard level)&quot;,
+                                                     &quot;Biology 3&quot;,
+                                                     &quot;Biology Unit 1 + Unit 2&quot;,
+                                                     &quot;Business Management STJ103&quot;,
+                                                     &quot;Calculus (AB)&quot;,
+                                                     &quot;Calculus (BC)&quot;,
+                                                     &quot;Calculus 12&quot;,
+                                                     &quot;Calculus 12 AP (AB)&quot;,
+                                                     &quot;Calculus 12 AP (BC)&quot;,
+                                                     &quot;Calculus 42S&quot;,
+                                                     &quot;Chemistry&quot;,
+                                                     &quot;Chemistry (A-level)&quot;,
+                                                     &quot;Chemistry (H2)&quot;,
+                                                     &quot;Chemistry (Higher level)&quot;,
+                                                     &quot;Chemistry (Kimia)&quot;,
+                                                     &quot;Chemistry 40S&quot;,
+                                                     &quot;Chemistry A (A-level)&quot;,
+                                                     &quot;Chemistry B (A Level) (Salters)&quot;,
+                                                     &quot;Chemistry Unit 1&quot;,
+                                                     &quot;Chinese History (A-level)&quot;,
+                                                     &quot;Chinese History (AS-level)&quot;,
+                                                     &quot;Computer Science (Higher level)&quot;,
+                                                     &quot;Computer Science (Standard level)&quot;,
+                                                     &quot;Computer Science A&quot;,
+                                                     &quot;Computer Science Unit 1 + Unit 2&quot;,
+                                                     &quot;Computer Studies (A-level)&quot;,
+                                                     &quot;Computing (A-level)&quot;,
+                                                     &quot;Critical Thinking (A-level)&quot;,
+                                                     &quot;Earth and Life Sciences / Sc. vie Terre (Coef. 6)&quot;,
+                                                     &quot;Economics (A-level)&quot;,
+                                                     &quot;Economics (AS-level)&quot;,
+                                                     &quot;Economics (Higher level)&quot;,
+                                                     &quot;Economics (Standard level)&quot;,
+                                                     &quot;Electronics (A Level)&quot;,
+                                                     &quot;Environmental Science&quot;,
+                                                     &quot;Further Mathematics&quot;,
+                                                     &quot;Further Mathematics (A-level)&quot;,
+                                                     &quot;Further Mathematics (Higher level)&quot;,
+                                                     &quot;Government and Politics (A-level)&quot;,
+                                                     &quot;Government and Public Affairs (A-level)&quot;,
+                                                     &quot;Government and Public Affairs (AS-level)&quot;,
+                                                     &quot;History (SAG103, 203, 303)&quot;,
+                                                     &quot;Human Biology (A-level)&quot;,
+                                                     &quot;Humanities (A-level)&quot;,
+                                                     &quot;Information Technology in a Global Society (Higher level)&quot;,
+                                                     &quot;Information Technology in a Global Society (Standard level)&quot;,
+                                                     &quot;Information and Communications Technology (A-level)&quot;,
+                                                     &quot;Macroeconomics&quot;,
+                                                     &quot;Marketing (MAR103, 203)&quot;,
+                                                     &quot;Mathematics&quot;,
+                                                     &quot;Mathematics (A-level)&quot;,
+                                                     &quot;Mathematics (Advanced) Matematiikassa, Pitk瓣 Oppim瓣瓣r瓣&quot;,
+                                                     &quot;Mathematics (H2)&quot;,
+                                                     &quot;Mathematics (Higher level)&quot;,
+                                                     &quot;Mathematics (Mathematics Section / Coeff. 4)&quot;,
+                                                     &quot;Mathematics (Science Stream, Coef. 7 or 9)&quot;,
+                                                     &quot;Mathematics Extension 2&quot;,
+                                                     &quot;Mathematics T (Technology)&quot;,
+                                                     &quot;Mathematics and Statistics&quot;,
+                                                     &quot;Microeconomics&quot;,
+                                                     &quot;Microeconomics (REK103, 203, 323)&quot;,
+                                                     &quot;Natural Science (Biology, Geology, Physics and Chemistry NAT103, 113, 123)&quot;,
+                                                     &quot;Natural science&quot;,
+                                                     &quot;Physics&quot;,
+                                                     &quot;Physics &amp; Chemistry (Coef. 6 or 8)&quot;,
+                                                     &quot;Physics (A-level)&quot;,
+                                                     &quot;Physics (H2)&quot;,
+                                                     &quot;Physics (Higher level)&quot;,
+                                                     &quot;Physics 1 + Physics 2&quot;,
+                                                     &quot;Physics B&quot;,
+                                                     &quot;Physics C (Electricity and Magnetism)&quot;,
+                                                     &quot;Physics C (Mechanics)&quot;,
+                                                     &quot;Physics Unit 1 + Unit 2&quot;,
+                                                     &quot;Psychology&quot;,
+                                                     &quot;Psychology (A-level)&quot;,
+                                                     &quot;Psychology (AS-level)&quot;,
+                                                     &quot;Psychology (Higher level)&quot;,
+                                                     &quot;Psychology (SAL103, 203, 303, 403)&quot;,
+                                                     &quot;Psychology (Standard level)&quot;,
+                                                     &quot;Pure Mathematics&quot;,
+                                                     &quot;Pure Mathematics (A-level)&quot;,
+                                                     &quot;Social and Cultural Anthropology (Higher level)&quot;,
+                                                     &quot;Social and Cultural Anthropology (Standard level)&quot;,
+                                                     &quot;Sociology (A-level)&quot;,
+                                                     &quot;Statistics&quot;,
+                                                     &quot;Wiskunde (Mathematics) B 1, 2&quot;
+                                                   };
+
+    // id examination subject min_grade transfer_course_code db_reference_no
+    private static final String SQL_TABLE = &quot;examinations_credits&quot;;
+    private static final String STATIC_TABLE = &quot;/static/academic/credit_transfer/examinationCredits.txt&quot;;
+
+    private List&lt;String&gt; examQuery;
+    private List&lt;CreditTransferInfo&gt; results;
+
+    /**
+     * This is the constructor of ExamCreditTransfer class.
+     * @param examQuery
+     */
+    ExamCreditTransfer(final List&lt;String&gt; examQuery) 
+    {
+<span class="fc" id="L190">        super();</span>
+<span class="fc" id="L191">        this.examQuery = examQuery;</span>
+<span class="fc" id="L192">    }</span>
+
+    /**
+     * This method will connect to the SQL database and retrieve data on details of exam credit transfer.
+     * @return String Return the data retrieved from SQL database
+     * @throws NotSQLAccessibleError
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
+    @Override
+    public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
+<span class="pc" id="L203">        try (SQLDatabaseEngine database = new SQLDatabaseEngine(this.getClass(), SQL_TABLE)) {</span>
+<span class="fc" id="L204">            results = Collections.synchronizedList(new ArrayList&lt;&gt;());</span>
+
+<span class="fc" id="L206">            StringBuilder SQLStatement = new StringBuilder(&quot;SELECT examination, subject, transfer_course_code, min_grade FROM &quot;)</span>
+<span class="fc" id="L207">                                             .append(SQL_TABLE)</span>
+<span class="fc" id="L208">                                             .append(&quot; WHERE subject = ?&quot;);</span>
+<span class="fc bfc" id="L209" title="All 2 branches covered.">            for (int i = 1; i &lt; examQuery.size(); i++)</span>
+<span class="fc" id="L210">                SQLStatement.append(&quot; OR subject = ?&quot;);</span>
+
+<span class="fc" id="L212">            PreparedStatement SQLQuery = database.prepare(SQLStatement.toString());</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">            for (int i = 0; i &lt; examQuery.size(); i++)</span>
+<span class="fc" id="L214">                SQLQuery.setString(i + 1, examQuery.get(i));</span>
+
+<span class="fc" id="L216">            ResultSet reader = database.executeQuery();</span>
+<span class="fc bfc" id="L217" title="All 2 branches covered.">            while (reader.next()){</span>
+<span class="fc" id="L218">                results.add(new ExamCreditTransferInfo(reader.getString(1), reader.getString(2), </span>
+<span class="fc" id="L219">                                                       reader.getString(3), reader.getString(4)));</span>
+            }
+
+<span class="fc" id="L222">            return super.replyResults(results);</span>
+<span class="pc bpc" id="L223" title="6 of 8 branches missed.">        }</span>
+    }
+
+    /**
+     * This method will connect to the static database and retrieve data on details of exam credit transfer.
+     * It is used when the SQL database has run into some trouble of connection.
+     * @return String Return the data retrieved from database
+     * @throws NotStaticAccessibleError
+     * @throws StaticDatabaseFileNotFoundException
+     */
+    @Override
+    public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
+<span class="nc" id="L235">        try (StaticDatabaseEngine database = new StaticDatabaseEngine(this.getClass(), STATIC_TABLE)) {</span>
+<span class="nc" id="L236">            results = Collections.synchronizedList(new ArrayList&lt;&gt;());</span>
+
+<span class="nc" id="L238">            Scanner reader = database.executeQuery();</span>
+<span class="nc bnc" id="L239" title="All 2 branches missed.">            while (reader.hasNextLine()){</span>
+<span class="nc" id="L240">                String line = reader.nextLine();</span>
+                // starting with # is considered as comment
+<span class="nc bnc" id="L242" title="All 4 branches missed.">                if (line.startsWith(&quot;#&quot;) || line.length() == 0)</span>
+<span class="nc" id="L243">                    continue;</span>
+
+<span class="nc" id="L245">                List&lt;String&gt; row = reconstruct(line);</span>
+<span class="nc bnc" id="L246" title="All 2 branches missed.">                if (examQuery.contains(row.get(2)))</span>
+<span class="nc" id="L247">                    results.add(new ExamCreditTransferInfo(row.get(1), row.get(2), row.get(4), row.get(3)));</span>
+<span class="nc" id="L248">            }</span>
+
+<span class="nc" id="L250">            return super.replyResults(results);</span>
+<span class="nc bnc" id="L251" title="All 8 branches missed.">        }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

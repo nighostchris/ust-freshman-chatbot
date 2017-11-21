@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StaticDatabaseEngine.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.model.engine</a> &gt; <span class="el_source">StaticDatabaseEngine.java</span></div><h1>StaticDatabaseEngine.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.model.engine;
+
+import com.cse3111project.bot.spring.model.engine.marker.StaticAccessible;
+
+import java.io.InputStream;
+import java.io.IOException;
+
+import java.util.Scanner;
+import com.cse3111project.bot.spring.utility.Utilities;
+
+import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
+import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
+
+/**
+ * StaticDatabaseEngine inherits from DatabaseEngine class, which handles the actual communication between client and 
+ * static database, and retrieve the corresponding data.
+ * @version 1.0
+ */
+public class StaticDatabaseEngine extends DatabaseEngine implements AutoCloseable 
+{
+    private InputStream buffer;  // storing static database buffer
+    private Scanner reader;
+
+    /**
+     * Constructor for StaticDatabaseEngine
+     * @param _class forcing this class to implement SQLAccessible marker interface, otherwise throws NotSQLAccessibleError
+     * @param STATIC_TABLE name of static database.
+     * @throws NotStaticAccessibleError thrown if the class attempting to use this engine 
+     *                                  is not implementing StaticAccessible interface
+     */
+    public StaticDatabaseEngine(Class&lt;?&gt; _class, final String STATIC_TABLE) throws NotStaticAccessibleError
+    {
+<span class="fc" id="L33">        super(STATIC_TABLE);</span>
+
+        // force to implement StaticAccessible interface in order to use StaticDatabaseEngine
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">        if (!StaticAccessible.class.isAssignableFrom(_class))</span>
+<span class="nc" id="L37">            throw new NotStaticAccessibleError(_class.getName() + &quot; is not StaticAccessible&quot;);</span>
+<span class="fc" id="L38">    }</span>
+
+    /**
+     * This method will perform query on static database.
+     * @return Scanner
+     * @throws StaticDatabaseFileNotFoundException
+     */
+    @Override
+    public final synchronized Scanner executeQuery() throws StaticDatabaseFileNotFoundException {
+<span class="fc" id="L47">        this.buffer = this.getClass().getResourceAsStream(TABLE);</span>
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">        if (this.buffer == null)</span>
+<span class="nc" id="L49">            throw new StaticDatabaseFileNotFoundException(TABLE + &quot; file not found&quot;);</span>
+
+<span class="fc" id="L51">        this.reader = new Scanner(this.buffer);</span>
+
+<span class="fc" id="L53">        return this.reader;</span>
+    }
+
+    /**
+     * This method will close the internal buffer.
+     */
+    @Override
+    public void close(){
+        try {
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">            if (buffer != null)</span>
+<span class="fc" id="L63">                buffer.close();</span>
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">            if (reader != null)</span>
+<span class="fc" id="L65">                reader.close();</span>
+        }
+        // just suppress the error since indeed the query result can be found
+<span class="nc" id="L68">        catch (IOException e) {</span>
+<span class="nc" id="L69">            Utilities.errorLog(&quot;Unable to close static database&quot;, e);</span>
+<span class="fc" id="L70">        }</span>
+<span class="fc" id="L71">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

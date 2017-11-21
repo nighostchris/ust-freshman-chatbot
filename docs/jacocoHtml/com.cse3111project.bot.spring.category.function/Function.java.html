@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Function.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.function</a> &gt; <span class="el_source">Function.java</span></div><h1>Function.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.function;
+
+import com.cse3111project.bot.spring.category.Category;
+import com.cse3111project.bot.spring.category.function.timetable.TimeTable;
+
+import com.cse3111project.bot.spring.KitchenSinkController;
+
+// import org.springframework.beans.factory.annotation.Autowired;
+
+// import com.linecorp.bot.client.LineMessagingService;
+// import com.linecorp.bot.model.event.MessageEvent;
+// import com.linecorp.bot.model.event.message.TextMessageContent;
+// import com.linecorp.bot.model.message.Message;
+// import com.linecorp.bot.model.message.TextMessage;
+// import com.linecorp.bot.model.ReplyMessage;
+// import com.linecorp.bot.model.response.BotApiResponse;
+// import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
+// import com.linecorp.bot.spring.boot.annotation.EventMapping;
+
+// import java.util.concurrent.ExecutionException;
+
+// import java.io.ObjectInputStream;
+// import java.io.FileInputStream;
+// import java.io.ObjectOutputStream;
+// import java.io.FileOutputStream;
+
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+
+import java.nio.file.FileAlreadyExistsException;
+import java.io.IOException;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import com.cse3111project.bot.spring.utility.Utilities;
+
+import lombok.NonNull;
+
+// @LineMessageHandler
+<span class="fc" id="L43">public abstract class Function extends Category {</span>
+    // @Autowired
+    // private LineMessagingService client;
+
+<span class="fc" id="L47">    public static final String QUERY_KEYWORD[] = TimeTable.FUNCTION_KEYWORD;</span>
+
+<span class="fc" id="L49">    protected Path saveRootDir = FileSystems.getDefault().getPath(&quot;function&quot;);</span>
+
+    // switch the controller to handle this function event
+<span class="fc" id="L52">    private KitchenSinkController controller = new KitchenSinkController(this);</span>
+
+    // private MessageEvent&lt;TextMessageContent&gt; currentEvent = null;
+<span class="fc" id="L55">    private String userMessage = null;</span>
+<span class="fc" id="L56">    private String replyToken = null;</span>
+    // private String prevReplyToken = null;
+
+    public static Category analyze(final ArrayList&lt;String&gt; extractedResults){
+        // ArrayList&lt;String&gt; timetableKeywords = new ArrayList&lt;&gt;();
+
+        // there is only one subcategory in Function
+        // =&gt; no need to categorize temporarily
+        // for (String result : extractedResults){
+        //     for (String timetableKeyword : TimeTable.FUNCTION_KEYWORD)
+        //         if (result.equals(timetableKeyword))
+        //             timetableKeywords.add(result);
+        // }
+
+<span class="fc" id="L70">        return new TimeTable();</span>
+    }
+
+    // user text message would be handled here
+    // @EventMapping
+    // public void handleTextMessageEvent(MessageEvent&lt;TextMessageContent&gt; event){
+    //     currentEvent = event;
+    //     userMessage = event.getMessage().getText();  // obtain user message
+    //     // a reply token would be issued every time when user sends a message (triggering this event)
+    //     prevReplyToken = event.getReplyToken();
+    // }
+
+    // protected boolean userHasReplied(){
+    //     return currentEvent.getReplyToken() != prevReplyToken;
+    // }
+
+    protected boolean userHasReplied(){
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        return replyToken != null;</span>
+    }
+
+    // protected void replyText(@NonNull String reply){
+    //     if (reply.length() &gt; 1000)  // truncate the reply if it is too long
+    //         reply = reply.substring(0, 1000 - 2) + &quot;..&quot;;
+
+    //     ReplyMessage replyMessage = new ReplyMessage(currentEvent.getReplyToken(), 
+    //                                                  Collections.singletonList(new TextMessage(reply)));
+
+    //     try {
+    //         BotApiResponse apiResponse = client.replyMessage(replyMessage).execute().body();
+    //     }
+    //     catch (IOException e) {
+    //         Utilities.errorLog(&quot;I/O error occurred while trying to reply&quot;, e);
+    //     }
+    // }
+
+<span class="nc bnc" id="L105" title="All 2 branches missed.">    protected void replyText(@NonNull String reply){</span>
+<span class="nc" id="L106">        controller.replyText(replyToken, reply);</span>
+        // after reply, reset userMessage and replyToken
+<span class="nc" id="L108">        userMessage = null; replyToken = null;</span>
+<span class="nc" id="L109">    }</span>
+
+    // redirect user message from KitchenSinkController
+<span class="nc" id="L112">    public void retrieveUserMessage(final String userMessage) { this.userMessage = userMessage; }</span>
+
+<span class="nc bnc" id="L114" title="All 2 branches missed.">    public void retrieveReplyToken(final @NonNull String replyToken) { this.replyToken = replyToken; }</span>
+
+<span class="nc" id="L116">    protected String getUserMessage() { return userMessage; }</span>
+
+    // restore the previous state of user settings from a local file
+    protected abstract void read();
+
+    // save current state of user settings / configurations on applications, e.g. timetable
+    protected abstract void save();
+
+    // create save root directory if not exists
+    protected void createSaveDir() throws FileAlreadyExistsException, IOException {
+        try {
+<span class="nc bnc" id="L127" title="All 2 branches missed.">            if (!Files.exists(saveRootDir))</span>
+<span class="nc" id="L128">                Files.createDirectory(saveRootDir);</span>
+        }
+<span class="nc" id="L130">        catch (FileAlreadyExistsException e) {</span>
+<span class="nc" id="L131">            Utilities.errorLog(saveRootDir.toString() + &quot; directory already exists&quot;, e);</span>
+<span class="nc" id="L132">            throw e;</span>
+        }
+<span class="nc" id="L134">        catch (IOException e) {</span>
+<span class="nc" id="L135">            Utilities.errorLog(&quot;I/O error occurred while creating &quot; + saveRootDir.toString(), e);</span>
+<span class="nc" id="L136">            throw e;</span>
+<span class="nc" id="L137">        }</span>
+<span class="nc" id="L138">    }</span>
+
+    // entry point for every function
+    public abstract void run();
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

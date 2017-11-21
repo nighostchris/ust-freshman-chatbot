@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CreditTransferSyncDB.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.script.creditTransferCrawler</a> &gt; <span class="el_source">CreditTransferSyncDB.java</span></div><h1>CreditTransferSyncDB.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.script.creditTransferCrawler;
+
+import com.cse3111project.bot.spring.model.engine.SQLDatabaseEngine;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.net.URISyntaxException;
+
+import java.util.ArrayList;
+
+public class CreditTransferSyncDB {
+	private ArrayList&lt;LocalInstitutionCredit&gt; localInstitutionList;
+	private ArrayList&lt;ExaminationCredit&gt; examinationList;
+	private ArrayList&lt;NonLocalInstitutionCredit&gt; nonLocalInstitutionList;
+	private CreditTransfer credits;
+	private int option;
+	
+<span class="nc" id="L18">	private CreditTransferSyncDB() throws URISyntaxException, SQLException {</span>
+<span class="nc" id="L19">		this.credits = new CreditTransfer(); // running the crawler by creating the object</span>
+<span class="nc" id="L20">		this.option = this.credits.getOption();</span>
+<span class="nc bnc" id="L21" title="All 4 branches missed.">		switch(option) {</span>
+			case 1:
+<span class="nc" id="L23">				this.examinationList = credits.getExaminationList(); // getting the crawled data</span>
+<span class="nc" id="L24">				break;</span>
+			case 2:
+<span class="nc" id="L26">				this.localInstitutionList = credits.getLocalInstitutionList(); // getting the crawled data</span>
+<span class="nc" id="L27">				break;</span>
+			case 3:
+<span class="nc" id="L29">				this.nonLocalInstitutionList = credits.getNonLocalInstitutionList(); // getting the crawled data</span>
+		}
+<span class="nc" id="L31">	}</span>
+	
+	private void insertToDatabase() throws URISyntaxException, SQLException {
+		
+<span class="nc bnc" id="L35" title="All 4 branches missed.">		switch(this.option) {</span>
+			case 1:
+<span class="nc" id="L37">				SQLDatabaseEngine de = new SQLDatabaseEngine(this.getClass(), &quot;examinations_credits&quot;); // creating this object will get connection to db</span>
+				// check if the table exists, it will create it if it does not exist
+<span class="nc" id="L39">				String createExamTableSQL = &quot;CREATE TABLE IF NOT EXISTS public.examinations_credits&quot;</span>
+						+ &quot;(id SERIAL PRIMARY KEY, examination varchar(255),&quot;
+						+ &quot;subject varchar(255), min_grade varchar(255),&quot;
+						+ &quot;transfer_course_code varchar(255), db_reference_no varchar(255))&quot;;
+<span class="nc" id="L43">				PreparedStatement createExamTable = de.prepare(createExamTableSQL);</span>
+<span class="nc" id="L44">				createExamTable.executeUpdate();</span>
+<span class="nc" id="L45">				createExamTable.close();</span>
+				
+<span class="nc" id="L47">				String insertExamTableSQL = &quot;INSERT INTO examinations_credits&quot;</span>
+						+ &quot;(examination, subject, min_grade, transfer_course_code, db_reference_no) VALUES&quot;
+						+ &quot;(?,?,?,?,?);&quot;;
+<span class="nc" id="L50">				PreparedStatement insertExamData = de.prepare(insertExamTableSQL);</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">				for (int i = 0 ; i &lt; examinationList.size(); i++) {</span>
+<span class="nc" id="L52">					insertExamData.setString(1, examinationList.get(i).getExamination());</span>
+<span class="nc" id="L53">					insertExamData.setString(2, examinationList.get(i).getSubject());</span>
+<span class="nc" id="L54">					insertExamData.setString(3, examinationList.get(i).getMinGrade());</span>
+<span class="nc" id="L55">					insertExamData.setString(4, examinationList.get(i).getTransferCourseCode());</span>
+<span class="nc" id="L56">					insertExamData.setString(5, examinationList.get(i).getDBReferenceNo());</span>
+<span class="nc" id="L57">					insertExamData.executeUpdate();</span>
+				}
+<span class="nc" id="L59">				insertExamData.close();</span>
+<span class="nc" id="L60">				break;</span>
+			case 2:
+<span class="nc" id="L62">				de = new SQLDatabaseEngine(this.getClass(), &quot;local_institutions_credits&quot;); // creating this object will get connection to db</span>
+				// check if the table exists, it will create it if it does not exist
+<span class="nc" id="L64">				String createLocalTableSQL = &quot;CREATE TABLE IF NOT EXISTS public.local_institutions_credits&quot;</span>
+						+ &quot;(id SERIAL PRIMARY KEY, institution varchar(255),&quot;
+						+ &quot;course_code varchar(255), transfer_course_code varchar(255),&quot;
+						+ &quot;restriction varchar(255), db_reference_no varchar(255))&quot;;
+<span class="nc" id="L68">				PreparedStatement createLocalTable = de.prepare(createLocalTableSQL);</span>
+<span class="nc" id="L69">				createLocalTable.executeUpdate();</span>
+<span class="nc" id="L70">				createLocalTable.close();</span>
+				
+<span class="nc" id="L72">				String insertLocalTableSQL = &quot;INSERT INTO local_institutions_credits&quot;</span>
+						+ &quot;(institution, course_code, transfer_course_code, restriction, db_reference_no) VALUES&quot;
+						+ &quot;(?,?,?,?,?);&quot;;
+<span class="nc" id="L75">				PreparedStatement insertLocalData = de.prepare(insertLocalTableSQL);</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">				for (int i = 0 ; i &lt; localInstitutionList.size(); i++) {</span>
+<span class="nc" id="L77">					insertLocalData.setString(1, localInstitutionList.get(i).getInstitution());</span>
+<span class="nc" id="L78">					insertLocalData.setString(2, localInstitutionList.get(i).getCourseCode());</span>
+<span class="nc" id="L79">					insertLocalData.setString(3, localInstitutionList.get(i).getTransferCourseCode());</span>
+<span class="nc" id="L80">					insertLocalData.setString(4, localInstitutionList.get(i).getRestriction());</span>
+<span class="nc" id="L81">					insertLocalData.setString(5, localInstitutionList.get(i).getDBReferenceNo());</span>
+<span class="nc" id="L82">					insertLocalData.executeUpdate();</span>
+				}
+<span class="nc" id="L84">				insertLocalData.close();</span>
+<span class="nc" id="L85">				break;</span>
+			case 3:
+<span class="nc" id="L87">				de = new SQLDatabaseEngine(this.getClass(), &quot;non_local_institutions_credits&quot;); // creating this object will get connection to db</span>
+				// check if the table exists, it will create it if it does not exist
+<span class="nc" id="L89">				String createNonLocalTableSQL = &quot;CREATE TABLE IF NOT EXISTS public.non_local_institutions_credits&quot;</span>
+						+ &quot;(id SERIAL PRIMARY KEY, country varchar (255), institution varchar(255),&quot;
+						+ &quot;course_code varchar(255), transfer_course_code varchar(255),&quot;
+						+ &quot;restriction varchar(255), db_reference_no varchar(255))&quot;;
+<span class="nc" id="L93">				PreparedStatement createNonLocalTable = de.prepare(createNonLocalTableSQL);</span>
+<span class="nc" id="L94">				createNonLocalTable.executeUpdate();</span>
+<span class="nc" id="L95">				createNonLocalTable.close();</span>
+				
+<span class="nc" id="L97">				String insertNonLocalTableSQL = &quot;INSERT INTO non_local_institutions_credits&quot;</span>
+						+ &quot;(country, institution, course_code, transfer_course_code, restriction, db_reference_no) VALUES&quot;
+						+ &quot;(?,?,?,?,?,?);&quot;;
+<span class="nc" id="L100">				PreparedStatement insertNonLocalData = de.prepare(insertNonLocalTableSQL);</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">				for (int i = 0 ; i &lt; nonLocalInstitutionList.size(); i++) {</span>
+<span class="nc" id="L102">					insertNonLocalData.setString(1, nonLocalInstitutionList.get(i).getCountry());</span>
+<span class="nc" id="L103">					insertNonLocalData.setString(2, nonLocalInstitutionList.get(i).getInstitution());</span>
+<span class="nc" id="L104">					insertNonLocalData.setString(3, nonLocalInstitutionList.get(i).getCourseCode());</span>
+<span class="nc" id="L105">					insertNonLocalData.setString(4, nonLocalInstitutionList.get(i).getTransferCourseCode());</span>
+<span class="nc" id="L106">					insertNonLocalData.setString(5, nonLocalInstitutionList.get(i).getRestriction());</span>
+<span class="nc" id="L107">					insertNonLocalData.setString(6, nonLocalInstitutionList.get(i).getDBReferenceNo());</span>
+<span class="nc" id="L108">					insertNonLocalData.executeUpdate();</span>
+				}
+<span class="nc" id="L110">				insertNonLocalData.close();</span>
+				break;
+		}
+<span class="nc" id="L113">	}</span>
+
+//	 for testing
+//	public static void main(String[] args) throws URISyntaxException, SQLException {
+//		CreditTransferSyncDB test = new CreditTransferSyncDB();
+//		test.insertToDatabase();
+//		System.out.println(&quot;FINISHED&quot;);
+//	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

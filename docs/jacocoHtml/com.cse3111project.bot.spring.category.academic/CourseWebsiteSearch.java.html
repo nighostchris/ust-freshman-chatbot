@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CourseWebsiteSearch.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.academic</a> &gt; <span class="el_source">CourseWebsiteSearch.java</span></div><h1>CourseWebsiteSearch.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.academic;
+import com.cse3111project.bot.spring.utility.Utilities;
+
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.*;
+import org.jsoup.select.*;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+
+/**
+ * CourseWebsiteSearch class inherits from Academic class, which handles all user query on helping them to find
+ * relevant course websites according to the given course code.
+ * @version 1.0
+ */
+public class CourseWebsiteSearch extends Academic
+{
+	private ArrayList&lt;String&gt; userQuery;
+<span class="fc" id="L23">	private String parentURL[] = { &quot;https://www.google.com/search?q=&quot;, &quot;+hkust&amp;num=4&quot; };</span>
+	private ArrayList&lt;Website&gt; searchList;
+	
+<span class="fc" id="L26">	public static final String WEBSITE_SEARCH_KEYWORD[] = Utilities.concatArrays(new String[] { &quot;course website&quot;, &quot;website&quot;, &quot;search&quot; },</span>
+																				 Course.COURSE_CODE_KEYWORD);
+
+	public CourseWebsiteSearch(final ArrayList&lt;String&gt; userQuery)
+<span class="fc" id="L30">	{</span>
+<span class="fc" id="L31">		this.userQuery = userQuery;</span>
+<span class="fc" id="L32">		searchList = new ArrayList&lt;Website&gt;();</span>
+<span class="fc" id="L33">	}</span>
+	
+	/**
+	 * This method will perform web crawling on the search engine and try to get the results of searching relevant course
+	 * websites according to the given course code.
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
+	public void webCrawling() throws MalformedURLException, IOException
+	{
+		try
+		{
+<span class="fc" id="L45">			String finalURL = parentURL[0];</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">			for (int i = 0; i &lt; userQuery.size(); i++)</span>
+			{
+<span class="fc bfc" id="L48" title="All 2 branches covered.">				if (userQuery.get(i) != &quot;course website&quot;)</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">					if (userQuery.get(i) != &quot;website&quot;)</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">						if (userQuery.get(i) != &quot;search&quot;)</span>
+						{
+<span class="fc" id="L52">							finalURL += URLEncoder.encode(userQuery.get(i), &quot;UTF-8&quot;);</span>
+<span class="fc" id="L53">							finalURL += &quot;+&quot;;</span>
+						}
+			}
+<span class="fc" id="L56">			URL url = new URL(finalURL + parentURL[1]);</span>
+<span class="fc" id="L57">			Document doc = Jsoup.parse(url, 3000);</span>
+<span class="fc" id="L58">			Elements rows = doc.select(&quot;h3.r &gt; a&quot;);</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">			for (Element result : rows)</span>
+			{
+<span class="fc" id="L61">				String title = result.text();</span>
+<span class="fc" id="L62">				String websiteLink = result.attr(&quot;href&quot;);</span>
+<span class="fc" id="L63">				searchList.add(new Website(title, websiteLink));</span>
+<span class="fc" id="L64">			}</span>
+		}
+<span class="nc" id="L66">        catch (MalformedURLException e) </span>
+		{
+<span class="nc" id="L68">            Utilities.errorLog(&quot;Bad URL&quot;, e);</span>
+<span class="nc" id="L69">            throw new MalformedURLException(&quot;Unexpected Error occurred. Sorry&quot;);</span>
+        }
+<span class="nc" id="L71">        catch (IOException e)</span>
+        {
+<span class="nc" id="L73">            Utilities.errorLog(&quot;I/O error occurred while querying course website&quot;, e);</span>
+<span class="nc" id="L74">            throw new IOException(&quot;Unexpected Error occurred while searching the course website. Sorry&quot;);</span>
+<span class="fc" id="L75">        }</span>
+<span class="fc" id="L76">	}</span>
+	
+	/**
+	 * Getter method of the instance variable searchList, which is the list containing the search engine result.
+	 * @return ArrayList
+	 */
+<span class="nc" id="L82">	public ArrayList&lt;Website&gt; getSearchList() { return searchList; }</span>
+	
+	/**
+	 * This method will help the SearchEngine class to get the search results on this class and write them in a nicer way
+	 * in a single string.
+	 * @return String
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
+	public String getCourseWebsite() throws MalformedURLException, IOException
+	{ 
+<span class="fc" id="L93">		webCrawling();</span>
+<span class="fc" id="L94">		return super.replyResults(searchList); </span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

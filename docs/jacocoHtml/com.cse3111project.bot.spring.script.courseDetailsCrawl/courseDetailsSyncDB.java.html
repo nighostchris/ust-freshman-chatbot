@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>courseDetailsSyncDB.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.script.courseDetailsCrawl</a> &gt; <span class="el_source">courseDetailsSyncDB.java</span></div><h1>courseDetailsSyncDB.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.script.courseDetailsCrawl;
+
+import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
+import com.cse3111project.bot.spring.model.engine.SQLDatabaseEngine;
+import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.net.URISyntaxException;
+
+import java.util.ArrayList;
+
+public class courseDetailsSyncDB implements SQLAccessible{
+	private ArrayList&lt;Course&gt; courseList;
+	private HKUSTCourse courses;
+	
+<span class="nc" id="L17">	private courseDetailsSyncDB() throws URISyntaxException, SQLException {</span>
+<span class="nc" id="L18">		this.courses = new HKUSTCourse(); // running the crawler by creating the object</span>
+<span class="nc" id="L19">		this.courseList = courses.getCourseList(); // getting the crawled data</span>
+<span class="nc" id="L20">	}</span>
+	
+	// this insert function can only be run once as it is an insert SQL
+	private void insertToDatabase() throws URISyntaxException, SQLException {
+<span class="nc" id="L24">		SQLDatabaseEngine de = new SQLDatabaseEngine(this.getClass(), &quot;hkust_courses&quot;); // creating this object will get connection to db</span>
+		
+		// check if the table exists, it will create it if it does not exist
+<span class="nc" id="L27">		String createTableSQL = &quot;CREATE TABLE IF NOT EXISTS public.hkust_courses&quot;</span>
+				+ &quot;(id SERIAL PRIMARY KEY, course_code varchar(255),&quot;
+				+ &quot;course_title varchar(255), course_credit varchar(255),&quot;
+				+ &quot;prerequisite text, exclusion text,&quot;
+				+ &quot;corequisite text)&quot;;
+<span class="nc" id="L32">		PreparedStatement createTable = de.prepare(createTableSQL);</span>
+<span class="nc" id="L33">		createTable.executeUpdate();</span>
+<span class="nc" id="L34">		createTable.close();</span>
+		
+<span class="nc" id="L36">		String insertTableSQL = &quot;INSERT INTO hkust_courses&quot;</span>
+				+ &quot;(course_code, course_title, course_credit, prerequisite, exclusion, corequisite) VALUES&quot;
+				+ &quot;(?,?,?,?,?,?);&quot;;
+<span class="nc" id="L39">		PreparedStatement insertData = de.prepare(insertTableSQL);</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">		for (int i = 0 ; i &lt; courseList.size(); i++) {</span>
+<span class="nc" id="L41">			insertData.setString(1, courseList.get(i).getCourseCode());</span>
+<span class="nc" id="L42">			insertData.setString(2, courseList.get(i).getCourseName());</span>
+<span class="nc" id="L43">			insertData.setString(3, courseList.get(i).getCredit());</span>
+<span class="nc" id="L44">			insertData.setString(4, courseList.get(i).getPrerequisite());</span>
+<span class="nc" id="L45">			insertData.setString(5, courseList.get(i).getExclusion());</span>
+<span class="nc" id="L46">			insertData.setString(6, courseList.get(i).getCoRequisite());</span>
+<span class="nc" id="L47">			insertData.executeUpdate();</span>
+		}
+<span class="nc" id="L49">		insertData.close();</span>
+<span class="nc" id="L50">	}</span>
+
+	// for local testing
+//	public static void main(String[] args) throws URISyntaxException, SQLException {
+//		courseDetailsSyncDB test = new courseDetailsSyncDB();
+//		test.insertToDatabase();
+//		System.out.println(&quot;FINISHED&quot;);
+//	}
+
+	@Override
+	public String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
+		// TODO Auto-generated method stub
+<span class="nc" id="L62">		return null;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CreditTransfer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.script.creditTransferCrawler</a> &gt; <span class="el_source">CreditTransfer.java</span></div><h1>CreditTransfer.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.script.creditTransferCrawler;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import java.net.URL;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.*;
+import org.jsoup.select.*;
+
+public class CreditTransfer 
+{
+	public static final String localWebsite = &quot;http://arr.ust.hk/ust_actoe/credit_local.php?selI=&quot;;
+	public static final String localParameter = &quot;&amp;txtK=&amp;search=y&amp;btn1=+Search+#myform&quot;;
+<span class="nc" id="L15">	public static final String localCode[] = { &quot;B0650&quot;, &quot;B0058&quot;, &quot;B0062&quot;, &quot;B0131&quot;, &quot;B0686&quot;, &quot;B0746&quot;, &quot;B0132&quot;, &quot;B0640&quot;, </span>
+												 &quot;B0144&quot;, &quot;B0182&quot;, &quot;B0262&quot;, &quot;B0989&quot;, &quot;B0652&quot;, &quot;B0328a&quot;, &quot;B0321&quot;, &quot;B0326&quot;,
+												 &quot;B0328&quot;, &quot;B0335&quot;, &quot;B0344&quot;, &quot;X033&quot; };
+	
+	public static final String examWebsite = &quot;http://arr.ust.hk/ust_actoe/credit_exam.php?selI=&quot;;
+	public static final String examParameter = &quot;&amp;search=y#myform&quot;;
+<span class="nc" id="L21">	public static final String examCode[] = { &quot;HKAL&quot;, &quot;GCEAL&quot;, &quot;IAL&quot;, &quot;IBDP&quot;, &quot;AP&quot;, &quot;AUNSWHSC&quot;, &quot;BDHSC&quot;, &quot;CAMBHSD&quot;, &quot;CABCHSD&quot;,</span>
+											  &quot;CAPE&quot;, &quot;EB&quot;, &quot;EC-TBRE&quot;, &quot;FMB&quot;, &quot;FB&quot;, &quot;GA&quot;, &quot;IS&quot;, &quot;AISSCE&quot;, &quot;ISCE&quot;, &quot;INMHHSCE&quot;,
+											  &quot;TSB&quot;, &quot;T-ATY&quot;, &quot;IDUN&quot;, &quot;IMO&quot;, &quot;STPM&quot;, &quot;UEC&quot;, &quot;VWO&quot;, &quot;NOR&quot;, &quot;SCGCEAL&quot;, &quot;NQ&quot;, &quot;TB&quot; };
+	
+	public static final String nonLocalWebsite = &quot;http://arr.ust.hk/ust_actoe/credit_overseas.php?selCty=&quot;;
+<span class="nc" id="L26">	public static final String nonLocalLocation[] = { &quot;Algeria&quot;, &quot;Australia&quot;, &quot;Austria&quot;, &quot;Belgium&quot;, &quot;Brunei&quot;, &quot;Canada&quot;, &quot;China&quot;,</span>
+													  &quot;Czech+Republic&quot;, &quot;Denmark&quot;, &quot;Estonia&quot;, &quot;Finland&quot;, &quot;France&quot;, &quot;Germany&quot;,
+													  &quot;Hungary&quot;, &quot;India&quot;, &quot;Indonesia&quot;, &quot;Ireland&quot;, &quot;Israel&quot;, &quot;Italy&quot;, &quot;Japan&quot;,
+													  &quot;Korea%2C+Republic+of&quot;, &quot;Malaysia&quot;, &quot;Mexico&quot;, &quot;Netherlands&quot;, &quot;New+Zealand&quot;,
+													  &quot;Norway&quot;, &quot;Norwegian&quot;, &quot;Philippines&quot;, &quot;Poland&quot;, &quot;Portugal&quot;, &quot;Russian+Federation&quot;,
+													  &quot;Singapore&quot;, &quot;Spain&quot;, &quot;Sweden&quot;, &quot;Switzerland&quot;, &quot;Taiwan&quot;, &quot;Thailand&quot;,
+													  &quot;Turkey&quot;, &quot;United+Kingdom&quot;, &quot;United+States&quot; };
+<span class="nc" id="L33">	public static final String nonLocalCode[][] = {</span>
+		{ &quot;X027&quot; }, { &quot;B0529&quot;, &quot;B0316&quot;, &quot;B0349&quot;, &quot;B0352&quot;, &quot;B0360&quot; }, { &quot;B0346&quot;, &quot;B0498&quot;, &quot;B0498&quot; }, { &quot;B0742&quot; }, { &quot;B0766&quot; },
+		{ &quot;B0649&quot;, &quot;B0071&quot;, &quot;B0119&quot;, &quot;B0194&quot;, &quot;B0566&quot;, &quot;B0244&quot;, &quot;X0008&quot;, &quot;B0279&quot;, &quot;B0340&quot;, &quot;B0531&quot;, &quot;B0396&quot;, &quot;B0405&quot;, &quot;B0446&quot;,
+			&quot;B0481&quot;, &quot;B0492&quot;, &quot;B0504&quot;, &quot;B0516&quot; }, { &quot;B0020&quot;, &quot;B0085&quot;, &quot;B0103&quot;, &quot;B0114&quot;, &quot;B0204&quot;, &quot;B0206&quot;, &quot;B0236&quot;, &quot;B0247&quot;,
+			&quot;B0247a&quot;, &quot;B0268&quot;, &quot;B0271&quot;, &quot;B0273&quot;, &quot;B0278&quot;, &quot;B0295&quot;, &quot;B0370&quot;, &quot;B0471&quot;, &quot;B0508&quot;, &quot;B0511&quot;, &quot;B0517&quot; }, { &quot;B0606&quot;,
+			&quot;B0423&quot; }, { &quot;B0392&quot;, &quot;B0070&quot;, &quot;B0303&quot;, &quot;B0656&quot; }, { &quot;X034&quot; }, { &quot;B0525&quot;, &quot;X031&quot; }, { &quot;B0090NA&quot;, &quot;B0098&quot;, &quot;X0009&quot;,
+			&quot;B0110&quot;, &quot;B0592&quot;, &quot;B0563&quot;, &quot;B0026&quot;, &quot;B0151&quot;, &quot;B0151AA&quot;, &quot;B0151AB&quot;, &quot;B0682&quot;, &quot;B0682AA&quot;, &quot;B0592NA&quot;, &quot;B0528&quot;, &quot;B0571&quot;,
+			&quot;B0386&quot; }, { &quot;B0097&quot;, &quot;B0097NA&quot;, &quot;X016&quot;, &quot;B0657&quot;, &quot;B0681&quot;, &quot;B0986&quot;, &quot;B0564&quot;, &quot;B0683&quot;, &quot;B0307&quot;, &quot;B0308&quot;, &quot;B0309&quot;,
+			&quot;B0383&quot;, &quot;B0662&quot;, &quot;B0505NA&quot;, &quot;B0505&quot; }, { &quot;B0073&quot; }, { &quot;B0595&quot; }, { &quot;B0538&quot;, &quot;B0743&quot;, &quot;B0479&quot; }, { &quot;B0215&quot;, &quot;B0390&quot; },
+		{ &quot;B0325&quot; }, { &quot;B0658&quot;, &quot;B0379&quot; }, { &quot;B0175&quot;, &quot;B0527&quot;, &quot;B0233&quot;, &quot;B0250&quot;, &quot;B0284&quot;, &quot;B0567&quot;, &quot;B0604&quot;, &quot;B0714&quot; }, { &quot;B0802&quot;,
+			&quot;B0099&quot;, &quot;B0645&quot;, &quot;B0173&quot;, &quot;B0174&quot;, &quot;B0241&quot;, &quot;B0266&quot;, &quot;B0296&quot;, &quot;B0544&quot;, &quot;B0515&quot; }, { &quot;B0521&quot; }, { &quot;B0310&quot; }, { &quot;B0252&quot;,
+			&quot;X032&quot;, &quot;B0751&quot;, &quot;B0187&quot;, &quot;B0684&quot;, &quot;B0367&quot;, &quot;B0397&quot;, &quot;B0705&quot;, &quot;B0495&quot; }, { &quot;B0193&quot;, &quot;B0400&quot; }, { &quot;B0028&quot;, &quot;B0402&quot; },
+		{ &quot;B0991&quot; }, { &quot;B0009&quot; }, { &quot;B0582&quot;, &quot;B0506&quot; }, { &quot;X020&quot;, &quot;B0661AA&quot;, &quot;X028&quot; }, { &quot;X022&quot;, &quot;B0762&quot; }, { &quot;X029&quot;, &quot;B0207&quot;, 
+			&quot;B0216&quot;, &quot;B0220&quot;, &quot;B0280&quot;, &quot;B0281&quot; }, { &quot;B0164&quot;, &quot;B0164AA&quot;, &quot;B0164AB&quot;, &quot;B0095&quot;, &quot;B0378&quot;, &quot;B0455&quot; }, { &quot;B0053&quot;, &quot;B0183&quot;,
+			&quot;B0611&quot;, &quot;B0186&quot;, &quot;B0254&quot;, &quot;B0294&quot;, &quot;B0427&quot;, &quot;B0663&quot; }, { &quot;B0089&quot;, &quot;B0298&quot;, &quot;B0655&quot;, &quot;B0477&quot; }, { &quot;B0530&quot;, &quot;B0208&quot;,
+			&quot;B0209&quot;, &quot;B0210&quot;, &quot;B0990&quot;, &quot;B0211&quot;, &quot;B0212&quot; }, { &quot;B0059&quot; }, { &quot;B0754&quot;, &quot;B0605&quot;, &quot;B0522&quot; }, { &quot;B0687&quot;, &quot;B0061AA&quot;,
+			&quot;B0925&quot;, &quot;B0152&quot;, &quot;B0176&quot;, &quot;B0353&quot;, &quot;B0224&quot;, &quot;B0152NA&quot;, &quot;B0332&quot;, &quot;B0332a&quot;, &quot;B0339&quot;, &quot;B0348&quot;, &quot;B0358&quot;, &quot;B0363&quot;, &quot;B0532&quot;,
+			&quot;B0393&quot;, &quot;B0535&quot;, &quot;B0415&quot;, &quot;B0594&quot;, &quot;B0533&quot;, &quot;B0586&quot;, &quot;B0439&quot;, &quot;B0441&quot;, &quot;B0461&quot;, &quot;B0474&quot;, &quot;B0478&quot;, &quot;B0590&quot; },
+		{ &quot;X015&quot;, &quot;B0006&quot;, &quot;B0032&quot;, &quot;B0033&quot;, &quot;B0035&quot;, &quot;B0047&quot;, &quot;B0067&quot;, &quot;B0072&quot;, &quot;B0083&quot;, &quot;B0092&quot;, &quot;B0115&quot;, &quot;B0116&quot;, &quot;B0155&quot;,
+			&quot;B0167&quot;, &quot;B0179&quot;, &quot;B0669&quot;, &quot;B0191&quot;, &quot;B0524&quot;, &quot;B0196&quot;, &quot;B0727&quot;, &quot;B0198&quot;, &quot;B0219&quot;, &quot;B0222&quot;, &quot;B0225&quot;, &quot;B0608&quot;, &quot;B0803&quot;,
+			&quot;B0235&quot;, &quot;B0243&quot;, &quot;B0248&quot;, &quot;B0249&quot;, &quot;B0255&quot;, &quot;B0282&quot;, &quot;B0291&quot;, &quot;B0292&quot;, &quot;B0299&quot;, &quot;B0313&quot;, &quot;B0638&quot;, &quot;B0105&quot;, &quot;B0324&quot;,
+			&quot;B0334&quot;, &quot;B0341&quot;, &quot;B0362&quot;, &quot;B0570&quot;, &quot;B0372&quot;, &quot;B0407&quot;, &quot;B0408&quot;, &quot;B0409&quot;, &quot;B0410&quot;, &quot;B0628&quot;, &quot;B0411&quot;, &quot;B0412&quot;, &quot;B0413&quot;,
+			&quot;B0420&quot;, &quot;B0425&quot;, &quot;B0428&quot;, &quot;B0432&quot;, &quot;B0660&quot;, &quot;B0447&quot;, &quot;B0448&quot;, &quot;B0350&quot;, &quot;B0350AA&quot;, &quot;B0452&quot;, &quot;B0374&quot;, &quot;B0467&quot;, &quot;B0475&quot;,
+			&quot;B0475AA&quot;, &quot;B0484&quot;, &quot;B0485&quot;, &quot;B0488&quot;, &quot;B0496&quot;, &quot;B0502&quot;, &quot;B0748&quot; }
+	};
+	public static final String nonLocalParameter1 = &quot;&amp;selI=&quot;;
+	public static final String nonLocalParameter2 = &quot;&amp;txtK=&amp;search=y&amp;btn1=+Search+#myform&quot;;
+	
+	private ArrayList&lt;LocalInstitutionCredit&gt; localInstitutionList;
+	private ArrayList&lt;ExaminationCredit&gt; examinationList;
+	private ArrayList&lt;NonLocalInstitutionCredit&gt; nonLocalInstitutionList;
+	private int option;
+	
+	public CreditTransfer()
+<span class="nc" id="L67">	{</span>
+<span class="nc" id="L68">		localInstitutionList = new ArrayList&lt;LocalInstitutionCredit&gt;();</span>
+<span class="nc" id="L69">		examinationList = new ArrayList&lt;ExaminationCredit&gt;();</span>
+<span class="nc" id="L70">		nonLocalInstitutionList = new ArrayList&lt;NonLocalInstitutionCredit&gt;();</span>
+<span class="nc" id="L71">		System.out.println(&quot;Which type of credit you want to crawl for? (1. Examinations, 2. Local Institutions, 3. Non-Local Institutions)&quot;);</span>
+<span class="nc" id="L72">		Scanner sc = new Scanner(System.in);</span>
+<span class="nc" id="L73">	    this.option = sc.nextInt();</span>
+		try
+		{
+<span class="nc" id="L76">			webCrawling(option);</span>
+		}
+<span class="nc" id="L78">		catch (Exception e)</span>
+		{
+<span class="nc" id="L80">			e.printStackTrace();</span>
+<span class="nc" id="L81">		}</span>
+<span class="nc" id="L82">	}</span>
+	
+	private void webCrawling(int option) throws Exception
+	{
+<span class="nc bnc" id="L86" title="All 4 branches missed.">		switch(option) {</span>
+		case 1: 
+			// Crawl examination credit details
+<span class="nc" id="L89">			ArrayList&lt;String&gt; examination = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L90">			ArrayList&lt;String&gt; subject = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L91">			ArrayList&lt;String&gt; minGrade = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L92">			ArrayList&lt;String&gt; transferCourseCode = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L93">			ArrayList&lt;String&gt; dbReferenceNo = new ArrayList&lt;String&gt;();</span>
+			
+<span class="nc bnc" id="L95" title="All 2 branches missed.">			for (int i = 0; i &lt; examCode.length; i++) {</span>
+<span class="nc" id="L96">				URL url = new URL(examWebsite + examCode[i] + examParameter);</span>
+<span class="nc" id="L97">				Document doc = Jsoup.parse(url, 3000);</span>
+<span class="nc" id="L98">				Element table = doc.select(&quot;table&quot;).get(6);</span>
+<span class="nc" id="L99">				Elements rows = table.select(&quot;tr&quot;);</span>
+<span class="nc" id="L100">				Elements div = doc.select(&quot;div.brown&quot;);</span>
+<span class="nc" id="L101">				String exam = div.text();</span>
+				
+<span class="nc bnc" id="L103" title="All 2 branches missed.">				for (int j = 1; j &lt; rows.size(); j++) {</span>
+<span class="nc" id="L104">					Elements details = rows.get(j).select(&quot;td&quot;);</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">					if (!details.get(0).text().equals(&quot;No record(s) found.&quot;))</span>
+					{
+<span class="nc" id="L107">						String sub = details.get(0).text();</span>
+<span class="nc" id="L108">						String minScore = details.get(1).text();</span>
+<span class="nc" id="L109">						String USTCode = details.get(2).text();</span>
+<span class="nc" id="L110">						String refNo = details.get(5).text();</span>
+						
+<span class="nc" id="L112">						examination.add(exam);</span>
+<span class="nc" id="L113">						subject.add(sub);</span>
+<span class="nc" id="L114">						minGrade.add(minScore);</span>
+<span class="nc" id="L115">						transferCourseCode.add(USTCode);</span>
+<span class="nc" id="L116">						dbReferenceNo.add(refNo);</span>
+					}
+				}
+			}
+			// display for testing
+//			for (int i = 0; i &lt; examination.size(); i++)
+//			{
+//				examinationList.add(new ExaminationCredit(examination.get(i), subject.get(i), minGrade.get(i), transferCourseCode.get(i), dbReferenceNo.get(i)));
+//				System.out.println(examinationList.get(i));
+//			}
+<span class="nc" id="L126">			break;</span>
+		case 2:
+			// Crawl local school credit details
+<span class="nc" id="L129">			ArrayList&lt;String&gt; institution = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L130">			ArrayList&lt;String&gt; courseCode = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L131">			transferCourseCode = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L132">			ArrayList&lt;String&gt; restriction = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L133">			dbReferenceNo = new ArrayList&lt;String&gt;();</span>
+			
+<span class="nc bnc" id="L135" title="All 2 branches missed.">			for (int i = 0; i &lt; localCode.length; i++)</span>
+			{
+<span class="nc" id="L137">				URL url = new URL(localWebsite + localCode[i] + localParameter);</span>
+<span class="nc" id="L138">				Document doc = Jsoup.parse(url, 3000);</span>
+<span class="nc" id="L139">				Element table = doc.select(&quot;table&quot;).get(5);</span>
+<span class="nc" id="L140">				Element tableLink = doc.select(&quot;table&quot;).get(6);</span>
+<span class="nc" id="L141">				Elements rows = table.select(&quot;tr&quot;);</span>
+<span class="nc" id="L142">				Elements rowLink = tableLink.select(&quot;tr&quot;);</span>
+<span class="nc" id="L143">				Elements content = rowLink.select(&quot;td&quot;);</span>
+<span class="nc" id="L144">				Elements link = content.get(2).select(&quot;a&quot;);</span>
+<span class="nc" id="L145">				String absHref = link.attr(&quot;abs:href&quot;);</span>
+<span class="nc" id="L146">				Elements div = doc.select(&quot;div.brown&quot;);</span>
+<span class="nc" id="L147">				String school = div.text();</span>
+				
+<span class="nc bnc" id="L149" title="All 2 branches missed.">				for (int j = 2; j &lt; rows.size(); j++)</span>
+				{
+<span class="nc" id="L151">					Elements details = rows.get(j).select(&quot;td&quot;);</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">					if (!details.get(0).text().equals(&quot;No record(s) found.&quot;))</span>
+					{
+<span class="nc" id="L154">						String code = details.get(1).text();</span>
+<span class="nc" id="L155">						String USTCode = details.get(2).text();</span>
+<span class="nc" id="L156">						String restrict = details.get(4).text();</span>
+
+<span class="nc" id="L158">						String refNo = details.get(6).text();</span>
+
+<span class="nc bnc" id="L160" title="All 2 branches missed.">						if (restrict.equals(&quot;EXP&quot;))</span>
+<span class="nc" id="L161">							restrict = &quot;Expired&quot;;</span>
+<span class="nc bnc" id="L162" title="All 2 branches missed.">						else if (restrict.equals(&quot;--&quot;))</span>
+<span class="nc" id="L163">							restrict = &quot;No Restriction&quot;;</span>
+						
+<span class="nc" id="L165">						institution.add(school);</span>
+<span class="nc" id="L166">						courseCode.add(code);</span>
+<span class="nc" id="L167">						transferCourseCode.add(USTCode);</span>
+<span class="nc" id="L168">						restriction.add(restrict);</span>
+<span class="nc" id="L169">						dbReferenceNo.add(refNo);</span>
+					}
+				}
+				
+<span class="nc bnc" id="L173" title="All 2 branches missed.">				while(!absHref.isEmpty()){</span>
+<span class="nc" id="L174">					url = new URL(absHref);</span>
+<span class="nc" id="L175">					doc = Jsoup.parse(url, 3000);</span>
+<span class="nc" id="L176">					table = doc.select(&quot;table&quot;).get(5);</span>
+<span class="nc" id="L177">					tableLink = doc.select(&quot;table&quot;).get(6);</span>
+<span class="nc" id="L178">					rows = table.select(&quot;tr&quot;);</span>
+<span class="nc" id="L179">					rowLink = tableLink.select(&quot;tr&quot;);</span>
+<span class="nc" id="L180">					content = rowLink.select(&quot;td&quot;);</span>
+<span class="nc" id="L181">					link = content.get(2).select(&quot;a&quot;);</span>
+<span class="nc" id="L182">					absHref = link.attr(&quot;abs:href&quot;);</span>
+					
+<span class="nc bnc" id="L184" title="All 2 branches missed.">					for (int j = 2; j &lt; rows.size(); j++)</span>
+					{
+<span class="nc" id="L186">						Elements details = rows.get(j).select(&quot;td&quot;);</span>
+<span class="nc bnc" id="L187" title="All 2 branches missed.">						if (!details.get(0).text().equals(&quot;No record(s) found.&quot;))</span>
+						{
+<span class="nc" id="L189">							String code = details.get(1).text();</span>
+<span class="nc" id="L190">							String USTCode = details.get(2).text();</span>
+<span class="nc" id="L191">							String restrict = details.get(4).text();</span>
+<span class="nc" id="L192">							String refNo = details.get(6).text();</span>
+<span class="nc bnc" id="L193" title="All 2 branches missed.">							if (restrict.equals(&quot;EXP&quot;))</span>
+<span class="nc" id="L194">								restrict = &quot;Expired&quot;;</span>
+<span class="nc bnc" id="L195" title="All 2 branches missed.">							else if (restrict.equals(&quot;--&quot;))</span>
+<span class="nc" id="L196">								restrict = &quot;No Restriction&quot;;</span>
+							
+<span class="nc" id="L198">							institution.add(school);</span>
+<span class="nc" id="L199">							courseCode.add(code);</span>
+<span class="nc" id="L200">							transferCourseCode.add(USTCode);</span>
+<span class="nc" id="L201">							restriction.add(restrict);</span>
+<span class="nc" id="L202">							dbReferenceNo.add(refNo);</span>
+						}
+					}
+				}
+			}
+			
+			// display for testing
+//			for (int i = 0; i &lt; institution.size(); i++)
+//			{
+//				localInstitutionList.add(new LocalInstitutionCredit(institution.get(i), courseCode.get(i), transferCourseCode.get(i), restriction.get(i), dbReferenceNo.get(i)));
+//				System.out.println(localInstitutionList.get(i));
+//			}
+<span class="nc" id="L214">			break;</span>
+		case 3:
+			// Crawl non-local school credit details
+<span class="nc" id="L217">			ArrayList&lt;String&gt; country = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L218">			institution = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L219">			courseCode = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L220">			transferCourseCode = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L221">			restriction = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L222">			dbReferenceNo = new ArrayList&lt;String&gt;();</span>
+			
+<span class="nc bnc" id="L224" title="All 2 branches missed.">			for (int i = 0; i &lt; nonLocalLocation.length; i++)</span>
+			{
+<span class="nc bnc" id="L226" title="All 2 branches missed.">				for (int j = 0; j &lt; nonLocalCode[i].length; j++) {</span>
+<span class="nc" id="L227">					URL url = new URL(nonLocalWebsite + nonLocalLocation[i] + nonLocalParameter1 + nonLocalCode[i][j] + nonLocalParameter2);</span>
+<span class="nc" id="L228">					Document doc = Jsoup.parse(url, 3000);</span>
+<span class="nc" id="L229">					Element table = doc.select(&quot;table&quot;).get(5);</span>
+<span class="nc" id="L230">					Element tableLink = doc.select(&quot;table&quot;).get(6);</span>
+<span class="nc" id="L231">					Elements rows = table.select(&quot;tr&quot;);</span>
+<span class="nc" id="L232">					Elements rowLink = tableLink.select(&quot;tr&quot;);</span>
+<span class="nc" id="L233">					Elements content = rowLink.select(&quot;td&quot;);</span>
+<span class="nc" id="L234">					Elements link = content.get(2).select(&quot;a.link1&quot;);</span>
+<span class="nc" id="L235">					String absHref = link.attr(&quot;abs:href&quot;);</span>
+<span class="nc" id="L236">					Elements div = doc.select(&quot;div.brown&quot;);</span>
+<span class="nc" id="L237">					String school = div.text();</span>
+<span class="nc" id="L238">					String location = nonLocalLocation[i];</span>
+<span class="nc bnc" id="L239" title="All 2 branches missed.">					if (location.equals(&quot;Korea%2C+Republic+of&quot;)) {</span>
+<span class="nc" id="L240">						location = &quot;Republic of Korea&quot;;</span>
+					}
+					else {
+<span class="nc" id="L243">						location = location.replace(&quot;+&quot;, &quot; &quot;);</span>
+					}
+					
+<span class="nc bnc" id="L246" title="All 2 branches missed.">					for (int k = 2; k &lt; rows.size(); k++)</span>
+					{
+<span class="nc" id="L248">						Elements details = rows.get(k).select(&quot;td&quot;);</span>
+<span class="nc bnc" id="L249" title="All 2 branches missed.">						if (!details.get(0).text().equals(&quot;No record(s) found.&quot;))</span>
+						{
+<span class="nc" id="L251">							String code = details.get(1).text();</span>
+<span class="nc" id="L252">							String USTCode = details.get(2).text();</span>
+<span class="nc" id="L253">							String restrict = details.get(4).text();</span>
+
+<span class="nc" id="L255">							String refNo = details.get(6).text();</span>
+
+<span class="nc bnc" id="L257" title="All 2 branches missed.">							if (restrict.equals(&quot;EXP&quot;))</span>
+<span class="nc" id="L258">								restrict = &quot;Expired&quot;;</span>
+<span class="nc bnc" id="L259" title="All 2 branches missed.">							else if (restrict.equals(&quot;--&quot;))</span>
+<span class="nc" id="L260">								restrict = &quot;No Restriction&quot;;</span>
+
+<span class="nc" id="L262">							country.add(location);</span>
+<span class="nc" id="L263">							institution.add(school);</span>
+<span class="nc" id="L264">							courseCode.add(code);</span>
+<span class="nc" id="L265">							transferCourseCode.add(USTCode);</span>
+<span class="nc" id="L266">							restriction.add(restrict);</span>
+<span class="nc" id="L267">							dbReferenceNo.add(refNo);</span>
+						}
+					}
+					
+<span class="nc bnc" id="L271" title="All 2 branches missed.">					while(!absHref.isEmpty()) {</span>
+<span class="nc" id="L272">						absHref = absHref.replaceAll(&quot; &quot;, &quot;%20&quot;);</span>
+<span class="nc" id="L273">						url = new URL(absHref);</span>
+<span class="nc" id="L274">						doc = Jsoup.parse(url, 3000);</span>
+<span class="nc" id="L275">						table = doc.select(&quot;table&quot;).get(5);</span>
+<span class="nc" id="L276">						tableLink = doc.select(&quot;table&quot;).get(6);</span>
+<span class="nc" id="L277">						rows = table.select(&quot;tr&quot;);</span>
+<span class="nc" id="L278">						rowLink = tableLink.select(&quot;tr&quot;);</span>
+<span class="nc" id="L279">						content = rowLink.select(&quot;td&quot;);</span>
+<span class="nc" id="L280">						link = content.get(2).select(&quot;a.link1&quot;);</span>
+<span class="nc" id="L281">						absHref = link.attr(&quot;abs:href&quot;);</span>
+						
+<span class="nc bnc" id="L283" title="All 2 branches missed.">						for (int k = 2; k &lt; rows.size(); k++)</span>
+						{
+<span class="nc" id="L285">							Elements details = rows.get(k).select(&quot;td&quot;);</span>
+<span class="nc bnc" id="L286" title="All 2 branches missed.">							if (!details.get(0).text().equals(&quot;No record(s) found.&quot;))</span>
+							{
+<span class="nc" id="L288">								String code = details.get(1).text();</span>
+<span class="nc" id="L289">								String USTCode = details.get(2).text();</span>
+<span class="nc" id="L290">								String restrict = details.get(4).text();</span>
+<span class="nc" id="L291">								String refNo = details.get(6).text();</span>
+<span class="nc bnc" id="L292" title="All 2 branches missed.">								if (restrict.equals(&quot;EXP&quot;))</span>
+<span class="nc" id="L293">									restrict = &quot;Expired&quot;;</span>
+<span class="nc bnc" id="L294" title="All 2 branches missed.">								else if (restrict.equals(&quot;--&quot;))</span>
+<span class="nc" id="L295">									restrict = &quot;No Restriction&quot;;</span>
+								
+<span class="nc" id="L297">								country.add(location);</span>
+<span class="nc" id="L298">								institution.add(school);</span>
+<span class="nc" id="L299">								courseCode.add(code);</span>
+<span class="nc" id="L300">								transferCourseCode.add(USTCode);</span>
+<span class="nc" id="L301">								restriction.add(restrict);</span>
+<span class="nc" id="L302">								dbReferenceNo.add(refNo);</span>
+							}
+						}
+					}
+				}
+			}
+			
+			// display for testing
+//			for (int i = 0; i &lt; country.size(); i++)
+//			{
+//				nonLocalInstitutionList.add(new NonLocalInstitutionCredit(country.get(i), institution.get(i), courseCode.get(i), transferCourseCode.get(i), restriction.get(i), dbReferenceNo.get(i)));
+//				System.out.println(nonLocalInstitutionList.get(i));
+//			}
+			break;
+		}
+<span class="nc" id="L317">	}</span>
+	
+<span class="nc" id="L319">	public int getOption() { return option; }</span>
+	
+<span class="nc" id="L321">	public ArrayList&lt;LocalInstitutionCredit&gt; getLocalInstitutionList() { return localInstitutionList; }</span>
+	
+<span class="nc" id="L323">	public ArrayList&lt;ExaminationCredit&gt; getExaminationList() { return examinationList; }</span>
+	
+<span class="nc" id="L325">	public ArrayList&lt;NonLocalInstitutionCredit&gt; getNonLocalInstitutionList() { return nonLocalInstitutionList; }</span>
+	
+	// for testing
+//	public static void main(String[] args)
+//	{
+//		new CreditTransfer();
+//	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

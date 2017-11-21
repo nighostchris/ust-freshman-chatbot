@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TimeTable.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.function.timetable</a> &gt; <span class="el_source">TimeTable.java</span></div><h1>TimeTable.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.function.timetable;
+
+import com.cse3111project.bot.spring.category.function.Function;
+
+import java.nio.file.Path;
+import java.nio.file.Files;
+import java.nio.file.FileAlreadyExistsException;
+
+import java.io.File;
+import java.io.ObjectInputStream;
+import java.io.FileInputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
+import java.io.NotSerializableException;
+import java.io.IOException;
+
+import java.util.Collections;
+import com.cse3111project.bot.spring.utility.Utilities;
+
+import com.cse3111project.bot.spring.exception.InvalidDateException;
+import com.cse3111project.bot.spring.exception.InvalidTimeslotException;
+
+<span class="fc" id="L24">public class TimeTable extends Function {</span>
+<span class="fc" id="L25">    public static final String FUNCTION_KEYWORD[] = { &quot;timetable&quot;, &quot;time table&quot;, &quot;time manager&quot;,</span>
+                                                      &quot;time schedule&quot;, &quot;schedule&quot; };
+
+<span class="fc" id="L28">    private People user = null;</span>
+
+<span class="fc" id="L30">    private Path saveDir = saveRootDir.resolve(&quot;timetable&quot;);</span>
+
+    // save filename
+    // ** currently only one save slot is provided **
+    private static final String SAVEFILE = &quot;schedule&quot;;
+
+    // create save directory for TimeTable function
+    @Override
+    protected void createSaveDir() throws FileAlreadyExistsException, IOException {
+<span class="nc" id="L39">        super.createSaveDir();</span>
+
+        try {
+<span class="nc bnc" id="L42" title="All 2 branches missed.">            if (!Files.exists(saveDir))</span>
+<span class="nc" id="L43">                Files.createDirectory(saveDir);</span>
+        }
+<span class="nc" id="L45">        catch (FileAlreadyExistsException e) {</span>
+<span class="nc" id="L46">            Utilities.errorLog(saveDir.toString() + &quot; directory already exists&quot;, e);</span>
+<span class="nc" id="L47">            throw e;</span>
+        }
+<span class="nc" id="L49">        catch (IOException e) {</span>
+<span class="nc" id="L50">            Utilities.errorLog(&quot;I/O error occurred while creating &quot; + saveDir.toString(), e);</span>
+<span class="nc" id="L51">            throw e;</span>
+<span class="nc" id="L52">        }</span>
+<span class="nc" id="L53">    }</span>
+
+    // read the saved timetable
+    @Override
+    protected void read(){
+<span class="nc" id="L58">        Path saveFilePath = saveDir.resolve(SAVEFILE);</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if (!Files.exists(saveFilePath))</span>
+<span class="nc" id="L60">            return;</span>
+
+<span class="nc" id="L62">        FileInputStream fis = null;</span>
+<span class="nc" id="L63">        ObjectInputStream ois = null;</span>
+        try {
+<span class="nc" id="L65">            File saveFile = saveFilePath.toFile();</span>
+<span class="nc" id="L66">            fis = new FileInputStream(saveFile);</span>
+<span class="nc" id="L67">            ois = new ObjectInputStream(fis);</span>
+
+<span class="nc" id="L69">            this.user = (People) ois.readObject();</span>
+        }
+<span class="nc" id="L71">        catch (ClassNotFoundException e) {  // should not happen</span>
+<span class="nc" id="L72">            Utilities.errorLog(&quot;Deserialized class not found&quot;, e);</span>
+<span class="nc" id="L73">            replyText(&quot;System error occurred. Abort reading.&quot;);</span>
+        }
+<span class="nc" id="L75">        catch (IOException e) {</span>
+<span class="nc" id="L76">            Utilities.errorLog(&quot;I/O error occurred while reading save file&quot;, e);</span>
+<span class="nc" id="L77">            replyText(&quot;Error occurred while reading the save. Abort reading.&quot;);</span>
+        }
+        finally {
+<span class="nc" id="L80">            try {</span>
+<span class="nc bnc" id="L81" title="All 8 branches missed.">                if (fis != null)</span>
+<span class="nc" id="L82">                    fis.close();</span>
+<span class="nc bnc" id="L83" title="All 8 branches missed.">                if (ois != null)</span>
+<span class="nc" id="L84">                    ois.close();</span>
+            }
+<span class="nc" id="L86">            catch (IOException e) {</span>
+<span class="nc" id="L87">                Utilities.errorLog(&quot;Error occurred while closing stream&quot;, e);</span>
+<span class="nc" id="L88">            }</span>
+<span class="nc" id="L89">        }</span>
+<span class="nc" id="L90">    }</span>
+
+    // save current timetable
+    // ** currently only one save slot is provided **
+    @Override
+    protected void save(){
+<span class="nc" id="L96">        FileOutputStream fos = null;</span>
+<span class="nc" id="L97">        ObjectOutputStream oos = null;</span>
+        try {
+            // check if saveDir exists. If not, create one
+<span class="nc" id="L100">            this.createSaveDir();</span>
+
+            // overwrite the old schedule if exists **
+<span class="nc" id="L103">            File saveFile = saveDir.resolve(SAVEFILE).toFile();</span>
+
+<span class="nc" id="L105">            fos = new FileOutputStream(saveFile);</span>
+<span class="nc" id="L106">            oos = new ObjectOutputStream(fos);</span>
+
+<span class="nc" id="L108">            oos.writeObject(user);</span>
+
+<span class="nc" id="L110">            replyText(&quot;Saving Complete&quot;);</span>
+        }
+<span class="nc" id="L112">        catch (FileAlreadyExistsException e) {</span>
+<span class="nc" id="L113">            replyText(&quot;Error occurred while creating cache. Saving operation abort.&quot;);</span>
+        }
+<span class="nc" id="L115">        catch (NotSerializableException e) {  // should not occur in Release</span>
+<span class="nc" id="L116">            Utilities.errorLog(&quot;Unable to serialize a non-serializable class&quot;, e);</span>
+        }
+<span class="nc" id="L118">        catch (IOException e) {</span>
+<span class="nc" id="L119">            Utilities.errorLog(&quot;Error occurred while writing save&quot;, e);</span>
+<span class="nc" id="L120">            replyText(&quot;Error occurred while writing save. Saving operation abort.&quot;);</span>
+        }
+        finally {
+<span class="nc" id="L123">            try {</span>
+<span class="nc bnc" id="L124" title="All 10 branches missed.">                if (fos != null)</span>
+<span class="nc" id="L125">                    fos.close();</span>
+<span class="nc bnc" id="L126" title="All 10 branches missed.">                if (oos != null)</span>
+<span class="nc" id="L127">                    oos.close();</span>
+            }
+<span class="nc" id="L129">            catch (IOException e) {</span>
+<span class="nc" id="L130">                Utilities.errorLog(&quot;Error occurred while closing stream&quot;, e);</span>
+<span class="nc" id="L131">            }</span>
+<span class="nc" id="L132">        }</span>
+<span class="nc" id="L133">    }</span>
+
+    // before exit, ask whether to save the current time table
+    private void askSave(){
+        loop: while (true) {
+<span class="nc" id="L138">            replyText(&quot;Save the current timetable?[Y/N]\n\n&quot; + user.toString());</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">            while (!userHasReplied());</span>
+<span class="nc" id="L140">            String userResponse = getUserMessage();</span>
+<span class="nc bnc" id="L141" title="All 28 branches missed.">            switch (userResponse) {</span>
+                case &quot;Y&quot;: case &quot;y&quot;: case &quot;Yes&quot;: case &quot;yes&quot;:
+<span class="nc" id="L143">                    this.save();</span>
+<span class="nc" id="L144">                    break loop;</span>
+
+                case &quot;N&quot;: case &quot;n&quot;: case &quot;No&quot;: case &quot;no&quot;:
+<span class="nc" id="L147">                    break loop;</span>
+
+                default:
+<span class="nc" id="L150">                    replyText(&quot;Unknown option&quot;);</span>
+                    break;
+            }
+<span class="nc" id="L153">        }</span>
+<span class="nc" id="L154">    }</span>
+
+    // option 1
+    private void addEvent(){
+<span class="nc" id="L158">        int month = 0; int day = 0;</span>
+<span class="nc" id="L159">        int startTime = 0; int endTime = 0;</span>
+<span class="nc" id="L160">        String activityName = null;</span>
+        try {
+<span class="nc" id="L162">            replyText(&quot;Enter month and day for event (Separated by Space):&quot;);</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">            while (!userHasReplied());</span>
+<span class="nc" id="L164">            String dateParts[] = getUserMessage().split(&quot; &quot;);</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">            if (dateParts.length != 2)</span>
+<span class="nc" id="L166">                throw new IllegalArgumentException(&quot;2 arguments should be given:\n&lt;month&gt; &lt;day&gt;&quot;);</span>
+
+            // try to convert month, day string into Integer
+            // throw NumberFormatException if not convertible
+<span class="nc" id="L170">            month = new Integer(dateParts[0]).intValue();</span>
+<span class="nc" id="L171">            day = new Integer(dateParts[1]).intValue();</span>
+<span class="nc" id="L172">            Date.checkValidity(month, day);  // check whether the user inputed date is valid</span>
+
+<span class="nc" id="L174">            replyText(&quot;Enter event start and end time in hour (0-23, Separated by Space): &quot;);</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">            while (!userHasReplied());</span>
+<span class="nc" id="L176">            String timeslotParts[] = getUserMessage().split(&quot; &quot;);</span>
+<span class="nc bnc" id="L177" title="All 2 branches missed.">            if (timeslotParts.length != 2)</span>
+<span class="nc" id="L178">                throw new IllegalArgumentException(&quot;2 arguments should be given:\n&lt;starting time&gt; &lt;ending time&gt;&quot;);</span>
+
+            // try to convert startTime, endTime string into Integer
+            // throw NumberFormatException if not convertible
+<span class="nc" id="L182">            startTime = new Integer(timeslotParts[0]).intValue();</span>
+<span class="nc" id="L183">            endTime = new Integer(timeslotParts[1]).intValue();</span>
+<span class="nc" id="L184">            Timeslot.checkValidity(startTime, endTime);  // check whether the timeslot is valid</span>
+
+<span class="nc" id="L186">            replyText(&quot;Enter activity name:&quot;);</span>
+<span class="nc bnc" id="L187" title="All 2 branches missed.">            while (!userHasReplied());</span>
+<span class="nc" id="L188">            activityName = getUserMessage();</span>
+
+<span class="nc" id="L190">            user.addEventDate(month, day);</span>
+<span class="nc" id="L191">            Date date = user.searchDate(month, day);</span>
+<span class="nc" id="L192">            Timeslot timeslot = new Timeslot(startTime, endTime);</span>
+<span class="nc" id="L193">            Activity newActivity = new Activity(activityName, timeslot);</span>
+<span class="nc bnc" id="L194" title="All 2 branches missed.">            if (date.addActivity(newActivity))  // if successfully add activity</span>
+            {
+<span class="nc" id="L196">                replyText(&quot;Event Added.&quot;);</span>
+<span class="nc" id="L197">                Collections.sort(user.getDateList());</span>
+<span class="nc" id="L198">                Collections.sort(date.getActivity());</span>
+            }
+            else
+<span class="nc" id="L201">                replyText(&quot;Time Conflict occurs&quot;);</span>
+        }
+<span class="nc" id="L203">        catch (NumberFormatException e) {</span>
+<span class="nc" id="L204">            replyText(&quot;Entered invalid date/timeslot format. Please try again&quot;);</span>
+        }
+<span class="nc" id="L206">        catch (IllegalArgumentException | InvalidDateException | InvalidTimeslotException e) {</span>
+<span class="nc" id="L207">            replyText(e.getMessage());</span>
+<span class="nc" id="L208">        }</span>
+<span class="nc" id="L209">    }</span>
+
+    // option 2
+    private void removeEvent(){
+<span class="nc" id="L213">        int month = 0; int day = 0;</span>
+<span class="nc" id="L214">        String activityName = null;</span>
+        try {
+<span class="nc bnc" id="L216" title="All 2 branches missed.">            if (user.hasEmptySchedule()){</span>
+<span class="nc" id="L217">                replyText(&quot;The current time schedule is empty. Nothing can be deleted&quot;);</span>
+<span class="nc" id="L218">                return;</span>
+            }
+
+<span class="nc" id="L221">            replyText(&quot;Enter month and day for removal:&quot;);</span>
+<span class="nc bnc" id="L222" title="All 2 branches missed.">            while (!userHasReplied());</span>
+<span class="nc" id="L223">            String[] dateParts = getUserMessage().split(&quot; &quot;);</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">            if (dateParts.length != 2)</span>
+<span class="nc" id="L225">                throw new IllegalArgumentException(&quot;2 arguments should be given:\n&lt;month&gt; &lt;day&gt;&quot;);</span>
+
+            // try to convert month, day string into Integer
+            // throw NumberFormatException if not convertible
+<span class="nc" id="L229">            month = new Integer(dateParts[0]).intValue();</span>
+<span class="nc" id="L230">            day = new Integer(dateParts[1]).intValue();</span>
+<span class="nc" id="L231">            Date.checkValidity(month, day);  // check whether the user inputed date is valid</span>
+
+<span class="nc" id="L233">            Date date = user.searchDate(month, day);</span>
+<span class="nc bnc" id="L234" title="All 2 branches missed.">            if (date == null)</span>
+<span class="nc" id="L235">                replyText(&quot;Invalid Removal. No event on that day&quot;);</span>
+            else
+            {
+<span class="nc bnc" id="L238" title="All 2 branches missed.">                if (date.getActivity().size() == 1){  // there is only one activity to remove</span>
+<span class="nc" id="L239">                    activityName = date.getActivity().get(0).getName();</span>
+<span class="nc" id="L240">                    date.removeActivity(activityName);</span>
+<span class="nc" id="L241">                    replyText(&quot;Event deleted.&quot;);</span>
+                    // remove the empty date as well
+<span class="nc" id="L243">                    user.removeDate(date.getMonth(), date.getDay());</span>
+                }
+                else {
+<span class="nc" id="L246">                    replyText(&quot;Enter activity name:&quot;);</span>
+<span class="nc bnc" id="L247" title="All 2 branches missed.">                    while (!userHasReplied());</span>
+<span class="nc" id="L248">                    activityName = getUserMessage();</span>
+<span class="nc bnc" id="L249" title="All 2 branches missed.">                    if (date.removeActivity(activityName))</span>
+<span class="nc" id="L250">                        replyText(&quot;Event deleted.&quot;);</span>
+                    else
+<span class="nc" id="L252">                        replyText(&quot;No event with name &quot; + activityName);</span>
+                }
+            }
+        }
+<span class="nc" id="L256">        catch (NumberFormatException e) {</span>
+<span class="nc" id="L257">            replyText(&quot;Entered invalid date/timeslot format. Please try again&quot;);</span>
+        }
+<span class="nc" id="L259">        catch (IllegalArgumentException | InvalidDateException e) {</span>
+<span class="nc" id="L260">            replyText(e.getMessage());</span>
+<span class="nc" id="L261">        }</span>
+<span class="nc" id="L262">    }</span>
+
+    // option 3
+    private void displayEventsAtParticularDate(){
+<span class="nc" id="L266">        int month = 0; int day = 0;</span>
+        try {
+<span class="nc" id="L268">            replyText(&quot;Enter month and day for display (Separated by Space):&quot;);</span>
+<span class="nc bnc" id="L269" title="All 2 branches missed.">            while (!userHasReplied());</span>
+<span class="nc" id="L270">            String dateParts[] = this.getUserMessage().split(&quot; &quot;);</span>
+<span class="nc bnc" id="L271" title="All 2 branches missed.">            if (dateParts.length != 2)</span>
+<span class="nc" id="L272">                throw new IllegalArgumentException(&quot;2 arguments should be given:\n&lt;month&gt; &lt;day&gt;&quot;);</span>
+
+            // try to convert month, day string into Integer
+            // throw NumberFormatException if not convertible
+<span class="nc" id="L276">            month = new Integer(dateParts[0]).intValue();</span>
+<span class="nc" id="L277">            day = new Integer(dateParts[1]).intValue();</span>
+<span class="nc" id="L278">            Date.checkValidity(month, day);</span>
+
+<span class="nc" id="L280">            Date date = user.searchDate(month, day);</span>
+<span class="nc bnc" id="L281" title="All 2 branches missed.">            if (date == null)</span>
+<span class="nc" id="L282">                replyText(&quot;No event on &quot; + month + &quot;/&quot; + day);</span>
+            else
+<span class="nc" id="L284">                replyText(date.toString());</span>
+        }
+<span class="nc" id="L286">        catch (NumberFormatException e) {</span>
+<span class="nc" id="L287">            replyText(&quot;Entered invalid date format. Please try again&quot;);</span>
+        }
+<span class="nc" id="L289">        catch (IllegalArgumentException | InvalidDateException e) {</span>
+<span class="nc" id="L290">            replyText(e.getMessage());</span>
+<span class="nc" id="L291">        }</span>
+<span class="nc" id="L292">    }</span>
+
+    // option 4
+    private void displayAllEvents(){
+<span class="nc" id="L296">        replyText(user.toString());</span>
+<span class="nc" id="L297">    }</span>
+
+    // entry point for TimeTable function
+    @Override
+	public void run(){
+		// TimeManager tm = new TimeManager();
+<span class="nc" id="L303">        this.read();  // attempt to read the saved time schedule if exists</span>
+<span class="nc bnc" id="L304" title="All 2 branches missed.">        if (user == null){  // no save / error occurred while reading save</span>
+<span class="nc" id="L305">            replyText(&quot;Enter New Username (for later retrieving the timetable): &quot;);</span>
+            // wait for user reply
+<span class="nc bnc" id="L307" title="All 2 branches missed.">            while (!userHasReplied()); </span>
+<span class="nc" id="L308">            user = new People(getUserMessage());</span>
+        }
+
+		// user = tm.searchPeople(username);
+		// if (user == null)
+		// {
+		// 	user = new People(username);
+		// 	tm.getPeopleList().add(user);
+		// }
+
+<span class="nc" id="L318">        String input = &quot;&quot;;</span>
+<span class="nc" id="L319">        StringBuilder menuBuilder = new StringBuilder().append(&quot;\n1) Add event&quot;)</span>
+<span class="nc" id="L320">                                                       .append(&quot;2) Remove event&quot;)</span>
+<span class="nc" id="L321">                                                       .append(&quot;3) Display event for particular date&quot;)</span>
+<span class="nc" id="L322">                                                       .append(&quot;4) Display all event&quot;)</span>
+<span class="nc" id="L323">                                                       .append(&quot;Enter q to save/leave&quot;);</span>
+<span class="nc bnc" id="L324" title="All 2 branches missed.">        while (input != &quot;q&quot;)</span>
+		{
+<span class="nc" id="L326">            replyText(menuBuilder.toString());</span>
+<span class="nc bnc" id="L327" title="All 2 branches missed.">            while (!userHasReplied()); input = getUserMessage();</span>
+<span class="nc bnc" id="L328" title="All 25 branches missed.">			switch (input)</span>
+			{
+				case &quot;1&quot;:
+<span class="nc" id="L331">                    this.addEvent();</span>
+<span class="nc" id="L332">					break;</span>
+				
+				case &quot;2&quot;:
+<span class="nc" id="L335">                    this.removeEvent();</span>
+<span class="nc" id="L336">					break;</span>
+					
+				case &quot;3&quot;:
+<span class="nc" id="L339">                    this.displayEventsAtParticularDate();</span>
+<span class="nc" id="L340">					break;</span>
+					
+				case &quot;4&quot;:
+<span class="nc" id="L343">					this.displayAllEvents();</span>
+<span class="nc" id="L344">					break;</span>
+
+                case &quot;Q&quot;: case &quot;q&quot;:
+<span class="nc" id="L347">                    input = &quot;q&quot;;</span>
+<span class="nc bnc" id="L348" title="All 2 branches missed.">                    if (!user.hasEmptySchedule())</span>
+<span class="nc" id="L349">                        this.askSave();</span>
+                    break;
+
+				default:
+<span class="nc" id="L353">                    replyText(&quot;Unknown option&quot;);</span>
+<span class="nc" id="L354">					break;</span>
+			}
+		}
+<span class="nc" id="L357">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExaminationCredit.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.script.creditTransferCrawler</a> &gt; <span class="el_source">ExaminationCredit.java</span></div><h1>ExaminationCredit.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.script.creditTransferCrawler;
+
+public class ExaminationCredit {
+	private String examination;
+	private String subject;
+	private String minGrade;
+	private String transferCourseCode;
+	private String dbReferenceNo;
+	
+	public ExaminationCredit()
+<span class="nc" id="L11">	{</span>
+<span class="nc" id="L12">		this.examination = &quot;&quot;;</span>
+<span class="nc" id="L13">		this.subject = &quot;&quot;;</span>
+<span class="nc" id="L14">		this.minGrade = &quot;&quot;;</span>
+<span class="nc" id="L15">		this.transferCourseCode = &quot;&quot;;</span>
+<span class="nc" id="L16">		this.dbReferenceNo = &quot;&quot;;</span>
+<span class="nc" id="L17">	}</span>
+	
+	public ExaminationCredit(String examination, String subject, String minGrade, String transferCourseCode, String dbReferenceNo)
+<span class="nc" id="L20">	{</span>
+<span class="nc" id="L21">		this.examination = examination;</span>
+<span class="nc" id="L22">		this.subject = subject;</span>
+<span class="nc" id="L23">		this.minGrade = minGrade;</span>
+<span class="nc" id="L24">		this.transferCourseCode = transferCourseCode;</span>
+<span class="nc" id="L25">		this.dbReferenceNo = dbReferenceNo;</span>
+<span class="nc" id="L26">	}</span>
+	
+<span class="nc" id="L28">	public String getExamination() { return examination; }</span>
+	
+<span class="nc" id="L30">	public String getSubject() { return subject; }</span>
+	
+<span class="nc" id="L32">	public String getMinGrade() { return minGrade; }</span>
+	
+<span class="nc" id="L34">	public String getTransferCourseCode() { return transferCourseCode; }</span>
+	
+<span class="nc" id="L36">	public String getDBReferenceNo() { return dbReferenceNo; }</span>
+	
+	@Override
+	public String toString()
+	{
+<span class="nc" id="L41">		return examination + &quot; &quot; + subject + &quot; &quot; + minGrade + &quot; &quot; + transferCourseCode + &quot; &quot; + dbReferenceNo;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

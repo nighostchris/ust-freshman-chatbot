@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SearchEngine.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.model.engine</a> &gt; <span class="el_source">SearchEngine.java</span></div><h1>SearchEngine.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.model.engine;
+
+import com.cse3111project.bot.spring.category.Category;
+import com.cse3111project.bot.spring.category.transport.*;
+import com.cse3111project.bot.spring.category.academic.*;
+import com.cse3111project.bot.spring.category.social.*;
+import com.cse3111project.bot.spring.category.function.Function;
+import com.cse3111project.bot.spring.category.function.timetable.TimeTable;
+import com.cse3111project.bot.spring.category.campus.*;
+import com.cse3111project.bot.spring.category.instruction.*;
+import com.cse3111project.bot.spring.category.academic.credit_transfer.NonLocalInstitutionCreditTransfer;
+
+import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
+import com.cse3111project.bot.spring.model.engine.marker.StaticAccessible;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLTimeoutException;
+import java.sql.SQLException;
+
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+
+import java.io.IOException;
+
+import java.util.Collections;
+import java.util.ArrayList;
+import com.cse3111project.bot.spring.utility.Utilities;
+
+import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
+import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
+import com.cse3111project.bot.spring.exception.StaffNotFoundException;
+import com.cse3111project.bot.spring.exception.CourseNotFoundException;
+import com.cse3111project.bot.spring.exception.RoomNotFoundException;
+import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
+import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
+
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * SearchEngine class handles the actual communication between chatbot and user, which search for matched response
+ * from various category.
+ * @version 1.0
+ */
+<span class="fc" id="L45">@Slf4j</span>
+<span class="fc" id="L46">public class SearchEngine </span>
+{
+	/**
+	 * This method will conduct search based on userQuery, and reply accordingly 
+	 * upon matched certain QUERY_KEYWORD.
+	 * @param userQuery
+	 * @return Object
+	 */
+	public Object search(String userQuery)
+	{
+		// Possible response:
+		// 	 - general query e.g. finding the office location of staff and return String
+		//	 - query result would be searched on SQL database first
+		//	 if SQLDatabase is failed to load, use the backup static database
+		//	 - application e.g. TimeTable function, return the application object
+		
+<span class="fc" id="L62">        String reply = null;  // chatbot reply according to userQuery</span>
+
+<span class="fc" id="L64">        Category categoryResult = null;  // storing search result of user query</span>
+
+        // --- Analyzing ---
+        // if found matched results, find out what category the user is asking for
+        try {
+            // parse and manipulate the query
+<span class="fc" id="L70">            ArrayList&lt;String&gt; matchedResults = this.parse(userQuery);</span>
+
+<span class="fc" id="L72">            Utilities.arrayLog(&quot;matchedResults&quot;, matchedResults);</span>
+
+            // if doesn't match any result from the QUERY_KEYWORD list
+<span class="fc bfc" id="L75" title="All 2 branches covered.">            if (matchedResults.isEmpty())</span>
+<span class="fc" id="L76">                return null;</span>
+
+<span class="fc" id="L78">            categoryResult = Category.analyze(matchedResults);</span>
+        }
+        // if results are found, but specified staff is not found on database or 
+        // the entire query is ambiguous then reply corresponding message
+
+<span class="fc" id="L83">        catch (StaffNotFoundException | CourseNotFoundException | RoomNotFoundException | AmbiguousQueryException e) {</span>
+<span class="fc" id="L84">            return e.getMessage();</span>
+        }
+<span class="nc" id="L86">        catch (MalformedURLException | StaticDatabaseFileNotFoundException | NotStaticAccessibleError e) {</span>
+<span class="nc" id="L87">            Utilities.errorLog(e.getMessage(), e);</span>
+<span class="nc" id="L88">            return &quot;Internal Error occurred. Sorry&quot;;</span>
+        }
+<span class="nc" id="L90">        catch (IOException e) {</span>
+<span class="nc" id="L91">            return e.getMessage();</span>
+<span class="fc" id="L92">        }</span>
+
+        // --- Application Module ---
+        // return the function query object
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        if (categoryResult instanceof Function)</span>
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">            if (categoryResult instanceof TimeTable)</span>
+<span class="fc" id="L98">                return categoryResult;</span>
+        
+<span class="fc bfc" id="L100" title="All 2 branches covered.">        if (categoryResult instanceof Instruction)</span>
+<span class="fc" id="L101">        	return ((Instruction) categoryResult).getReply();</span>
+
+        // --- Web Crawling from pathadvisor.ust.hk ---
+        try {
+<span class="fc bfc" id="L105" title="All 2 branches covered.">            if (categoryResult instanceof Campus)</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">                if (categoryResult instanceof CampusETA)</span>
+<span class="fc" id="L107">                    return ((CampusETA) categoryResult).getCampusETA();</span>
+        }
+<span class="nc" id="L109">        catch (IOException e) {  // MalformedURLException would also be redirected here</span>
+<span class="nc" id="L110">            return e.getMessage();</span>
+<span class="fc" id="L111">        }</span>
+
+        try {
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        	if (categoryResult instanceof Academic)</span>
+<span class="fc bfc" id="L115" title="All 2 branches covered.">        		if (categoryResult instanceof CourseWebsiteSearch)</span>
+<span class="fc" id="L116">        			return ((CourseWebsiteSearch) categoryResult).getCourseWebsite();</span>
+        }
+<span class="nc" id="L118">        catch (IOException e)</span>
+        {
+<span class="nc" id="L120">        	return e.getMessage();</span>
+<span class="fc" id="L121">        }</span>
+        
+        // --- KMB database ---
+        try {
+<span class="fc bfc" id="L125" title="All 2 branches covered.">            if (categoryResult instanceof Transport)</span>
+<span class="fc bfc" id="L126" title="All 2 branches covered.">                if (categoryResult instanceof Bus)</span>
+<span class="fc" id="L127">                    return ((Bus) categoryResult).getArrivalTimeFromKMB();</span>
+        }
+<span class="nc" id="L129">        catch (Exception e) {</span>
+<span class="nc" id="L130">            Utilities.errorLog(&quot;unexpected error occurred while reading from KMB database&quot;, e);</span>
+<span class="nc" id="L131">            return &quot;Unexpected error occurred while reading from KMB database. Sorry&quot;;</span>
+<span class="fc" id="L132">        }</span>
+
+        // --- SQL Database ---
+        try {
+            // throw new Exception(&quot;*** throwing error to test static database ***&quot;);
+
+            // if SQL Database is available to that category
+<span class="pc bpc" id="L139" title="1 of 2 branches missed.">            if (categoryResult instanceof SQLAccessible)</span>
+<span class="fc" id="L140">                return categoryResult.getDataFromSQL();</span>
+        }
+        // when one of exceptions occurs then load static database
+<span class="nc" id="L143">        catch (URISyntaxException e) {</span>
+<span class="nc" id="L144">            Utilities.errorLog(&quot;Invalid URI&quot;, e);</span>
+        }
+<span class="nc" id="L146">        catch (SQLTimeoutException e) {</span>
+<span class="nc" id="L147">            Utilities.errorLog(&quot;Database connection timeout&quot;, e);</span>
+        }
+<span class="nc" id="L149">        catch (SQLException e) {</span>
+<span class="nc" id="L150">            Utilities.errorLog(&quot;Unable to connect database&quot;, e);</span>
+        }
+<span class="nc" id="L152">        catch (Throwable e) {</span>
+<span class="nc" id="L153">            Utilities.errorLog(e.getMessage(), e);</span>
+<span class="nc" id="L154">        }</span>
+
+        // --- static database ---
+        try {
+<span class="nc bnc" id="L158" title="All 2 branches missed.">            if (categoryResult instanceof StaticAccessible)</span>
+<span class="nc" id="L159">                return categoryResult.getDataFromStatic();</span>
+        }
+        // if failed on LAST RESORT ....
+<span class="nc" id="L162">        catch (Throwable e) {</span>
+<span class="nc" id="L163">            Utilities.errorLog(e.getMessage(), e);</span>
+<span class="nc" id="L164">            reply = &quot;***\n1001010100\nOh It seEms I aM bRokEn\n0101010001\n***&quot;;</span>
+<span class="nc" id="L165">        }</span>
+
+<span class="nc" id="L167">        return reply;</span>
+	}
+
+    // symbols needed to be omitted in user query
+    // may add Unicode / emojis later **
+    public static final String OMITTED_SYMBOLS = &quot;!@#$%^&amp;*()_=+[]{}\\|:;\'\&quot;,&lt;&gt;?&quot;;
+
+    /**
+     * This method will process the original sentence from user, remove the useless symbols and detect
+     * useful keywords.
+     * @param userQuery user query sentence
+     * @return matched results
+     * @throws StaticDatabaseFileNotFoundException
+     * @throws NotStaticAccessibleError
+     */
+    private ArrayList&lt;String&gt; parse(String userQuery) throws StaticDatabaseFileNotFoundException, NotStaticAccessibleError
+    {
+<span class="fc" id="L184">        StringBuilder queryBuilder = new StringBuilder(userQuery);</span>
+
+        // remove all unneccessary symbols
+<span class="fc bfc" id="L187" title="All 2 branches covered.">        for (int symbol = 0; symbol &lt; OMITTED_SYMBOLS.length(); symbol++){</span>
+            while (true) {
+<span class="fc" id="L189">                int i = queryBuilder.indexOf(new Character(OMITTED_SYMBOLS.charAt(symbol)).toString());</span>
+<span class="fc bfc" id="L190" title="All 2 branches covered.">                if (i == -1)  // if symbol not found / all removed</span>
+<span class="fc" id="L191">                    break;</span>
+<span class="fc" id="L192">                queryBuilder.deleteCharAt(i);</span>
+<span class="fc" id="L193">            }</span>
+        }
+
+        // assign to the transformed user query text + lower casing
+<span class="fc" id="L197">        userQuery = queryBuilder.toString();  // some methods need to preserve the casing of userQuery</span>
+
+<span class="fc" id="L199">        ArrayList&lt;String&gt; matchedResults = new ArrayList&lt;&gt;();</span>
+
+<span class="fc bfc" id="L201" title="All 2 branches covered.">        for (String keyword : Category.QUERY_KEYWORD){</span>
+<span class="fc" id="L202">            String userQueryLowerCase = userQuery.toLowerCase();</span>
+<span class="fc" id="L203">            String keywordLowerCase = keyword.toLowerCase();</span>
+<span class="fc bfc" id="L204" title="All 2 branches covered.">            if (userQueryLowerCase.contains(keywordLowerCase)){  // partial match (match exact substring)</span>
+<span class="fc" id="L205">                String alikeKeywordLowerCase = locateKeyword(userQueryLowerCase, keywordLowerCase);</span>
+<span class="fc" id="L206">                log.info(&quot;keyword: {}&quot;, keyword);</span>
+<span class="fc" id="L207">                log.info(&quot;alikeKeyword: {}&quot;, alikeKeywordLowerCase);</span>
+                // most of broad keywords (abbreviations) have at most 3 letters
+<span class="fc bfc" id="L209" title="All 2 branches covered.">                if (keywordLowerCase.length() &lt;= 3){</span>
+<span class="fc bfc" id="L210" title="All 2 branches covered.">                    if (alikeKeywordLowerCase.equals(keywordLowerCase))  // restricted to be equal</span>
+<span class="fc" id="L211">                        matchedResults.add(keyword);</span>
+                }
+                // only tolerate at most 2 typos
+<span class="fc bfc" id="L214" title="All 2 branches covered.">                else if (editDistance(alikeKeywordLowerCase, keywordLowerCase) &lt;= 2)</span>
+<span class="fc" id="L215">                    matchedResults.add(keyword);</span>
+<span class="fc" id="L216">            }</span>
+<span class="fc bfc" id="L217" title="All 2 branches covered.">            else if (keywordLowerCase.contains(&quot;(&quot;)){</span>
+<span class="fc" id="L218">                String keywordLowerCaseWithoutBrackets = keywordLowerCase.substring(0, keywordLowerCase.indexOf('(')).trim();</span>
+<span class="fc bfc" id="L219" title="All 4 branches covered.">                if (keywordLowerCaseWithoutBrackets.length() != 0 &amp;&amp; userQueryLowerCase.contains(keywordLowerCaseWithoutBrackets)){</span>
+<span class="fc" id="L220">                    String alikeKeywordLowerCase = locateKeyword(userQueryLowerCase, keywordLowerCaseWithoutBrackets);</span>
+<span class="fc" id="L221">                    log.info(&quot;keywordLowerCaseWithoutBrackets: {}&quot;, keywordLowerCaseWithoutBrackets);</span>
+<span class="fc" id="L222">                    log.info(&quot;alikeKeyword: {}&quot;, alikeKeywordLowerCase);</span>
+                    // most of broad keywords (abbreviations) have at most 3 letters
+<span class="pc bpc" id="L224" title="1 of 2 branches missed.">                    if (keywordLowerCase.length() &lt;= 3){</span>
+<span class="nc bnc" id="L225" title="All 2 branches missed.">                        if (alikeKeywordLowerCase.equals(keywordLowerCaseWithoutBrackets))  // restricted to be equal</span>
+<span class="nc" id="L226">                            matchedResults.add(keyword);</span>
+                    }
+                    // only tolerate at most 2 typos
+<span class="fc bfc" id="L229" title="All 2 branches covered.">                    else if (editDistance(alikeKeywordLowerCase, keywordLowerCaseWithoutBrackets) &lt;= 2)</span>
+<span class="fc" id="L230">                        matchedResults.add(keyword);</span>
+                }
+            }
+        }
+
+<span class="fc" id="L235">        Utilities.arrayLog(&quot;before .containsLastName()&quot;, matchedResults);</span>
+
+        // detect last name (full name) after STAFF_POSITION_KEYWORD, e.g. Lecturer, Professor, Prof., ...
+<span class="fc" id="L238">        Staff.containsLastName(userQuery.toLowerCase(), matchedResults);</span>
+        
+<span class="fc" id="L240">        Course.containsCourseCode(userQuery.toLowerCase(), matchedResults);</span>
+
+<span class="fc" id="L242">        NonLocalInstitutionCreditTransfer.detectSubject(userQuery, matchedResults);</span>
+
+        // detect location name if provided
+        // pass userQuery to preserve casing
+<span class="fc" id="L246">        CampusETA.detectLocationName(userQuery, matchedResults);</span>
+
+<span class="fc" id="L248">        return matchedResults;</span>
+    }
+
+    // locate userQuery keyword if partial matched, then compute edit distance to improve the search accuracy
+    private String locateKeyword(String userQueryLowerCase, String keywordLowerCase){
+<span class="fc" id="L253">        int i = userQueryLowerCase.indexOf(keywordLowerCase);</span>
+<span class="fc bfc" id="L254" title="All 4 branches covered.">        for (; i &gt;= 0 &amp;&amp; userQueryLowerCase.charAt(i) != ' '; i--);</span>
+
+<span class="fc" id="L256">        int j = userQueryLowerCase.indexOf(' ', i + 1);</span>
+<span class="fc bfc" id="L257" title="All 4 branches covered.">        for (int k = 1; j != -1 &amp;&amp; k &lt; keywordLowerCase.split(&quot; &quot;).length; k++)</span>
+<span class="fc" id="L258">            j = userQueryLowerCase.indexOf(' ', j + 1);</span>
+
+<span class="fc bfc" id="L260" title="All 2 branches covered.">        return (j == -1 ? userQueryLowerCase.substring(i + 1) : userQueryLowerCase.substring(i + 1, j));</span>
+    }
+
+    // find the minimum edit distance between str1 and str2 
+    // (able to handle user typos / resolve partial match strange problem, see partialMatchTimeTable1())
+    // using dynamic programming
+    private int editDistance(String str1, String str2){
+        // 2D matrix of size (str1.length() + 1) x (str2.length() + 1)
+<span class="fc" id="L268">        int dp[][] = new int[str2.length() + 1][str1.length() + 1];</span>
+
+        // base case
+        // from str1.substring(0, i) to str2.substring(0, 0) (&quot;&quot;)
+        // =&gt; i deletions
+<span class="fc bfc" id="L273" title="All 2 branches covered.">        for (int i = 0; i &lt;= str1.length(); i++)</span>
+<span class="fc" id="L274">            dp[0][i] = i;</span>
+        // from str1.substring(0, 0) (&quot;&quot;) to str2.substring(0, j)
+        // =&gt; j insertions
+<span class="fc bfc" id="L277" title="All 2 branches covered.">        for (int j = 1; j &lt;= str2.length(); j++)</span>
+<span class="fc" id="L278">            dp[j][0] = j;</span>
+
+<span class="fc bfc" id="L280" title="All 2 branches covered.">        for (int j = 1; j &lt;= str2.length(); j++){</span>
+<span class="fc bfc" id="L281" title="All 2 branches covered.">            for (int i = 1; i &lt;= str1.length(); i++){</span>
+                // find the minimum edit distance between str1.substring(0, i - 1) and str2.substring(0, j - 1)
+                // if the last character of str1 and str2 are equal
+<span class="fc bfc" id="L284" title="All 2 branches covered.">                if (str1.charAt(i - 1) == str2.charAt(j - 1))</span>
+<span class="fc" id="L285">                    dp[j][i] = dp[j - 1][i - 1];</span>
+                else
+<span class="fc" id="L287">                    dp[j][i] = Utilities.min(dp[j - 1][i - 1] + 1,  // replacement cost</span>
+                                             dp[j - 1][i] + 1,      // deletion cost
+                                             dp[j][i - 1] + 1       // insertion cost
+                                            );
+            }
+        }
+
+<span class="fc" id="L294">        return dp[str2.length()][str1.length()];</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

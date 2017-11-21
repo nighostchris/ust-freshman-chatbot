@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BusDetail.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.transport</a> &gt; <span class="el_source">BusDetail.java</span></div><h1>BusDetail.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.transport;
+
+import java.net.URI;
+
+import java.util.Scanner;
+import java.util.ArrayList;
+
+import org.json.*;
+
+/**
+ * The BusDetail Class handles all the actual data retrieval from the KMB database and return the 
+ * result. It was used and called in Bus Class when needed.
+ * @version 1.0
+ */
+<span class="nc" id="L15">final class BusDetail</span>
+{
+    // 91M from UST to Choi Hung
+    private static final String ROUTE91MSOUTHGATE = &quot;http://etav3.kmb.hk/?action=geteta&amp;lang=tc&amp;route=91M&amp;bound=1&amp;stop=HK02T10000&amp;stop_seq=12&amp;serviceType=1&quot;;
+    // 91 from UST to Choi Hung
+    private static final String ROUTE91SOUTHGATE = &quot;http://etav3.kmb.hk/?action=geteta&amp;lang=tc&amp;route=91&amp;bound=1&amp;stop=HK02T10000&amp;stop_seq=15&amp;serviceType=1&quot;;
+    // 91M from UST to Po Lam
+    private static final String ROUTE91MNORTHGATE = &quot;http://etav3.kmb.hk/?action=geteta&amp;lang=tc&amp;route=91M&amp;bound=1&amp;stop=HK01T11000&amp;stop_seq=16&amp;serviceType=1&quot;;
+    // 91 from UST to Clear Water Bay
+    private static final String ROUTE91NORTHGATE = &quot;http://etav3.kmb.hk/?action=geteta&amp;lang=tc&amp;route=91&amp;bound=1&amp;stop=HK01T10500&amp;stop_seq=15&amp;serviceType=1&quot;;
+	
+    /** 
+     * This method will connect to KMB database, retrieve the data in JSON format and
+     * perform further process on the data.
+     * @param uri This method will take in a URI object which represents the link to corresponding
+     * 			  KMB database.
+     * @return ArrayList&lt;String&gt; This method will return an ArrayList of String which contains all
+     * 							 the available estimated arrival time of bus from the Bus Database.
+     * @throws Exception This method will throw Exception when encounter Database-connection or
+     * 					 URL malform problem.
+     */
+	private static ArrayList&lt;String&gt; updateETA(URI uri) throws Exception
+	{
+<span class="fc" id="L38">        ArrayList&lt;String&gt; arrivalTime = new ArrayList&lt;&gt;();</span>
+
+        // get json from kmb
+<span class="fc" id="L41">        Scanner sc = new Scanner(uri.toURL().openStream());</span>
+<span class="fc" id="L42">		String json = sc.nextLine();</span>
+		
+		// get the 3 eta for bus route
+<span class="fc" id="L45">		JSONObject obj = new JSONObject(json);</span>
+<span class="fc" id="L46">		JSONArray time = obj.getJSONArray(&quot;response&quot;);</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">		for (int i = 0; i &lt; time.length(); i++)</span>
+		{
+<span class="fc" id="L49">            JSONObject eta = time.getJSONObject(i);</span>
+<span class="fc" id="L50">            String etaTime = eta.getString(&quot;t&quot;).substring(0, 5);</span>
+<span class="fc" id="L51">            arrivalTime.add(etaTime);</span>
+		}
+
+<span class="fc" id="L54">        sc.close();</span>
+
+<span class="fc" id="L56">        return arrivalTime;</span>
+	}
+	
+	/**
+	 * This method will return the processed data of estimated arrival time of bus in South
+	 * gate bus stop of UST.
+	 * @param mornotm Only required parameter of the function, which represents whether the bus
+	 * 				  route is 91 or 91M. Integer value of 0 means 91M while 1 means 91.
+	 * @return ArrayList&lt;String&gt; This method will return an ArrayList of String which contains
+	 * 							 all the ETA of bus from KMB database.
+	 * @throws Exception
+	 */
+	static ArrayList&lt;String&gt; getForSouthGate(int mornotm) throws Exception
+	{
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">        return updateETA(new URI(mornotm == 0 ? ROUTE91MSOUTHGATE : ROUTE91SOUTHGATE));</span>
+	}
+	
+	/**
+	 * This method will return the processed data of estimated arrival time of bus in North
+	 * gate bus stop of UST.
+	 * @param mornotm Only required parameter of the function, which represents whether the bus
+	 * 		  route is 91 or 91M. Integer value of 0 means 91M while 1 means 91.
+	 * @return ArrayList&lt;String&gt; This method will return an ArrayList of String which contains
+	 * 							 all the ETA of bus from KMB database.
+	 * @throws Exception
+	 */
+	static ArrayList&lt;String&gt; getForNorthGate(int mornotm) throws Exception
+	{
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">        return updateETA(new URI(mornotm == 0 ? ROUTE91MNORTHGATE : ROUTE91NORTHGATE));</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

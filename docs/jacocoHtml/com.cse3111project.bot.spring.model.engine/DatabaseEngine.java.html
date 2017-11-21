@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DatabaseEngine.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.model.engine</a> &gt; <span class="el_source">DatabaseEngine.java</span></div><h1>DatabaseEngine.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.model.engine;
+
+import java.sql.PreparedStatement;
+
+/**
+ * DatabaseEngine abstract class defines a basic structure for both SQL database and static database.
+ * @version 1.0
+ */
+public abstract class DatabaseEngine 
+{
+    // table name / filepath
+    protected String TABLE;
+
+    /**
+     * Constructor of DatabaseEngine class.
+     * @param TABLE It is the table name in the database
+     */
+    protected DatabaseEngine(String TABLE) 
+<span class="fc" id="L19">    {</span>
+<span class="fc" id="L20">        this.TABLE = TABLE;</span>
+<span class="fc" id="L21">    }</span>
+
+    /**
+     * Getter method for instance variable TABLE
+     * @return String This method returns the database table name
+     */
+<span class="nc" id="L27">    public final String getTableName() { return this.TABLE; }</span>
+
+    /**
+     * Abstract method which execute query at a single thread.
+     * @return Object
+     * @throws Exception
+     */
+    public abstract Object executeQuery() throws Exception;
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

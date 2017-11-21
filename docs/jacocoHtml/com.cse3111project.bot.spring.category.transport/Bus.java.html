@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Bus.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.transport</a> &gt; <span class="el_source">Bus.java</span></div><h1>Bus.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.transport;
+
+import java.sql.SQLException;
+
+import java.util.ArrayList;
+import com.cse3111project.bot.spring.utility.Utilities;
+
+/**
+ * The Bus class inherits from the Transport category and handle all user query about
+ * estimaed arrival time of KMB bus in the campus.
+ * @version 1.0
+ */
+public class Bus extends Transport 
+{
+    public static final String QUERY_KEYWORD[];
+
+<span class="fc" id="L17">    public static final String ROUTE_91_KEYWORD[]  = { &quot;91&quot;, &quot;91 route&quot;, &quot;route 91&quot;, </span>
+                                                       &quot;91 bus&quot;, &quot;bus route 91&quot;, &quot;bus 91 route&quot; };
+<span class="fc" id="L19">    public static final String ROUTE_91M_KEYWORD[] = { &quot;91M&quot;, &quot;91M route&quot;, &quot;route 91M&quot;,</span>
+                                                       &quot;91M bus&quot;, &quot;bus route 91M&quot;, &quot;bus 91M route&quot; };
+
+<span class="fc" id="L22">    public static final String DIRECTION_KEYWORD[] = { &quot;north gate&quot;, &quot;south gate&quot; };</span>
+    public static final int NORTH = 0;
+    public static final int SOUTH = 1;
+
+    static 
+    {
+<span class="fc" id="L28">        QUERY_KEYWORD = Utilities.concatArrays(DIRECTION_KEYWORD,</span>
+                                               ROUTE_91_KEYWORD, ROUTE_91M_KEYWORD);
+<span class="fc" id="L30">    }</span>
+
+    // constants (enums) defined based on crawler's argument
+    public static final int ROUTE_91M = 0;
+    public static final int ROUTE_91  = 1;
+
+    // group the user query info together
+    class BusQuery {
+        // 91M =&gt; 0; 91 =&gt; 1
+        private int busRoute;
+        // north gate =&gt; 0; south gate =&gt; 1
+        private int location;
+
+        // only visible to this class
+<span class="fc" id="L44">        private BusQuery(int busRoute, int location){</span>
+<span class="fc" id="L45">            this.busRoute = busRoute; this.location = location;</span>
+<span class="fc" id="L46">        }</span>
+    }
+
+<span class="fc" id="L49">    private BusQuery userQuery = null;</span>
+<span class="fc" id="L50">    private ArrayList&lt;String&gt; results = new ArrayList&lt;&gt;();</span>
+
+    /**
+     * This is the constructor of Bus class, which will initalize an object of inner Class
+     * BusQuery, storing further details of the bus query.
+     * @param busRoute First parameter taken in the constructor, indicating the code of Bus
+     * 				   Route to be stored (91 or 91M).
+     * @param location Second parameter taken in the constructor, indicating the location of 
+     * 				   Bus Stop in UST Campus (South or North gate bus stop).
+     */
+    Bus(int busRoute, int location) 
+<span class="fc" id="L61">    {</span>
+<span class="fc" id="L62">        userQuery = new BusQuery(busRoute, location);</span>
+<span class="fc" id="L63">    }</span>
+
+    /**
+     * This method requires no parameter, which will obtain the estimated arrival time of
+     * bus from official KMB Company.
+     * @return String This method will return a string which contains all the available
+     * 				  estimated arrival time of bus from the KMB database
+     * @throws Exception This method will throw Exception when there is a failure connecting
+     * 		   to the KMB database or some URL malforming exception.
+     */
+    public String getArrivalTimeFromKMB() throws Exception {
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        if (userQuery.location == NORTH){</span>
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">            if (userQuery.busRoute == ROUTE_91)</span>
+<span class="nc" id="L76">                results = BusDetail.getForNorthGate(ROUTE_91);</span>
+            else
+<span class="fc" id="L78">                results = BusDetail.getForNorthGate(ROUTE_91M);</span>
+        }
+        else {
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">            if (userQuery.busRoute == ROUTE_91)</span>
+<span class="fc" id="L82">                results = BusDetail.getForSouthGate(ROUTE_91);</span>
+            else
+<span class="nc" id="L84">                results = BusDetail.getForSouthGate(ROUTE_91M);</span>
+        }
+
+<span class="fc" id="L87">        return super.replyResults();</span>
+    }
+    
+    /**
+     * This method will further process the data retrieved from KMB database and make it to
+     * be more clear to the user about the bus arrival time.
+     * @return String This method will return a String representation of Bus class with all 
+     * 		   the details embedded.
+     */
+    @Override
+    public String toString(){
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">        if (results.isEmpty())</span>
+<span class="nc" id="L99">            return &quot;Currently there is no available arrival time from KMB database. Sorry&quot;;</span>
+        
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">        if (results.contains(&quot;\u5C3E\u73ED\u8ECA\u5DF2\u904E&quot;))</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">            return &quot;You have missed the last &quot; + (userQuery.busRoute == ROUTE_91 ? &quot;91&quot; : &quot;91M&quot;) + &quot; bus.&quot; + </span>
+                   &quot; Try to take minibus instead.&quot;;
+
+<span class="fc bfc" id="L105" title="All 2 branches covered.">        return &quot;The next &quot; + results.size() + &quot; route &quot; + (userQuery.busRoute == ROUTE_91 ? &quot;91&quot; : &quot;91M&quot;) + </span>
+<span class="fc" id="L106">               &quot; bus arrival time:\n&quot; + results.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

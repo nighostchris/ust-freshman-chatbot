@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Timeslot.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.function.timetable</a> &gt; <span class="el_source">Timeslot.java</span></div><h1>Timeslot.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.function.timetable;
+
+import java.io.Serializable;
+
+import com.cse3111project.bot.spring.exception.InvalidTimeslotException;
+
+class Timeslot implements Serializable
+{
+    private static final long serialVersionUID = 1L;
+
+	private int start;
+	private int end;
+	
+	Timeslot(int start, int end)
+<span class="nc" id="L15">	{</span>
+<span class="nc" id="L16">		this.start = start;</span>
+<span class="nc" id="L17">		this.end = end;</span>
+<span class="nc" id="L18">	}</span>
+
+    static void checkValidity(int start, int end) throws InvalidTimeslotException {
+<span class="nc bnc" id="L21" title="All 4 branches missed.">        if (start &lt; 0 || start &gt;= 24)  // limit input range [0, 24)</span>
+<span class="nc" id="L22">            throw new InvalidTimeslotException(&quot;Entered invalid starting time. Please try again&quot;);</span>
+<span class="nc bnc" id="L23" title="All 4 branches missed.">        if (end &lt; 0 || end &gt;= 24)  // limit input range [0, 24)</span>
+<span class="nc" id="L24">            throw new InvalidTimeslotException(&quot;Entered invalid ending time. Please try again&quot;);</span>
+<span class="nc" id="L25">    }</span>
+	
+	boolean hasConflict(Timeslot timeslot)
+	{
+<span class="nc bnc" id="L29" title="All 4 branches missed.">		if (this.start &gt;= timeslot.start &amp;&amp; this.start &lt; timeslot.end)</span>
+<span class="nc" id="L30">			return true;</span>
+<span class="nc bnc" id="L31" title="All 4 branches missed.">		else if (timeslot.start &gt;= this.start &amp;&amp; timeslot.start &lt; this.end)</span>
+<span class="nc" id="L32">			return true;</span>
+		else
+<span class="nc" id="L34">			return false;</span>
+	}
+	
+<span class="nc" id="L37">	int getStart() { return start; }</span>
+<span class="nc" id="L38">	int getEnd() { return end; }</span>
+	
+	@Override
+	public String toString()
+	{
+<span class="nc" id="L43">		return getHourFormat(start) + &quot;-&quot; + getHourFormat(end);</span>
+	}
+	
+	private String getHourFormat(int hour)
+	{
+<span class="nc bnc" id="L48" title="All 2 branches missed.">		if (hour &lt;= 9)</span>
+<span class="nc" id="L49">			return &quot;0&quot; + hour + &quot;:00&quot;;</span>
+		else
+<span class="nc" id="L51">			return hour + &quot;:00&quot;;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

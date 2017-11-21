@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HKUSTCourse.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.script.courseDetailsCrawl</a> &gt; <span class="el_source">HKUSTCourse.java</span></div><h1>HKUSTCourse.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.script.courseDetailsCrawl;
+
+import java.util.ArrayList;
+import java.net.URL;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.*;
+import org.jsoup.select.*;
+
+public class HKUSTCourse 
+{
+	private ArrayList&lt;Course&gt; courseList;
+	
+	private static final String parentUrl = &quot;http://prog-crs.ust.hk/ugcourse/2017-18/&quot;;
+	
+<span class="nc" id="L15">	private static final String courseCategory[] = { &quot;ACCT&quot;, &quot;BIBU&quot;, &quot;BIEN&quot;, &quot;BIPH&quot;, &quot;BMED&quot;, &quot;CENG&quot;, &quot;CHEM&quot;, &quot;CIVL&quot;, &quot;COMP&quot;,</span>
+													 &quot;CPEG&quot;, &quot;ECON&quot;, &quot;ELEC&quot;, &quot;ENGG&quot;, &quot;ENTR&quot;, &quot;ENVR&quot;, &quot;ENVS&quot;, &quot;FINA&quot;, &quot;FYTG&quot;,
+													 &quot;GBUS&quot;, &quot;GNED&quot;, &quot;HART&quot;, &quot;HLTH&quot;, &quot;HUMA&quot;, &quot;IDPO&quot;, &quot;IELM&quot;, &quot;IIMP&quot;, &quot;IROP&quot;,
+													 &quot;ISOM&quot;, &quot;LABU&quot;, &quot;LANG&quot;, &quot;LIFS&quot;, &quot;MARK&quot;, &quot;MATH&quot;, &quot;MECH&quot;, &quot;MGMT&quot;, &quot;PHYS&quot;,
+													 &quot;RMBI&quot;, &quot;SBMT&quot;, &quot;SCIE&quot;, &quot;SHSS&quot;, &quot;SISP&quot;, &quot;SOSC&quot;, &quot;SUST&quot;, &quot;TEMG&quot;, &quot;UROP&quot;,
+													 &quot;WBBA&quot;};
+	
+	public HKUSTCourse()
+<span class="nc" id="L23">	{</span>
+<span class="nc" id="L24">		courseList = new ArrayList&lt;Course&gt;();</span>
+		try
+		{
+<span class="nc" id="L27">			webCrawling();</span>
+		}
+<span class="nc" id="L29">		catch (Exception e)</span>
+		{
+<span class="nc" id="L31">			e.printStackTrace();</span>
+<span class="nc" id="L32">		}</span>
+<span class="nc" id="L33">	}</span>
+	
+	private void webCrawling() throws Exception
+	{
+<span class="nc bnc" id="L37" title="All 2 branches missed.">		for (int i = 0; i &lt; courseCategory.length; i++)</span>
+		//for (int i = 0; i &lt; 1; i++)
+		{
+<span class="nc" id="L40">			URL url = new URL(parentUrl + courseCategory[i]);</span>
+<span class="nc" id="L41">			Document doc = Jsoup.parse(url, 3000);</span>
+<span class="nc" id="L42">			Elements courseTable = doc.select(&quot;li.crse.accordion-item&quot;);</span>
+<span class="nc" id="L43">			Elements course = courseTable.select(&quot;div.accordion-item-header&quot;);</span>
+<span class="nc" id="L44">			Elements courseCodeList = course.select(&quot;div.crse-code&quot;);</span>
+<span class="nc" id="L45">			Elements courseTitleList = course.select(&quot;div.crse-title&quot;);</span>
+<span class="nc" id="L46">			Elements courseCreditList = course.select(&quot;div.crse-unit&quot;);</span>
+			
+<span class="nc bnc" id="L48" title="All 2 branches missed.">			for (int j = 0; j &lt; courseTable.size(); j++)</span>
+			{
+<span class="nc" id="L50">				String courseCode = courseCodeList.get(j).text();</span>
+<span class="nc" id="L51">				String courseTitle = courseTitleList.get(j).text();</span>
+<span class="nc" id="L52">				String courseCredit = courseCreditList.get(j).text();</span>
+<span class="nc" id="L53">				String prerequisite = &quot;&quot;;</span>
+<span class="nc" id="L54">				String exclusion = &quot;&quot;;</span>
+<span class="nc" id="L55">				String corequisite = &quot;&quot;;</span>
+				
+<span class="nc" id="L57">				Elements courseCriteria = courseTable.get(j).select(&quot;div.data-row.data-row-default&quot;);</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">				if (!courseCriteria.isEmpty())</span>
+				{
+<span class="nc" id="L60">					Elements header = courseCriteria.select(&quot;div.header&quot;);</span>
+<span class="nc" id="L61">					Elements data = courseCriteria.select(&quot;div.data&quot;);</span>
+					
+<span class="nc bnc" id="L63" title="All 2 branches missed.">					for (int k = 0; k &lt; header.size(); k++)</span>
+					{
+<span class="nc bnc" id="L65" title="All 2 branches missed.">						if (header.get(k).text().contains(&quot;Prerequisite(s)&quot;))</span>
+<span class="nc" id="L66">							prerequisite = data.get(k).text();</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">						else if (header.get(k).text().contains(&quot;Exclusion(s)&quot;))</span>
+<span class="nc" id="L68">							exclusion = data.get(k).text();</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">						else if (header.get(k).text().contains(&quot;Corequisite(s)&quot;))</span>
+<span class="nc" id="L70">							corequisite = data.get(k).text();</span>
+					}
+				}
+<span class="nc" id="L73">				Course newCourse = new Course(courseCode, courseTitle, courseCredit, prerequisite, exclusion, corequisite);</span>
+<span class="nc" id="L74">				courseList.add(newCourse);</span>
+			}
+		}
+<span class="nc" id="L77">	}</span>
+	
+<span class="nc" id="L79">	public ArrayList&lt;Course&gt; getCourseList() { return courseList; }</span>
+	
+	// local testing for web crawling function only
+	//public static void main(String[] args)
+	//{
+		//HKUSTCourse test = new HKUSTCourse();
+		//for (Course print : test.courseList)
+			//System.out.println(print);
+	//}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

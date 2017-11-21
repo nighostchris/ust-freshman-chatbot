@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CampusETA.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.campus</a> &gt; <span class="el_source">CampusETA.java</span></div><h1>CampusETA.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.campus;
+
+import java.net.URL;
+import java.net.URLEncoder;
+
+import java.net.MalformedURLException;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import java.util.Scanner;
+import java.util.ArrayList;
+import com.cse3111project.bot.spring.utility.Utilities;
+
+/**
+ * The CampusETA Class inherits from Campus Class, which handle the actual calculation of distance between
+ * the 2 locations indicated by user and store the time required as instance variable.
+ * @version 1.0
+ */
+public class CampusETA extends Campus
+{
+	private String startPoint;
+	private String endPoint;
+	private double eta;
+	private CampusMapping timeMatrix;
+	
+	private static final double MINUTE_PER_PIXEL = 0.000546;
+	
+<span class="fc" id="L29">	private static String parentURL[] = { &quot;http://pathadvisor.ust.hk/phplib/keyword_suggestion.php?keyword=&quot;, &quot;&amp;floor=Overall&quot; };</span>
+	
+<span class="fc" id="L31">	public static final String CAMPUS_DIRECTION_KEYWORD[] = { &quot;from&quot;, &quot;to&quot; };</span>
+	
+	/**
+	 * This is the constructor of CampusETA Class, which will accept the 2 valid locations by users and
+	 * store as instance variable for further calculation later on in this class.
+	 * @param startPoint First parameter taken by the constructor, representing the name of the starting 
+	 * 					 location of the user.
+	 * @param endPoint Second parameter taken by the constructor, representing the name of the destination
+	 * 				   that the user wants to go.
+	 * @throws FileNotFoundException
+	 */
+	CampusETA(String startPoint, String endPoint) throws FileNotFoundException
+<span class="fc" id="L43">	{</span>
+<span class="fc" id="L44">		this.startPoint = startPoint;</span>
+<span class="fc" id="L45">		this.endPoint = endPoint;</span>
+<span class="fc" id="L46">		eta = 0;</span>
+<span class="fc" id="L47">		timeMatrix = new CampusMapping();</span>
+<span class="fc" id="L48">	}</span>
+
+    /**
+     * This method will try to detect location name within the campus from transformed user query. It is
+     * supposed to be called in Category Class.
+     * @param userQuery First parameter taken by the method, representing the user query without invalid
+     * 				    symbol.
+     * @param matchedResults Second parameter taken by the method, representing the keywords detected from the
+     * 						 user query.
+     */
+	public static void detectLocationName(String userQuery, ArrayList&lt;String&gt; matchedResults)
+    {
+<span class="fc" id="L60">        StringBuilder fromLocation = new StringBuilder();</span>
+<span class="fc" id="L61">        StringBuilder toLocation = new StringBuilder();</span>
+
+<span class="fc" id="L63">        int i = userQuery.indexOf(CAMPUS_DIRECTION_KEYWORD[0], 0);</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (i == -1) return;  // no &quot;from&quot;</span>
+<span class="fc" id="L65">        int j = userQuery.indexOf(CAMPUS_DIRECTION_KEYWORD[1], i);  // should be after &quot;from&quot;</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        if (j == -1) return;  // no &quot;to&quot;</span>
+
+        // i = userQuery.indexOf(' ', i);  // after the end of &quot;from&quot;
+        // append from &quot;from ...&quot; until &quot; to&quot;
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        for (int k = i; k &lt; j - 1; k++)</span>
+<span class="fc" id="L71">            fromLocation.append(userQuery.charAt(k));</span>
+
+        // j = userQuery.indexOf(' ', j);  // after the end of &quot;to&quot;
+        // if (j == -1) return;
+<span class="fc" id="L75">        toLocation.append(userQuery.substring(j));  // &quot;to ...&quot;</span>
+
+        // remove all '.' (fullstop) in toLocation if exist
+        // it should not exist while querying location
+        // NOTE that it is not trimmed in SearchEngine.parse() 
+        // since it is part of keyword for Staff query: Prof.
+<span class="fc" id="L81">        int k = 0;</span>
+        while (true) {
+<span class="fc" id="L83">            k = toLocation.indexOf(&quot;.&quot;, k);</span>
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">            if (k == -1) break;</span>
+<span class="nc" id="L85">            toLocation = toLocation.deleteCharAt(k);</span>
+        }
+
+        // eliminate the possiblities of  &quot;from to&quot;, &quot;from LTA to&quot;, &quot;from to LTA&quot;, ...
+<span class="pc bpc" id="L89" title="2 of 4 branches missed.">        if (fromLocation.length() == 0 || toLocation.length() == 0)</span>
+<span class="nc" id="L90">            return;</span>
+
+        // fromLocation: &quot;from ...&quot;
+        // toLocation: &quot;to ...&quot;
+<span class="fc" id="L94">        matchedResults.add(fromLocation.toString());</span>
+<span class="fc" id="L95">        matchedResults.add(toLocation.toString());</span>
+
+<span class="fc" id="L97">        Utilities.arrayLog(&quot;matchedResults after CampusETA.detectLocationName()&quot;, matchedResults);</span>
+<span class="fc" id="L98">    }</span>
+	
+	/**
+	 * This method will check if the location / room inputted by user is valid before calculating the actual
+	 * estimated time for the user to walk between. It is supposed to be called in Category class.
+	 * @param startPoint First parameter taken by the method, representing the current position of the user.
+	 * @param endPoint Second parameter taken by the method, representing the destination of user.
+	 * @return Boolean This method will return a boolean value indicating whether the 2 locations inputted by
+	 * 				   the user is correct. True when valid locations, false otherwise.
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
+	public static boolean locationValid(String startPoint, String endPoint) 
+            throws MalformedURLException, IOException
+	{
+<span class="fc" id="L113">        URL startDetail = null; URL endDetail = null;</span>
+<span class="fc" id="L114">        Scanner start = null; Scanner end = null;</span>
+        try {
+            // use URLEncoder to ensure the URL is valid (has proper HTML encoding)
+            // so that the connection could be opened
+<span class="fc" id="L118">            startDetail = new URL(parentURL[0] + URLEncoder.encode(startPoint, &quot;UTF-8&quot;) + parentURL[1]);</span>
+<span class="fc" id="L119">            endDetail = new URL(parentURL[0] + URLEncoder.encode(endPoint, &quot;UTF-8&quot;) + parentURL[1]);</span>
+<span class="fc" id="L120">            start = new Scanner(startDetail.openStream());</span>
+<span class="fc" id="L121">            end = new Scanner(endDetail.openStream());</span>
+
+            // read one line should be fine
+<span class="pc bpc" id="L124" title="2 of 4 branches missed.">            return start.hasNext() &amp;&amp; end.hasNext();</span>
+        }
+<span class="nc" id="L126">        catch (MalformedURLException e) {  // should not occur in Release</span>
+<span class="nc" id="L127">            Utilities.errorLog(&quot;Bad URL&quot;, e);</span>
+<span class="nc" id="L128">            throw new MalformedURLException(&quot;Unexpected Error occurred. Sorry&quot;);</span>
+        }
+<span class="nc" id="L130">        catch (IOException e)</span>
+        {
+<span class="nc" id="L132">            Utilities.errorLog(&quot;I/O error occurred while querying location on pathadvisor.ust.hk&quot;, e);</span>
+<span class="nc" id="L133">            throw new IOException(&quot;Unexpected Error occurred while interpreting your location. Sorry&quot;);</span>
+        }
+        finally {
+<span class="pc bpc" id="L136" title="3 of 4 branches missed.">            if (start != null)</span>
+<span class="pc" id="L137">                start.close();</span>
+<span class="pc bpc" id="L138" title="3 of 4 branches missed.">            if (end != null)</span>
+<span class="pc" id="L139">                end.close();</span>
+        }
+
+		// if (start.hasNext())
+		// {
+		// 	String line = start.nextLine();
+		// 	countStart += line.length();
+		// }
+		// 
+		// if (end.hasNext())
+		// {
+		// 	String line = end.nextLine();
+		// 	countStart += line.length();
+		// }
+		
+		// if (countStart == 0 || countEnd == 0)
+		// 	return false;
+		// return true;
+	}
+	
+	/**
+	 * This method is the getter method for instance variable startPoint.
+	 * @return String return instance variable startPoint.
+	 */
+<span class="nc" id="L163">	public String getStartPoint() { return startPoint; }</span>
+	
+	/**
+	 * This method is the getter method for instance variable endPoint.
+	 * @return String return instance variable endPoint.
+	 */
+<span class="nc" id="L169">	public String getEndPoint() { return endPoint; }</span>
+	
+	/**
+	 * This method is the getter method for instance variable eta.
+	 * @return double return the instnace variable eta.
+	 */
+<span class="nc" id="L175">	public double getETA() { return eta; }</span>
+	
+	/**
+	 * This method is going to calculate the estimated time to go from startPoint to endPoint
+	 * defined by the user.
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
+	private void calculateETA() throws MalformedURLException, IOException
+	{
+<span class="fc" id="L185">        URL startDetail = null; URL endDetail = null;</span>
+<span class="fc" id="L186">        Scanner start = null; Scanner end = null;</span>
+
+        try {
+            // use URLEncoder to make sure the HTML encoding is correct
+<span class="fc" id="L190">            startDetail = new URL(parentURL[0] + URLEncoder.encode(startPoint, &quot;UTF-8&quot;) + parentURL[1]);</span>
+<span class="fc" id="L191">            endDetail = new URL(parentURL[0] + URLEncoder.encode(endPoint, &quot;UTF-8&quot;) + parentURL[1]);</span>
+<span class="fc" id="L192">            start = new Scanner(startDetail.openStream());</span>
+<span class="fc" id="L193">            end = new Scanner(endDetail.openStream());</span>
+
+<span class="fc" id="L195">            String s[] = start.nextLine().split(&quot;[,;]&quot;);</span>
+<span class="fc" id="L196">            String e[] = end.nextLine().split(&quot;[,;]&quot;);</span>
+			
+<span class="fc" id="L198">            double firstDraft = distanceToMinute(Integer.parseInt(s[2]), Integer.parseInt(s[3]), </span>
+<span class="fc" id="L199">                                                 Integer.parseInt(e[2]), Integer.parseInt(e[3]));</span>
+<span class="fc" id="L200">            this.eta = adjustDraft(s[4], e[4], firstDraft);</span>
+        }
+<span class="nc" id="L202">        catch (MalformedURLException e) {  // should not occur in Release</span>
+<span class="nc" id="L203">            Utilities.errorLog(&quot;Bad URL&quot;, e);</span>
+<span class="nc" id="L204">            throw new MalformedURLException(&quot;Unexpected Error occurred. Sorry&quot;);</span>
+        }
+<span class="nc" id="L206">        catch (IOException e)</span>
+        {
+<span class="nc" id="L208">            Utilities.errorLog(&quot;I/O error occurred while querying location on pathadvisor.ust.hk&quot;, e);</span>
+<span class="nc" id="L209">            throw new IOException(&quot;Unexpected Error occurred while interpreting your location. Sorry&quot;);</span>
+        }
+        finally {
+<span class="pc bpc" id="L212" title="3 of 4 branches missed.">            if (start != null)</span>
+<span class="pc" id="L213">                start.close();</span>
+<span class="pc bpc" id="L214" title="3 of 4 branches missed.">            if (end != null)</span>
+<span class="pc" id="L215">                end.close();</span>
+        }
+<span class="fc" id="L217">	}</span>
+	
+	/**
+	 * This method will calculate the distance between 2 points with the x, y coordinates of them
+	 * known to the program, and transform the distance to time required to walk through.
+	 * @param x1 First parameter taken by the method, representing the x coordinate of Point 1.
+	 * @param y1 Second parameter taken by the method, representing the y coordinate of Point 1.
+	 * @param x2 Third parameter taken by the method, representing the x coordinate of Point 2.
+	 * @param y2 Last parameter taken by the method, representing the y coordinate of Point 2.
+	 * @return double This method will return the time to walk between 2 points in double format.
+	 */
+	private double distanceToMinute(int x1, int y1, int x2, int y2)
+	{
+<span class="fc" id="L230">		double distance = Math.sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1));</span>
+<span class="fc" id="L231">		return distance * MINUTE_PER_PIXEL;</span>
+	}
+	
+	/**
+	 * This method will further adjust the time estimated in the first draft from calculateETA() method,
+	 * which consider also the floor difference and the campus building difference between the 2 points.
+	 * @param startFloor First parameter taken by the method, representing the located floor of startPoint.
+	 * @param endFloor Second parameter taken by the method, representing the located floor of endPoint.
+	 * @param firstDraft Last parameter taken by the method, representing the rough estimation from the 
+	 * 					 calculateETA() method.
+	 * @return double This method will return the final estimation of the time required in double format.
+	 */
+	private double adjustDraft(String startFloor, String endFloor, double firstDraft)
+	{
+<span class="fc" id="L245">		int start = timeMatrix.locationOnMatrix(startFloor);</span>
+<span class="fc" id="L246">		int end = timeMatrix.locationOnMatrix(endFloor);</span>
+<span class="fc" id="L247">		int adjust = timeMatrix.getTimeFromMatrix(start, end);</span>
+<span class="fc" id="L248">		return firstDraft + (double)adjust / 60;</span>
+	}
+	
+	/** 
+	 * This method will transform a double type value into a String that represents the time in text format.
+	 * @param eta Only parameter taken by the method, representing the time want to transform, e.g. eta.
+	 * @return String This method will return a String which represents eta.
+	 */
+	private String numberToTimeString(double eta)
+	{
+<span class="fc" id="L258">		String result = &quot;&quot;;</span>
+<span class="fc" id="L259">		Double d = new Double(eta);</span>
+<span class="fc" id="L260">		int min = d.intValue();</span>
+<span class="fc" id="L261">		result = result + Integer.toString(min) + &quot; mins and &quot;;</span>
+		
+<span class="fc" id="L263">		eta -= min;</span>
+<span class="fc" id="L264">		d = new Double(eta / 1 * 60);</span>
+<span class="fc" id="L265">		min = d.intValue();</span>
+<span class="fc" id="L266">		result = result + Integer.toString(min) + &quot; seconds&quot;;</span>
+		
+<span class="fc" id="L268">		return result;</span>
+	}
+	
+	/**
+	 * This method will calculate the eta between 2 points and return the time result.
+	 * @return String the text format of the eta.
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
+	public String getCampusETA() throws MalformedURLException, IOException
+	{
+<span class="fc" id="L279">		calculateETA();</span>
+<span class="fc" id="L280">		return this.toString();</span>
+	}
+	
+	/**
+	 * This method will wrap the text format of eta in a nicer way to display to LINE client.
+	 * @return String
+	 */
+	@Override
+	public String toString()
+	{
+<span class="fc" id="L290">		return &quot;It takes &quot; + numberToTimeString(eta) + &quot; to go from &quot; + startPoint + &quot; to &quot; + endPoint;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

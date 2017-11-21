@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Utilities.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.utility</a> &gt; <span class="el_source">Utilities.java</span></div><h1>Utilities.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.utility;
+
+import java.io.PrintStream;
+import java.io.ByteArrayOutputStream;
+
+import java.util.List;
+
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * The Utilities class apply the strategy pattern and group up all general functions that will be
+ * called frequently by all classes as a family of algorithms.
+ * @version 1.0
+ */
+<span class="fc" id="L15">@Slf4j</span>
+public final class Utilities 
+{
+	/**
+	 * Constructor of Utilities class. It was made private to make sure no one could instantiate Utilities 
+	 * object since all methods here would be static.
+	 */
+<span class="nc" id="L22">    private Utilities() { }</span>
+
+    /**
+     * This method is used to concatenate two arrays. Time Complexity: O(sum of arrays length)
+     * @param arrays Only parameter of this method, representing all the String arrays to be concatenated.
+     * @return String[] Return the concatenated String array.
+     */
+    public static synchronized String[] concatArrays(String[]... arrays)
+    {
+<span class="fc" id="L31">        int newArrSize = 0;</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        for (int i = 0; i &lt; arrays.length; i++)</span>
+<span class="fc" id="L33">            newArrSize += arrays[i].length;</span>
+
+<span class="fc" id="L35">        String newArr[] = new String[newArrSize];</span>
+
+<span class="fc" id="L37">        int k = 0;</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        for (int i = 0; i &lt; arrays.length; i++)</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">            for (int j = 0; j &lt; arrays[i].length; j++, k++)</span>
+<span class="fc" id="L40">                newArr[k] = arrays[i][j];</span>
+
+<span class="fc" id="L42">        return newArr;</span>
+    }
+
+    /**
+     * This method will find the maximum object within the input arguments. Time Complexity: O(args.length)
+     * @param args This method will take in infinite integer arguments to compare them.
+     * @return int return the max integer value among the input.
+     */
+    public static int max(int... args)
+    {
+<span class="fc" id="L52">        int maximum = args[0];</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        for (int i = 1; i &lt; args.length; i++)</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">            if (maximum &lt; args[i])</span>
+<span class="fc" id="L55">                maximum = args[i];</span>
+
+<span class="fc" id="L57">        return maximum;</span>
+    }
+
+    /**
+     * This method will find the minimum object within the input arguments. Time Complexity: O(args.length)
+     * @param args This method will take in infinite integer arguments to compare them.
+     * @return int return the min integer value among the input.
+     */
+    public static int min(int... args)
+    {
+<span class="fc" id="L67">        int minimum = args[0];</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        for (int i = 1; i &lt; args.length; i++)</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">            if (minimum &gt; args[i])</span>
+<span class="fc" id="L70">                minimum = args[i];</span>
+
+<span class="fc" id="L72">        return minimum;</span>
+    }
+
+    /**
+     * This method will check whether the String array contains result with case-sensitive. 
+     * Time complexity: O(arr.length)
+     * @param arr It is a String array which contains all the elements to be compare.
+     * @param result It is the result to be tested.
+     * @return boolean This method will return a boolean value indicating whether the array contains the result.
+     */
+    public static boolean contains(String[] arr, String result)
+    {
+<span class="fc bfc" id="L84" title="All 2 branches covered.">        for (String element : arr)</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">            if (element.equals(result))</span>
+<span class="fc" id="L86">                return true;</span>
+
+<span class="fc" id="L88">        return false;</span>
+    }
+
+    /**
+     * This method will be used to check whether all args are all equal to each other
+     * @param args The arguments of any type to be checked
+     * @return boolean Return a boolean which indicate whether all arguments are equal to each other
+     */
+    @SafeVarargs
+    public static &lt;T&gt; boolean allEquals(T... args){
+        // empty set or singleton
+<span class="pc bpc" id="L99" title="2 of 4 branches missed.">        if (args.length == 0 || args.length == 1)</span>
+<span class="nc" id="L100">            return true;</span>
+
+<span class="fc" id="L102">        T arg = args[0];</span>
+<span class="pc bpc" id="L103" title="1 of 2 branches missed.">        for (int i = 1; i &lt; args.length; i++)</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">            if (!arg.equals(args[i]))</span>
+<span class="fc" id="L105">                return false;</span>
+
+<span class="nc" id="L107">        return true;</span>
+    }
+
+    /**
+     * This method will be used to take log on errors. The error log format will be like 
+     * errMsg: exception name: exception message
+     * @param errMsg First parameter taken by this method, representing the error message to be recorded.
+     * @param errObj Last parameter taken by this method, representing the error class.
+     */
+    public static void errorLog(String errMsg, Throwable errObj)
+    {
+    	// store original stderr
+<span class="nc" id="L119">    	PrintStream stderr = System.err;  </span>
+
+<span class="nc" id="L121">        ByteArrayOutputStream os = new ByteArrayOutputStream();</span>
+        // reassign the stream
+<span class="nc" id="L123">        System.setErr(new PrintStream(os));  </span>
+        
+        // in order to .printStackTrace() on os instead of stderr
+<span class="nc" id="L126">        errObj.printStackTrace();  </span>
+
+<span class="nc" id="L128">        log.info(&quot;{}: {}\n{}&quot;, errMsg, errObj.toString(), os.toString());</span>
+
+        // reset as stderr
+<span class="nc" id="L131">        System.setErr(stderr);  </span>
+<span class="nc" id="L132">    }</span>
+
+    /**
+     * This method is used to log all elements.
+     * @param msg First parameter taken by this method, which is the message to be logged.
+     * @param items Last parameter taken by this method, which is the list of items to be logged.
+     */
+    public static void arrayLog(String msg, List&lt;String&gt; items){
+<span class="fc" id="L140">        StringBuilder logBuilder = new StringBuilder();</span>
+
+<span class="fc bfc" id="L142" title="All 2 branches covered.">        for (int i = 0; i &lt; items.size(); i++){</span>
+<span class="fc" id="L143">            logBuilder.append(items.get(i));</span>
+<span class="fc bfc" id="L144" title="All 2 branches covered.">            if (i != items.size() - 1)</span>
+<span class="fc" id="L145">                logBuilder.append(&quot;, &quot;);</span>
+        }
+
+<span class="fc" id="L148">        log.info(&quot;{}: {}&quot;, msg, logBuilder.toString());</span>
+<span class="fc" id="L149">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

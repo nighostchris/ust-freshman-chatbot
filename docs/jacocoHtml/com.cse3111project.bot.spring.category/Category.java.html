@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Category.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category</a> &gt; <span class="el_source">Category.java</span></div><h1>Category.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category;
+
+import com.cse3111project.bot.spring.category.transport.Transport;
+import com.cse3111project.bot.spring.category.academic.Academic;
+import com.cse3111project.bot.spring.category.social.Social;
+import com.cse3111project.bot.spring.category.function.Function;
+import com.cse3111project.bot.spring.category.campus.Campus;
+import com.cse3111project.bot.spring.category.instruction.Instruction;
+
+import java.sql.SQLException;
+
+import java.net.URISyntaxException;
+import java.net.MalformedURLException;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import java.util.List;
+import java.util.ArrayList;
+import com.cse3111project.bot.spring.utility.Utilities;
+
+import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
+import com.cse3111project.bot.spring.exception.StaffNotFoundException;
+import com.cse3111project.bot.spring.exception.CourseNotFoundException;
+import com.cse3111project.bot.spring.exception.RoomNotFoundException;
+import com.cse3111project.bot.spring.exception.CourseNotFoundException;
+
+/**
+ * The Category Class classify different features of the chatbot into different categories, act
+ * as the framework of classes of features like Transport and Academic. It coordinates the 
+ * communication between SearchEngine and different features.
+ * @version 1.0
+ */
+<span class="fc" id="L34">public class Category </span>
+{
+    // going to use Utilities.concatArrays() to concatenate all QUERY_KEYWORDs in each catagory
+    // as more Categories are defined
+<span class="fc" id="L38">    public static final String QUERY_KEYWORD[] = Utilities.concatArrays(Academic.QUERY_KEYWORD, </span>
+                                                                        Transport.QUERY_KEYWORD,
+                                                                        Social.QUERY_KEYWORD,
+                                                                        Function.QUERY_KEYWORD,
+                                                                        Instruction.QUERY_KEYWORD);
+    // Campus.QUERY_KEYWORD not enlisted since it only consists of CAMPUS_DIRECTION_KEYWORD
+    // which would be handled in CampusETA.detectLocationName() in SearchEngine.parse()
+
+    // not every Category has a SQLDatabase
+    // protected static SQLDatabaseEngine SQLDatabase = null;
+
+    /**
+     * This method will compare the keywords of user query and the pre-defined keywords of different
+     * classes, perform further analyzes and determine which category the user is questioning for
+     * @param matchedResults
+     * @return
+     * @throws AmbiguousQueryException Throws exception upon unclear user-query.
+     * @throws StaffNotFoundException Throws exception when the user is asking for details of UST
+     * 								  staffs but there is no matching results.
+     * @throws RoomNotFoundException Throws exception when the user is asking for estimated time
+     * 								 to go from one place to another place within campus, but the
+     * 								 room is invalid.
+     * @throws MalformedURLException Throws exeception when URL has malform problem.
+     * @throws FileNotFoundException Throws exception when static database cannot be loaded.
+     * @throws IOException
+     */
+    public static Category analyze(final List&lt;String&gt; matchedResults) 
+           throws AmbiguousQueryException, StaffNotFoundException, CourseNotFoundException,
+           		  RoomNotFoundException, MalformedURLException, FileNotFoundException,
+           		  IOException 
+    {
+<span class="fc" id="L69">        ArrayList&lt;String&gt; transportResults = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L70">        ArrayList&lt;String&gt; academicResults = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L71">        ArrayList&lt;String&gt; socialResults = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L72">        ArrayList&lt;String&gt; functionResults = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L73">        ArrayList&lt;String&gt; campusResults = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L74">        ArrayList&lt;String&gt; instructionResults = new ArrayList&lt;&gt;();</span>
+
+<span class="fc bfc" id="L76" title="All 2 branches covered.">        for (String result : matchedResults){</span>
+            // Transport.QUERY_KEYWORD = Minibus.QUERY_KEYWORD U Bus.QUERY_KEYWORD
+            // U represents union
+<span class="fc bfc" id="L79" title="All 2 branches covered.">            for (String transportKeyword : Transport.QUERY_KEYWORD)</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">                if (result.equals(transportKeyword))</span>
+<span class="fc" id="L81">                    transportResults.add(transportKeyword);</span>
+
+            // Academic.QUERY_KEYWORD = Staff.STAFF_NAME_KEYWORD U Staff.STAFF_POSITION_KEYWORD
+<span class="fc bfc" id="L84" title="All 2 branches covered.">            for (String academicKeyword : Academic.QUERY_KEYWORD)</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">                if (result.equals(academicKeyword))</span>
+<span class="fc" id="L86">                    academicResults.add(academicKeyword);</span>
+
+            // Social.QUERY_KEYWORD = Societies.QUERY_KEYWORD U Recreation.QUERY_KEYWORD
+<span class="fc bfc" id="L89" title="All 2 branches covered.">            for (String socialKeyword : Social.QUERY_KEYWORD)</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">                if (result.equals(socialKeyword))</span>
+<span class="fc" id="L91">                    socialResults.add(socialKeyword);</span>
+
+            // Function.QUERY_KEYWORD = TimeTable.FUNCTION_KEYWORD
+<span class="fc bfc" id="L94" title="All 2 branches covered.">            for (String functionKeyword : Function.QUERY_KEYWORD)</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">                if (result.equals(functionKeyword))</span>
+<span class="fc" id="L96">                    functionResults.add(functionKeyword);</span>
+
+            // Campus.QUERY_KEYWORD = CampusETA.CAMPUS_DIRECTION_KEYWORD
+<span class="fc bfc" id="L99" title="All 2 branches covered.">            for (String campusKeyword : Campus.QUERY_KEYWORD)</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">                if (result.contains(campusKeyword))  // contains direction keyword &quot;from&quot;, &quot;to&quot;</span>
+<span class="fc" id="L101">                    campusResults.add(result);</span>
+            
+            // Instruction.QUERY_KEYWORD = Instruction.QUERY_KEYWORD
+<span class="fc bfc" id="L104" title="All 2 branches covered.">            for (String instructionKeyword : Instruction.QUERY_KEYWORD)</span>
+<span class="fc bfc" id="L105" title="All 2 branches covered.">            	if (result.equals(instructionKeyword))</span>
+<span class="fc" id="L106">            		instructionResults.add(result);</span>
+<span class="fc" id="L107">        }</span>
+
+        // each of categories should be UNIQUE, NO query keyword between categories is overlapping
+        // functionResults.size() should be placed before academicResults.size()
+        // since they have a ridiculously overlap: &quot;TA&quot; and &quot;time table&quot;, see partialMatchTimeTable1()
+        // ** Update: no need anymore because of the change in .parse()
+<span class="fc" id="L113">        int mostMatch = Utilities.max(transportResults.size(), academicResults.size(), </span>
+<span class="fc" id="L114">                                      socialResults.size(), functionResults.size(), </span>
+<span class="fc" id="L115">                                      campusResults.size(), instructionResults.size());</span>
+
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        if (mostMatch == transportResults.size())</span>
+<span class="fc" id="L118">            return Transport.analyze(transportResults);</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">        if (mostMatch == functionResults.size())</span>
+<span class="fc" id="L120">            return Function.analyze(functionResults);</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">        if (mostMatch == academicResults.size())</span>
+<span class="fc" id="L122">            return Academic.analyze(academicResults);</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">        if (mostMatch == socialResults.size())</span>
+<span class="fc" id="L124">            return Social.analyze(socialResults);</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">        if (mostMatch == campusResults.size())</span>
+<span class="fc" id="L126">            return Campus.analyze(campusResults);</span>
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">        if (mostMatch == instructionResults.size())</span>
+<span class="fc" id="L128">        	return Instruction.analyze(instructionResults);</span>
+
+<span class="nc" id="L130">        throw new AmbiguousQueryException(&quot;I am not quite sure what you are talking about, &quot; +</span>
+                                          &quot;could you be more clearer? Maybe you want to try out /help&quot;);
+    }
+
+    /**
+     * This method is intended to be overriden by class who implements StaticAccessible, which is used to
+     * get data from SQL database if there is any.
+     * @return
+     * @throws Throwable Throws throwable that indicates this function cannot be used.
+     */
+    public synchronized String getDataFromSQL() throws Throwable {
+<span class="nc" id="L141">        throw new RuntimeException(this.getClass().getName() + &quot;.getDataFromSQL() is not intended to be used&quot;);</span>
+    }
+
+    /**
+     * This method is intended to be overriden by class who implements StaticAccessible, which is used to
+     * get data from static database if there is any.
+     * @return String This method will return the query result from static database.
+     * @throws Throwable Throws throwable that indicates this function cannot be used.
+     */
+    public synchronized String getDataFromStatic() throws Throwable {
+<span class="nc" id="L151">        throw new RuntimeException(this.getClass().getName() + &quot;.getDataFromStatic() is not intended to be used&quot;);</span>
+    }
+
+    /**
+     * This method will take an ArrayList of query result and transform it into a single 
+     * String by looping through the list and append each elements to the final display result string.
+     * @return String This method will return a single String which is the actual output to the
+     * 				  screen of LINE client.
+     */
+    protected String replyResults(final List&lt;?&gt; results){
+<span class="fc" id="L161">        StringBuilder replyBuilder = new StringBuilder(&quot;Results:\n&quot;);</span>
+<span class="fc" id="L162">        int divider = (int)Math.ceil((double)results.size()/5);</span>
+<span class="fc bfc" id="L163" title="All 2 branches covered.">        for (int i = 0; i &lt; results.size(); i++){</span>
+<span class="fc" id="L164">            replyBuilder.append(results.get(i).toString());</span>
+<span class="fc bfc" id="L165" title="All 2 branches covered.">            if (i != results.size() - 1)</span>
+<span class="fc" id="L166">                replyBuilder.append(&quot;\n&quot;);</span>
+<span class="fc bfc" id="L167" title="All 4 branches covered.">            if ((i+1)%divider==0 &amp;&amp; i != results.size() - 1) {</span>
+<span class="fc" id="L168">            	replyBuilder.append(&quot;\n&quot;);</span>
+            }
+        }
+
+<span class="fc" id="L172">        return replyBuilder.toString();</span>
+    }
+
+    /**
+     * This method will take no parameter and just call the toString() method of the class who invoke 
+     * this method to get a single string of query-result.
+     * @return String This method will return a single String which is the actual output to the
+     * 				  screen of LINE client.
+     */
+    protected String replyResults()
+    {
+<span class="fc" id="L183">        return this.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

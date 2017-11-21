@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CampusMapping.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.campus</a> &gt; <span class="el_source">CampusMapping.java</span></div><h1>CampusMapping.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.campus;
+
+import java.io.InputStream;
+import java.io.FileNotFoundException;
+
+import java.util.Scanner;
+
+/**
+ * The CampusMapping Class store all floor and building details of UST Campus and handle time estimation adjustment
+ * for the first draft. It is included in CampusETA Class as instance variable.
+ * @version 1.0
+ */
+class CampusMapping 
+{
+<span class="fc" id="L15">	private String floorName[] = { &quot;LG7&quot;, &quot;LG5&quot;, &quot;LG4&quot;, &quot;LG3&quot;, &quot;LG1&quot;, &quot;G&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, </span>
+								   &quot;CYTG&quot;, &quot;CYTUG&quot;, &quot;CYT1&quot;, &quot;CYT2&quot;, &quot;CYT3&quot;, &quot;CYT4&quot;, &quot;CYT5&quot;, &quot;CYT6&quot;, &quot;CYT7&quot;,
+								   &quot;NABG&quot;, &quot;NAB1&quot;, &quot;NAB2&quot;, &quot;NAB3&quot;, &quot;NAB4&quot;, &quot;NAB5&quot;, &quot;NAB6&quot;, &quot;NAB7&quot;,
+								   &quot;IASG&quot;, &quot;IAS1&quot;, &quot;IAS2&quot;, &quot;IAS3&quot;, &quot;IAS4&quot;, &quot;IAS5&quot; };
+	
+	private int timeMatrix[][];
+
+    private static final String TIME_MATRIX = &quot;/static/campus/timeMatrix.txt&quot;;
+	
+    /**
+     * This is constructor for CampusMapping Class. It loads the static database which stores time adjustment for 
+     * different floor.
+     * @throws FileNotFoundException
+     */
+	CampusMapping() throws FileNotFoundException
+<span class="fc" id="L30">	{</span>
+<span class="fc" id="L31">		this.timeMatrix = new int[36][36];</span>
+
+<span class="fc" id="L33">        Scanner sc = null;</span>
+		try
+		{
+<span class="fc" id="L36">            InputStream is = this.getClass().getResourceAsStream(TIME_MATRIX);</span>
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">            if (is == null)</span>
+<span class="nc" id="L38">                throw new FileNotFoundException(TIME_MATRIX + &quot; file not found&quot;);</span>
+
+<span class="fc" id="L40">            sc = new Scanner(is);</span>
+
+<span class="fc bfc" id="L42" title="All 2 branches covered.">			for (int i = 0; i &lt; 36; i++)</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">				for (int j = 0; j &lt; 36; j++) </span>
+<span class="fc" id="L44">					this.timeMatrix[i][j] = sc.nextInt();</span>
+		}
+        finally {
+<span class="pc bpc" id="L47" title="3 of 4 branches missed.">            if (sc != null)</span>
+<span class="pc" id="L48">                sc.close();</span>
+        }
+<span class="fc" id="L50">	}</span>
+	
+	/**
+	 * This method will calculate the corresponding position of a certain floor in campus on the database.
+	 * @param input Only parameter of this method, representing the floor name.
+	 * @return int location on database matrix.
+	 */
+	public int locationOnMatrix(String input)
+	{
+<span class="fc" id="L59">		int location = 0;</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">		for (int i = 0; i &lt; floorName.length; i++)</span>
+		{
+<span class="fc bfc" id="L62" title="All 2 branches covered.">			if (input.equals(floorName[i]))</span>
+<span class="fc" id="L63">				return location;</span>
+<span class="fc" id="L64">			location++;</span>
+		}
+<span class="nc" id="L66">		return location;</span>
+	}
+	
+	/**
+	 * This method will get the time adjustment base on the database. It will then be used for adjusting the eta
+	 * in CampusETA Class. 
+	 * @param row First parameter taken by the method, representing the row position in the database.
+	 * @param column Second parameter taken by the method, representing the column position in the database.
+	 * @return int The time adjustment.
+	 */
+<span class="fc" id="L76">	public int getTimeFromMatrix(int row, int column) { return timeMatrix[row][column]; }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

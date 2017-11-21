@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Transport.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.category.transport</a> &gt; <span class="el_source">Transport.java</span></div><h1>Transport.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.category.transport;
+
+import com.cse3111project.bot.spring.category.Category;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import com.cse3111project.bot.spring.utility.Utilities;
+
+import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
+
+/**
+ * The Transport abstract class acts as the main controller for coordinating all the
+ * user-query on transportation details on campus.  
+ * @version 1.0
+ */
+<span class="fc" id="L19">public abstract class Transport extends Category </span>
+{
+    // would be used in SearchEngine.search()
+<span class="fc" id="L22">    public static final String QUERY_KEYWORD[] = Utilities.concatArrays(Minibus.QUERY_KEYWORD, </span>
+                                                                        Bus.QUERY_KEYWORD);
+
+    /**
+     * This method will take in useful keywords from user-query and analyze about
+     * what sub-category the user is querying on Transport category.
+     * @param extractedResults This is the only parameter of the function, which is a 
+     * 						   list of processed keyword from the user-query.
+     * @return Category This returns the sub-category of which the user-query belongs to
+     * @throws AmbiguousQueryException Throws exception upon unclear user-query.
+     */
+    public static Category analyze(final ArrayList&lt;String&gt; extractedResults) throws AmbiguousQueryException 
+    {
+<span class="fc" id="L35">        ArrayList&lt;String&gt; minibusKeywords = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L36">        ArrayList&lt;String&gt; busRoute91Keywords = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L37">        ArrayList&lt;String&gt; busRoute91MKeywords = new ArrayList&lt;&gt;();</span>
+
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        for (String result : extractedResults){</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">            for (String minibusKeyword : Minibus.QUERY_KEYWORD)  // only route 11 is collected</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">                if (result.equals(minibusKeyword))</span>
+<span class="fc" id="L42">                    minibusKeywords.add(minibusKeyword);</span>
+
+<span class="fc bfc" id="L44" title="All 2 branches covered.">            for (String busRoute91Keyword : Bus.ROUTE_91_KEYWORD)</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">                if (result.equals(busRoute91Keyword))</span>
+<span class="fc" id="L46">                    busRoute91Keywords.add(busRoute91Keyword);</span>
+
+<span class="fc bfc" id="L48" title="All 2 branches covered.">            for (String busRoute91MKeyword : Bus.ROUTE_91M_KEYWORD)</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">                if (result.equals(busRoute91MKeyword))</span>
+<span class="fc" id="L50">                    busRoute91MKeywords.add(busRoute91MKeyword);</span>
+<span class="fc" id="L51">        }</span>
+
+<span class="fc" id="L53">        Utilities.arrayLog(&quot;minibusKeywords&quot;, minibusKeywords);</span>
+<span class="fc" id="L54">        Utilities.arrayLog(&quot;busRoute91Keywords&quot;, busRoute91Keywords);</span>
+<span class="fc" id="L55">        Utilities.arrayLog(&quot;busRoute91MKeywords&quot;, busRoute91MKeywords);</span>
+
+        // &quot;bus&quot; is subset of &quot;minibus&quot; (&quot;minibus&quot; contains &quot;bus&quot; string)
+        // =&gt; if search &quot;minibus&quot; -&gt; since use .contains() in SearchEngine.search()
+        // ==&gt; match &quot;bus&quot;, &quot;minibus&quot;
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (minibusKeywords.size() &gt;= busRoute91Keywords.size())</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">            if (minibusKeywords.size() &gt;= busRoute91MKeywords.size())</span>
+<span class="fc" id="L62">                return new Minibus();</span>
+
+        // similarly, &quot;91&quot; is subset of &quot;91M&quot;
+        // search &quot;91M&quot; =&gt; return &quot;91&quot;, &quot;91M&quot;
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        if (busRoute91MKeywords.size() &gt;= busRoute91Keywords.size()){</span>
+<span class="pc bpc" id="L67" title="1 of 2 branches missed.">            if (extractedResults.contains(Bus.DIRECTION_KEYWORD[Bus.NORTH]))</span>
+<span class="fc" id="L68">                return new Bus(Bus.ROUTE_91M, Bus.NORTH);</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">            else if (extractedResults.contains(Bus.DIRECTION_KEYWORD[Bus.SOUTH]))</span>
+<span class="nc" id="L70">                return new Bus(Bus.ROUTE_91M, Bus.SOUTH);</span>
+            else
+<span class="nc" id="L72">                throw new AmbiguousQueryException(&quot;Sorry I don\'t know where you are &quot; +</span>
+                                                  &quot;(south or north gate). Please query again.&quot;);
+        }
+        else {
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">            if (extractedResults.contains(Bus.DIRECTION_KEYWORD[Bus.NORTH]))</span>
+<span class="nc" id="L77">                return new Bus(Bus.ROUTE_91, Bus.NORTH);</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">            else if (extractedResults.contains(Bus.DIRECTION_KEYWORD[Bus.SOUTH]))</span>
+<span class="fc" id="L79">                return new Bus(Bus.ROUTE_91, Bus.SOUTH);</span>
+            else
+<span class="fc" id="L81">                throw new AmbiguousQueryException(&quot;Sorry I don\'t know where you are &quot; +</span>
+                                                  &quot;(south or north gate). Please query again.&quot;);
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SQLDatabaseEngine.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.model.engine</a> &gt; <span class="el_source">SQLDatabaseEngine.java</span></div><h1>SQLDatabaseEngine.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.model.engine;
+
+import com.cse3111project.bot.spring.model.engine.marker.SQLAccessible;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import com.cse3111project.bot.spring.utility.Utilities;
+
+import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
+
+import lombok.extern.slf4j.Slf4j;  // logging
+
+/**
+ * SQLDatabaseEngine inherits from DatabaseEngine class, which handles the actual communication between client and 
+ * SQL server, and retrieve the corresponding data. Connection object is wrapped in this class as well.
+ * @version 1.0
+ */
+<span class="fc" id="L25">@Slf4j</span>
+public class SQLDatabaseEngine extends DatabaseEngine implements AutoCloseable 
+{
+    private static SQLDatabaseEngine database;
+
+    private Connection connection;
+    private PreparedStatement query;
+    private ResultSet reader;
+
+    /**
+     * Constructor of SQLDatabaseEngine:
+     * Connect SQL database with default DATABASE_URL.
+     * @param _class forcing this class to implement SQLAccessible marker interface, otherwise throws NotSQLAccessibleError
+     * @param SQL_TABLE name of table in database.
+     * @throws URISyntaxException thrown if specified wrong database URI.
+     * @throws SQLException thrown if unable to access SQL database
+     * @throws NotSQLAccessibleError thrown if the class attempting to use this engine 
+     *                               is not implementing SQLAccessible marker interface
+     */
+    public SQLDatabaseEngine(Class&lt;?&gt; _class, final String SQL_TABLE) throws URISyntaxException, SQLException, NotSQLAccessibleError 
+    {
+<span class="fc" id="L46">        this(_class, SQL_TABLE, System.getenv(&quot;DATABASE_URL&quot;));</span>
+<span class="fc" id="L47">    }</span>
+
+    /**
+      * Constructor of SQLDatabaseEngine:
+      * Connect SQL database with an overridden DATABASE_URL
+      * @param _class forcing this class to implement SQLAccessible marker interface, otherwise throws NotSQLAccessibleError
+      * @param SQL_TABLE name of table in database.
+      * @param DATABASE_URL overridden database URL.
+      * @throws URISyntaxException thrown if specified wrong database URI.
+      * @throws SQLException thrown if unable to access SQL database
+      * @throws NotSQLAccessibleError thrown if the class attempting to use this SQLDatabaseEngine is not 
+      *                               implementing SQLAccessible marker interface
+      */
+    public SQLDatabaseEngine(Class&lt;?&gt; _class, final String SQL_TABLE, final String DATABASE_URL) throws URISyntaxException, SQLException, NotSQLAccessibleError {
+<span class="fc" id="L61">        super(SQL_TABLE);</span>
+
+        // force to implement SQLAccessible interface in order to use SQLDatabaseEngine
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">        if (!SQLAccessible.class.isAssignableFrom(_class))</span>
+<span class="nc" id="L65">            throw new NotSQLAccessibleError(_class.getName() + &quot; class is not SQLAccessible&quot;);</span>
+
+<span class="fc" id="L67">        connection = this.getConnection();</span>
+        // SQLConnection = this.getLocalConnection();
+<span class="fc" id="L69">    }</span>
+
+    /**
+     * This method establish connection with SQL database using JDBC.
+     * @return Connection
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
+	private Connection getConnection() throws URISyntaxException, SQLException {
+<span class="fc" id="L78">		Connection connection = null;</span>
+        // get database URL from environment variable, need to be set in build.gradle
+        // using URI constructor to check if the DATABASE_URL has valid URI syntax
+<span class="fc" id="L81">		URI databaseURI = new URI(System.getenv(&quot;DATABASE_URL&quot;));</span>
+
+<span class="fc" id="L83">		String username = databaseURI.getUserInfo().split(&quot;:&quot;)[0];</span>
+<span class="fc" id="L84">		String password = databaseURI.getUserInfo().split(&quot;:&quot;)[1];</span>
+<span class="fc" id="L85">		String databaseURL = &quot;jdbc:postgresql://&quot; + </span>
+<span class="fc" id="L86">                             databaseURI.getHost() + ':' + databaseURI.getPort() + databaseURI.getPath() +</span>
+                             &quot;?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory&quot;;
+
+<span class="fc" id="L89">		log.info(&quot;Username: {} Password: {}&quot;, username, password);</span>
+<span class="fc" id="L90">		log.info(&quot;databaseURL: {}&quot;, databaseURL);</span>
+		
+<span class="fc" id="L92">		connection = DriverManager.getConnection(databaseURL, username, password);</span>
+
+<span class="fc" id="L94">		return connection;</span>
+	}
+
+
+	/**
+	 * This method is used to test local database connection.
+	 * @return Connection
+	 * @throws URISyntaxException
+	 * @throws SQLException
+	 */
+    private Connection getLocalConnection() throws URISyntaxException, SQLException 
+    {
+        // see the DATABASE_URL example in ust-freshmen-chatbot/build.gradle 
+<span class="nc" id="L107">        Connection connection = null;</span>
+
+<span class="nc" id="L109">        URI databaseURI = new URI(System.getenv(&quot;DATABASE_URL&quot;));</span>
+
+<span class="nc" id="L111">        String username = &quot;cnleungaa&quot;;  // modify your own username</span>
+<span class="nc" id="L112">        String password = &quot;12345&quot;;      // modify your own password</span>
+<span class="nc" id="L113">        String databaseURL = &quot;jdbc:&quot; + databaseURI.toString();</span>
+
+<span class="nc" id="L115">		log.info(&quot;Username: {} Password: {}&quot;, username, password);</span>
+<span class="nc" id="L116">		log.info(&quot;databaseURL: {}&quot;, databaseURL);</span>
+
+<span class="nc" id="L118">		connection = DriverManager.getConnection(databaseURL, username, password);</span>
+        
+<span class="nc" id="L120">        return connection;</span>
+    }
+
+    /**
+     * This method wraps the Connection.prepareStatement() method.
+     * @param SQLstatement
+     * @return
+     * @throws SQLException
+     */
+    public PreparedStatement prepare(String SQLstatement) throws SQLException 
+    {
+<span class="fc" id="L131">        this.query = connection.prepareStatement(SQLstatement);</span>
+<span class="fc" id="L132">        return this.query;</span>
+    }
+
+    /**
+     * This method will perform query on SQL database.
+     * @return
+     * @throws SQLException
+     */
+    @Override
+    public final synchronized ResultSet executeQuery() throws SQLException {
+<span class="fc" id="L142">        reader = query.executeQuery();</span>
+
+<span class="fc" id="L144">        return this.reader;</span>
+    }
+
+    /**
+     * This method will safely close SQL connection and the corresponding query object.
+     */
+    @Override
+    public void close()
+    {
+        try {
+<span class="pc bpc" id="L154" title="1 of 2 branches missed.">            if (reader != null)</span>
+<span class="fc" id="L155">                reader.close();</span>
+<span class="pc bpc" id="L156" title="1 of 2 branches missed.">            if (query != null)</span>
+<span class="fc" id="L157">                query.close();</span>
+<span class="pc bpc" id="L158" title="1 of 2 branches missed.">            if (connection != null)</span>
+<span class="fc" id="L159">                connection.close();</span>
+        }
+        // just suppress the error since indeed the query result can be found
+<span class="nc" id="L162">        catch (SQLException e) {</span>
+<span class="nc" id="L163">            Utilities.errorLog(&quot;Unable to close SQL database / query object&quot;, e);</span>
+<span class="fc" id="L164">        }</span>
+<span class="fc" id="L165">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

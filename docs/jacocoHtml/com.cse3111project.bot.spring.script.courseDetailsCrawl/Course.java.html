@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Course.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ust-freshmen-chatbot</a> &gt; <a href="index.source.html" class="el_package">com.cse3111project.bot.spring.script.courseDetailsCrawl</a> &gt; <span class="el_source">Course.java</span></div><h1>Course.java</h1><pre class="source lang-java linenums">package com.cse3111project.bot.spring.script.courseDetailsCrawl;
+
+public class Course 
+{
+	private String courseCode;
+	private String courseName;
+	private String credit;
+	// note that the prerequisite, exclusion and corequisite are all the related courses combined into a string
+	// to check if a course is inside either of the 3 criteria
+	// one need to use example: prerequisite.contains(courseCode)
+	private String prerequisite;
+	private String exclusion;
+	private String corequisite;
+	
+	public Course()
+<span class="nc" id="L16">	{</span>
+<span class="nc" id="L17">		this.courseCode = &quot;&quot;;</span>
+<span class="nc" id="L18">		this.courseName = &quot;&quot;;</span>
+<span class="nc" id="L19">		this.credit = &quot;&quot;;</span>
+<span class="nc" id="L20">		this.prerequisite = &quot;&quot;;</span>
+<span class="nc" id="L21">		this.exclusion = &quot;&quot;;</span>
+<span class="nc" id="L22">		this.corequisite = &quot;&quot;;</span>
+<span class="nc" id="L23">	}</span>
+	
+	public Course(String courseCode, String courseName, String credit, String prerequisite, String exclusion, String corequisite)
+<span class="nc" id="L26">	{</span>
+<span class="nc" id="L27">		this.courseCode = courseCode;</span>
+<span class="nc" id="L28">		this.courseName = courseName;</span>
+<span class="nc" id="L29">		this.credit = credit;</span>
+<span class="nc" id="L30">		this.prerequisite = prerequisite;</span>
+<span class="nc" id="L31">		this.exclusion = exclusion;</span>
+<span class="nc" id="L32">		this.corequisite = corequisite;</span>
+<span class="nc" id="L33">	}</span>
+	
+<span class="nc" id="L35">	public String getCourseCode() { return courseCode; }</span>
+	
+<span class="nc" id="L37">	public String getCourseName() { return courseName; }</span>
+	
+<span class="nc" id="L39">	public String getCredit() { return credit; }</span>
+	
+<span class="nc" id="L41">	public String getPrerequisite() { return prerequisite; }</span>
+	
+<span class="nc" id="L43">	public String getExclusion() { return exclusion; }</span>
+	
+<span class="nc" id="L45">	public String getCoRequisite() { return corequisite; }</span>
+	
+	@Override
+	public String toString()
+	{
+<span class="nc" id="L50">		return courseCode + &quot; &quot; + courseName + &quot; &quot; + credit + &quot;\nPrerequsite: &quot; + prerequisite + &quot;\nExclusion: &quot; + exclusion + &quot;\nCorequisite: &quot; + corequisite;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>
