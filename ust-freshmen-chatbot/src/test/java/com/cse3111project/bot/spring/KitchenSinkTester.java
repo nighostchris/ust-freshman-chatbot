@@ -560,10 +560,7 @@ public class KitchenSinkTester {
     public void partialMatchCourseWebsiteSearch3() throws Exception {
         log.info("--- partialMatchCourseWebsiteSearch3 ---");
         Object answer = this.searchEngine.search("Can you find 2012?");
-        assertThat(answer).isNotNull();
-        assertThat(answer instanceof String).isEqualTo(true);
-        log.info("reply: {}", answer);
-        assertThat(((String) answer).contains("understand")).isEqualTo(true);
+        assertThat(answer).isNull();
         log.info("--- End of partialMatchCourseWebsiteSearch3 ---");
     }
     
