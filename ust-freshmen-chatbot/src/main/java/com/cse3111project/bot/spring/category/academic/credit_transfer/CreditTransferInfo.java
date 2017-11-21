@@ -1,16 +1,33 @@
 package com.cse3111project.bot.spring.category.academic.credit_transfer;
 
-abstract class CreditTransferInfo {
+/**
+ * CreditTransferInfo abstract class defines the basic structure of any kind of credit transfer
+ * class. It is used for inheritance of ExamCreditTransfer, LocalInstitutionCreditTransfer etc.
+ * @version 1.0
+ */
+abstract class CreditTransferInfo 
+{
     protected String subject;
     protected String restriction;
     protected String transferCourseCode;
 
-    CreditTransferInfo(String subject, String transferCourseCode, String restriction) {
+    /**
+     * This is constructor of CreditTransferInfo class.
+     * @param subject The subject name of the course
+     * @param transferCourseCode The course code of the transferred course
+     * @param restriction The restriction of applying the transfer
+     */
+    CreditTransferInfo(String subject, String transferCourseCode, String restriction) 
+    {
         this.subject = subject;
         this.transferCourseCode = transferCourseCode;
         this.restriction = restriction;
     }
 
+    /**
+     * Overriden the original toString() method given by Java. It handles how the details
+     * of this class to be displayed in String format.
+     */
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder(subject).append(" is equivalent as ")
