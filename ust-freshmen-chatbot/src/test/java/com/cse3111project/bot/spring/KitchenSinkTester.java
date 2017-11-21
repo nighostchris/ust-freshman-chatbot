@@ -486,18 +486,18 @@ public class KitchenSinkTester {
         assertThat(answer).isNotNull();
         assertThat(answer instanceof String).isEqualTo(true);
         log.info("reply: {}", answer);
-        assertThat(((String) answer).contains("Review")).isEqualTo(true);
+        assertThat(((String) answer).contains("Courses")).isEqualTo(true);
         log.info("--- End of partialMatchCourseWebsiteSearch1 ---");
     }
     
     @Test
     public void partialMatchCourseWebsiteSearch2() throws Exception {
         log.info("--- partialMatchCourseWebsiteSearch2 ---");
-        Object answer = this.searchEngine.search("Can you find details of course COMP4641 for me?");
+        Object answer = this.searchEngine.search("Can you search details of course COMP4641 for me?");
         assertThat(answer).isNotNull();
         assertThat(answer instanceof String).isEqualTo(true);
         log.info("reply: {}", answer);
-        assertThat(((String) answer).contains("Review")).isEqualTo(true);
+        assertThat(((String) answer).contains("James Kwok")).isEqualTo(true);
         log.info("--- End of partialMatchCourseWebsiteSearch2 ---");
     }
     
@@ -508,7 +508,7 @@ public class KitchenSinkTester {
         assertThat(answer).isNotNull();
         assertThat(answer instanceof String).isEqualTo(true);
         log.info("reply: {}", answer);
-        assertThat(((String) answer).contains("Review")).isEqualTo(true);
+        assertThat(((String) answer).contains("understand")).isEqualTo(true);
         log.info("--- End of partialMatchCourseWebsiteSearch3 ---");
     }
     
@@ -519,7 +519,7 @@ public class KitchenSinkTester {
         assertThat(answer).isNotNull();
         assertThat(answer instanceof String).isEqualTo(true);
         log.info("reply: {}", answer);
-        assertThat(((String) answer).contains("Review")).isEqualTo(true);
+        assertThat(((String) answer).contains("COMP 2611")).isEqualTo(true);
         log.info("--- End of StudyPathSearchTest1 ---");
     }
     
@@ -530,7 +530,7 @@ public class KitchenSinkTester {
         assertThat(answer).isNotNull();
         assertThat(answer instanceof String).isEqualTo(true);
         log.info("reply: {}", answer);
-        assertThat(((String) answer).contains("Review")).isEqualTo(true);
+        assertThat(((String) answer).contains("COMP 4111")).isEqualTo(true);
         log.info("--- End of StudyPathSearchTest2 ---");
     }
     
@@ -541,7 +541,7 @@ public class KitchenSinkTester {
         assertThat(answer).isNotNull();
         assertThat(answer instanceof String).isEqualTo(true);
         log.info("reply: {}", answer);
-        assertThat(((String) answer).contains("Review")).isEqualTo(true);
+        assertThat(((String) answer).contains("COMP 4511")).isEqualTo(true);
         log.info("--- End of StudyPathSearchTest3 ---");
     }
 }
