@@ -27,7 +27,6 @@ public abstract class Academic extends Category
     static {
         QUERY_KEYWORD = Utilities.concatArrays(Staff.STAFF_NAME_KEYWORD,
                                                Staff.STAFF_POSITION_KEYWORD,
-                                               Course.COURSE_CODE_KEYWORD,
                                                CourseWebsiteSearch.WEBSITE_SEARCH_KEYWORD,
                                                CreditTransfer.QUERY_KEYWORD,
                                                ExamCreditTransfer.EXAM_KEYWORD,
