@@ -164,7 +164,12 @@ public class SearchEngine
             reply = "***\n1001010100\nOh It seEms I aM bRokEn\n0101010001\n***";
         }
         // --- thanks giving ---
-        new Thanksgiving().invitation();
+        try {
+        	new Thanksgiving().invitation();
+        }
+        catch (Throwable e) {
+            Utilities.errorLog(e.getMessage(), e);
+        }
         return reply;
 	}
 
