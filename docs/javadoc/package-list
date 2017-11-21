@@ -1,6 +1,7 @@
 com.cse3111project.bot.spring
 com.cse3111project.bot.spring.category
 com.cse3111project.bot.spring.category.academic
+com.cse3111project.bot.spring.category.academic.credit_transfer
 com.cse3111project.bot.spring.category.campus
 com.cse3111project.bot.spring.category.function
 com.cse3111project.bot.spring.category.function.timetable
