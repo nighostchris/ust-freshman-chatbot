@@ -127,13 +127,13 @@ public class Instruction extends Category
             	reply = SOCIETY_QUERY;
             else if (result.equals(QUERY_KEYWORD[5]))
             	reply = CAMPUS_QUERY;
-            else if (results.equals(QUERY_KEYWORD[6]))
+            else if (result.equals(QUERY_KEYWORD[6]))
             	reply = BOOKING_QUERY;
-            else if (results.equals(QUERY_KEYWORD[7]))
+            else if (result.equals(QUERY_KEYWORD[7]))
             	reply = STUDY_PATH_QUERY;
-            else if (results.equals(QUERY_KEYWORD[8]))
+            else if (result.equals(QUERY_KEYWORD[8]))
             	reply = COURSE_WEBSITE_QUERY;
-            else if (results.equals(QUERY_KEYWORD[9]))
+            else if (result.equals(QUERY_KEYWORD[9]))
             	reply = CREDIT_TRANSFER_QUERY;
             else
             	reply = TIME_MANAGER;
