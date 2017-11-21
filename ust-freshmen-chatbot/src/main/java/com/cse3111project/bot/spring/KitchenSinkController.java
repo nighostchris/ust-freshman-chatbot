@@ -235,7 +235,7 @@ public class KitchenSinkController {
         response = searchEngine.search(query);  // start analyzing what user is querying for
 
         if (response == null)
-            this.replyText(replyToken, "I don\'t understand what you are saying. Could you be more clearer?");
+            this.replyText(replyToken, "I don\'t understand what you are saying. Could you be more clearer?\nMaybe you want to try typing /help");
         else if (response instanceof String) {
         	String[] array = ((String) response).split("\\r?\\n\\n\\n");
         	List<Message> messageList = new ArrayList<Message>();
