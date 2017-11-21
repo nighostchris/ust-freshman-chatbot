@@ -21,6 +21,11 @@ import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
 import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
 import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
 
+/**
+ * The NonLocalInstitutionCreditTransfer class acts as the main controller for coordinating all the user-query
+ * on non local institution credit transfer related issues.
+ * @version 1.0
+ */
 public class NonLocalInstitutionCreditTransfer extends CreditTransfer implements SQLAccessible, StaticAccessible {
     public static final String INSTITUTION_KEYWORD[] = { "Aalto University",
                                                          "Aarhus University",
@@ -31,7 +36,7 @@ public class NonLocalInstitutionCreditTransfer extends CreditTransfer implements
                                                          "Beijing Institute of Technology",
                                                          "Boston College",
                                                          "Boston University",
-                                                         "Boğaziçi University",
+                                                         "Bo�zi癟i University",
                                                          "Briercrest College and Seminary",
                                                          "Brigham Young University",
                                                          "Cardiff University",
@@ -48,7 +53,7 @@ public class NonLocalInstitutionCreditTransfer extends CreditTransfer implements
                                                          "Dankook University",
                                                          "Drexel University",
                                                          "Durham University",
-                                                         "EBS Universität für Wirtschaft und Recht",
+                                                         "EBS Universit瓣t f羹r Wirtschaft und Recht",
                                                          "ESSEC Business School",
                                                          "East China Normal University",
                                                          "Ecole Polytechnique Federale de Lausanne",
@@ -58,7 +63,7 @@ public class NonLocalInstitutionCreditTransfer extends CreditTransfer implements
                                                          "European Business School - Paris",
                                                          "European Innovation Academy",
                                                          "Ewha Womans Univeristy",
-                                                         "Freie Universität Berlin",
+                                                         "Freie Universit瓣t Berlin",
                                                          "Fudan University",
                                                          "Grenoble Institute of Technology",
                                                          "HEC Montreal",
@@ -68,12 +73,12 @@ public class NonLocalInstitutionCreditTransfer extends CreditTransfer implements
                                                          "Harvard College",
                                                          "Harvard University",
                                                          "Helsinki Metropolia University of Applied Science",
-                                                         "Humboldt-Universität zu Berlin",
+                                                         "Humboldt-Universit瓣t zu Berlin",
                                                          "ISCTE Business School",
                                                          "Imperial College London",
                                                          "Indiana University",
-                                                         "Institut D'études Politiques de Paris",
-                                                         "Institut Supérieur d'Électronique de Paris",
+                                                         "Institut D'矇tudes Politiques de Paris",
+                                                         "Institut Sup矇rieur d'�ectronique de Paris",
                                                          "Instituto De Empresa",
                                                          "Iowa State University",
                                                          "Jacobs University Bremen",
@@ -82,7 +87,7 @@ public class NonLocalInstitutionCreditTransfer extends CreditTransfer implements
                                                          "Korea Advanced Institute of Science and Technology",
                                                          "Korea University",
                                                          "Kozminski University",
-                                                         "Koç University",
+                                                         "Ko癟 University",
                                                          "Kyoto University",
                                                          "Lancaster University",
                                                          "Lehigh University",
@@ -169,10 +174,10 @@ public class NonLocalInstitutionCreditTransfer extends CreditTransfer implements
                                                          "Tallinn University",
                                                          "Technical University of Denmark",
                                                          "Technische Universiteit Eindhoven",
-                                                         "Technische Universität Darmstadt",
-                                                         "Technische Universität Dortmund",
-                                                         "Technische Universität München",
-                                                         "Tecnológico de Monterrey",
+                                                         "Technische Universit瓣t Darmstadt",
+                                                         "Technische Universit瓣t Dortmund",
+                                                         "Technische Universit瓣t M羹nchen",
+                                                         "Tecnol籀gico de Monterrey",
                                                          "Texas A&M University",
                                                          "The Australian National University",
                                                          "The Catholic University of America",
@@ -206,7 +211,7 @@ public class NonLocalInstitutionCreditTransfer extends CreditTransfer implements
                                                          "Ulsan National Institute of Science and Technology",
                                                          "Universidade Nova de Lisboa, NOVA School of Business and Economics",
                                                          "Universitas Indonesia",
-                                                         "Universitat Politècnica de València",
+                                                         "Universitat Polit癡cnica de Val癡ncia",
                                                          "Universite Joseph Fourier",
                                                          "Universiti Brunei Darussalam",
                                                          "Universiti Putra Malaysia",
@@ -264,7 +269,7 @@ public class NonLocalInstitutionCreditTransfer extends CreditTransfer implements
                                                          "University of Virginia",
                                                          "University of Waterloo",
                                                          "University of Wisconsin - Madison",
-                                                         "Università Commerciale Luigi Bocconi",
+                                                         "Universit�� Commerciale Luigi Bocconi",
                                                          "Uppsala University",
                                                          "Utrecht University",
                                                          "Vanderbilt University",
@@ -294,7 +299,13 @@ public class NonLocalInstitutionCreditTransfer extends CreditTransfer implements
         this.nonLocalInstitutionQuery = nonLocalInstitutionQuery;
     }
 
-    // detect non-local institution subjects (course code)
+    /**
+     * This method is used to detect non-local institution subjects (course code) 
+     * @param userQuery Original sentence of the user-query
+     * @param matchedResults Keywords detected from the user-query
+     * @throws NotStaticAccessibleError
+     * @throws StaticDatabaseFileNotFoundException
+     */
     public static synchronized void detectSubject(final String userQuery, List<String> matchedResults)
         throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
         try (StaticDatabaseEngine database = new StaticDatabaseEngine(NonLocalInstitutionCreditTransfer.class, STATIC_TABLE)) {
@@ -313,6 +324,13 @@ public class NonLocalInstitutionCreditTransfer extends CreditTransfer implements
         }
     }
 
+    /**
+     * This method will connect to the SQL database and retrieve data on details of non local institution credit transfer.
+     * @return String
+     * @throws NotSQLAccessibleError
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     @Override
     public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
         try (SQLDatabaseEngine database = new SQLDatabaseEngine(this.getClass(), SQL_TABLE, System.getenv("NON_LOCAL_INSTITUTION_DATABASE_URL"))) {
@@ -339,6 +357,13 @@ public class NonLocalInstitutionCreditTransfer extends CreditTransfer implements
         }
     }
 
+    /**
+     * This method will connect to the static database and retrieve data on details of credit transfer.
+     * It is used when the SQL database has run into some trouble of connection.
+     * @return String
+     * @throws NotStaticAccessibleError
+     * @throws StaticDatabaseFileNotFoundException
+     */
     @Override
     public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
         try (StaticDatabaseEngine database = new StaticDatabaseEngine(this.getClass(), STATIC_TABLE)) {
