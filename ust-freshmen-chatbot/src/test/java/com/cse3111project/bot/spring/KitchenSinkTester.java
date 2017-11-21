@@ -533,6 +533,28 @@ public class KitchenSinkTester {
         assertThat(((String) answer).contains("HUMA 1720")).isEqualTo(true);
         log.info("--- End of testLocalInstitutionCreditTransfer1 ---");
     }
+    
+    @Test
+    public void testLocalInstitutionCreditTransfer2() throws Exception {
+        log.info("--- testLocalInstitutionCreditTransfer2 ---");
+        Object answer = this.searchEngine.search("Can I transfer PHI3105 ?");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("Lingnan")).isEqualTo(true);
+        log.info("--- End of testLocalInstitutionCreditTransfer2 ---");
+    }
+    
+    @Test
+    public void testNonLocalInstitutionCreditTransfer1() throws Exception {
+        log.info("--- testNonLocalInstitutionCreditTransfer1 ---");
+        Object answer = this.searchEngine.search("credit transfer Aalto University");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("Which")).isEqualTo(true);
+        log.info("--- End of testLocalInstitutionCreditTransfer1 ---");
+    }
         
     @Test
     public void partialMatchCourseWebsiteSearch1() throws Exception {
