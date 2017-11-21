@@ -1,4 +1,4 @@
-package com.cse3111project.bot.spring.category.function.timetable;
+package com.cse3111project.bot.spring.category.function;
 
 import com.cse3111project.bot.spring.utility.Utilities;
 
@@ -9,232 +9,68 @@ import java.util.Collections;
 import com.cse3111project.bot.spring.exception.InvalidDateException;
 import com.cse3111project.bot.spring.exception.InvalidTimeslotException;
 
-// database structure
-// username month day activityName startTime endTime
-public class Timetable 
+/**
+ * The Timetable abstract class defines the structure for subclass ActivityDB that handles all
+ * the user-query on using the Time Manager function.
+ * @version 1.0
+ */
+public abstract class Timetable
 {
-    public static final String FUNCTION_KEYWORD[] = { "timetable", "time table", "time manager",
-                                                      "time schedule", "schedule" };
+    public static final String FUNCTION_KEYWORD[] = { "add event", "remove", "display events",
+                                                      "display all events" };
+    
+    /**
+     * This method takes no parameter and will return the result for responding user-query
+     * to the LINE client. This method supposed to be implemented in subclass ActivityDB.
+     */
+    public abstract getResult();
 
+    /**
+     * This method will take in the original sentence of user-query and determine which method
+     * to be called in the subclass ActivityDB.
+     * @param extractedResults Original sentence of user-query.
+     * @return Category This returns the sub-category of which the user-query belongs to.
+     */
     public static Category analyze(final ArrayList<String> extractedResults)
     {
-    	/*
-    	 * Chris wants to eat dinner from 6 to 9 on November 22.
-			Input parameter to analyze
-			Chris <- username
-			eat dinner <- event nme
-			from 6 to 9 <- get the time
-			November 22 <- Date
+    	/* Fixed format of user-query
+    	 Chris wants to [add event of] eat dinner from 6 to 9 on November 22.
+    	 Chris wants to [remove] event of eat dinner.
+    	 Chris wants to [display events] on November 22.
+    	 Chris wants to [display all events].
     	 */
-    	String originalText = extractedResults.get(0);
-    	// get the username for checking
-    	String username = originalText.substring(0, originalText.indexOf(' '));
-    	// get the activity name
-    	String eventName = originalText.substring(originalText.indexOf("to") + 3, originalText.indexOf("from") - 1);
-    }
-    
-    
-    // option 1
-    private void addEvent()
-    {
-        int month = 0; int day = 0;
-        int startTime = 0; int endTime = 0;
-        String activityName = null;
-        try {
-            replyText("Enter month and day for event (Separated by Space):");
-            while (!userHasReplied());
-            String dateParts[] = getUserMessage().split(" ");
-            if (dateParts.length != 2)
-                throw new IllegalArgumentException("2 arguments should be given:\n<month> <day>");
-
-            // try to convert month, day string into Integer
-            // throw NumberFormatException if not convertible
-            month = new Integer(dateParts[0]).intValue();
-            day = new Integer(dateParts[1]).intValue();
-            Date.checkValidity(month, day);  // check whether the user inputed date is valid
-
-            replyText("Enter event start and end time in hour (0-23, Separated by Space): ");
-            while (!userHasReplied());
-            String timeslotParts[] = getUserMessage().split(" ");
-            if (timeslotParts.length != 2)
-                throw new IllegalArgumentException("2 arguments should be given:\n<starting time> <ending time>");
-
-            // try to convert startTime, endTime string into Integer
-            // throw NumberFormatException if not convertible
-            startTime = new Integer(timeslotParts[0]).intValue();
-            endTime = new Integer(timeslotParts[1]).intValue();
-            Timeslot.checkValidity(startTime, endTime);  // check whether the timeslot is valid
-
-            replyText("Enter activity name:");
-            while (!userHasReplied());
-            activityName = getUserMessage();
-
-            user.addEventDate(month, day);
-            Date date = user.searchDate(month, day);
-            Timeslot timeslot = new Timeslot(startTime, endTime);
-            Activity newActivity = new Activity(activityName, timeslot);
-            if (date.addActivity(newActivity))  // if successfully add activity
-            {
-                replyText("Event Added.");
-                Collections.sort(user.getDateList());
-                Collections.sort(date.getActivity());
-            }
-            else
-                replyText("Time Conflict occurs");
-        }
-        catch (NumberFormatException e) {
-            replyText("Entered invalid date/timeslot format. Please try again");
-        }
-        catch (IllegalArgumentException | InvalidDateException | InvalidTimeslotException e) {
-            replyText(e.getMessage());
-        }
-    }
-
-    // option 2
-    private void removeEvent(){
-        int month = 0; int day = 0;
-        String activityName = null;
-        try {
-            if (user.hasEmptySchedule()){
-                replyText("The current time schedule is empty. Nothing can be deleted");
-                return;
-            }
-
-            replyText("Enter month and day for removal:");
-            while (!userHasReplied());
-            String[] dateParts = getUserMessage().split(" ");
-            if (dateParts.length != 2)
-                throw new IllegalArgumentException("2 arguments should be given:\n<month> <day>");
-
-            // try to convert month, day string into Integer
-            // throw NumberFormatException if not convertible
-            month = new Integer(dateParts[0]).intValue();
-            day = new Integer(dateParts[1]).intValue();
-            Date.checkValidity(month, day);  // check whether the user inputed date is valid
-
-            Date date = user.searchDate(month, day);
-            if (date == null)
-                replyText("Invalid Removal. No event on that day");
-            else
-            {
-                if (date.getActivity().size() == 1){  // there is only one activity to remove
-                    activityName = date.getActivity().get(0).getName();
-                    date.removeActivity(activityName);
-                    replyText("Event deleted.");
-                    // remove the empty date as well
-                    user.removeDate(date.getMonth(), date.getDay());
-                }
-                else {
-                    replyText("Enter activity name:");
-                    while (!userHasReplied());
-                    activityName = getUserMessage();
-                    if (date.removeActivity(activityName))
-                        replyText("Event deleted.");
-                    else
-                        replyText("No event with name " + activityName);
-                }
-            }
-        }
-        catch (NumberFormatException e) {
-            replyText("Entered invalid date/timeslot format. Please try again");
-        }
-        catch (IllegalArgumentException | InvalidDateException e) {
-            replyText(e.getMessage());
-        }
-    }
-
-    // option 3
-    private void displayEventsAtParticularDate(){
-        int month = 0; int day = 0;
-        try {
-            replyText("Enter month and day for display (Separated by Space):");
-            while (!userHasReplied());
-            String dateParts[] = this.getUserMessage().split(" ");
-            if (dateParts.length != 2)
-                throw new IllegalArgumentException("2 arguments should be given:\n<month> <day>");
-
-            // try to convert month, day string into Integer
-            // throw NumberFormatException if not convertible
-            month = new Integer(dateParts[0]).intValue();
-            day = new Integer(dateParts[1]).intValue();
-            Date.checkValidity(month, day);
-
-            Date date = user.searchDate(month, day);
-            if (date == null)
-                replyText("No event on " + month + "/" + day);
-            else
-                replyText(date.toString());
-        }
-        catch (NumberFormatException e) {
-            replyText("Entered invalid date format. Please try again");
-        }
-        catch (IllegalArgumentException | InvalidDateException e) {
-            replyText(e.getMessage());
-        }
-    }
-
-    // option 4
-    private void displayAllEvents(){
-        replyText(user.toString());
-    }
-
-    // entry point for TimeTable function
-    @Override
-	public void run(){
-		// TimeManager tm = new TimeManager();
-        this.read();  // attempt to read the saved time schedule if exists
-        if (user == null){  // no save / error occurred while reading save
-            replyText("Enter New Username (for later retrieving the timetable): ");
-            // wait for user reply
-            while (!userHasReplied()); 
-            user = new People(getUserMessage());
-        }
-
-		// user = tm.searchPeople(username);
-		// if (user == null)
-		// {
-		// 	user = new People(username);
-		// 	tm.getPeopleList().add(user);
-		// }
-
-        String input = "";
-        StringBuilder menuBuilder = new StringBuilder().append("\n1) Add event")
-                                                       .append("2) Remove event")
-                                                       .append("3) Display event for particular date")
-                                                       .append("4) Display all event")
-                                                       .append("Enter q to save/leave");
-        while (input != "q")
+    	if (input.contains("add event"))
 		{
-            replyText(menuBuilder.toString());
-            while (!userHasReplied()); input = getUserMessage();
-			switch (input)
-			{
-				case "1":
-                    this.addEvent();
-					break;
-				
-				case "2":
-                    this.removeEvent();
-					break;
-					
-				case "3":
-                    this.displayEventsAtParticularDate();
-					break;
-					
-				case "4":
-					this.displayAllEvents();
-					break;
-
-                case "Q": case "q":
-                    input = "q";
-                    if (!user.hasEmptySchedule())
-                        this.askSave();
-                    break;
-
-				default:
-                    replyText("Unknown option");
-					break;
-			}
+			int secondOccur = input.indexOf("to", input.indexOf("to") + 1);
+			
+			String username = input.substring(0, input.indexOf(' '));
+	    	String activityName = input.substring(input.indexOf("of") + 3, input.indexOf("from") - 1);
+	    	String startTime = input.substring(input.indexOf("from") + 5, secondOccur - 1);
+	    	String endTime = input.substring(secondOccur + 3, input.indexOf("on") - 1);
+	    	String month = input.substring(input.indexOf("on") + 3, input.lastIndexOf(" "));
+	    	String day = input.substring(input.lastIndexOf(" ") + 1, input.length());
+	    	
+	    	return new ActivityDB(username, month, day, activityName, startTime, endTime, 1);
 		}
-	}
+		else if (input.contains("remove"))
+		{
+			String activityName = input.substring(input.indexOf("of") + 3, input.length());
+			return new ActivityDB("", "", "", activityName, "", "", 2);
+		}
+		else if (input.contains("display events"))
+		{
+			String month = input.substring(input.indexOfd("on") + 3, input.lastIndexOf(" "));
+	    	String day = input.substring(input.lastIndexOf(" ") + 1, input.length());
+	    	return new ActivityDB("", month, day, "", "", "", 3);
+		}
+		else if (input.contains("display all events"))
+		{
+			return new ActivityDB("", "", "", "", "", "", 4);
+		}
+    }
+    
+    public static void returnOriginalSentence(String userQuery, ArrayList<String> matchedResults)
+    {
+    	matchedResults.add(userQuery);
+    }
 }

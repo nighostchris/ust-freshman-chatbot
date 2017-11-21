@@ -4,8 +4,7 @@ import com.cse3111project.bot.spring.category.Category;
 import com.cse3111project.bot.spring.category.transport.*;
 import com.cse3111project.bot.spring.category.academic.*;
 import com.cse3111project.bot.spring.category.social.*;
-import com.cse3111project.bot.spring.category.function.Function;
-import com.cse3111project.bot.spring.category.function.timetable.TimeTable;
+import com.cse3111project.bot.spring.category.function.*;
 import com.cse3111project.bot.spring.category.campus.*;
 import com.cse3111project.bot.spring.category.instruction.*;
 
@@ -213,6 +212,8 @@ public class SearchEngine
         Staff.containsLastName(userQuery.toLowerCase(), matchedResults);
         
         Course.containsCourseCode(userQuery.toLowerCase(), matchedResults);
+        
+        Timetable.returnOriginalSentence(userQuery, matchedResults);
 
         // detect location name if provided
         // pass userQuery to preserve casing

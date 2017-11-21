@@ -3,7 +3,7 @@ package com.cse3111project.bot.spring.category;
 import com.cse3111project.bot.spring.category.transport.Transport;
 import com.cse3111project.bot.spring.category.academic.Academic;
 import com.cse3111project.bot.spring.category.social.Social;
-import com.cse3111project.bot.spring.category.function.Function;
+import com.cse3111project.bot.spring.category.function.Timetable;
 import com.cse3111project.bot.spring.category.campus.Campus;
 import com.cse3111project.bot.spring.category.instruction.Instruction;
 
@@ -117,7 +117,7 @@ public class Category
         if (mostMatch == transportResults.size())
             return Transport.analyze(transportResults);
         if (mostMatch == functionResults.size())
-            return Timetable.analyze(timetableResults);
+            return Timetable.analyze(matchedResults);
         if (mostMatch == academicResults.size())
             return Academic.analyze(academicResults);
         if (mostMatch == socialResults.size())
