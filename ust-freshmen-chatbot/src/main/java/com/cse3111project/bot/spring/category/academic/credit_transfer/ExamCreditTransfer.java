@@ -21,6 +21,11 @@ import com.cse3111project.bot.spring.exception.NotSQLAccessibleError;
 import com.cse3111project.bot.spring.exception.NotStaticAccessibleError;
 import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundException;
 
+/**
+ * ExamCreditTransfer class acts as the main controller for handling all user-query about exam
+ * credit transfer.
+ * @version 1.0
+ */
 public class ExamCreditTransfer extends CreditTransfer implements SQLAccessible, StaticAccessible {
     public static final String EXAM_KEYWORD[] = { "Australia, Higher School Certificate Examination (NSW)",
                                                   "Bangladesh Higher Secondary Certificate (BDHSC)",
@@ -176,11 +181,23 @@ public class ExamCreditTransfer extends CreditTransfer implements SQLAccessible,
     private List<String> examQuery;
     private List<CreditTransferInfo> results;
 
-    ExamCreditTransfer(final List<String> examQuery) {
+    /**
+     * This is the constructor of ExamCreditTransfer class.
+     * @param examQuery
+     */
+    ExamCreditTransfer(final List<String> examQuery) 
+    {
         super();
         this.examQuery = examQuery;
     }
 
+    /**
+     * This method will connect to the SQL database and retrieve data on details of exam credit transfer.
+     * @return String Return the data retrieved from SQL database
+     * @throws NotSQLAccessibleError
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     @Override
     public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
         try (SQLDatabaseEngine database = new SQLDatabaseEngine(this.getClass(), SQL_TABLE)) {
@@ -206,6 +223,13 @@ public class ExamCreditTransfer extends CreditTransfer implements SQLAccessible,
         }
     }
 
+    /**
+     * This method will connect to the static database and retrieve data on details of exam credit transfer.
+     * It is used when the SQL database has run into some trouble of connection.
+     * @return String Return the data retrieved from database
+     * @throws NotStaticAccessibleError
+     * @throws StaticDatabaseFileNotFoundException
+     */
     @Override
     public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
         try (StaticDatabaseEngine database = new StaticDatabaseEngine(this.getClass(), STATIC_TABLE)) {
