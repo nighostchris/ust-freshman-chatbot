@@ -80,7 +80,7 @@ public class Minibus extends Transport implements SQLAccessible, StaticAccessibl
         // enlarge the hour range if timeslot not found
         // for (int hrRange = 1; numOfData == 0 && hrRange <= 24; hrRange++) { ... }
 
-        try (SQLDatabaseEngine database = new SQLDatabaseEngine(this, SQL_TABLE)) {
+        try (SQLDatabaseEngine database = new SQLDatabaseEngine(this.getClass(), SQL_TABLE)) {
             this.init();
             int currentHr = currentTime.get(Calendar.HOUR_OF_DAY);  // get current hr in 24-hr format
             arrivalTime = new ArrayList<>();
@@ -117,7 +117,7 @@ public class Minibus extends Transport implements SQLAccessible, StaticAccessibl
      */
     @Override
     public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
-        try (StaticDatabaseEngine database = new StaticDatabaseEngine(this, STATIC_TABLE)) {
+        try (StaticDatabaseEngine database = new StaticDatabaseEngine(this.getClass(), STATIC_TABLE)) {
             this.init();
             int currentHr = currentTime.get(Calendar.HOUR_OF_DAY);  // get current hr in 24-hr format
             arrivalTime = new ArrayList<>();

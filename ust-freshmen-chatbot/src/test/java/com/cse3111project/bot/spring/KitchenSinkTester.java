@@ -71,13 +71,13 @@ public class KitchenSinkTester {
         log.info("--- End of testNotFound() ---");
 	}
 	
-    // partial match minibus keyword case 1: at the near end + merge with other character '?'
+    // minibus keyword case 1: at the near end + merge with other character '?'
     // local SQL database     -- pass
     // heroku SQL database    -- pass
     // local static database  -- pass
     @Test
-    public void partialMatchMinibus1() throws Exception {
-        log.info("--- partialMatchMinibus1() ---");
+    public void testMinibus1() throws Exception {
+        log.info("--- testMinibus1() ---");
 
         Object answer = this.searchEngine.search("What is the arrival time of minibus 11?");
 
@@ -86,16 +86,16 @@ public class KitchenSinkTester {
         log.info("reply: {}", (String) answer);
         assertThat(((String) answer).contains("Estimated Arrival Time")).isEqualTo(true);
 
-        log.info("--- End of partialMatchMinibus1() ---");
+        log.info("--- End of testMinibus1() ---");
     }
 
-    // partial match minibus keyword case 2: different case + middle
+    // minibus keyword case 2: different case + middle
     // local SQL database     -- pass
     // heroku SQL database    -- pass
     // local static database  -- pass
     @Test
-    public void partialMatchMinibus2() throws Exception {
-        log.info("--- partialMatchMinibus2() ---");
+    public void testMinibus2() throws Exception {
+        log.info("--- testMinibus2() ---");
 
         Object answer = null;
 
@@ -103,16 +103,16 @@ public class KitchenSinkTester {
 
         assertThat(answer).isNull();
 
-        log.info("--- End of partialMatchMinibus2() ---");
+        log.info("--- End of testMinibus2() ---");
     }
 
-    // partial match minibus keyword case 3: at the front + different case
+    // minibus keyword case 3: at the front + different case
     // local SQL database     -- pass
     // heroku SQL database    -- pass
     // local static database  -- pass
     @Test
-    public void partialMatchMinibus3() throws Exception {
-        log.info("--- partialMatchMinibus3() ---");
+    public void testMinibus3() throws Exception {
+        log.info("--- testMinibus3() ---");
 
         Object answer = null;
 
@@ -123,15 +123,15 @@ public class KitchenSinkTester {
         log.info("reply: {}", (String) answer);
         assertThat(((String) answer).contains("Estimated Arrival Time")).isEqualTo(true);
 
-        log.info("--- End of partialMatchMinibus3() ---");
+        log.info("--- End of testMinibus3() ---");
     }
 
-    // partial match staff keyword case 1: at the middle + exact staff name <lastName> <firstName>
+    // staff keyword case 1: at the middle + exact staff name <lastName> <firstName>
     // heroku SQL database    -- pass
     // local static database  -- pass
     @Test
-    public void partialMatchStaff1() throws Exception {
-        log.info("--- partialMatchStaff1() ---");
+    public void testStaff1() throws Exception {
+        log.info("--- testStaff1() ---");
 
         Object answer = null;
 
@@ -143,15 +143,15 @@ public class KitchenSinkTester {
         assertThat(((String) answer).contains("Results:") && ((String) answer).contains("LI Bo") && 
                    !((String) answer).contains("LI Xin")).isEqualTo(true);
 
-        log.info("--- End of partialMatchStaff1() ---");
+        log.info("--- End of testStaff1() ---");
     }
 
-    // partial match staff keyword case 2: multiple matches + staff last name
+    // staff keyword case 2: multiple matches + staff last name
     // heroku SQL database    -- pass
     // local static database  -- pass
     @Test
-    public void partialMatchStaff2() throws Exception {
-        log.info("--- partialMatchStaff2() ---");
+    public void testStaff2() throws Exception {
+        log.info("--- testStaff2() ---");
 
         Object answer = null;
 
@@ -163,15 +163,15 @@ public class KitchenSinkTester {
         assertThat(((String) answer).contains("Results:") && ((String) answer).contains("LI Bo") && 
                    ((String) answer).contains("LI Xin")).isEqualTo(true);
 
-        log.info("--- End of partialMatchStaff2() ---");
+        log.info("--- End of testStaff2() ---");
     }
 
-    // partial match staff keyword case 3: multiple matches + exact staff name <firstName> <lastName>
+    // staff keyword case 3: multiple matches + exact staff name <firstName> <lastName>
     // heroku SQL database    -- pass
     // local static database  -- pass
     @Test
-    public void partialMatchStaff3() throws Exception {
-        log.info("--- partialMatchStaff3() ---");
+    public void testStaff3() throws Exception {
+        log.info("--- testStaff3() ---");
 
         Object answer = null;
 
@@ -182,14 +182,14 @@ public class KitchenSinkTester {
         log.info("reply: {}", (String) answer);
         assertThat(((String) answer).contains("Results:") && ((String) answer).contains("KIM Sunghun")).isEqualTo(true);
 
-        log.info("--- End of partialMatchStaff3() ---");
+        log.info("--- End of testStaff3() ---");
     }
 
-    // partial match bus keyword case 1: middle + 2 matches (route + location) + different case
+    // bus keyword case 1: middle + 2 matches (route + location) + different case
     // KMB database           -- pass
     @Test
-    public void partialMatchBus1() throws Exception {
-        log.info("--- partialMatchBus1() ---");
+    public void testBus1() throws Exception {
+        log.info("--- testBus1() ---");
 
         Object answer = null;
 
@@ -203,15 +203,15 @@ public class KitchenSinkTester {
                     ((String) answer).contains("missed")).isEqualTo(true);
         // assertThat(answer.equals("here")).isEqualTo(true);
 
-        log.info("--- End of partialMatchBus1() ---");
+        log.info("--- End of testBus1() ---");
     }
 
-    // partial match bus keyword case 1.1: middle + 2 matches (route + location) + different case +
-    //                                     merged with other char
+    // bus keyword case 1.1: middle + 2 matches (route + location) + different case +
+    //                       merged with other char
     // KMB database           -- pass
     @Test
-    public void partialMatchBus1_1() throws Exception {
-        log.info("--- partialMatchBus1_1() ---");
+    public void testBus1_1() throws Exception {
+        log.info("--- testBus1_1() ---");
 
         Object answer = null;
 
@@ -225,14 +225,14 @@ public class KitchenSinkTester {
                    ((String) answer).contains("missed")).isEqualTo(true);
         // assertThat(answer.equals("here")).isEqualTo(true);
 
-        log.info("--- End of partialMatchBus1_1() ---");
+        log.info("--- End of testBus1_1() ---");
     }
 
-    // partial match bus keyword case 2: end + merged with other char + no location provided
+    // bus keyword case 2: end + merged with other char + no location provided
     // KMB database           -- pass
     @Test
-    public void partialMatchBus2() throws Exception {
-        log.info("--- partialMatchBus2() ---");
+    public void testBus2() throws Exception {
+        log.info("--- testBus2() ---");
 
         Object answer = null;
 
@@ -243,15 +243,15 @@ public class KitchenSinkTester {
         log.info("reply: {}", (String) answer);
         assertThat(((String) answer).contains("Sorry") && ((String) answer).contains("query again")).isEqualTo(true);
 
-        log.info("--- End of partialMatchBus2() ---");
+        log.info("--- End of testBus2() ---");
     }
 
-    // partial match societies keyword case 1: end + merged with other char + different case
+    // societies keyword case 1: end + merged with other char + different case
     // heroku SQL database    -- pass
     // local static database  -- pass
     @Test
-    public void partialMatchSocieties1() throws Exception {
-        log.info("--- partialMatchSocieties1() ---");
+    public void testSocieties1() throws Exception {
+        log.info("--- testSocieties1() ---");
 
         Object answer = null;
 
@@ -262,15 +262,15 @@ public class KitchenSinkTester {
         log.info("reply: {}", (String) answer);
         assertThat(((String) answer).contains("Results:")).isEqualTo(true);
 
-        log.info("--- End of partialMatchSocieties1() ---");
+        log.info("--- End of testSocieties1() ---");
     }
 
-    // partial match societies keyword case 2: front + merged with other char + multiple matches
+    // societies keyword case 2: front + merged with other char + multiple matches
     // heroku SQL database    -- pass
     // local static database  -- pass
     @Test
-    public void partialMatchSocieties2() throws Exception {
-        log.info("--- partialMatchSocieties2() ---");
+    public void testSocieties2() throws Exception {
+        log.info("--- testSocieties2() ---");
 
         Object answer = null;
 
@@ -282,16 +282,16 @@ public class KitchenSinkTester {
         assertThat(((String) answer).contains("Results:") && ((String) answer).contains("Nature Club") && 
                    ((String) answer).contains("Cricket Club")).isEqualTo(true);
 
-        log.info("--- End of partialMatchSocieties2() ---");
+        log.info("--- End of testSocieties2() ---");
     }
 
-    // partial match societies keyword case 3: end + merged with other char + different case +
-    //                                         no Societies.SOCIETIES_KEYWORD
+    // societies keyword case 3: end + merged with other char + different case +
+    //                           no Societies.SOCIETIES_KEYWORD
     // heroku SQL database    -- pass
     // local static database  -- pass
     @Test
-    public void partialMatchSocieties3() throws Exception {
-        log.info("--- partialMatchSocieties3() ---");
+    public void testSocieties3() throws Exception {
+        log.info("--- testSocieties3() ---");
 
         Object answer = null;
 
@@ -302,15 +302,15 @@ public class KitchenSinkTester {
         log.info("reply: {}", (String) answer);
         assertThat(((String) answer).contains("There are a variety of UST societies")).isEqualTo(true);
 
-        log.info("--- End of partialMatchSocieties3() ---");
+        log.info("--- End of testSocieties3() ---");
     }
 
-    // partial match recreation keyword case 1: middle + different case
+    // recreation keyword case 1: middle + different case
     // heroku SQL database    -- pass
     // local static database  -- pass
     @Test
-    public void partialMatchRecreation1() throws Exception {
-        log.info("--- partialMatchRecreation1() ---");
+    public void testRecreation1() throws Exception {
+        log.info("--- testRecreation1() ---");
 
         Object answer = null;
 
@@ -321,16 +321,16 @@ public class KitchenSinkTester {
         log.info("reply: {}", (String) answer);
         assertThat(((String) answer).contains("Results:") && ((String) answer).contains("Music Room")).isEqualTo(true);
 
-        log.info("--- End of partialMatchRecreation1() ---");
+        log.info("--- End of testRecreation1() ---");
     }
 
-    // partial match recreation keyword case 2: multiple matches + different case + merged with other char
-    //                                          + keyword transformation
+    // recreation keyword case 2: multiple matches + different case + merged with other char
+    //                            + keyword transformation
     // heroku SQL database    -- pass
     // local static database  -- pass
     @Test
-    public void partialMatchRecreation2() throws Exception {
-        log.info("--- partialMatchRecreation2() ---");
+    public void testRecreation2() throws Exception {
+        log.info("--- testRecreation2() ---");
 
         Object answer = null;
 
@@ -344,13 +344,13 @@ public class KitchenSinkTester {
         assertThat(((String) answer).contains("Results:") && ((String) answer).contains("Classroom") && 
                    ((String) answer).contains("Study Room")).isEqualTo(true);
 
-        log.info("--- End of partialMatchRecreation2() ---");
+        log.info("--- End of testRecreation2() ---");
     }
 
-    // partial match timetable keyword case 1: end + merged with other char + different case
+    // timetable keyword case 1: end + merged with other char + different case
     @Test
-    public void partialMatchTimeTable1() throws Exception {
-        log.info("--- partialMatchTimeTable1() ---");
+    public void testTimeTable1() throws Exception {
+        log.info("--- testTimeTable1() ---");
 
         Object answer = null;
 
@@ -363,43 +363,43 @@ public class KitchenSinkTester {
         assertThat(answer instanceof TimeTable).isEqualTo(true);
         // assertThat(((TimeTable) answer).getController().getFunctionEvent() instanceof TimeTable);
 
-        log.info("--- End of partialMatchTimeTable1() ---");
+        log.info("--- End of testTimeTable1() ---");
     }
 
-    // partial match campus keyword case 1: end + merged with other char
+    // campus keyword case 1: end + merged with other char
     @Test
-    public void partialMatchCampus1() throws Exception {
-        log.info("--- partialMatchCampus1() ---");
+    public void testCampus1() throws Exception {
+        log.info("--- testCampus1() ---");
         Object answer = this.searchEngine.search("Can I know eta from 4619 to 2407?");
         assertThat(answer).isNotNull();
         assertThat(answer instanceof String).isEqualTo(true);
         log.info("reply: {}", answer);
         assertThat(((String) answer).contains("It takes")).isEqualTo(true);
-        log.info("--- End of partialMatchCampus1() ---");
+        log.info("--- End of testCampus1() ---");
     }
 
-    // partial match campus keyword case 2: end + merged with other char + 
-    //                                      starting point string consisting of multiple words 
-    //                                      (to test HTML encoding) + different case
+    // campus keyword case 2: end + merged with other char + 
+    //                        starting point string consisting of multiple words 
+    //                        (to test HTML encoding) + different case
     @Test
-    public void partialMatchCampus2() throws Exception {
-        log.info("--- partialMatchCampus2() ---");
+    public void testCampus2() throws Exception {
+        log.info("--- testCampus2() ---");
         Object answer = this.searchEngine.search("Can I know eta from LTA back entrance to 2504?");
         assertThat(answer).isNotNull();
         assertThat(answer instanceof String).isEqualTo(true);
         log.info("reply: {}", answer);
         assertThat(((String) answer).contains("It takes")).isEqualTo(true);
-        log.info("--- End of partialMatchCampus2() ---");
+        log.info("--- End of testCampus2() ---");
     }
 
-    // partial match campus keyword case 3: end + merged with other char + 
+    // campus keyword case 3: end + merged with other char + 
     //                                      only providing starting point without ending point
     @Test
-    public void partialMatchCampus3() throws Exception {
-        log.info("--- partialMatchCampus3() ---");
+    public void testCampus3() throws Exception {
+        log.info("--- testCampus3() ---");
         Object answer = this.searchEngine.search("Can I know eta from 4619?");
         assertThat(answer).isNull();
-        log.info("--- End of partialMatchCampus3() ---");
+        log.info("--- End of testCampus3() ---");
     }
     
     @Test
@@ -478,7 +478,61 @@ public class KitchenSinkTester {
         assertThat(((String) answer).contains("I want to")).isEqualTo(true);
         log.info("--- End of userHelpTest7() ---");
     }
-    
+
+    @Test
+    public void testExamCreditTransfer1() throws Exception {
+        log.info("--- testExamCreditTransfer1 ---");
+        Object answer = this.searchEngine.search("Can I transfer HKALE Chemistry (A-level) to UST?");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("CHEM 1010")).isEqualTo(true);
+        log.info("--- End of testExamCreditTransfer1 ---");
+    }
+
+    @Test
+    public void testExamCreditTransfer2() throws Exception {
+        log.info("--- testExamCreditTransfer2 ---");
+        Object answer = this.searchEngine.search("Can I transfer HKALE grades to UST?");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("What subjects")).isEqualTo(true);
+        log.info("--- End of testExamCreditTransfer2 ---");
+    }
+
+    @Test
+    public void testExamCreditTransfer3() throws Exception {
+        log.info("--- testExamCreditTransfer3 ---");
+        Object answer = this.searchEngine.search("Can I transfer Advanced Mathematics II to UST?");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("Advanced Mathematics II")).isEqualTo(true);
+        log.info("--- End of testExamCreditTransfer3 ---");
+    }
+
+    @Test
+    public void testExamCreditTransfer4() throws Exception {
+        log.info("--- testExamCreditTransfer4 ---");
+        Object answer = this.searchEngine.search("Can I transfer Chinese History from HKALE to UST?");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("Chinese History")).isEqualTo(true);
+        log.info("--- End of testExamCreditTransfer4 ---");
+    }
+
+    @Test
+    public void testLocalInstitutionCreditTransfer1() throws Exception {
+        log.info("--- testLocalInstitutionCreditTransfer1 ---");
+        Object answer = this.searchEngine.search("Can I transfer HUM4001?");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("HUMA 1720")).isEqualTo(true);
+        log.info("--- End of testLocalInstitutionCreditTransfer1 ---");
+        
     @Test
     public void partialMatchCourseWebsiteSearch1() throws Exception {
         log.info("--- partialMatchCourseWebsiteSearch1 ---");

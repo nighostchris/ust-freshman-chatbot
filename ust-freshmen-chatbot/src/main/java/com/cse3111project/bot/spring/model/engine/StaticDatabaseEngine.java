@@ -23,17 +23,18 @@ public class StaticDatabaseEngine extends DatabaseEngine implements AutoCloseabl
 
     /**
      * Constructor for StaticDatabaseEngine
-     * @param classObj First parameter taken by this method, which is the Category object.
-     * @param STATIC_TABLE Second parameter taken by this method, which is the name of static database.
-     * @throws NotStaticAccessibleError
+     * @param _class forcing this class to implement SQLAccessible marker interface, otherwise throws NotSQLAccessibleError
+     * @param STATIC_TABLE name of static database.
+     * @throws NotStaticAccessibleError thrown if the class attempting to use this engine 
+     *                                  is not implementing StaticAccessible interface
      */
-    public StaticDatabaseEngine(Object classObj, final String STATIC_TABLE) throws NotStaticAccessibleError
+    public StaticDatabaseEngine(Class<?> _class, final String STATIC_TABLE) throws NotStaticAccessibleError
     {
         super(STATIC_TABLE);
 
         // force to implement StaticAccessible interface in order to use StaticDatabaseEngine
-        if (!(classObj instanceof StaticAccessible))
-            throw new NotStaticAccessibleError(classObj + " is not StaticAccessible");
+        if (!StaticAccessible.class.isAssignableFrom(_class))
+            throw new NotStaticAccessibleError(_class.getName() + " is not StaticAccessible");
     }
 
     /**

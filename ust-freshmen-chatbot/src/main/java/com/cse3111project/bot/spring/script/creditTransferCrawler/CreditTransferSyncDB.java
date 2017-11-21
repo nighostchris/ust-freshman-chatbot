@@ -34,7 +34,7 @@ public class CreditTransferSyncDB {
 		
 		switch(this.option) {
 			case 1:
-				SQLDatabaseEngine de = new SQLDatabaseEngine(this, "examinations_credits"); // creating this object will get connection to db
+				SQLDatabaseEngine de = new SQLDatabaseEngine(this.getClass(), "examinations_credits"); // creating this object will get connection to db
 				// check if the table exists, it will create it if it does not exist
 				String createExamTableSQL = "CREATE TABLE IF NOT EXISTS public.examinations_credits"
 						+ "(id SERIAL PRIMARY KEY, examination varchar(255),"
@@ -59,7 +59,7 @@ public class CreditTransferSyncDB {
 				insertExamData.close();
 				break;
 			case 2:
-				de = new SQLDatabaseEngine(this, "local_institutions_credits"); // creating this object will get connection to db
+				de = new SQLDatabaseEngine(this.getClass(), "local_institutions_credits"); // creating this object will get connection to db
 				// check if the table exists, it will create it if it does not exist
 				String createLocalTableSQL = "CREATE TABLE IF NOT EXISTS public.local_institutions_credits"
 						+ "(id SERIAL PRIMARY KEY, institution varchar(255),"
@@ -84,7 +84,7 @@ public class CreditTransferSyncDB {
 				insertLocalData.close();
 				break;
 			case 3:
-				de = new SQLDatabaseEngine(this, "non_local_institutions_credits"); // creating this object will get connection to db
+				de = new SQLDatabaseEngine(this.getClass(), "non_local_institutions_credits"); // creating this object will get connection to db
 				// check if the table exists, it will create it if it does not exist
 				String createNonLocalTableSQL = "CREATE TABLE IF NOT EXISTS public.non_local_institutions_credits"
 						+ "(id SERIAL PRIMARY KEY, country varchar (255), institution varchar(255),"

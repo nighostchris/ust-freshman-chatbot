@@ -32,21 +32,37 @@ public class SQLDatabaseEngine extends DatabaseEngine implements AutoCloseable
     private ResultSet reader;
 
     /**
-     * Constructor of SQLDatabaseEngine
-     * @param classObj First parameter taken by this method, which is the Category object.
-     * @param SQL_TABLE Second parameter taken by this method, which is the name of table in database.
-     * @throws URISyntaxException
-     * @throws SQLException
-     * @throws NotSQLAccessibleError
+     * Constructor of SQLDatabaseEngine:
+     * Connect SQL database with default DATABASE_URL.
+     * @param _class forcing this class to implement SQLAccessible marker interface, otherwise throws NotSQLAccessibleError
+     * @param SQL_TABLE name of table in database.
+     * @throws URISyntaxException thrown if specified wrong database URI.
+     * @throws SQLException thrown if unable to access SQL database
+     * @throws NotSQLAccessibleError thrown if the class attempting to use this engine 
+     *                               is not implementing SQLAccessible marker interface
      */
-    public SQLDatabaseEngine(Object classObj, final String SQL_TABLE) throws URISyntaxException, SQLException, NotSQLAccessibleError 
+    public SQLDatabaseEngine(Class<?> _class, final String SQL_TABLE) throws URISyntaxException, SQLException, NotSQLAccessibleError 
     {
+        this(_class, SQL_TABLE, System.getenv("DATABASE_URL"));
+    }
+
+    /**
+      * Constructor of SQLDatabaseEngine:
+      * Connect SQL database with an overridden DATABASE_URL
+      * @param _class forcing this class to implement SQLAccessible marker interface, otherwise throws NotSQLAccessibleError
+      * @param SQL_TABLE name of table in database.
+      * @param DATABASE_URL overridden database URL.
+      * @throws URISyntaxException thrown if specified wrong database URI.
+      * @throws SQLException thrown if unable to access SQL database
+      * @throws NotSQLAccessibleError thrown if the class attempting to use this SQLDatabaseEngine is not 
+      *                               implementing SQLAccessible marker interface
+      */
+    public SQLDatabaseEngine(Class<?> _class, final String SQL_TABLE, final String DATABASE_URL) throws URISyntaxException, SQLException, NotSQLAccessibleError {
         super(SQL_TABLE);
 
         // force to implement SQLAccessible interface in order to use SQLDatabaseEngine
-        // ** no need to throw, already handled in SearchEngine.search() **
-        if (!(classObj instanceof SQLAccessible))
-            throw new NotSQLAccessibleError(classObj.getClass().getName() + " class is not SQLAccessible");
+        if (!SQLAccessible.class.isAssignableFrom(_class))
+            throw new NotSQLAccessibleError(_class.getName() + " class is not SQLAccessible");
 
         connection = this.getConnection();
         // SQLConnection = this.getLocalConnection();
