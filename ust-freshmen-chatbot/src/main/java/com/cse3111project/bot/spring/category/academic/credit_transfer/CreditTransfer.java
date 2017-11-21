@@ -21,13 +21,29 @@ import com.cse3111project.bot.spring.exception.StaticDatabaseFileNotFoundExcepti
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * The CreditTransfer class acts as the main controller for coordinating all the user-query
+ * on credit transfer related issues like exam credit transfer and local institution credit
+ * transfer.
+ * @version 1.0
+ */
 @Slf4j
-public class CreditTransfer extends Academic implements SQLAccessible, StaticAccessible {
+public class CreditTransfer extends Academic implements SQLAccessible, StaticAccessible 
+{
     public static final String QUERY_KEYWORD[] = { "credit transfer" , "transfer" };
 
     private List<CreditTransfer> subcategoryResults = new ArrayList<>();
     private List<String> generalResults;
 
+    /**
+     * This is the constructor of CreditTransfer which initialize the List of String of
+     * corresponding sub-class and further process the data in the List.
+     * @param examQuery This is the List that stores all query about exam credit transfer
+     * @param localInstitutionQuery This is the List that stores all query about local 
+     * 								institution credit transfer
+     * @param nonLocalInstitutionQuery This is the List that stores all query about non local 
+     * 								   institution credit transfer
+     */
     public CreditTransfer(final List<String> examQuery,
                           final List<String> localInstitutionQuery, 
                           final List<String> nonLocalInstitutionQuery) {
@@ -39,9 +55,16 @@ public class CreditTransfer extends Academic implements SQLAccessible, StaticAcc
             subcategoryResults.add(new NonLocalInstitutionCreditTransfer(nonLocalInstitutionQuery));
     }
 
+    /**
+     * Default constructor of CreditTransfer Class.
+     */
     CreditTransfer() { }
 
-    // reconstruct each line (row) from static database
+    /**
+     * This method will reconstruct each line (row) from static database
+     * @param line The original data retrieved from database
+     * @return List Return a List of String that contains the processed data from database
+     */
     protected static synchronized List<String> reconstruct(String line){
         // reconstruct the row
         List<String> row = Collections.synchronizedList(new ArrayList<>());
@@ -75,6 +98,13 @@ public class CreditTransfer extends Academic implements SQLAccessible, StaticAcc
         return row;
     }
 
+    /**
+     * This method will connect to the SQL database and retrieve data on details of credit transfer.
+     * @return String Return the data retrieved from SQL database
+     * @throws NotSQLAccessibleError
+     * @throws URISyntaxException
+     * @throws SQLException
+     */
     @Override
     public synchronized String getDataFromSQL() throws NotSQLAccessibleError, URISyntaxException, SQLException {
         generalResults = Collections.synchronizedList(new ArrayList<>());
@@ -85,6 +115,13 @@ public class CreditTransfer extends Academic implements SQLAccessible, StaticAcc
         return super.replyResults();
     }
 
+    /**
+     * This method will connect to the static database and retrieve data on details of credit transfer.
+     * It is used when the SQL database has run into some trouble of connection.
+     * @return String Return the data retrieved from database
+     * @throws NotStaticAccessibleError
+     * @throws StaticDatabaseFileNotFoundException
+     */
     @Override
     public synchronized String getDataFromStatic() throws NotStaticAccessibleError, StaticDatabaseFileNotFoundException {
         generalResults = Collections.synchronizedList(new ArrayList<>());
@@ -95,6 +132,10 @@ public class CreditTransfer extends Academic implements SQLAccessible, StaticAcc
         return super.replyResults();
     }
 
+    /**
+     * Overriden the original toString() method given by Java.
+     * @return
+     */
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
