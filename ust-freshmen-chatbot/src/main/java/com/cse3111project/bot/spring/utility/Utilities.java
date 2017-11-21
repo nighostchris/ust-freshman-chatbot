@@ -72,8 +72,13 @@ public final class Utilities
         return minimum;
     }
 
-    // check whether the String array contains result, case-sensitive
-    // Time complexity: O(arr.length)
+    /**
+     * This method will check whether the String array contains result with case-sensitive. 
+     * Time complexity: O(arr.length)
+     * @param arr It is a String array which contains all the elements to be compare.
+     * @param result It is the result to be tested.
+     * @return boolean This method will return a boolean value indicating whether the array contains the result.
+     */
     public static boolean contains(String[] arr, String result)
     {
         for (String element : arr)
