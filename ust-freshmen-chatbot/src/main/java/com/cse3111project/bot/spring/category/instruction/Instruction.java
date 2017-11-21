@@ -13,7 +13,7 @@ public class Instruction extends Category
 	private String reply;
 	
 	public static final String QUERY_KEYWORD[] = { "/help", "/dir", "/kmb", "/minibus", "/society", "/campus", "/facb",
-												   "/studypath", "find", "cretrans", "/t" };
+												   "/studypath", "/f", "/cretrans", "/t" };
 	
 	private static final String HELP_QUERY = "Commands available for checking guidelines on\n"
 										   + "different features of this chatbot:\n"
@@ -24,7 +24,7 @@ public class Instruction extends Category
 										   + "/campus  Campus ETA Enquiry\n"
 										   + "/facb	 Facilities Booking Enquiry\n"
 										   + "/studypath Course Suggestion\n"
-										   + "/find	 Course Website Enquiry\n"
+										   + "/f  Course Website Enquiry\n"
 										   + "/cretrans Credit Transfer Enquiry\n"
 										   + "/t Time Manager Function";
 	

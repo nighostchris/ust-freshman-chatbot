@@ -74,7 +74,8 @@ public final class Utilities
 
     // check whether the String array contains result, case-sensitive
     // Time complexity: O(arr.length)
-    public static boolean contains(String[] arr, String result){
+    public static boolean contains(String[] arr, String result)
+    {
         for (String element : arr)
             if (element.equals(result))
                 return true;
@@ -82,7 +83,11 @@ public final class Utilities
         return false;
     }
 
-    // check whether all args are all equal to each other
+    /**
+     * This method will be used to check whether all args are all equal to each other
+     * @param args The arguments of any type to be checked
+     * @return boolean Return a boolean which indicate whether all arguments are equal to each other
+     */
     @SafeVarargs
     public static <T> boolean allEquals(T... args){
         // empty set or singleton
