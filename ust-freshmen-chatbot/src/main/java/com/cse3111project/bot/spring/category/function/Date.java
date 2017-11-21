@@ -6,13 +6,10 @@ import java.util.ArrayList;
 
 import com.cse3111project.bot.spring.exception.InvalidDateException;
 
-class Date implements Comparable<Date>, Serializable
+class Date implements Comparable<Date>
 {
-    private static final long serialVersionUID = 1L;
-
 	private int month;
 	private int day;
-	// private int noOfActivity = 0;  // will be tracked by activity.size()
 	private ArrayList<Activity> activity;
 	
 	Date(int month, int day)
@@ -22,7 +19,8 @@ class Date implements Comparable<Date>, Serializable
 		this.activity = new ArrayList<Activity>();
 	}
 
-    static void checkValidity(int month, int day) throws InvalidDateException {
+    static void checkValidity(int month, int day) throws InvalidDateException 
+    {
         if (month < 0 || month > 12)
             throw new InvalidDateException("Entered invalid month. Please try again");
         if (day < 0 || day > 31)
@@ -39,10 +37,8 @@ class Date implements Comparable<Date>, Serializable
 		for (Activity check : this.activity)
 			if (check.getTimeslot().hasConflict(activity.getTimeslot()))
                 return false;
-
+		
         this.activity.add(activity);
-        // noOfActivity++;
-
 		return true;
 	}
 	
@@ -53,7 +49,6 @@ class Date implements Comparable<Date>, Serializable
 			if (check.getName().equals(name))
 			{
 				this.activity.remove(check);
-				// noOfActivity--;
 				return true;
 			}
 		}
@@ -72,8 +67,6 @@ class Date implements Comparable<Date>, Serializable
 	int getMonth() { return month; }
 	
 	int getDay() { return day; }
-	
-	// public int getNoOfActivity() { return noOfActivity; }
 
     boolean isEmpty() { return activity.isEmpty(); }
 	

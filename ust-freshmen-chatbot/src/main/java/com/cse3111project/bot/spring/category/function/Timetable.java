@@ -1,158 +1,37 @@
 package com.cse3111project.bot.spring.category.function.timetable;
 
-import com.cse3111project.bot.spring.category.function.Function;
-
-import java.nio.file.Path;
-import java.nio.file.Files;
-import java.nio.file.FileAlreadyExistsException;
-
-import java.io.File;
-import java.io.ObjectInputStream;
-import java.io.FileInputStream;
-import java.io.ObjectOutputStream;
-import java.io.FileOutputStream;
-import java.io.FileNotFoundException;
-import java.io.NotSerializableException;
-import java.io.IOException;
-
-import java.util.Collections;
 import com.cse3111project.bot.spring.utility.Utilities;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import com.cse3111project.bot.spring.exception.InvalidDateException;
 import com.cse3111project.bot.spring.exception.InvalidTimeslotException;
 
-public class TimeTable extends Function {
+public class Timetable 
+{
     public static final String FUNCTION_KEYWORD[] = { "timetable", "time table", "time manager",
                                                       "time schedule", "schedule" };
 
-    private People user = null;
-
-    private Path saveDir = saveRootDir.resolve("timetable");
-
-    // save filename
-    // ** currently only one save slot is provided **
-    private static final String SAVEFILE = "schedule";
-
-    // create save directory for TimeTable function
-    @Override
-    protected void createSaveDir() throws FileAlreadyExistsException, IOException {
-        super.createSaveDir();
-
-        try {
-            if (!Files.exists(saveDir))
-                Files.createDirectory(saveDir);
-        }
-        catch (FileAlreadyExistsException e) {
-            Utilities.errorLog(saveDir.toString() + " directory already exists", e);
-            throw e;
-        }
-        catch (IOException e) {
-            Utilities.errorLog("I/O error occurred while creating " + saveDir.toString(), e);
-            throw e;
-        }
+    public static Category analyze(final ArrayList<String> extractedResults)
+    {
+    	/*
+    	 * Chris wants to eat dinner from 6 to 9 on November 22.
+			Input parameter to analyze
+			Chris <- username
+			eat dinner <- event nme
+			from 6 to 9 <- get the time
+			November 22 <- Date
+    	 */
+    	String originalText = extractedResults.get(0);
+    	// get the username for checking
+    	String username = originalText.substring(0, originalText.indexOf(' '));
+    	// get the activity name
+    	String eventName = originalText.substring(originalText.indexOf("to") + 3, originalText.indexOf("from") - 1);
     }
-
-    // read the saved timetable
-    @Override
-    protected void read(){
-        Path saveFilePath = saveDir.resolve(SAVEFILE);
-        if (!Files.exists(saveFilePath))
-            return;
-
-        FileInputStream fis = null;
-        ObjectInputStream ois = null;
-        try {
-            File saveFile = saveFilePath.toFile();
-            fis = new FileInputStream(saveFile);
-            ois = new ObjectInputStream(fis);
-
-            this.user = (People) ois.readObject();
-        }
-        catch (ClassNotFoundException e) {  // should not happen
-            Utilities.errorLog("Deserialized class not found", e);
-            replyText("System error occurred. Abort reading.");
-        }
-        catch (IOException e) {
-            Utilities.errorLog("I/O error occurred while reading save file", e);
-            replyText("Error occurred while reading the save. Abort reading.");
-        }
-        finally {
-            try {
-                if (fis != null)
-                    fis.close();
-                if (ois != null)
-                    ois.close();
-            }
-            catch (IOException e) {
-                Utilities.errorLog("Error occurred while closing stream", e);
-            }
-        }
-    }
-
-    // save current timetable
-    // ** currently only one save slot is provided **
-    @Override
-    protected void save(){
-        FileOutputStream fos = null;
-        ObjectOutputStream oos = null;
-        try {
-            // check if saveDir exists. If not, create one
-            this.createSaveDir();
-
-            // overwrite the old schedule if exists **
-            File saveFile = saveDir.resolve(SAVEFILE).toFile();
-
-            fos = new FileOutputStream(saveFile);
-            oos = new ObjectOutputStream(fos);
-
-            oos.writeObject(user);
-
-            replyText("Saving Complete");
-        }
-        catch (FileAlreadyExistsException e) {
-            replyText("Error occurred while creating cache. Saving operation abort.");
-        }
-        catch (NotSerializableException e) {  // should not occur in Release
-            Utilities.errorLog("Unable to serialize a non-serializable class", e);
-        }
-        catch (IOException e) {
-            Utilities.errorLog("Error occurred while writing save", e);
-            replyText("Error occurred while writing save. Saving operation abort.");
-        }
-        finally {
-            try {
-                if (fos != null)
-                    fos.close();
-                if (oos != null)
-                    oos.close();
-            }
-            catch (IOException e) {
-                Utilities.errorLog("Error occurred while closing stream", e);
-            }
-        }
-    }
-
-    // before exit, ask whether to save the current time table
-    private void askSave(){
-        loop: while (true) {
-            replyText("Save the current timetable?[Y/N]\n\n" + user.toString());
-            while (!userHasReplied());
-            String userResponse = getUserMessage();
-            switch (userResponse) {
-                case "Y": case "y": case "Yes": case "yes":
-                    this.save();
-                    break loop;
-
-                case "N": case "n": case "No": case "no":
-                    break loop;
-
-                default:
-                    replyText("Unknown option");
-                    break;
-            }
-        }
-    }
-
+    
+    
     // option 1
     private void addEvent(){
         int month = 0; int day = 0;

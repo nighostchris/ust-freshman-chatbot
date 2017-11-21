@@ -86,9 +86,8 @@ public class SearchEngine
 
         // --- Application Module ---
         // return the function query object
-        if (categoryResult instanceof Function)
-            if (categoryResult instanceof TimeTable)
-                return categoryResult;
+        if (categoryResult instanceof Timetable)
+            return categoryResult; // Not yet decide the method to return result
         
         if (categoryResult instanceof Instruction)
         	return ((Instruction) categoryResult).getReply();

@@ -1,13 +1,9 @@
 package com.cse3111project.bot.spring.category.function.timetable;
 
-import java.io.Serializable;
-
 import java.util.ArrayList;
 
-public class People implements Serializable
+public class People
 {
-    private static final long serialVersionUID = 1L;
-
 	private String username;
 	private ArrayList<Date> dateList;
 	

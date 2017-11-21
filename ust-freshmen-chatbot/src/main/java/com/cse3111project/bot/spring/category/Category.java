@@ -39,7 +39,7 @@ public class Category
                                                                         Transport.QUERY_KEYWORD,
                                                                         Social.QUERY_KEYWORD,
                                                                         Function.QUERY_KEYWORD,
-                                                                        Instruction.QUERY_KEYWORD);
+                                                                        Timetable.QUERY_KEYWORD);
     // Campus.QUERY_KEYWORD not enlisted since it only consists of CAMPUS_DIRECTION_KEYWORD
     // which would be handled in CampusETA.detectLocationName() in SearchEngine.parse()
 
@@ -69,7 +69,7 @@ public class Category
         ArrayList<String> transportResults = new ArrayList<>();
         ArrayList<String> academicResults = new ArrayList<>();
         ArrayList<String> socialResults = new ArrayList<>();
-        ArrayList<String> functionResults = new ArrayList<>();
+        ArrayList<String> timetableResults = new ArrayList<>();
         ArrayList<String> campusResults = new ArrayList<>();
         ArrayList<String> instructionResults = new ArrayList<>();
 
@@ -91,9 +91,9 @@ public class Category
                     socialResults.add(socialKeyword);
 
             // Function.QUERY_KEYWORD = TimeTable.FUNCTION_KEYWORD
-            for (String functionKeyword : Function.QUERY_KEYWORD)
-                if (result.equals(functionKeyword))
-                    functionResults.add(functionKeyword);
+            for (String timetableKeyword : Function.QUERY_KEYWORD)
+                if (result.contains(timetableKeyword))
+                    timetableResults.add(timetableKeyword);
 
             // Campus.QUERY_KEYWORD = CampusETA.CAMPUS_DIRECTION_KEYWORD
             for (String campusKeyword : Campus.QUERY_KEYWORD)
@@ -111,13 +111,13 @@ public class Category
         // since they have a ridiculously overlap: "TA" and "time table", see partialMatchTimeTable1()
         // ** Update: no need anymore because of the change in .parse()
         int mostMatch = Utilities.max(transportResults.size(), academicResults.size(), 
-                                      socialResults.size(), functionResults.size(), 
+                                      socialResults.size(), timetableResults.size(), 
                                       campusResults.size(), instructionResults.size());
 
         if (mostMatch == transportResults.size())
             return Transport.analyze(transportResults);
         if (mostMatch == functionResults.size())
-            return Function.analyze(functionResults);
+            return Timetable.analyze(timetableResults);
         if (mostMatch == academicResults.size())
             return Academic.analyze(academicResults);
         if (mostMatch == socialResults.size())

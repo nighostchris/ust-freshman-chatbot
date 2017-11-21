@@ -1,11 +1,7 @@
 package com.cse3111project.bot.spring.category.function.timetable;
 
-import java.io.Serializable;
-
-class Activity implements Comparable<Activity>, Serializable
+class Activity implements Comparable<Activity>
 {
-    private static final long serialVersionUID = 1L;
-
 	private String name;
 	private Timeslot timeslot;
 	
