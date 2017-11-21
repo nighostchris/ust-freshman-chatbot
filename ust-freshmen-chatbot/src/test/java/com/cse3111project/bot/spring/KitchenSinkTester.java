@@ -532,6 +532,7 @@ public class KitchenSinkTester {
         log.info("reply: {}", answer);
         assertThat(((String) answer).contains("HUMA 1720")).isEqualTo(true);
         log.info("--- End of testLocalInstitutionCreditTransfer1 ---");
+    }
         
     @Test
     public void partialMatchCourseWebsiteSearch1() throws Exception {
