@@ -38,7 +38,7 @@ public class Category
     public static final String QUERY_KEYWORD[] = Utilities.concatArrays(Academic.QUERY_KEYWORD, 
                                                                         Transport.QUERY_KEYWORD,
                                                                         Social.QUERY_KEYWORD,
-                                                                        Function.QUERY_KEYWORD,
+                                                                        Instruction.QUERY_KEYWORD,
                                                                         Timetable.QUERY_KEYWORD);
     // Campus.QUERY_KEYWORD not enlisted since it only consists of CAMPUS_DIRECTION_KEYWORD
     // which would be handled in CampusETA.detectLocationName() in SearchEngine.parse()

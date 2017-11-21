@@ -9,6 +9,8 @@ import java.util.Collections;
 import com.cse3111project.bot.spring.exception.InvalidDateException;
 import com.cse3111project.bot.spring.exception.InvalidTimeslotException;
 
+// database structure
+// username month day activityName startTime endTime
 public class Timetable 
 {
     public static final String FUNCTION_KEYWORD[] = { "timetable", "time table", "time manager",
@@ -33,7 +35,8 @@ public class Timetable
     
     
     // option 1
-    private void addEvent(){
+    private void addEvent()
+    {
         int month = 0; int day = 0;
         int startTime = 0; int endTime = 0;
         String activityName = null;
