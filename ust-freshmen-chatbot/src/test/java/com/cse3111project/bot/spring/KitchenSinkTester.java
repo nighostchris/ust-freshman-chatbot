@@ -478,17 +478,6 @@ public class KitchenSinkTester {
         assertThat(((String) answer).contains("I want to")).isEqualTo(true);
         log.info("--- End of userHelpTest7() ---");
     }
-    
-    @Test
-    public void testCourseWebsiteSearch1() throws Exception {
-        log.info("--- testCourseWebsiteSearch1 ---");
-        Object answer = this.searchEngine.search("Please search course website of COMP 2611 for me");
-        assertThat(answer).isNotNull();
-        assertThat(answer instanceof String).isEqualTo(true);
-        log.info("reply: {}", answer);
-        assertThat(((String) answer).contains("Review")).isEqualTo(true);
-        log.info("--- End of testCourseWebsiteSearch1 ---");
-    }
 
     @Test
     public void testExamCreditTransfer1() throws Exception {
@@ -543,5 +532,70 @@ public class KitchenSinkTester {
         log.info("reply: {}", answer);
         assertThat(((String) answer).contains("HUMA 1720")).isEqualTo(true);
         log.info("--- End of testLocalInstitutionCreditTransfer1 ---");
+        
+    @Test
+    public void partialMatchCourseWebsiteSearch1() throws Exception {
+        log.info("--- partialMatchCourseWebsiteSearch1 ---");
+        Object answer = this.searchEngine.search("Can you find the course website of COMP 3111 for me?");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("Courses")).isEqualTo(true);
+        log.info("--- End of partialMatchCourseWebsiteSearch1 ---");
+    }
+    
+    @Test
+    public void partialMatchCourseWebsiteSearch2() throws Exception {
+        log.info("--- partialMatchCourseWebsiteSearch2 ---");
+        Object answer = this.searchEngine.search("Can you search details of course COMP4641 for me?");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("James Kwok")).isEqualTo(true);
+        log.info("--- End of partialMatchCourseWebsiteSearch2 ---");
+    }
+    
+    @Test
+    public void partialMatchCourseWebsiteSearch3() throws Exception {
+        log.info("--- partialMatchCourseWebsiteSearch3 ---");
+        Object answer = this.searchEngine.search("Can you find 2012?");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("understand")).isEqualTo(true);
+        log.info("--- End of partialMatchCourseWebsiteSearch3 ---");
+    }
+    
+    @Test
+    public void StudyPathSearchTest1() throws Exception {
+        log.info("--- StudyPathSearchTest1 ---");
+        Object answer = this.searchEngine.search("Can you suggest some course after I have taken COMP 2012?");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("COMP 2611")).isEqualTo(true);
+        log.info("--- End of StudyPathSearchTest1 ---");
+    }
+    
+    @Test
+    public void StudyPathSearchTest2() throws Exception {
+        log.info("--- StudyPathSearchTest2 ---");
+        Object answer = this.searchEngine.search("What can I study if I have finished COMP 3111?");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("COMP 4111")).isEqualTo(true);
+        log.info("--- End of StudyPathSearchTest2 ---");
+    }
+    
+    @Test
+    public void StudyPathSearchTest3() throws Exception {
+        log.info("--- StudyPathSearchTest3 ---");
+        Object answer = this.searchEngine.search("Suggest some path for me after COMP3511");
+        assertThat(answer).isNotNull();
+        assertThat(answer instanceof String).isEqualTo(true);
+        log.info("reply: {}", answer);
+        assertThat(((String) answer).contains("COMP 4511")).isEqualTo(true);
+        log.info("--- End of StudyPathSearchTest3 ---");
     }
 }

@@ -50,14 +50,15 @@ public class SearchEngine
 	 * upon matched certain QUERY_KEYWORD.
 	 * @param userQuery
 	 * @return Object
-	 * Possible response:
-	 * - general query e.g. finding the office location of staff and return String
-	 * - query result would be searched on SQL database first
-	 *   if SQLDatabase is failed to load, use the backup static database
-	 * - application e.g. TimeTable function, return the application object
 	 */
 	public Object search(String userQuery)
 	{
+		// Possible response:
+		// 	 - general query e.g. finding the office location of staff and return String
+		//	 - query result would be searched on SQL database first
+		//	 if SQLDatabase is failed to load, use the backup static database
+		//	 - application e.g. TimeTable function, return the application object
+		
         String reply = null;  // chatbot reply according to userQuery
 
         Category categoryResult = null;  // storing search result of user query

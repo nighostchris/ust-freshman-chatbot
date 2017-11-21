@@ -12,7 +12,8 @@ public class Instruction extends Category
 {
 	private String reply;
 	
-	public static final String QUERY_KEYWORD[] = { "/help", "/dir", "/kmb", "/minibus", "/society", "/campus", "/facb" };
+	public static final String QUERY_KEYWORD[] = { "/help", "/dir", "/kmb", "/minibus", "/society", "/campus", "/facb",
+												   "/studypath", "find", "cretrans", "/t" };
 	
 	private static final String HELP_QUERY = "Commands available for checking guidelines on\n"
 										   + "different features of this chatbot:\n"
@@ -21,7 +22,11 @@ public class Instruction extends Category
 										   + "/minibus  Minibus ETA Enquiry\n"
 										   + "/society  Societies Enquiry\n"
 										   + "/campus  Campus ETA Enquiry\n"
-										   + "/facb  Facilities Booking Website Enquiry";
+										   + "/facb	 Facilities Booking Enquiry\n"
+										   + "/studypath Course Suggestion\n"
+										   + "/find	 Course Website Enquiry\n"
+										   + "/cretrans Credit Transfer Enquiry\n"
+										   + "/t Time Manager Function";
 	
 	private static final String DIRECTORY_QUERY = "Tips on HKUST Staff Directory Enquiry\n"
 												+ "You can search details of any valid staff available in UST!\n"
@@ -54,6 +59,30 @@ public class Instruction extends Category
 											  + "available online from our bot!\n"
 											  + "e.g.1 Can I know how to book LC?\n"
 											  + "e.g.2 I want to book Hall 6 common room";
+	
+	private static final String STUDY_PATH_QUERY = "Tips on Study Path Suggestion\n"
+												 + "You can input your current courses and see what \n"
+												 + "to study next!\n"
+												 + "e.g.1 What can I study if I have finished COMP 3111?\n"
+												 + "e.g.2 Suggest some path for me after COMP3511";
+	
+	private static final String COURSE_WEBSITE_QUERY = "Tips on Searching Course Website\n"
+													 + "This chatbot will try to search the course website for you!\n"
+													 + "e.g.1 Can you find the course website of COMP 3111 for me?\n"
+													 + "e.g.2 Can you search details of course COMP4641 for me?";
+	
+	private static final String CREDIT_TRANSFER_QUERY = "Tips on Credit Transfer Database Query\n"
+													  + "This chatbot can help you to check whether you can have credit\n"
+													  + "transfer on your exam results or courses taken before!/n"
+													  + "e.g.1     Wait To Fill in"
+													  + "e.g.2     Wait To Fill in";
+	
+	private static final String TIME_MANAGER = "Tips on Time Manager Function\n"
+											 + "This chatbot can act as your schedule book!\n"
+											 + "e.g.1 "
+											 + "e.g.2 "
+											 + "e.g.3 "
+											 + "e.g.4 ";
 	
 	public Instruction()
 	{
@@ -98,8 +127,16 @@ public class Instruction extends Category
             	reply = SOCIETY_QUERY;
             else if (result.equals(QUERY_KEYWORD[5]))
             	reply = CAMPUS_QUERY;
-            else
+            else if (result.equals(QUERY_KEYWORD[6]))
             	reply = BOOKING_QUERY;
+            else if (result.equals(QUERY_KEYWORD[7]))
+            	reply = STUDY_PATH_QUERY;
+            else if (result.equals(QUERY_KEYWORD[8]))
+            	reply = COURSE_WEBSITE_QUERY;
+            else if (result.equals(QUERY_KEYWORD[9]))
+            	reply = CREDIT_TRANSFER_QUERY;
+            else
+            	reply = TIME_MANAGER;
         }
         return new Instruction(reply);
     }
