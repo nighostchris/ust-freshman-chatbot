@@ -1,8 +1,8 @@
-package com.cse3111project.bot.spring.category.function.timetable;
+package com.cse3111project.bot.spring.category.function;
 
 import com.cse3111project.bot.spring.exception.InvalidTimeslotException;
 
-class Timeslot implements Serializable
+class Timeslot
 {
 	private int start;
 	private int end;

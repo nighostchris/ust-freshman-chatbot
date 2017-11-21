@@ -18,7 +18,7 @@ package com.cse3111project.bot.spring;
 
 import com.cse3111project.bot.spring.model.engine.SearchEngine;
 
-import com.cse3111project.bot.spring.category.function.Function;
+//import com.cse3111project.bot.spring.category.function.Function;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -97,25 +97,25 @@ public class KitchenSinkController {
 
 	private SearchEngine searchEngine;
 
-    private Function functionEvent;
+//    private Function functionEvent;
 
 	public KitchenSinkController() {
-        this(null);
+		this.searchEngine = new SearchEngine();
 	}
 
     // used in Function
-    public KitchenSinkController(Function functionEvent) {
-        this.searchEngine = (functionEvent == null ? new SearchEngine() : null);
-        this.functionEvent = functionEvent;
-    }
+//    public KitchenSinkController(Function functionEvent) {
+//        this.searchEngine = (functionEvent == null ? new SearchEngine() : null);
+//        this.functionEvent = functionEvent;
+//    }
 
 	@EventMapping
 	public void handleTextMessageEvent(MessageEvent<TextMessageContent> event) throws Exception {
 		TextMessageContent message = event.getMessage();
-        if (functionEvent == null)
+//        if (functionEvent == null)
             handleQueryContent(event.getReplyToken(), event, message);
-        else
-            handleFunctionContent(event.getReplyToken(), event, message);
+//        else
+//            handleFunctionContent(event.getReplyToken(), event, message);
 	}
 
 	@EventMapping
@@ -244,23 +244,23 @@ public class KitchenSinkController {
         	}
         	this.reply(replyToken, messageList);
         }
-        else if (response instanceof Function){
-            // retrieve current reply token first
-            ((Function) response).retrieveReplyToken(replyToken);
-            ((Function) response).run();  // launch the sub-application
-        }
+//        else if (response instanceof Function){
+//            // retrieve current reply token first
+//            ((Function) response).retrieveReplyToken(replyToken);
+//            ((Function) response).run();  // launch the sub-application
+//        }
         else  // SHOULD NOT HAPPEN
             this.replyText(replyToken, "Fatal Error: Unexpected error occurred");
     }
 
-    private void handleFunctionContent(String replyToken, Event event,
-                                       TextMessageContent content) throws Exception {
-        String command = content.getText();
-
-        // redirect the user message to Function
-        functionEvent.retrieveUserMessage(command);
-        functionEvent.retrieveReplyToken(replyToken);
-    }
+//    private void handleFunctionContent(String replyToken, Event event,
+//                                       TextMessageContent content) throws Exception {
+//        String command = content.getText();
+//
+//        // redirect the user message to Function
+//        functionEvent.retrieveUserMessage(command);
+//        functionEvent.retrieveReplyToken(replyToken);
+//    }
 
     // create URI for static resources
 	static String createUri(String path) {

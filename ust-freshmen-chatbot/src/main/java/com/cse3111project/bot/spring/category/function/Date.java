@@ -1,4 +1,4 @@
-package com.cse3111project.bot.spring.category.function.timetable;
+package com.cse3111project.bot.spring.category.function;
 
 import java.io.Serializable;
 

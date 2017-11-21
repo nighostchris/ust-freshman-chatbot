@@ -48,7 +48,7 @@ import com.cse3111project.bot.spring.model.engine.SearchEngine;
 import com.cse3111project.bot.spring.category.Category;
 
 import com.cse3111project.bot.spring.category.transport.Minibus;
-import com.cse3111project.bot.spring.category.function.timetable.TimeTable;
+import com.cse3111project.bot.spring.category.function.Timetable;
 
 @Slf4j
 @RunWith(SpringRunner.class)
@@ -360,7 +360,7 @@ public class KitchenSinkTester {
         answer = this.searchEngine.search("I would like to use the Timetable function.");
 
         assertThat(answer).isNotNull();
-        assertThat(answer instanceof TimeTable).isEqualTo(true);
+        assertThat(answer instanceof Timetable).isEqualTo(true);
         // assertThat(((TimeTable) answer).getController().getFunctionEvent() instanceof TimeTable);
 
         log.info("--- End of partialMatchTimeTable1() ---");

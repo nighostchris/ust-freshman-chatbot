@@ -2,10 +2,15 @@ package com.cse3111project.bot.spring.category.function;
 
 import com.cse3111project.bot.spring.utility.Utilities;
 
+import com.cse3111project.bot.spring.category.Category;
+
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import com.cse3111project.bot.spring.exception.AmbiguousQueryException;
 import com.cse3111project.bot.spring.exception.InvalidDateException;
 import com.cse3111project.bot.spring.exception.InvalidTimeslotException;
 
@@ -14,16 +19,16 @@ import com.cse3111project.bot.spring.exception.InvalidTimeslotException;
  * the user-query on using the Time Manager function.
  * @version 1.0
  */
-public abstract class Timetable
+public abstract class Timetable extends Category
 {
-    public static final String FUNCTION_KEYWORD[] = { "add event", "remove", "display events",
+    public static final String QUERY_KEYWORD[] = { "add event", "remove", "display events",
                                                       "display all events" };
     
     /**
      * This method takes no parameter and will return the result for responding user-query
      * to the LINE client. This method supposed to be implemented in subclass ActivityDB.
      */
-    public abstract getResult();
+    public abstract String getResult() throws URISyntaxException, SQLException;
 
     /**
      * This method will take in the original sentence of user-query and determine which method
@@ -31,7 +36,7 @@ public abstract class Timetable
      * @param extractedResults Original sentence of user-query.
      * @return Category This returns the sub-category of which the user-query belongs to.
      */
-    public static Category analyze(final ArrayList<String> extractedResults)
+    public static Category analyze(final ArrayList<String> extractedResults) throws URISyntaxException, SQLException, AmbiguousQueryException
     {
     	/* Fixed format of user-query
     	 Chris wants to [add event of] eat dinner from 6 to 9 on November 22.
@@ -39,41 +44,45 @@ public abstract class Timetable
     	 Chris wants to [display events] on November 22.
     	 Chris wants to [display all events].
     	 */
-    	if (input.contains("add event"))
-		{
-			int secondOccur = input.indexOf("to", input.indexOf("to") + 1);
-			
-			String username = input.substring(0, input.indexOf(' '));
-	    	String activityName = input.substring(input.indexOf("of") + 3, input.indexOf("from") - 1);
-	    	String startTime = input.substring(input.indexOf("from") + 5, secondOccur - 1);
-	    	String endTime = input.substring(secondOccur + 3, input.indexOf("on") - 1);
-	    	String month = input.substring(input.indexOf("on") + 3, input.lastIndexOf(" "));
-	    	String day = input.substring(input.lastIndexOf(" ") + 1, input.length());
-	    	
-	    	return new ActivityDB(username, month, day, activityName, startTime, endTime, 1);
-		}
-		else if (input.contains("remove"))
-		{
-			int secondOccur = input.indexOf("to", input.indexOf("to") + 1);
-			
-			String username = input.substring(0, input.indexOf(' '));
-	    	String activityName = input.substring(input.indexOf("of") + 3, input.indexOf("from") - 1);
-	    	String startTime = input.substring(input.indexOf("from") + 5, secondOccur - 1);
-	    	String endTime = input.substring(secondOccur + 3, input.indexOf("on") - 1);
-	    	String month = input.substring(input.indexOf("on") + 3, input.lastIndexOf(" "));
-	    	String day = input.substring(input.lastIndexOf(" ") + 1, input.length());
-			return new ActivityDB(username, month, day, activityName, startTime, endTime, 2);
-		}
-		else if (input.contains("display events"))
-		{
-			String month = input.substring(input.indexOfd("on") + 3, input.lastIndexOf(" "));
-	    	String day = input.substring(input.lastIndexOf(" ") + 1, input.length());
-	    	return new ActivityDB("", month, day, "", "", "", 3);
-		}
-		else if (input.contains("display all events"))
-		{
-			return new ActivityDB("", "", "", "", "", "", 4);
-		}
+    	for (String input : extractedResults) {
+    		if (input.contains("add event"))
+    		{
+    			int secondOccur = input.indexOf("to", input.indexOf("to") + 1);
+    			
+    			String username = input.substring(0, input.indexOf(' '));
+    			String activityName = input.substring(input.indexOf("of") + 3, input.indexOf("from") - 1);
+    			String startTime = input.substring(input.indexOf("from") + 5, secondOccur - 1);
+    			String endTime = input.substring(secondOccur + 3, input.indexOf("on") - 1);
+    			String month = input.substring(input.indexOf("on") + 3, input.lastIndexOf(" "));
+    			String day = input.substring(input.lastIndexOf(" ") + 1, input.length());
+    			
+    			return new ActivityDB(username, month, day, activityName, startTime, endTime, 1);
+    		}
+    		else if (input.contains("remove"))
+    		{
+    			int secondOccur = input.indexOf("to", input.indexOf("to") + 1);
+    			
+    			String username = input.substring(0, input.indexOf(' '));
+    			String activityName = input.substring(input.indexOf("of") + 3, input.indexOf("from") - 1);
+    			String startTime = input.substring(input.indexOf("from") + 5, secondOccur - 1);
+    			String endTime = input.substring(secondOccur + 3, input.indexOf("on") - 1);
+    			String month = input.substring(input.indexOf("on") + 3, input.lastIndexOf(" "));
+    			String day = input.substring(input.lastIndexOf(" ") + 1, input.length());
+    			return new ActivityDB(username, month, day, activityName, startTime, endTime, 2);
+    		}
+    		else if (input.contains("display events"))
+    		{
+    			String month = input.substring(input.indexOf("on") + 3, input.lastIndexOf(" "));
+    			String day = input.substring(input.lastIndexOf(" ") + 1, input.length());
+    			return new ActivityDB("", month, day, "", "", "", 3);
+    		}
+    		else if (input.contains("display all events"))
+    		{
+    			return new ActivityDB("", "", "", "", "", "", 4);
+    		}
+    	}
+    	throw new AmbiguousQueryException("I am not sure what you are asking for, " + 
+                "could you be more clearer?");
     }
     
     public static void returnOriginalSentence(String userQuery, ArrayList<String> matchedResults)

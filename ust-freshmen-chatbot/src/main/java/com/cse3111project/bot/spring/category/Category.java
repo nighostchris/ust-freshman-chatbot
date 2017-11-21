@@ -91,7 +91,7 @@ public class Category
                     socialResults.add(socialKeyword);
 
             // Function.QUERY_KEYWORD = TimeTable.FUNCTION_KEYWORD
-            for (String timetableKeyword : Function.QUERY_KEYWORD)
+            for (String timetableKeyword : Timetable.QUERY_KEYWORD)
                 if (result.contains(timetableKeyword))
                     timetableResults.add(timetableKeyword);
 
@@ -116,7 +116,7 @@ public class Category
 
         if (mostMatch == transportResults.size())
             return Transport.analyze(transportResults);
-        if (mostMatch == functionResults.size())
+        if (mostMatch == timetableResults.size())
             return Timetable.analyze(matchedResults);
         if (mostMatch == academicResults.size())
             return Academic.analyze(academicResults);

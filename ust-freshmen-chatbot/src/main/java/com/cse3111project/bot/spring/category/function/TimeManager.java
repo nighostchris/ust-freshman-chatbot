@@ -1,9 +1,9 @@
-package com.cse3111project.bot.spring.category.function.timetable;
+package com.cse3111project.bot.spring.category.function;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-class TimeManager extends TimeTable
+class TimeManager
 {
 	private ArrayList<People> peopleList;
 	
