@@ -35,7 +35,7 @@ public abstract class Timetable
     {
     	/* Fixed format of user-query
     	 Chris wants to [add event of] eat dinner from 6 to 9 on November 22.
-    	 Chris wants to [remove] event of eat dinner.
+    	 Chris wants to [remove] event of eat dinner from 6 to 9 on November 22.
     	 Chris wants to [display events] on November 22.
     	 Chris wants to [display all events].
     	 */
@@ -54,8 +54,15 @@ public abstract class Timetable
 		}
 		else if (input.contains("remove"))
 		{
-			String activityName = input.substring(input.indexOf("of") + 3, input.length());
-			return new ActivityDB("", "", "", activityName, "", "", 2);
+			int secondOccur = input.indexOf("to", input.indexOf("to") + 1);
+			
+			String username = input.substring(0, input.indexOf(' '));
+	    	String activityName = input.substring(input.indexOf("of") + 3, input.indexOf("from") - 1);
+	    	String startTime = input.substring(input.indexOf("from") + 5, secondOccur - 1);
+	    	String endTime = input.substring(secondOccur + 3, input.indexOf("on") - 1);
+	    	String month = input.substring(input.indexOf("on") + 3, input.lastIndexOf(" "));
+	    	String day = input.substring(input.lastIndexOf(" ") + 1, input.length());
+			return new ActivityDB(username, month, day, activityName, startTime, endTime, 2);
 		}
 		else if (input.contains("display events"))
 		{
