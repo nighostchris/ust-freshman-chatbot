@@ -62,13 +62,16 @@ public abstract class Academic extends Category
 
             if (Utilities.contains(Course.COURSE_CODE_KEYWORD, result))
                 queryCourseCodeKeywords.add(result);
+            
             if (Utilities.contains(CourseWebsiteSearch.WEBSITE_SEARCH_KEYWORD, result))
                 queryCourseWebsiteSearchKeywords.add(result);
 
             if (Utilities.contains(ExamCreditTransfer.SUBJECT_KEYWORD, result))
                 queryExamCreditTransferKeywords.add(result);
+            
             if (Utilities.contains(LocalInstitutionCreditTransfer.SUBJECT_KEYWORD, result))
                 queryLocalInstitutionCreditTransferKeywords.add(result);
+            
             NonLocalInstitutionCreditTransfer.detectSubject(result, queryNonLocalInstitutionCreditTransferKeywords);
         }
 
@@ -93,7 +96,9 @@ public abstract class Academic extends Category
         if (Utilities.allEquals(queryStaffNameKeywords.size(), 
                                 queryExamCreditTransferKeywords.size(),
                                 queryLocalInstitutionCreditTransferKeywords.size(), 
-                                queryNonLocalInstitutionCreditTransferKeywords.size()))
+                                queryNonLocalInstitutionCreditTransferKeywords.size(),
+                                queryCourseWebsiteSearchKeywords.size(),
+                                queryCourseCodeKeywords.size()))
             throw new AmbiguousQueryException("I am not quite sure what you are asking for, could you be more clearer?");
 
         int maximum = Utilities.max(queryStaffNameKeywords.size(),
