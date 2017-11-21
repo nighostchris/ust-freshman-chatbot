@@ -114,31 +114,6 @@ public class CallbackRequestTest {
         });
     }
 
-//    @Test
-//    public void testLocation() throws IOException {
-//        parse("callback/location.json", callbackRequest -> {
-//            assertThat(callbackRequest.getEvents()).hasSize(1);
-//            Event event = callbackRequest.getEvents().get(0);
-//            assertThat(event).isInstanceOf(MessageEvent.class);
-//            assertThat(event.getSource())
-//                    .isInstanceOf(UserSource.class);
-//            assertThat(event.getSource().getUserId())
-//                    .isEqualTo("u206d25c2ea6bd87c17655609a1c37cb8");
-//            assertThat(event.getTimestamp())
-//                    .isEqualTo(Instant.parse("2016-05-07T13:57:59.859Z"));
-//
-//            MessageEvent messageEvent = (MessageEvent) event;
-//            assertThat(messageEvent.getReplyToken())
-//                    .isEqualTo("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA");
-//            MessageContent message = messageEvent.getMessage();
-//            assertThat(message).isInstanceOf(LocationMessageContent.class);
-//            if (message instanceof LocationMessageContent) {
-//                assertThat(((LocationMessageContent) message).getAddress())
-//                        .isEqualTo("ã€’150-0002 æ�±äº¬éƒ½æ¸‹è°·åŒºæ¸‹è°·ï¼’ä¸�ç›®ï¼’ï¼‘âˆ’ï¼‘");
-//            }
-//        });
-//    }
-
     @Test
     public void testFile() throws IOException {
         parse("callback/file.json", callbackRequest -> {
